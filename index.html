@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Hazırlık Testi | AI Readiness Checker</title>
+<meta name="description" content="Sitenizin yapay zekaya hazır olup olmadığını saniyeler içinde test edin.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #060d0a;
+    --surface: #0d1a14;
+    --border: #1a3028;
+    --accent: #00e87a;
+    --accent2: #00b8d9;
+    --warn: #f5a623;
+    --danger: #ff4d4d;
+    --text: #e8f5f0;
+    --muted: #5a7a6a;
+    --font-display: 'Syne', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-mono);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grid BG */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,232,122,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,232,122,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 0 20px; }
+
+  /* HEADER */
+  header {
+    padding: 28px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+  }
+  .logo span { color: var(--text); }
+
+  .lang-toggle {
+    display: flex;
+    gap: 4px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 4px;
+  }
+  .lang-btn {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.08em;
+  }
+  .lang-btn.active { background: var(--accent); color: #060d0a; font-weight: 700; }
+
+  /* HERO */
+  .hero {
+    padding: 60px 0 40px;
+    text-align: center;
+  }
+  .hero-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+    position: relative;
+  }
+  .hero p {
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.7;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* INPUT */
+  .input-section { margin: 40px 0 32px; }
+  .input-box {
+    display: flex;
+    gap: 10px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 8px 8px 8px 16px;
+    transition: border-color 0.3s;
+  }
+  .input-box:focus-within { border-color: var(--accent); }
+  .input-box input {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+  }
+  .input-box input::placeholder { color: var(--muted); }
+  .btn-check {
+    background: var(--accent);
+    color: #060d0a;
+    border: none;
+    border-radius: 7px;
+    padding: 11px 22px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .btn-check:hover { background: #00ffaa; transform: scale(1.03); }
+  .btn-check:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  /* LOADING */
+  .loading {
+    display: none;
+    text-align: center;
+    padding: 40px 0;
+  }
+  .loading.active { display: block; }
+  .scanner {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    border-top-color: var(--accent);
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-text {
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+  .loading-steps { margin-top: 16px; display: flex; flex-direction: column; gap: 6px; }
+  .loading-step {
+    font-size: 0.72rem;
+    color: var(--muted);
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.4s;
+  }
+  .loading-step.done { opacity: 1; transform: translateX(0); color: var(--accent); }
+
+  /* RESULTS */
+  #results { display: none; }
+  #results.active { display: block; }
+
+  .score-banner {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .score-banner::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: var(--score-color, var(--accent));
+  }
+  .score-circle {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .score-circle svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .score-circle .track { fill: none; stroke: var(--border); stroke-width: 6; }
+  .score-circle .fill { fill: none; stroke-width: 6; stroke-linecap: round;
+    stroke: var(--score-color, var(--accent));
+    transition: stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1);
+  }
+  .score-num {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 800;
+  }
+  .score-info h2 { font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; }
+  .score-info p { color: var(--muted); font-size: 0.78rem; margin-top: 6px; line-height: 1.5; }
+  .score-label {
+    margin-top: 8px;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    padding: 3px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  /* CHECKS */
+  .checks-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  @media(max-width:600px) { .checks-grid { grid-template-columns: 1fr; } }
+
+  .check-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+  .check-card.visible { opacity: 1; transform: translateY(0); }
+
+  .check-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .check-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.82rem;
+  }
+  .check-status {
+    font-size: 1rem;
+    line-height: 1;
+  }
+  .check-detail { font-size: 0.72rem; color: var(--muted); line-height: 1.5; }
+  .check-bar {
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-top: 10px;
+    overflow: hidden;
+  }
+  .check-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    width: 0%;
+    transition: width 1s ease;
+  }
+
+  /* TIPS */
+  .tips-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .tips-section h3 {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 16px;
+  }
+  .tip-item {
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+  .tip-item:last-child { border-bottom: none; }
+  .tip-icon { flex-shrink: 0; color: var(--warn); font-size: 0.9rem; margin-top: 1px; }
+  .tip-text strong { color: var(--text); display: block; margin-bottom: 2px; font-family: var(--font-display); font-size: 0.8rem; }
+
+  /* AD SLOT */
+  .ad-slot {
+    background: var(--surface);
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* RESET */
+  .btn-reset {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    padding: 10px 20px;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 40px;
+  }
+  .btn-reset:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* DISCLAIMER */
+  .disclaimer {
+    background: rgba(245,166,35,0.05);
+    border: 1px solid rgba(245,166,35,0.2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 0.72rem;
+    color: var(--warn);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 20px 0;
+    text-align: center;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* ERROR */
+  .error-msg {
+    background: rgba(255,77,77,0.08);
+    border: 1px solid rgba(255,77,77,0.3);
+    color: var(--danger);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.78rem;
+    margin-top: 10px;
+    display: none;
+  }
+  .error-msg.active { display: block; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">AI<span>Hazır</span>.net</div>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('tr')" id="btn-tr">TR</button>
+      <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-badge" id="hero-badge">Yapay Zeka Uyumluluk Testi</div>
+    <h1 id="hero-h1">Siteniz <em>yapay zekaya</em><br>hazır mı?</h1>
+    <p id="hero-p">ChatGPT, Perplexity ve Google AI Overview siteleri farklı okur. URL'nizi girin, saniyeler içinde öğrenin.</p>
+  </section>
+
+  <div class="input-section">
+    <div class="input-box">
+      <input type="url" id="url-input" placeholder="https://siteniz.com" autocomplete="off" />
+      <button class="btn-check" id="btn-check" onclick="runCheck()">
+        <span id="btn-text">ANALİZ ET</span>
+      </button>
+    </div>
+    <div class="error-msg" id="error-msg"></div>
+  </div>
+
+  <div class="loading" id="loading">
+    <div class="scanner"></div>
+    <div class="loading-text" id="loading-label">TARAMA BAŞLADI</div>
+    <div class="loading-steps" id="loading-steps"></div>
+  </div>
+
+  <div id="results">
+    <div class="score-banner" id="score-banner">
+      <div class="score-circle" id="score-circle">
+        <svg viewBox="0 0 80 80">
+          <circle class="track" cx="40" cy="40" r="34"/>
+          <circle class="fill" id="score-arc" cx="40" cy="40" r="34"
+            stroke-dasharray="213.6" stroke-dashoffset="213.6"/>
+        </svg>
+        <div class="score-num" id="score-num">0</div>
+      </div>
+      <div class="score-info">
+        <h2 id="score-title"></h2>
+        <p id="score-desc"></p>
+        <span class="score-label" id="score-label"></span>
+      </div>
+    </div>
+
+    <!-- Ad slot top -->
+    <div class="ad-slot" id="ad-top"><!-- reklam alanı / advertisement --></div>
+
+    <div class="checks-grid" id="checks-grid"></div>
+
+    <div class="tips-section" id="tips-section" style="display:none">
+      <h3 id="tips-title">💡 Öneriler</h3>
+      <div id="tips-list"></div>
+    </div>
+
+    <div class="disclaimer" id="disclaimer"></div>
+
+    <!-- Ad slot bottom -->
+    <div class="ad-slot" id="ad-bottom"><!-- reklam alanı / advertisement --></div>
+
+    <button class="btn-reset" onclick="resetAll()" id="btn-reset">↩ Yeni Test</button>
+  </div>
+
+  <footer id="footer">© 2025 AIHazır.net — Yapay zeka uyumluluk analizi</footer>
+</div>
+
+<script>
+/* ===== LANG ===== */
+let lang = 'tr';
+const T = {
+  tr: {
+    badge: 'Yapay Zeka Uyumluluk Testi',
+    h1: 'Siteniz <em>yapay zekaya</em><br>hazır mı?',
+    p: 'ChatGPT, Perplexity ve Google AI Overview siteleri farklı okur. URL\'nizi girin, saniyeler içinde öğrenin.',
+    btnText: 'ANALİZ ET',
+    placeholder: 'https://siteniz.com',
+    loadingLabel: 'TARAMA BAŞLADI',
+    loadingSteps: ['robots.txt kontrol ediliyor…', 'Meta etiketler taranıyor…', 'Yapısal veri aranıyor…', 'AI görünürlüğü ölçülüyor…'],
+    tipsTitle: '💡 İyileştirme Önerileri',
+    disclaimerText: '⚠️ Bu analiz, kamuya açık HTTP başlıklarını ve HTML içeriğini okuyarak gerçekleştirilir. Bazı siteler CORS kısıtlaması nedeniyle tam analiz edilemeyebilir. Sonuçlar bilgi amaçlıdır.',
+    btnReset: '↩ Yeni Test',
+    footer: '© 2025 AIHazır.net — Yapay zeka uyumluluk analizi',
+    errInvalid: 'Geçerli bir URL girin (https:// ile başlamalı).',
+    errFetch: 'Site analiz edilemedi. Bazı siteler CORS kısıtlaması nedeniyle taranamaz.',
+    scoreLabels: ['Kritik Eksikler', 'Geliştirme Gerekli', 'Orta Düzey', 'Oldukça İyi', 'Mükemmel'],
+    scoreTitles: ['Hazır Değil', 'Zayıf', 'Gelişiyor', 'İyi', 'AI Hazır! 🚀'],
+    scoreDescs: [
+      'Siteniz yapay zeka tarayıcılarına büyük ölçüde görünmez. Acil iyileştirme gerekli.',
+      'Temel eksikler mevcut. Birkaç kritik düzenlemeyle sıralama yükselir.',
+      'Ortalama düzeyde. Doğru adımlarla öne çıkabilir.',
+      'Siteniz AI araçlarına büyük ölçüde görünür. Küçük dokunuşlar yeterli.',
+      'Siteniz yapay zeka aramalarına mükemmel şekilde optimize edilmiş!'
+    ],
+    adText: '[ Reklam Alanı / Advertisement ]',
+    checks: {
+      robots: { title: 'robots.txt', ok: 'Mevcut ve okunaklı', warn: 'robots.txt bulunamadı', detail_ok: 'Yapay zeka botlarına yönlendirme yapılabilir.', detail_warn: 'AI tarayıcıları hangi sayfaları okuyacağını bilemez.' },
+      llms: { title: 'llms.txt', ok: 'llms.txt mevcut', warn: 'llms.txt bulunamadı', detail_ok: 'LLM\'ler için özel içerik kılavuzu var.', detail_warn: 'İleride AI botları için standart dosya haline gelebilir.' },
+      desc: { title: 'Meta Description', ok: 'Açıklama mevcut', warn: 'Meta açıklama eksik', detail_ok: 'Sayfa özeti AI\'ya aktarılabilir.', detail_warn: 'AI içerik özetleyemez, atlar.' },
+      og: { title: 'Open Graph', ok: 'OG etiketleri var', warn: 'OG etiketleri eksik', detail_ok: 'Paylaşım ve AI önizleme için hazır.', detail_warn: 'Sosyal ve AI paylaşımında düşük görünürlük.' },
+      canonical: { title: 'Canonical URL', ok: 'Canonical tanımlı', warn: 'Canonical eksik', detail_ok: 'Kopya içerik riski minimize.', detail_warn: 'Kopya URL sorunu yaşanabilir.' },
+      schema: { title: 'Schema.org', ok: 'Yapısal veri mevcut', warn: 'Schema bulunamadı', detail_ok: 'AI içeriği yapılandırılmış okuyabilir.', detail_warn: 'AI içeriği düz metin olarak işler.' },
+      jsonld: { title: 'JSON-LD', ok: 'JSON-LD mevcut', warn: 'JSON-LD yok', detail_ok: 'Google önerilen format kullanılıyor.', detail_warn: 'Zengin snippet fırsatı kaçırılıyor.' },
+      viewport: { title: 'Mobile Uyum', ok: 'Viewport tanımlı', warn: 'Viewport eksik', detail_ok: 'Mobil uyumlu — AI mobil skorlar.', detail_warn: 'Mobil uyumsuzluk AI sıralamasını düşürür.' },
+      lang: { title: 'Dil Etiketi', ok: 'Dil tanımlı', warn: 'Dil etiketi eksik', detail_ok: 'Dil bağlamı AI\'ya iletilmiş.', detail_warn: 'AI içerik dilini tahmin etmek zorunda.' },
+      https: { title: 'HTTPS', ok: 'Güvenli bağlantı', warn: 'HTTPS yok', detail_ok: 'Şifreli bağlantı — AI güvenli bulur.', detail_warn: 'HTTP siteler AI tarafından güvensiz sayılır.' }
+    },
+    tips: {
+      llms: { title: 'llms.txt oluşturun', text: 'Sitenizin kök dizinine llms.txt ekleyin. AI botları için içerik kılavuzu sağlar.' },
+      robots: { title: 'robots.txt ekleyin', text: 'GPTBot, ClaudeBot, PerplexityBot gibi AI tarayıcılarına izin verin.' },
+      desc: { title: 'Meta açıklama yazın', text: 'Her sayfa için 120–160 karakter arası, anahtar kelime içeren açıklama ekleyin.' },
+      schema: { title: 'Schema.org işaretlemesi', text: 'JSON-LD formatında Article, Organization veya WebSite şeması ekleyin.' },
+      og: { title: 'Open Graph etiketleri', text: 'og:title, og:description ve og:image etiketlerini ekleyin.' },
+      canonical: { title: 'Canonical URL tanımlayın', text: '<link rel="canonical"> etiketi kopya içerik sorunlarını önler.' }
+    }
+  },
+  en: {
+    badge: 'AI Readiness Checker',
+    h1: 'Is your site ready<br>for <em>AI search</em>?',
+    p: 'ChatGPT, Perplexity and Google AI Overview read sites differently. Enter your URL and find out in seconds.',
+    btnText: 'ANALYZE',
+    placeholder: 'https://yoursite.com',
+    loadingLabel: 'SCAN STARTED',
+    loadingSteps: ['Checking robots.txt…', 'Scanning meta tags…', 'Looking for structured data…', 'Measuring AI visibility…'],
+    tipsTitle: '💡 Improvement Tips',
+    disclaimerText: '⚠️ This analysis reads publicly available HTTP headers and HTML content. Some sites may not be fully analyzable due to CORS restrictions. Results are for informational purposes.',
+    btnReset: '↩ New Test',
+    footer: '© 2025 AIReady.net — AI readiness analysis',
+    errInvalid: 'Please enter a valid URL (must start with https://).',
+    errFetch: 'Could not analyze site. Some sites cannot be scanned due to CORS restrictions.',
+    scoreLabels: ['Critical Issues', 'Needs Work', 'Average', 'Good', 'Excellent'],
+    scoreTitles: ['Not Ready', 'Weak', 'Improving', 'Good', 'AI Ready! 🚀'],
+    scoreDescs: [
+      'Your site is largely invisible to AI crawlers. Urgent improvements needed.',
+      'Key issues found. A few critical fixes will boost your ranking.',
+      'Average level. Right steps can make you stand out.',
+      'Your site is largely visible to AI tools. Small touches are enough.',
+      'Your site is perfectly optimized for AI search!'
+    ],
+    adText: '[ Advertisement ]',
+    checks: {
+      robots: { title: 'robots.txt', ok: 'Present and readable', warn: 'robots.txt not found', detail_ok: 'AI bots can be directed properly.', detail_warn: 'AI crawlers cannot know which pages to read.' },
+      llms: { title: 'llms.txt', ok: 'llms.txt present', warn: 'llms.txt not found', detail_ok: 'Custom content guide for LLMs exists.', detail_warn: 'May become a standard file for AI bots.' },
+      desc: { title: 'Meta Description', ok: 'Description present', warn: 'Meta description missing', detail_ok: 'Page summary can be passed to AI.', detail_warn: 'AI cannot summarize content, may skip.' },
+      og: { title: 'Open Graph', ok: 'OG tags present', warn: 'OG tags missing', detail_ok: 'Ready for sharing and AI preview.', detail_warn: 'Low visibility in social and AI sharing.' },
+      canonical: { title: 'Canonical URL', ok: 'Canonical defined', warn: 'Canonical missing', detail_ok: 'Duplicate content risk minimized.', detail_warn: 'Duplicate URL issues may occur.' },
+      schema: { title: 'Schema.org', ok: 'Structured data found', warn: 'No schema found', detail_ok: 'AI can read content structurally.', detail_warn: 'AI processes content as plain text.' },
+      jsonld: { title: 'JSON-LD', ok: 'JSON-LD present', warn: 'No JSON-LD', detail_ok: 'Google-recommended format in use.', detail_warn: 'Missing rich snippet opportunity.' },
+      viewport: { title: 'Mobile Ready', ok: 'Viewport defined', warn: 'Viewport missing', detail_ok: 'Mobile-friendly — AI scores mobile.', detail_warn: 'Mobile issues lower AI ranking.' },
+      lang: { title: 'Language Tag', ok: 'Language defined', warn: 'Language tag missing', detail_ok: 'Language context passed to AI.', detail_warn: 'AI must guess content language.' },
+      https: { title: 'HTTPS', ok: 'Secure connection', warn: 'No HTTPS', detail_ok: 'Encrypted — AI considers it trustworthy.', detail_warn: 'HTTP sites are considered unsafe by AI.' }
+    },
+    tips: {
+      llms: { title: 'Create llms.txt', text: 'Add llms.txt to your root directory. It provides a content guide for AI bots.' },
+      robots: { title: 'Add robots.txt', text: 'Allow AI crawlers like GPTBot, ClaudeBot, PerplexityBot.' },
+      desc: { title: 'Write meta description', text: 'Add 120–160 character descriptions with keywords for each page.' },
+      schema: { title: 'Add Schema.org markup', text: 'Add Article, Organization or WebSite schema in JSON-LD format.' },
+      og: { title: 'Add Open Graph tags', text: 'Add og:title, og:description and og:image tags.' },
+      canonical: { title: 'Define canonical URL', text: '<link rel="canonical"> tag prevents duplicate content issues.' }
+    }
+  }
+};
+
+function setLang(l) {
+  lang = l;
+  document.getElementById('btn-tr').classList.toggle('active', l === 'tr');
+  document.getElementById('btn-en').classList.toggle('active', l === 'en');
+  const t = T[l];
+  document.getElementById('hero-badge').textContent = t.badge;
+  document.getElementById('hero-h1').innerHTML = t.h1;
+  document.getElementById('hero-p').textContent = t.p;
+  document.getElementById('btn-text').textContent = t.btnText;
+  document.getElementById('url-input').placeholder = t.placeholder;
+  document.getElementById('btn-reset').textContent = t.btnReset;
+  document.getElementById('footer').textContent = t.footer;
+  document.getElementById('ad-top').textContent = t.adText;
+  document.getElementById('ad-bottom').textContent = t.adText;
+  document.documentElement.lang = l;
+}
+
+/* ===== PROXY LIST ===== */
+const PROXIES = [
+  u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
+  u => `https://corsproxy.io/?${encodeURIComponent(u)}`
+];
+
+async function fetchHtml(url) {
+  for (const proxy of PROXIES) {
+    try {
+      const res = await fetch(proxy(url), { signal: AbortSignal.timeout(10000) });
+      if (res.ok) return await res.text();
+    } catch (_) {}
+  }
+  return null;
+}
+
+async function fetchHead(url) {
+  try {
+    const res = await fetch(url, { method: 'HEAD', mode: 'no-cors', signal: AbortSignal.timeout(5000) });
+    return res.status === 0 || res.ok;
+  } catch (_) { return false; }
+}
+
+async function checkFile(base, path) {
+  const url = base + path;
+  for (const proxy of PROXIES) {
+    try {
+      const res = await fetch(proxy(url), { signal: AbortSignal.timeout(8000) });
+      if (res.ok) {
+        const txt = await res.text();
+        return txt.length > 5 ? txt : null;
+      }
+    } catch (_) {}
+  }
+  return null;
+}
+
+/* ===== ANALYZE ===== */
+async function runCheck() {
+  const raw = document.getElementById('url-input').value.trim();
+  const errEl = document.getElementById('error-msg');
+  const t = T[lang];
+
+  if (!raw.startsWith('http')) {
+    errEl.textContent = t.errInvalid; errEl.classList.add('active'); return;
+  }
+  errEl.classList.remove('active');
+
+  let base;
+  try { const u = new URL(raw); base = u.origin; } catch (_) { errEl.textContent = t.errInvalid; errEl.classList.add('active'); return; }
+
+  document.getElementById('results').classList.remove('active');
+  document.getElementById('results').style.display = 'none';
+  const loadEl = document.getElementById('loading');
+  const stepsEl = document.getElementById('loading-steps');
+  loadEl.classList.add('active');
+  document.getElementById('btn-check').disabled = true;
+  document.getElementById('loading-label').textContent = t.loadingLabel;
+
+  stepsEl.innerHTML = t.loadingSteps.map(s => `<div class="loading-step">${s}</div>`).join('');
+  const stepEls = stepsEl.querySelectorAll('.loading-step');
+  const stepDelay = [300, 900, 1600, 2400];
+  stepDelay.forEach((d, i) => setTimeout(() => stepEls[i] && stepEls[i].classList.add('done'), d));
+
+  await new Promise(r => setTimeout(r, 3200));
+
+  const [html, robotsTxt, llmsTxt] = await Promise.all([
+    fetchHtml(raw),
+    checkFile(base, '/robots.txt'),
+    checkFile(base, '/llms.txt')
+  ]);
+
+  loadEl.classList.remove('active');
+
+  if (!html) {
+    errEl.textContent = t.errFetch; errEl.classList.add('active');
+    document.getElementById('btn-check').disabled = false; return;
+  }
+
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, 'text/html');
+
+  const get = sel => doc.querySelector(sel);
+  const getMeta = name => get(`meta[name="${name}"]`)?.getAttribute('content') ||
+                          get(`meta[property="${name}"]`)?.getAttribute('content');
+
+  const checks = {
+    https:    { pass: raw.startsWith('https://') },
+    robots:   { pass: !!robotsTxt },
+    llms:     { pass: !!llmsTxt },
+    desc:     { pass: !!(getMeta('description')?.trim()) },
+    og:       { pass: !!(getMeta('og:title') || getMeta('og:description')) },
+    canonical:{ pass: !!get('link[rel="canonical"]') },
+    schema:   { pass: !!(get('[itemtype]') || html.includes('schema.org')) },
+    jsonld:   { pass: !!get('script[type="application/ld+json"]') },
+    viewport: { pass: !!get('meta[name="viewport"]') },
+    lang:     { pass: !!(doc.documentElement.getAttribute('lang') || get('meta[http-equiv="content-language"]')) }
+  };
+
+  const passCount = Object.values(checks).filter(c => c.pass).length;
+  const total = Object.keys(checks).length;
+  const score = Math.round((passCount / total) * 100);
+
+  showResults(score, checks, t);
+  document.getElementById('btn-check').disabled = false;
+}
+
+function showResults(score, checks, t) {
+  const tier = score < 30 ? 0 : score < 50 ? 1 : score < 70 ? 2 : score < 85 ? 3 : 4;
+  const colors = ['#ff4d4d', '#f5a623', '#f5d023', '#00b8d9', '#00e87a'];
+  const color = colors[tier];
+
+  document.documentElement.style.setProperty('--score-color', color);
+
+  document.getElementById('score-num').textContent = score;
+  document.getElementById('score-title').textContent = t.scoreTitles[tier];
+  document.getElementById('score-desc').textContent = t.scoreDescs[tier];
+  const lbl = document.getElementById('score-label');
+  lbl.textContent = t.scoreLabels[tier];
+  lbl.style.background = color + '22';
+  lbl.style.color = color;
+
+  const arc = document.getElementById('score-arc');
+  const circ = 213.6;
+  setTimeout(() => {
+    arc.style.strokeDashoffset = circ - (circ * score / 100);
+  }, 100);
+
+  const grid = document.getElementById('checks-grid');
+  grid.innerHTML = '';
+  const icons = { pass: '✅', fail: '❌', warn: '⚠️' };
+  const barColors = { pass: '#00e87a', fail: '#ff4d4d', warn: '#f5a623' };
+
+  Object.entries(checks).forEach(([key, data], i) => {
+    const info = t.checks[key];
+    if (!info) return;
+    const status = data.pass ? 'pass' : 'fail';
+    const card = document.createElement('div');
+    card.className = 'check-card';
+    card.innerHTML = `
+      <div class="check-head">
+        <span class="check-title">${info.title}</span>
+        <span class="check-status">${icons[status]}</span>
+      </div>
+      <div class="check-detail">${data.pass ? info.detail_ok : info.detail_warn}</div>
+      <div class="check-bar"><div class="check-bar-fill" style="background:${barColors[status]};width:0%"></div></div>
+    `;
+    grid.appendChild(card);
+    setTimeout(() => {
+      card.classList.add('visible');
+      card.querySelector('.check-bar-fill').style.width = data.pass ? '100%' : '20%';
+    }, 80 * i + 200);
+  });
+
+  const failed = Object.entries(checks).filter(([,d]) => !d.pass).map(([k]) => k);
+  const tipKeys = ['llms','robots','desc','schema','og','canonical'];
+  const relevantTips = tipKeys.filter(k => failed.includes(k));
+
+  const tipsSection = document.getElementById('tips-section');
+  if (relevantTips.length > 0) {
+    document.getElementById('tips-title').textContent = t.tipsTitle;
+    document.getElementById('tips-list').innerHTML = relevantTips.map(k => {
+      const tip = t.tips[k];
+      if (!tip) return '';
+      return `<div class="tip-item"><span class="tip-icon">⚡</span><div class="tip-text"><strong>${tip.title}</strong>${tip.text}</div></div>`;
+    }).join('');
+    tipsSection.style.display = 'block';
+  } else {
+    tipsSection.style.display = 'none';
+  }
+
+  document.getElementById('disclaimer').textContent = t.disclaimerText;
+
+  const results = document.getElementById('results');
+  results.style.display = 'block';
+  results.classList.add('active');
+  results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function resetAll() {
+  document.getElementById('results').classList.remove('active');
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('url-input').value = '';
+  document.getElementById('error-msg').classList.remove('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
