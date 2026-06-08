@@ -855,33 +855,19 @@ function setLang(l) {
   document.documentElement.lang = l;
 }
 
-/* ===== PROXIES ===== */
-const PROXIES = [
-  u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
-  u => `https://corsproxy.io/?${encodeURIComponent(u)}`
-];
+/* ===== WORKER API ===== */
+const WORKER_URL = 'https://scanliq-api.dreamdosima08.workers.dev';
 
-async function fetchHtml(url) {
-  for (const proxy of PROXIES) {
-    try {
-      const res = await fetch(proxy(url), { signal: AbortSignal.timeout(10000) });
-      if (res.ok) return await res.text();
-    } catch (_) {}
-  }
-  return null;
-}
-
-async function checkFile(base, path) {
-  const url = base + path;
-  for (const proxy of PROXIES) {
-    try {
-      const res = await fetch(proxy(url), { signal: AbortSignal.timeout(8000) });
-      if (res.ok) {
-        const txt = await res.text();
-        return txt.length > 5 ? txt : null;
-      }
-    } catch (_) {}
-  }
+async function analyzeWithWorker(url) {
+  try {
+    const res = await fetch(`${WORKER_URL}/?url=${encodeURIComponent(url)}`, {
+      signal: AbortSignal.timeout(15000)
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (data.success) return data.results;
+    }
+  } catch (_) {}
   return null;
 }
 
@@ -896,8 +882,7 @@ async function runCheck() {
   }
   errEl.classList.remove('active');
 
-  let base;
-  try { const u = new URL(raw); base = u.origin; }
+  try { new URL(raw); }
   catch (_) { errEl.textContent = t.errInvalid; errEl.classList.add('active'); return; }
 
   document.getElementById('results').classList.remove('active');
@@ -918,15 +903,11 @@ async function runCheck() {
 
   await new Promise(r => setTimeout(r, 3200));
 
-  const [html, robotsTxt, llmsTxt] = await Promise.all([
-    fetchHtml(raw),
-    checkFile(base, '/robots.txt'),
-    checkFile(base, '/llms.txt')
-  ]);
+  const workerResults = await analyzeWithWorker(raw);
 
   loadEl.classList.remove('active');
 
-  if (!html) {
+  if (!workerResults) {
     errEl.textContent = t.errFetch; errEl.classList.add('active');
     document.getElementById('btn-check').disabled = false;
     document.getElementById('about-section').style.display = 'block';
@@ -935,22 +916,17 @@ async function runCheck() {
     return;
   }
 
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(html, 'text/html');
-  const getMeta = name => doc.querySelector(`meta[name="${name}"]`)?.getAttribute('content') ||
-                          doc.querySelector(`meta[property="${name}"]`)?.getAttribute('content');
-
   const checks = {
-    https:    { pass: raw.startsWith('https://') },
-    robots:   { pass: !!robotsTxt },
-    llms:     { pass: !!llmsTxt },
-    desc:     { pass: !!(getMeta('description')?.trim()) },
-    og:       { pass: !!(getMeta('og:title') || getMeta('og:description')) },
-    canonical:{ pass: !!doc.querySelector('link[rel="canonical"]') },
-    schema:   { pass: !!(doc.querySelector('[itemtype]') || html.includes('schema.org')) },
-    jsonld:   { pass: !!doc.querySelector('script[type="application/ld+json"]') },
-    viewport: { pass: !!doc.querySelector('meta[name="viewport"]') },
-    lang:     { pass: !!(doc.documentElement.getAttribute('lang') || getMeta('http-equiv="content-language"')) }
+    https:    { pass: workerResults.https === true },
+    robots:   { pass: workerResults.robots === true },
+    llms:     { pass: workerResults.llms === true },
+    desc:     { pass: workerResults.desc === true },
+    og:       { pass: workerResults.og === true },
+    canonical:{ pass: workerResults.canonical === true },
+    schema:   { pass: workerResults.schema === true },
+    jsonld:   { pass: workerResults.jsonld === true },
+    viewport: { pass: workerResults.viewport === true },
+    lang:     { pass: workerResults.lang === true }
   };
 
   const score = Math.round(Object.values(checks).filter(c => c.pass).length / Object.keys(checks).length * 100);
