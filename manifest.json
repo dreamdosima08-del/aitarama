@@ -1,0 +1,25 @@
+{
+  "name": "HakBul — Çalışan Hakları Rehberi",
+  "short_name": "HakBul",
+  "description": "Memur, işçi ve güvenlik görevlilerinin haklarını öğren",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#1e3a5f",
+  "orientation": "portrait",
+  "lang": "tr",
+  "icons": [
+    {
+      "src": "https://i.ibb.co/Q7TTNhxz/68613.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://i.ibb.co/cSP50hhG/68612.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
