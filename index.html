@@ -537,9 +537,12 @@
     <a class="logo" href="/">
       <span class="logo-scan">Scan</span><span class="logo-liq">liq</span><span class="logo-dot"></span>
     </a>
-    <div class="lang-toggle">
-      <button class="lang-btn active" onclick="setLang('tr')" id="btn-tr">TR</button>
-      <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+    <div style="display:flex;align-items:center;gap:20px;">
+      <a href="/blog.html" id="nav-blog" style="color:var(--muted);text-decoration:none;font-size:0.78rem;letter-spacing:0.05em;transition:color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">Blog</a>
+      <div class="lang-toggle">
+        <button class="lang-btn active" onclick="setLang('tr')" id="btn-tr">TR</button>
+        <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+      </div>
     </div>
   </header>
 
@@ -844,6 +847,7 @@ function setLang(l) {
   document.getElementById('step4-title').textContent = t.step4t;
   document.getElementById('step4-text').textContent = t.step4p;
   document.getElementById('btn-reset').textContent = t.btnReset;
+  document.getElementById('nav-blog').textContent = l === 'tr' ? 'Blog' : 'Blog';
   document.getElementById('footer-legal').textContent = t.footerLegal;
   document.getElementById('footer-privacy').textContent = t.footerPrivacy;
   document.getElementById('footer-contact').textContent = t.footerContact;

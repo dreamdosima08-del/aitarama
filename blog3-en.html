@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What is Schema.org? Structured Data Guide for Google AI 2026</title>
+<meta name="description" content="Learn what Schema.org is and how to add structured data with JSON-LD. Stand out on Google AI Overview and Perplexity with ready-to-use code examples. Updated 2026 guide.">
+<meta name="keywords" content="Schema.org, what is Schema.org, JSON-LD guide, structured data 2026, Google AI Overview schema, Perplexity structured data, rich snippet, WebPage schema, Article schema, FAQ schema, Organization schema, AI SEO structured data">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Scanliq">
+<meta name="geo.region" content="TR">
+<link rel="canonical" href="https://scanliq.com/blog3-en.html">
+<link rel="alternate" hreflang="tr" href="https://scanliq.com/blog3.html">
+<link rel="alternate" hreflang="en" href="https://scanliq.com/blog3-en.html">
+
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://scanliq.com/blog3-en.html">
+<meta property="og:title" content="What is Schema.org? Structured Data Guide for Google AI 2026">
+<meta property="og:description" content="Add Schema.org structured data with JSON-LD and stand out on Google AI Overview and Perplexity. Ready-to-use code examples.">
+<meta property="og:image" content="https://scanliq.com/img/blog3-og.png">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Scanliq">
+<meta property="article:published_time" content="2026-06-08T11:00:00+03:00">
+<meta property="article:modified_time" content="2026-06-08T11:00:00+03:00">
+<meta property="article:author" content="Scanliq">
+<meta property="article:section" content="Structured Data">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What is Schema.org? Structured Data for Google AI 2026">
+<meta name="twitter:description" content="Stand out on Google AI and Perplexity with JSON-LD. Ready code examples included.">
+<meta name="twitter:image" content="https://scanliq.com/img/blog3-og.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "What is Schema.org? Structured Data Guide for Google AI and Perplexity 2026",
+  "description": "Learn what Schema.org is and how to add it with JSON-LD. Stand out on Google AI Overview and Perplexity.",
+  "image": "https://scanliq.com/img/blog3-og.png",
+  "author": {"@type": "Organization", "name": "Scanliq", "url": "https://scanliq.com"},
+  "publisher": {"@type": "Organization", "name": "Scanliq", "url": "https://scanliq.com"},
+  "datePublished": "2026-06-08T11:00:00+03:00",
+  "dateModified": "2026-06-08T11:00:00+03:00",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://scanliq.com/blog3-en.html"},
+  "url": "https://scanliq.com/blog3-en.html",
+  "inLanguage": "en-US",
+  "articleSection": "Structured Data",
+  "keywords": "Schema.org, JSON-LD, structured data, Google AI Overview, rich snippet"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is adding Schema.org difficult?",
+      "acceptedAnswer": {"@type": "Answer", "text": "No. You just need to add a script tag in JSON-LD format to your HTML page's head section. You can copy and adapt the ready-made templates in this guide."}
+    },
+    {
+      "@type": "Question",
+      "name": "Which Schema type should I use?",
+      "acceptedAnswer": {"@type": "Answer", "text": "It depends on your site type: Article for blog posts, Organization for company pages, Product for e-commerce, FAQPage for FAQ sections. Choose the appropriate schema for each page."}
+    },
+    {
+      "@type": "Question",
+      "name": "Will Google AI fail to find me without Schema.org?",
+      "acceptedAnswer": {"@type": "Answer", "text": "It can still find you, but without structured data AI processes your content as plain text. With Schema.org you clearly communicate your content's structure, category and context in machine language."}
+    }
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#060d0a;--surface:#0d1a14;--border:#1a3028;--accent:#00e87a;--accent2:#00b8d9;--warn:#f5a623;--text:#e8f5f0;--muted:#5a7a6a;--font-display:'Syne',sans-serif;--font-mono:'Space Mono',monospace;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:var(--font-mono);min-height:100vh;overflow-x:hidden;line-height:1.8;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,232,122,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,232,122,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+.wrap{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:0 20px;}
+header{padding:28px 0;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);}
+.logo{font-family:var(--font-display);font-weight:800;font-size:1.4rem;letter-spacing:-0.02em;text-decoration:none;display:flex;align-items:center;gap:2px;}
+.logo-scan{color:var(--text);}.logo-liq{color:var(--accent);}
+.logo-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;margin-left:2px;margin-bottom:10px;animation:pd 2s ease-in-out infinite;}
+@keyframes pd{0%,100%{opacity:1}50%{opacity:0.3}}
+nav{display:flex;gap:20px;align-items:center;}
+nav a{color:var(--muted);text-decoration:none;font-size:0.78rem;letter-spacing:0.05em;transition:color 0.2s;}
+nav a:hover,nav a.active{color:var(--accent);}
+.lang-switch{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:4px;display:flex;gap:4px;}
+.lang-switch a{color:var(--muted);text-decoration:none;font-size:0.72rem;padding:4px 10px;border-radius:4px;transition:all 0.2s;}
+.lang-switch a.active{background:var(--accent);color:#060d0a;font-weight:700;}
+.blog-hero{padding:48px 0 32px;border-bottom:1px solid var(--border);margin-bottom:40px;}
+.blog-category{display:inline-block;font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:3px 12px;border-radius:20px;margin-bottom:16px;}
+.blog-hero h1{font-family:var(--font-display);font-weight:800;font-size:clamp(1.6rem,4vw,2.4rem);line-height:1.15;margin-bottom:16px;}
+.blog-hero h1 em{font-style:normal;color:var(--accent);}
+.blog-meta{display:flex;gap:20px;flex-wrap:wrap;font-size:0.72rem;color:var(--muted);}
+.blog-content{padding:0 0 60px;}
+.blog-content h2{font-family:var(--font-display);font-size:1.2rem;font-weight:800;margin:40px 0 16px;color:var(--text);position:relative;padding-left:16px;}
+.blog-content h2::before{content:'';position:absolute;left:0;top:4px;bottom:4px;width:3px;background:var(--accent);border-radius:2px;}
+.blog-content h3{font-family:var(--font-display);font-size:0.95rem;font-weight:700;margin:28px 0 12px;color:var(--accent2);}
+.blog-content p{font-size:0.82rem;color:var(--muted);margin-bottom:16px;line-height:1.8;}
+.blog-content strong{color:var(--text);}
+.code-block{background:#020a06;border:1px solid var(--border);border-radius:10px;padding:20px;margin:20px 0;overflow-x:auto;}
+.code-block pre{font-family:var(--font-mono);font-size:0.75rem;color:var(--accent);line-height:1.6;}
+.code-label{font-size:0.65rem;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:10px;}
+.info-box{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:16px 20px;margin:24px 0;}
+.info-box p{font-size:0.78rem;color:var(--muted);margin:0;}
+.info-box strong{color:var(--text);}
+.schema-types{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0;}
+@media(max-width:500px){.schema-types{grid-template-columns:1fr;}}
+.schema-type{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;}
+.st-name{font-family:var(--font-display);font-size:0.82rem;font-weight:700;color:var(--accent2);margin-bottom:6px;}
+.st-desc{font-size:0.72rem;color:var(--muted);line-height:1.5;}
+.faq-item{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-bottom:10px;}
+.faq-q{font-family:var(--font-display);font-size:0.85rem;font-weight:700;color:var(--text);margin-bottom:8px;}
+.faq-a{font-size:0.78rem;color:var(--muted);line-height:1.6;}
+.share-bar{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;margin:40px 0;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.share-label{font-family:var(--font-display);font-size:0.8rem;font-weight:700;}
+.share-btn{background:none;border:1px solid var(--border);color:var(--muted);font-family:var(--font-mono);font-size:0.72rem;padding:7px 16px;border-radius:6px;text-decoration:none;transition:all 0.2s;}
+.share-btn:hover{border-color:var(--accent);color:var(--accent);}
+.cta-box{background:linear-gradient(135deg,#0d1a14,#0a2018);border:1px solid var(--accent);border-radius:12px;padding:28px;text-align:center;margin:40px 0;}
+.cta-box h3{font-family:var(--font-display);font-size:1.1rem;font-weight:800;margin-bottom:10px;}
+.cta-box p{font-size:0.78rem;color:var(--muted);margin-bottom:20px;}
+.cta-btn{display:inline-block;background:var(--accent);color:#060d0a;font-family:var(--font-display);font-weight:800;font-size:0.85rem;padding:12px 28px;border-radius:8px;text-decoration:none;transition:all 0.2s;}
+.cta-btn:hover{background:#00ffaa;transform:scale(1.03);}
+.related{margin:40px 0;}
+.related h3{font-family:var(--font-display);font-size:0.85rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.related-grid{grid-template-columns:1fr;}}
+.related-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;text-decoration:none;transition:border-color 0.2s;display:block;}
+.related-card:hover{border-color:var(--accent);}
+.rc-cat{font-size:0.65rem;color:var(--accent);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:8px;}
+.rc-title{font-family:var(--font-display);font-size:0.82rem;font-weight:700;color:var(--text);line-height:1.4;}
+footer{border-top:1px solid var(--border);padding:24px 0 40px;display:flex;justify-content:space-between;align-items:center;font-size:0.7rem;color:var(--muted);flex-wrap:wrap;gap:12px;}
+.footer-logo{font-family:var(--font-display);font-weight:800;font-size:0.9rem;}
+.footer-logo span{color:var(--accent);}
+.footer-links{display:flex;gap:20px;}
+.footer-links a{color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:var(--accent);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <a class="logo" href="/"><span class="logo-scan">Scan</span><span class="logo-liq">liq</span><span class="logo-dot"></span></a>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/blog.html" class="active">Blog</a>
+    <div class="lang-switch">
+      <a href="/blog3.html">TR</a>
+      <a href="/blog3-en.html" class="active">EN</a>
+    </div>
+  </nav>
+</header>
+
+<article>
+  <div class="blog-hero">
+    <span class="blog-category">Structured Data</span>
+    <h1>What is <em>Schema.org</em>?<br>Structured Data Guide for Google AI 2026</h1>
+    <div class="blog-meta">
+      <span>📅 June 8, 2026</span>
+      <span>✍️ Scanliq Team</span>
+      <span>⏱️ 6 min read</span>
+    </div>
+  </div>
+
+  <div class="blog-content">
+
+    <p><strong>Schema.org</strong> is a markup standard that describes your web page's content to search engines and AI systems in machine-readable language. It was jointly developed by Google, Microsoft and Yahoo. By 2026, AI systems like <strong>Google AI Overview, Perplexity and ChatGPT</strong> treat sites with Schema.org data as priority sources.</p>
+
+    <div class="info-box">
+      <p><strong>Simple explanation:</strong> Without Schema.org, AI reads your site as plain text. With Schema.org, it knows "this is an article, written on this date, by this author, about this topic." That's a big difference for AI.</p>
+    </div>
+
+    <h2>Why Is Schema.org So Important?</h2>
+    <p>When AI systems crawl the web, they need context. Is your page a blog post, a product page, or a FAQ? Who wrote it? When was it published? Schema.org communicates all of this clearly.</p>
+    <p>Google AI Overview treats sites with structured data as <strong>more trustworthy sources</strong> and surfaces them more prominently when generating answers.</p>
+
+    <h2>Most Common Schema Types</h2>
+    <div class="schema-types">
+      <div class="schema-type">
+        <div class="st-name">Article</div>
+        <div class="st-desc">For blog posts, news and articles. Includes author, date and content information.</div>
+      </div>
+      <div class="schema-type">
+        <div class="st-name">Organization</div>
+        <div class="st-desc">For company and institution pages. Includes name, address and contact details.</div>
+      </div>
+      <div class="schema-type">
+        <div class="st-name">WebApplication</div>
+        <div class="st-desc">For web tools and apps. Used by tools like Scanliq.</div>
+      </div>
+      <div class="schema-type">
+        <div class="st-name">FAQPage</div>
+        <div class="st-desc">For frequently asked questions. Google displays these directly in answer boxes.</div>
+      </div>
+      <div class="schema-type">
+        <div class="st-name">Product</div>
+        <div class="st-desc">For e-commerce products. Includes price, stock status and reviews.</div>
+      </div>
+      <div class="schema-type">
+        <div class="st-name">BreadcrumbList</div>
+        <div class="st-desc">For site navigation structure. Enables breadcrumb display on Google.</div>
+      </div>
+    </div>
+
+    <h2>How to Add JSON-LD</h2>
+    <p>The easiest way to add Schema.org — and the method recommended by Google — is <strong>JSON-LD</strong> format. It's added as a script tag in your HTML page's <code>&lt;head&gt;</code> section. No changes to your existing HTML structure are needed.</p>
+
+    <h3>Article Schema for Blog Posts</h3>
+    <div class="code-block">
+      <div class="code-label">JSON-LD — Article Schema</div>
+      <pre>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Article Title",
+  "description": "Article description.",
+  "author": {
+    "@type": "Organization",
+    "name": "Your Site Name",
+    "url": "https://yoursite.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Your Site Name"
+  },
+  "datePublished": "2026-06-08",
+  "dateModified": "2026-06-08",
+  "url": "https://yoursite.com/article.html"
+}
+&lt;/script&gt;</pre>
+    </div>
+
+    <h3>Organization Schema for Company Pages</h3>
+    <div class="code-block">
+      <div class="code-label">JSON-LD — Organization Schema</div>
+      <pre>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Company Name",
+  "url": "https://yoursite.com",
+  "logo": "https://yoursite.com/logo.png",
+  "description": "Company description.",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer service",
+    "email": "info@yoursite.com"
+  }
+}
+&lt;/script&gt;</pre>
+    </div>
+
+    <h3>FAQPage Schema for FAQ Sections</h3>
+    <div class="code-block">
+      <div class="code-label">JSON-LD — FAQPage Schema</div>
+      <pre>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Question 1?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Answer 1."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Question 2?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Answer 2."
+      }
+    }
+  ]
+}
+&lt;/script&gt;</pre>
+    </div>
+
+    <h2>Validate Your Schema.org</h2>
+    <p>Use Google's official tool to test your structured data:</p>
+    <p>👉 <a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener">Google Rich Results Test</a> — enter your URL or code to validate.</p>
+    <p>You can also use <a href="https://scanliq.com/">Scanliq</a> to quickly check whether Schema.org and JSON-LD are present on your site. Find other AI SEO criteria in our <a href="/blog2-en.html">AI SEO guide</a>.</p>
+
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <div class="faq-q">Is adding Schema.org difficult?</div>
+      <div class="faq-a">No. You just need to add a script tag in JSON-LD format to your HTML page's head section. You can copy and adapt the ready-made templates in this guide.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Which Schema type should I use?</div>
+      <div class="faq-a">It depends on your site type: Article for blog posts, Organization for company pages, Product for e-commerce, FAQPage for FAQ sections.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Will Google AI fail to find me without Schema.org?</div>
+      <div class="faq-a">It can still find you, but without structured data AI processes your content as plain text. With Schema.org you clearly communicate your content's structure and context.</div>
+    </div>
+
+    <div class="share-bar">
+      <span class="share-label">Share this post:</span>
+      <a class="share-btn" href="https://twitter.com/intent/tweet?text=Schema.org+2026+Guide&url=https://scanliq.com/blog3-en.html" target="_blank" rel="noopener">𝕏 Twitter</a>
+      <a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https://scanliq.com/blog3-en.html" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="share-btn" href="https://wa.me/?text=Schema.org+Guide+https://scanliq.com/blog3-en.html" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+
+    <div class="cta-box">
+      <h3>Does your site have Schema.org?</h3>
+      <p>Analyze your site free with Scanliq — check JSON-LD and 9 other critical points in seconds.</p>
+      <a class="cta-btn" href="https://scanliq.com/">Test for Free →</a>
+    </div>
+
+    <div class="related">
+      <h3>Related Posts</h3>
+      <div class="related-grid">
+        <a class="related-card" href="/blog1-en.html">
+          <div class="rc-cat">AI SEO</div>
+          <div class="rc-title">What is llms.txt? The Essential AI File for 2026</div>
+        </a>
+        <a class="related-card" href="/blog2-en.html">
+          <div class="rc-cat">AI SEO</div>
+          <div class="rc-title">Is Your Site Visible on ChatGPT? 2026 AI SEO Guide</div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+<footer>
+  <div class="footer-logo">Scan<span>liq</span></div>
+  <div class="footer-links">
+    <a href="/blog.html">Blog</a>
+    <a href="/legal.html">Legal</a>
+    <a href="/">Home</a>
+  </div>
+  <div>© 2026 Scanliq</div>
+</footer>
+
+</div>
+</body>
+</html>
