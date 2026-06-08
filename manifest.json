@@ -10,13 +10,13 @@
   "lang": "tr",
   "icons": [
     {
-      "src": "https://i.ibb.co/Q7TTNhxz/68613.png",
+      "src": "icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "https://i.ibb.co/cSP50hhG/68612.png",
+      "src": "icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
