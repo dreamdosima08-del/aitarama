@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scanliq — Yasal Bilgiler | Legal</title>
+<meta name="description" content="Scanliq yasal bilgiler, gizlilik politikası, kullanım şartları ve iletişim.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://scanliq.com/legal.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #060d0a;
+    --surface: #0d1a14;
+    --border: #1a3028;
+    --accent: #00e87a;
+    --accent2: #00b8d9;
+    --warn: #f5a623;
+    --text: #f0f8f4;
+    --muted: #8ab5a0;
+    --font-display: 'Syne', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-mono);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,232,122,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,232,122,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding: 0 20px; }
+
+  header {
+    padding: 28px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+
+  .logo {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+  .logo-scan { color: var(--text); }
+  .logo-liq { color: var(--accent); }
+  .logo-dot {
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin-left: 2px;
+    margin-bottom: 10px;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .back-link {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    margin-bottom: 8px;
+  }
+  .page-title span { color: var(--accent); }
+  .page-subtitle {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-bottom: 48px;
+  }
+
+  /* NAV */
+  .legal-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 40px;
+  }
+  .legal-nav a {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.8rem;
+    padding: 6px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.08em;
+    transition: all 0.2s;
+  }
+  .legal-nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* SECTIONS */
+  .legal-section {
+    margin-bottom: 48px;
+    scroll-margin-top: 20px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-icon {
+    width: 36px; height: 36px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .section-header h2 {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  .section-header .section-sub {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  .legal-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 12px;
+  }
+  .legal-block h3 {
+    font-family: var(--font-display);
+    font-size: 0.82rem;
+    color: var(--accent2);
+    margin-bottom: 10px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .legal-block p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 10px;
+  }
+  .legal-block p:last-child { margin-bottom: 0; }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 8px 0 16px;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.78rem;
+    color: var(--muted);
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 40px;
+  }
+  .footer-logo { font-family: var(--font-display); font-weight: 800; font-size: 0.9rem; }
+  .footer-logo span { color: var(--accent); }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <a href="/" style="text-decoration:none;display:flex;align-items:center;">
+<svg width="140" height="44" viewBox="0 0 140 44" role="img" style="display:block;">
+  <title>Scanliq Logo</title>
+  <!-- Sinyal dalgaları -->
+  <path d="M14 22 Q17 14 20 22 Q23 30 26 22" fill="none" stroke="#1a3028" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M10 22 Q14 11 18 22 Q22 33 26 22" fill="none" stroke="#00b8d9" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M6 22 Q11 8 16 22 Q21 36 26 22" fill="none" stroke="#00e87a" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="16" cy="22" r="3" fill="#00e87a"/>
+  <!-- Scan -->
+  <text x="32" y="20" font-family="Arial,sans-serif" font-size="16" font-weight="900" fill="#f0f8f4" letter-spacing="-0.5">Scan</text>
+  <!-- liq -->
+  <text x="32" y="37" font-family="Arial,sans-serif" font-size="16" font-weight="900" fill="#00e87a" letter-spacing="-0.5">liq</text>
+  <!-- AI rozeti -->
+  <rect x="82" y="4" width="22" height="13" fill="#00e87a" rx="3"/>
+  <text x="93" y="14" font-family="monospace" font-size="8" font-weight="700" fill="#060d0a" text-anchor="middle">AI</text>
+</svg>
+</a>
+    <a class="back-link" href="/">← Ana Sayfa</a>
+  </header>
+
+  <h1 class="page-title">Yasal <span>Bilgiler</span></h1>
+  <p class="page-subtitle">Son güncelleme: 08.06.2026</p>
+
+  <nav class="legal-nav">
+    <a href="#about">Hakkımızda</a>
+    <a href="#terms">Kullanım Şartları</a>
+    <a href="#privacy">Gizlilik & KVKK</a>
+    <a href="#cookies">Çerez Politikası</a>
+    <a href="#ads">Reklam Politikası</a>
+    <a href="#disclaimer">Sorumluluk Reddi</a>
+    <a href="#contact">İletişim</a>
+  </nav>
+
+  <!-- ABOUT -->
+  <section class="legal-section" id="about">
+    <div class="section-header">
+      <div class="section-icon">🤖</div>
+      <div>
+        <h2>Hakkımızda</h2>
+        <div class="section-sub">About Us</div>
+      </div>
+    </div>
+    <div class="legal-block">
+      <h3>Türkçe</h3>
+      <p>Scanliq, web sitelerinin yapay zeka uyumluluğunu analiz eden bir dijital değerlendirme platformudur. Kullanıcıların web sitelerinin ChatGPT, Perplexity ve Google AI gibi yapay zeka sistemleri tarafından ne kadar okunabilir, anlaşılabilir ve optimize edilebilir olduğunu ölçmelerine yardımcı olur.</p>
+      <div class="divider"></div>
+      <h3>English</h3>
+      <p>Scanliq is a digital evaluation platform that analyzes whether websites meet AI-readiness standards. It helps users understand how readable, structured, and optimized their websites are for AI systems such as ChatGPT, Perplexity, and Google AI.</p>
+    </div>
+  </section>
+
+  <!-- TERMS -->
+  <section class="legal-section" id="terms">
+    <div class="section-header">
+      <div class="section-icon">📋</div>
+      <div>
+        <h2>Kullanım Şartları</h2>
+        <div class="section-sub">Terms of Use</div>
+      </div>
+    </div>
+    <div class="legal-block">
+      <h3>Türkçe</h3>
+      <p>Bu siteyi kullanarak, sağlanan analiz sonuçlarının bilgilendirme amaçlı olduğunu kabul etmiş sayılırsınız. Scanliq, sonuçların doğruluğu veya sürekli güncelliği konusunda garanti vermez. Hizmeti kötüye kullanmak, otomatik istekler göndermek veya zararlı amaçlarla kullanmak yasaktır.</p>
+      <div class="divider"></div>
+      <h3>English</h3>
+      <p>By using this website, you agree that all analysis results are for informational purposes only. Scanliq does not guarantee accuracy or continuous availability of results. Misuse of the service, automated requests, or use for harmful purposes is prohibited.</p>
+    </div>
+  </section>
+
+  <!-- PRIVACY -->
+  <section class="legal-section" id="privacy">
+    <div class="section-header">
+      <div class="section-icon">🔒</div>
+      <div>
+        <h2>Gizlilik & KVKK</h2>
+        <div class="section-sub">Privacy & Data Protection</div>
+      </div>
+    </div>
+    <div class="legal-block">
+      <h3>Türkçe</h3>
+      <p>Scanliq kullanıcı verilerini minimum düzeyde toplar. Analiz edilen site adresleri otomatik sistemler üzerinden işlenir ve saklanmaz. Kişisel veriler üçüncü taraflarla paylaşılmaz veya satılmaz.</p>
+      <p>6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında kullanıcılar; verilerine erişim, düzeltme ve silme haklarına sahiptir.</p>
+      <div class="divider"></div>
+      <h3>English</h3>
+      <p>Scanliq collects minimal user data. Analyzed website URLs are processed automatically and not stored. No personal data is sold or shared with third parties.</p>
+      <p>Under KVKK (Turkish Personal Data Protection Law) and applicable regulations, users have rights to access, correction, and deletion of personal data.</p>
+    </div>
+  </section>
+
+  <!-- COOKIES -->
+  <section class="legal-section" id="cookies">
+    <div class="section-header">
+      <div class="section-icon">🍪</div>
+      <div>
+        <h2>Çerez Politikası</h2>
+        <div class="section-sub">Cookie Policy</div>
+      </div>
+    </div>
+    <div class="legal-block">
+      <h3>Türkçe</h3>
+      <p>Bu site, kullanıcı deneyimini geliştirmek için temel çerezler ve Google Analytics/AdSense gibi üçüncü taraf çerezleri kullanabilir. Çerezler kişisel veri içermez ve kullanıcıyı doğrudan tanımlamak için kullanılmaz. Tarayıcı ayarlarınızdan çerezleri devre dışı bırakabilirsiniz.</p>
+      <div class="divider"></div>
+      <h3>English</h3>
+      <p>This website may use essential cookies and third-party cookies such as Google Analytics/AdSense to improve user experience. Cookies do not contain personal data and are not used for direct identification. You can disable cookies through your browser settings.</p>
+    </div>
+  </section>
+
+  <!-- ADS -->
+  <section class="legal-section" id="ads">
+    <div class="section-header">
+      <div class="section-icon">📢</div>
+      <div>
+        <h2>Reklam Politikası</h2>
+        <div class="section-sub">Advertising Policy</div>
+      </div>
+    </div>
+    <div class="legal-block">
+      <h3>Türkçe</h3>
+      <p>Scanliq, Google AdSense aracılığıyla reklam gösterebilir. Gösterilecek reklamlar kullanıcı deneyimini bozmayacak şekilde konumlandırılır. Reklam içerikleri üçüncü taraf sağlayıcılardan gelebilir. Scanliq, reklam içeriklerinin doğruluğundan sorumlu değildir.</p>
+      <div class="divider"></div>
+      <h3>English</h3>
+      <p>Scanliq may display advertisements via Google AdSense. Ads are positioned to be non-intrusive to user experience. Ad content may be served by third-party providers. Scanliq is not responsible for the content of advertisements.</p>
+    </div>
+  </section>
+
+  <!-- DISCLAIMER -->
+  <section class="legal-section" id="disclaimer">
+    <div class="section-header">
+      <div class="section-icon">⚠️</div>
+      <div>
+        <h2>Sorumluluk Reddi</h2>
+        <div class="section-sub">Disclaimer</div>
+      </div>
+    </div>
+    <div class="legal-block">
+      <h3>Türkçe</h3>
+      <p>Scanliq tarafından sunulan analizler teknik tahmin ve algoritmik değerlendirmelerdir. Hiçbir sonuç %100 kesinlik garantisi taşımaz. Yapay zeka standartları sürekli değiştiğinden sonuçlar zaman içinde farklılık gösterebilir. Kullanıcılar alınan sonuçlara göre kendi kararlarını vermelidir.</p>
+      <div class="divider"></div>
+      <h3>English</h3>
+      <p>All results provided by Scanliq are algorithmic estimates and technical assessments. No guarantee of accuracy, completeness, or fitness for any purpose is provided. As AI standards continuously evolve, results may vary over time. Users are responsible for their own decisions based on these results.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="legal-section" id="contact">
+    <div class="section-header">
+      <div class="section-icon">✉️</div>
+      <div>
+        <h2>İletişim</h2>
+        <div class="section-sub">Contact</div>
+      </div>
+    </div>
+    <div class="legal-block">
+      <h3>Türkçe</h3>
+      <p>Sorularınız, geri bildirimleriniz veya veri silme talepleriniz için bizimle iletişime geçebilirsiniz.</p>
+      <div class="divider"></div>
+      <h3>English</h3>
+      <p>For questions, feedback, or data deletion requests, please contact us.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">Scan<span>liq</span></div>
+    <div>© 2026 Scanliq — Tüm hakları saklıdır.</div>
+    <a href="/">← Ana Sayfa</a>
+  </footer>
+
+</div>
+</body>
+</html>
