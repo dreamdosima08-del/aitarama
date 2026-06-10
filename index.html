@@ -497,6 +497,61 @@
   }
   .btn-reset:hover { border-color: var(--accent); color: var(--accent); }
 
+  .prompt-section {
+    background: var(--surface);
+    border: 1px solid var(--accent2);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .prompt-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .prompt-head h3 {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--accent2);
+  }
+  .prompt-copy-btn {
+    background: var(--accent2);
+    color: #060d0a;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .prompt-copy-btn:hover { opacity: 0.85; transform: scale(1.03); }
+  .prompt-desc {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+  .prompt-box {
+    background: #020a06;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text);
+    line-height: 1.7;
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 320px;
+    overflow-y: auto;
+  }
+
   .disclaimer {
     background: rgba(245,166,35,0.05); border: 1px solid rgba(245,166,35,0.2);
     border-radius: 8px; padding: 14px 16px;
@@ -570,7 +625,7 @@
   <!-- INPUT -->
   <div class="input-section">
     <div class="input-box">
-      <input type="url" id="url-input" placeholder="https://siteniz.com" autocomplete="off" />
+      <input type="url" id="url-input" value="https://" placeholder="https://siteniz.com" autocomplete="off" spellcheck="false" />
       <button class="btn-check" id="btn-check" onclick="runCheck()">
         <span id="btn-text">ANALİZ ET</span>
       </button>
@@ -683,6 +738,16 @@
       <div id="tips-list"></div>
     </div>
 
+    <!-- AI PROMPT BOX -->
+    <div class="prompt-section" id="prompt-section" style="display:none">
+      <div class="prompt-head">
+        <h3 id="prompt-title">🤖 Yapay Zeka Düzeltme Komutu</h3>
+        <button class="prompt-copy-btn" id="prompt-copy-btn" onclick="copyPrompt()">📋 Kopyala</button>
+      </div>
+      <p class="prompt-desc" id="prompt-desc">Aşağıdaki komutu kopyalayıp ChatGPT, Claude veya kullandığınız yapay zeka asistanına yapıştırın — eksiklerinizi sizin için düzeltsin.</p>
+      <pre class="prompt-box" id="prompt-box"></pre>
+    </div>
+
     <div class="disclaimer" id="disclaimer"></div>
 
     <div class="ad-slot" id="ad-bottom"><!-- Google AdSense --></div>
@@ -731,7 +796,30 @@ const T = {
     loadingLabel: 'TARAMA BAŞLADI',
     loadingSteps: ['robots.txt kontrol ediliyor…', 'Meta etiketler taranıyor…', 'Yapısal veri aranıyor…', 'AI görünürlüğü ölçülüyor…'],
     tipsTitle: '💡 İyileştirme Önerileri',
-    disclaimerText: '⚠️ Bu analiz kamuya açık HTTP başlıkları ve HTML içeriği okunarak gerçekleştirilir. Bazı siteler CORS kısıtlaması nedeniyle tam analiz edilemeyebilir. Sonuçlar bilgi amaçlıdır.',
+    promptTitle: '🤖 Yapay Zeka Düzeltme Komutu',
+    promptDesc: 'Aşağıdaki komutu kopyalayıp ChatGPT, Claude veya kullandığınız yapay zeka asistanına yapıştırın — eksiklerinizi sizin için düzeltsin.',
+    promptCopy: '📋 Kopyala',
+    promptCopied: '✅ Kopyalandı!',
+    promptIntro: 'Web sitem için AI/SEO uyumluluk analizi yaptırdım. Aşağıdaki eksikler tespit edildi. Lütfen her birini düzeltmem için gerekli kodları üret ve nereye ekleyeceğimi adım adım açıkla. Sitem: ',
+    promptFixes: {
+      https: 'HTTPS aktif değil — sitemi HTTPS\'ye taşımam için yol göster.',
+      robots: 'robots.txt dosyası yok — AI botlarına (GPTBot, ClaudeBot, PerplexityBot) izin veren bir robots.txt oluştur.',
+      aibots: 'robots.txt dosyam AI botlarını engelliyor — GPTBot, ClaudeBot ve PerplexityBot engellerini kaldıracak şekilde düzenle.',
+      llms: 'llms.txt dosyası yok — sitemi tanıtan bir llms.txt dosyası oluştur.',
+      sitemap: 'sitemap.xml yok — sayfalarımı listeleyen bir sitemap.xml oluştur.',
+      title: 'Title etiketi eksik veya uygunsuz — 10-70 karakter arası, anahtar kelime içeren title etiketi yaz.',
+      desc: 'Meta description eksik — 120-160 karakter arası açıklama etiketi yaz.',
+      h1: 'H1 başlığı yok — sayfama uygun bir H1 başlığı ekle.',
+      og: 'Open Graph etiketleri eksik — og:title, og:description, og:url etiketlerini oluştur.',
+      ogimage: 'og:image etiketi yok — paylaşım görseli meta etiketi ekle.',
+      canonical: 'Canonical URL tanımlı değil — canonical link etiketi ekle.',
+      schema: 'Schema.org yapısal verisi yok — siteme uygun schema işaretlemesi oluştur.',
+      jsonld: 'JSON-LD yok — Google\'ın önerdiği JSON-LD formatında yapısal veri ekle.',
+      viewport: 'Viewport meta etiketi yok — mobil uyum için viewport etiketi ekle.',
+      lang: 'HTML lang etiketi yok — html etiketine dil tanımı ekle.',
+      favicon: 'Favicon yok — siteme favicon ekle ve link etiketini oluştur.'
+    },
+    disclaimerText: 'ℹ️ Bu analiz, sitenizin kamuya açık HTML içeriğini ve teknik dosyalarını okuyarak gerçekleştirilir. Tespit edilen eksikler (llms.txt, meta etiketler, yapısal veri vb.) kesin bulgulardır ve giderilmeleri sitenize zarar vermez. Ancak yüksek skor, yapay zeka sistemlerinde görünürlük garantisi vermez — AI algoritmaları sürekli gelişmektedir. Scanliq, sektörce kabul görmüş en iyi uygulamalara uygunluğunuzu ölçer.',
     btnReset: '↩ Yeni Test',
     footerLegal: 'Yasal', footerPrivacy: 'Gizlilik', footerContact: 'İletişim',
     footerCopy: '© 2026 Scanliq',
@@ -801,7 +889,30 @@ const T = {
     loadingLabel: 'SCAN STARTED',
     loadingSteps: ['Checking robots.txt…', 'Scanning meta tags…', 'Looking for structured data…', 'Measuring AI visibility…'],
     tipsTitle: '💡 Improvement Tips',
-    disclaimerText: '⚠️ This analysis reads publicly available HTTP headers and HTML content. Some sites may not be fully analyzable due to CORS restrictions. Results are for informational purposes.',
+    promptTitle: '🤖 AI Fix Prompt',
+    promptDesc: 'Copy the prompt below and paste it into ChatGPT, Claude or your AI assistant — let it fix the issues for you.',
+    promptCopy: '📋 Copy',
+    promptCopied: '✅ Copied!',
+    promptIntro: 'I ran an AI/SEO readiness analysis on my website. The following issues were found. Please generate the code to fix each one and explain step by step where to add it. My site: ',
+    promptFixes: {
+      https: 'HTTPS is not active — guide me to migrate my site to HTTPS.',
+      robots: 'No robots.txt file — create one that allows AI bots (GPTBot, ClaudeBot, PerplexityBot).',
+      aibots: 'My robots.txt blocks AI bots — edit it to remove GPTBot, ClaudeBot and PerplexityBot blocks.',
+      llms: 'No llms.txt file — create an llms.txt describing my site.',
+      sitemap: 'No sitemap.xml — create a sitemap listing my pages.',
+      title: 'Title tag missing or improper — write a 10-70 character keyword-rich title tag.',
+      desc: 'Meta description missing — write a 120-160 character description tag.',
+      h1: 'No H1 heading — add an appropriate H1 to my page.',
+      og: 'Open Graph tags missing — create og:title, og:description, og:url tags.',
+      ogimage: 'No og:image tag — add a share image meta tag.',
+      canonical: 'Canonical URL not defined — add a canonical link tag.',
+      schema: 'No Schema.org structured data — create appropriate schema markup for my site.',
+      jsonld: 'No JSON-LD — add structured data in Google-recommended JSON-LD format.',
+      viewport: 'No viewport meta tag — add it for mobile compatibility.',
+      lang: 'No HTML lang attribute — add language definition to the html tag.',
+      favicon: 'No favicon — add a favicon and create its link tag.'
+    },
+    disclaimerText: 'ℹ️ This analysis reads your site\'s publicly available HTML content and technical files. Detected gaps (llms.txt, meta tags, structured data, etc.) are factual findings and fixing them will not harm your site. However, a high score does not guarantee visibility in AI systems — AI algorithms evolve constantly. Scanliq measures your compliance with industry-accepted best practices.',
     btnReset: '↩ New Test',
     footerLegal: 'Legal', footerPrivacy: 'Privacy', footerContact: 'Contact',
     footerCopy: '© 2026 Scanliq',
@@ -937,6 +1048,7 @@ async function runCheck() {
 
   await new Promise(r => setTimeout(r, 3200));
 
+  window.lastAnalyzedUrl = raw;
   const workerResults = await analyzeWithWorker(raw);
 
   loadEl.classList.remove('active');
@@ -1035,6 +1147,23 @@ function showResults(score, checks, t) {
     tipsSection.style.display = 'none';
   }
 
+  // AI Prompt kutusu
+  const promptSection = document.getElementById('prompt-section');
+  if (failed.length > 0) {
+    document.getElementById('prompt-title').textContent = t.promptTitle;
+    document.getElementById('prompt-desc').textContent = t.promptDesc;
+    document.getElementById('prompt-copy-btn').textContent = t.promptCopy;
+    const fixLines = failed
+      .filter(k => t.promptFixes[k])
+      .map((k, i) => (i + 1) + '. ' + t.promptFixes[k])
+      .join('\n');
+    document.getElementById('prompt-box').textContent =
+      t.promptIntro + (window.lastAnalyzedUrl || '') + '\n\n' + fixLines;
+    promptSection.style.display = 'block';
+  } else {
+    promptSection.style.display = 'none';
+  }
+
   document.getElementById('disclaimer').textContent = t.disclaimerText;
   const results = document.getElementById('results');
   results.style.display = 'block';
@@ -1042,10 +1171,31 @@ function showResults(score, checks, t) {
   results.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
+function copyPrompt() {
+  const txt = document.getElementById('prompt-box').textContent;
+  const btn = document.getElementById('prompt-copy-btn');
+  const t = T[lang];
+  navigator.clipboard.writeText(txt).then(() => {
+    btn.textContent = t.promptCopied;
+    setTimeout(() => { btn.textContent = t.promptCopy; }, 2000);
+  }).catch(() => {
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = txt;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = t.promptCopied;
+    setTimeout(() => { btn.textContent = t.promptCopy; }, 2000);
+  });
+}
+
 function resetAll() {
+  document.getElementById('prompt-section').style.display = 'none';
   document.getElementById('results').classList.remove('active');
   document.getElementById('results').style.display = 'none';
-  document.getElementById('url-input').value = '';
+  document.getElementById('url-input').value = 'https://';
   document.getElementById('error-msg').classList.remove('active');
   document.getElementById('about-section').style.display = 'block';
   document.getElementById('how-section').style.display = 'block';
