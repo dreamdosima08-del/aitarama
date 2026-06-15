@@ -489,6 +489,79 @@
     transition: opacity 0.5s, transform 0.5s;
   }
   .check-card.visible { opacity: 1; transform: translateY(0); }
+
+  /* TEK-TIK ÇÖZÜM BUTONU */
+  .fix-btn {
+    margin-top: 10px;
+    width: 100%;
+    background: linear-gradient(135deg, var(--accent), #00b8d9);
+    color: #060d0a;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .fix-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,232,122,0.3); }
+
+  /* ÇÖZÜM MODAL */
+  .fix-modal {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.8);
+    display: none; align-items: center; justify-content: center;
+    z-index: 1000; padding: 20px;
+    backdrop-filter: blur(4px);
+  }
+  .fix-modal.active { display: flex; }
+  .fix-modal-box {
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    border-radius: 16px;
+    padding: 28px;
+    max-width: 600px; width: 100%;
+    max-height: 85vh; overflow-y: auto;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .fix-modal-close {
+    position: absolute; top: 16px; right: 16px;
+    background: var(--border); color: var(--text);
+    border: none; border-radius: 50%;
+    width: 32px; height: 32px; cursor: pointer;
+    font-size: 1rem; line-height: 1;
+  }
+  .fix-modal-close:hover { background: var(--accent); color: #060d0a; }
+  .fix-modal-title {
+    font-family: var(--font-display); font-size: 1.15rem; font-weight: 800;
+    color: var(--accent); margin-bottom: 10px; padding-right: 40px;
+  }
+  .fix-modal-desc {
+    font-size: 0.85rem; color: var(--muted);
+    line-height: 1.6; margin-bottom: 16px;
+  }
+  .fix-modal-code {
+    background: #020a06;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    font-family: var(--font-mono); font-size: 0.78rem;
+    color: var(--text); line-height: 1.7;
+    white-space: pre-wrap; word-break: break-word;
+    max-height: 300px; overflow-y: auto;
+    margin-bottom: 16px;
+  }
+  .fix-modal-action {
+    width: 100%;
+    background: var(--accent); color: #060d0a;
+    border: none; border-radius: 10px;
+    padding: 13px; font-family: var(--font-display);
+    font-weight: 800; font-size: 0.9rem; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .fix-modal-action:hover { opacity: 0.88; transform: scale(1.02); }
   .check-head {
     display: flex; align-items: center;
     justify-content: space-between; margin-bottom: 8px;
@@ -769,6 +842,17 @@
 
     <div class="checks-grid" id="checks-grid"></div>
 
+    <!-- TEK-TIK ÇÖZÜM MODAL -->
+    <div class="fix-modal" id="fix-modal">
+      <div class="fix-modal-box">
+        <button class="fix-modal-close" onclick="closeFix()">✕</button>
+        <h3 class="fix-modal-title" id="fix-modal-title"></h3>
+        <p class="fix-modal-desc" id="fix-modal-desc"></p>
+        <pre class="fix-modal-code" id="fix-modal-code"></pre>
+        <button class="fix-modal-action" id="fix-modal-action"></button>
+      </div>
+    </div>
+
     <div class="tips-section" id="tips-section" style="display:none">
       <h3 id="tips-title">💡 Öneriler</h3>
       <div id="tips-list"></div>
@@ -848,6 +932,9 @@ const T = {
     promptDesc: 'Aşağıdaki komutu kopyalayıp ChatGPT, Claude veya kullandığınız yapay zeka asistanına yapıştırın — eksiklerinizi sizin için düzeltsin.',
     promptCopy: '📋 Kopyala',
     promptCopied: '✅ Kopyalandı!',
+    fixDownload: '⬇ Dosyayı İndir',
+    fixCopy: '📋 Kopyala',
+    fixCopied: '✅ Kopyalandı!',
     promptIntro: 'Web sitem için AI/SEO uyumluluk analizi yaptırdım. Aşağıdaki eksikler tespit edildi. Lütfen her birini düzeltmem için gerekli kodları üret ve nereye ekleyeceğimi adım adım açıkla. Sitem: ',
     promptFixes: {
       https: 'HTTPS aktif değil — sitemi HTTPS\'ye taşımam için yol göster.',
@@ -945,6 +1032,9 @@ const T = {
     promptDesc: 'Copy the prompt below and paste it into ChatGPT, Claude or your AI assistant — let it fix the issues for you.',
     promptCopy: '📋 Copy',
     promptCopied: '✅ Copied!',
+    fixDownload: '⬇ Download File',
+    fixCopy: '📋 Copy',
+    fixCopied: '✅ Copied!',
     promptIntro: 'I ran an AI/SEO readiness analysis on my website. The following issues were found. Please generate the code to fix each one and explain step by step where to add it. My site: ',
     promptFixes: {
       https: 'HTTPS is not active — guide me to migrate my site to HTTPS.',
@@ -1215,6 +1305,11 @@ function showResults(score, checks, t) {
     const status = data.pass ? 'pass' : 'fail';
     const card = document.createElement('div');
     card.className = 'check-card';
+    // Başarısız ve çözümü olan kontroller için "Çöz" butonu
+    const hasFix = !data.pass && FIXERS[key];
+    const fixBtn = hasFix
+      ? `<button class="fix-btn" data-fix="${key}" onclick="openFix('${key}')">${FIXERS[key].btn[lang]}</button>`
+      : '';
     card.innerHTML = `
       <div class="check-head">
         <span class="check-title">${info.title}</span>
@@ -1222,6 +1317,7 @@ function showResults(score, checks, t) {
       </div>
       <div class="check-detail">${data.pass ? info.detail_ok : info.detail_warn}</div>
       <div class="check-bar"><div class="check-bar-fill" style="background:${barColors[status]};width:0%"></div></div>
+      ${fixBtn}
     `;
     grid.appendChild(card);
     setTimeout(() => {
@@ -1269,6 +1365,182 @@ function showResults(score, checks, t) {
   results.classList.add('active');
   results.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
+
+// ============================================================
+// TEK-TIK ÇÖZÜM MOTORU (One-Click Fixes)
+// Her eksik için siteye özel hazır dosya/kod üretir
+// ============================================================
+const FIXERS = {
+  llms: {
+    btn: { tr: '⬇ llms.txt Oluştur', en: '⬇ Generate llms.txt' },
+    title: { tr: 'Hazır llms.txt Dosyanız', en: 'Your Ready llms.txt File' },
+    type: 'download', filename: 'llms.txt',
+    desc: { tr: 'Bu dosyayı indirin ve sitenizin kök dizinine (ana klasör) yükleyin.', en: 'Download this file and upload it to your site root directory.' },
+    gen: (host) => `# llms.txt\n# ${host}\n\n## Site Hakkinda\n${host} - [sitenizi bir cumleyle tanimlayin]\n\n## Onemli Sayfalar\n- Ana Sayfa: https://${host}/\n- Hakkimizda: https://${host}/hakkimizda\n- Iletisim: https://${host}/iletisim\n\n## Izinler\nAI sistemleri bu sitenin icerigini okuyabilir ve ozetleyebilir.\n\n## Iletisim\nE-posta: info@${host}\n`
+  },
+  robots: {
+    btn: { tr: '⬇ robots.txt Oluştur', en: '⬇ Generate robots.txt' },
+    title: { tr: 'Hazır robots.txt Dosyanız', en: 'Your Ready robots.txt File' },
+    type: 'download', filename: 'robots.txt',
+    desc: { tr: 'Bu dosyayı indirin ve sitenizin kök dizinine yükleyin. AI botlarına tam erişim verir.', en: 'Download and upload to your site root. Grants full access to AI bots.' },
+    gen: (host) => `User-agent: *\nAllow: /\n\nUser-agent: GPTBot\nAllow: /\n\nUser-agent: ClaudeBot\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nUser-agent: Google-Extended\nAllow: /\n\nSitemap: https://${host}/sitemap.xml\n`
+  },
+  aibots: {
+    btn: { tr: '⬇ robots.txt Düzelt', en: '⬇ Fix robots.txt' },
+    title: { tr: 'Düzeltilmiş robots.txt', en: 'Fixed robots.txt' },
+    type: 'download', filename: 'robots.txt',
+    desc: { tr: 'Mevcut robots.txt dosyanızı bununla değiştirin — AI botları engeli kalkar.', en: 'Replace your current robots.txt with this — removes the AI bot block.' },
+    gen: (host) => `User-agent: *\nAllow: /\n\nUser-agent: GPTBot\nAllow: /\n\nUser-agent: ClaudeBot\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nUser-agent: Google-Extended\nAllow: /\n\nSitemap: https://${host}/sitemap.xml\n`
+  },
+  schema: {
+    btn: { tr: '📋 Schema Kodu Al', en: '📋 Get Schema Code' },
+    title: { tr: 'Siteniz İçin Schema.org Kodu', en: 'Schema.org Code for Your Site' },
+    type: 'copy', filename: null,
+    desc: { tr: 'Bu kodu sayfanızın <head> bölümüne yapıştırın.', en: 'Paste this code into your page <head> section.' },
+    gen: (host) => `<script type="application/ld+json">\n{\n  "@context": "https://schema.org",\n  "@type": "Organization",\n  "name": "${host}",\n  "url": "https://${host}",\n  "description": "[sitenizin kisa aciklamasi]",\n  "sameAs": [\n    "https://twitter.com/[hesabiniz]",\n    "https://instagram.com/[hesabiniz]"\n  ]\n}\n</script>`
+  },
+  jsonld: {
+    btn: { tr: '📋 JSON-LD Kodu Al', en: '📋 Get JSON-LD Code' },
+    title: { tr: 'Siteniz İçin JSON-LD', en: 'JSON-LD for Your Site' },
+    type: 'copy', filename: null,
+    desc: { tr: 'Bu yapısal veri kodunu sayfanızın <head> bölümüne ekleyin.', en: 'Add this structured data to your page <head>.' },
+    gen: (host) => `<script type="application/ld+json">\n{\n  "@context": "https://schema.org",\n  "@type": "WebSite",\n  "name": "${host}",\n  "url": "https://${host}",\n  "potentialAction": {\n    "@type": "SearchAction",\n    "target": "https://${host}/?s={search_term_string}",\n    "query-input": "required name=search_term_string"\n  }\n}\n</script>`
+  },
+  desc: {
+    btn: { tr: '📋 Meta Etiketi Al', en: '📋 Get Meta Tag' },
+    title: { tr: 'Meta Description Etiketi', en: 'Meta Description Tag' },
+    type: 'copy', filename: null,
+    desc: { tr: 'Köşeli parantez içini doldurun, <head> bölümüne ekleyin (120-160 karakter ideal).', en: 'Fill the brackets, add to <head> (120-160 chars ideal).' },
+    gen: (host) => `<meta name="description" content="[Sitenizi 120-160 karakter arasinda ozetleyin. Anahtar kelimelerinizi dogal sekilde kullanin.]">`
+  },
+  ogimage: {
+    btn: { tr: '📋 OG Görsel Etiketi', en: '📋 Get OG Image Tag' },
+    title: { tr: 'og:image Etiketi', en: 'og:image Tag' },
+    type: 'copy', filename: null,
+    desc: { tr: 'Görsel URL\'nizi ekleyin (1200x630px önerilir), <head> bölümüne yapıştırın.', en: 'Add your image URL (1200x630px recommended), paste in <head>.' },
+    gen: (host) => `<meta property="og:image" content="https://${host}/og-image.jpg">\n<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">`
+  },
+  og: {
+    btn: { tr: '📋 Open Graph Kodu', en: '📋 Get Open Graph Code' },
+    title: { tr: 'Open Graph Etiketleri', en: 'Open Graph Tags' },
+    type: 'copy', filename: null,
+    desc: { tr: 'Bu etiketleri <head> bölümüne ekleyin, köşeli parantezleri doldurun.', en: 'Add these tags to <head>, fill the brackets.' },
+    gen: (host) => `<meta property="og:title" content="[Sayfa basligi]">\n<meta property="og:description" content="[Sayfa aciklamasi]">\n<meta property="og:url" content="https://${host}/">\n<meta property="og:type" content="website">\n<meta property="og:image" content="https://${host}/og-image.jpg">`
+  },
+  canonical: {
+    btn: { tr: '📋 Canonical Etiketi', en: '📋 Get Canonical Tag' },
+    title: { tr: 'Canonical URL Etiketi', en: 'Canonical URL Tag' },
+    type: 'copy', filename: null,
+    desc: { tr: 'Her sayfanın <head> bölümüne, o sayfanın gerçek URL\'siyle ekleyin.', en: 'Add to each page <head> with that page real URL.' },
+    gen: (host) => `<link rel="canonical" href="https://${host}/">`
+  },
+  title: {
+    btn: { tr: '📋 Title Etiketi', en: '📋 Get Title Tag' },
+    title: { tr: 'Title Etiketi', en: 'Title Tag' },
+    type: 'copy', filename: null,
+    desc: { tr: 'Köşeli parantezi doldurun (10-70 karakter), <head> bölümüne ekleyin.', en: 'Fill the bracket (10-70 chars), add to <head>.' },
+    gen: (host) => `<title>[Ana anahtar kelimeniz - Markaniz | 10-70 karakter]</title>`
+  },
+  h1: {
+    btn: { tr: '📋 H1 Örneği', en: '📋 Get H1 Example' },
+    title: { tr: 'H1 Başlık Yapısı', en: 'H1 Heading Structure' },
+    type: 'copy', filename: null,
+    desc: { tr: 'Her sayfada TEK bir H1 olmalı. Bunu sayfanızın ana başlığı olarak kullanın.', en: 'Each page needs ONE H1. Use this as your page main heading.' },
+    gen: (host) => `<h1>[Sayfanizin ana konusunu ozetleyen tek baslik]</h1>`
+  },
+  viewport: {
+    btn: { tr: '📋 Viewport Etiketi', en: '📋 Get Viewport Tag' },
+    title: { tr: 'Viewport Etiketi', en: 'Viewport Tag' },
+    type: 'copy', filename: null,
+    desc: { tr: 'Mobil uyum için <head> bölümüne ekleyin.', en: 'Add to <head> for mobile compatibility.' },
+    gen: (host) => `<meta name="viewport" content="width=device-width, initial-scale=1.0">`
+  },
+  lang: {
+    btn: { tr: '📋 Dil Etiketi', en: '📋 Get Lang Tag' },
+    title: { tr: 'HTML Dil Etiketi', en: 'HTML Lang Attribute' },
+    type: 'copy', filename: null,
+    desc: { tr: '<html> etiketinizi bununla değiştirin (Türkçe site için tr).', en: 'Replace your <html> tag with this (tr for Turkish, en for English).' },
+    gen: (host) => `<html lang="tr">`
+  },
+  favicon: {
+    btn: { tr: '📋 Favicon Etiketi', en: '📋 Get Favicon Tag' },
+    title: { tr: 'Favicon Etiketi', en: 'Favicon Tag' },
+    type: 'copy', filename: null,
+    desc: { tr: 'favicon.ico dosyanızı kök dizine koyun, bu etiketi <head> bölümüne ekleyin.', en: 'Put favicon.ico in root, add this tag to <head>.' },
+    gen: (host) => `<link rel="icon" type="image/x-icon" href="/favicon.ico">\n<link rel="apple-touch-icon" href="/apple-touch-icon.png">`
+  },
+  sitemap: {
+    btn: { tr: '📋 Sitemap Rehberi', en: '📋 Sitemap Guide' },
+    title: { tr: 'sitemap.xml Şablonu', en: 'sitemap.xml Template' },
+    type: 'download', filename: 'sitemap.xml',
+    desc: { tr: 'Bu şablonu indirin, kendi sayfalarınızla doldurun, kök dizine yükleyin.', en: 'Download, fill with your pages, upload to root.' },
+    gen: (host) => `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>https://${host}/</loc><priority>1.0</priority></url>\n  <url><loc>https://${host}/hakkimizda</loc><priority>0.8</priority></url>\n  <url><loc>https://${host}/iletisim</loc><priority>0.5</priority></url>\n</urlset>`
+  },
+  faqPass: {
+    btn: { tr: '📋 FAQ Şablonu', en: '📋 FAQ Template' },
+    title: { tr: 'FAQ (Soru-Cevap) Şablonu', en: 'FAQ Template' },
+    type: 'copy', filename: null,
+    desc: { tr: 'Bu yapıyı sayfanıza ekleyin — AI alıntılama oranınız artar.', en: 'Add this structure to your page — increases AI citation rate.' },
+    gen: (host) => `<h2>[Sik sorulan soru buraya? ]</h2>\n<p>[Net, dogrudan cevap - 40-60 kelime ideal.]</p>\n\n<h2>[Ikinci soru? ]</h2>\n<p>[Ikinci cevap.]</p>\n\n<!-- AI sistemleri soru-cevap formatini alintilamayi sever -->`
+  },
+  textRatioPass: {
+    btn: { tr: '💡 Nasıl Düzeltilir', en: '💡 How to Fix' },
+    title: { tr: 'Metin/HTML Oranını Artırma', en: 'Increasing Text/HTML Ratio' },
+    type: 'copy', filename: null,
+    desc: { tr: 'Bu adımları uygulayın — sayfanızın metin yoğunluğu artar.', en: 'Apply these steps — increases your page text density.' },
+    gen: (host) => `METIN/HTML ORANINI ARTIRMA REHBERI\n\n1. Sayfaya daha fazla anlamli metin icerigi ekleyin\n2. Gereksiz inline script ve style kodlarini harici dosyalara tasiyin\n3. Asiri div ve span kullanimini azaltin\n4. Yorum satirlarini (HTML comments) temizleyin\n5. Bos ve gereksiz HTML etiketlerini kaldirin\n\nIdeal oran: %25 ve uzeri`
+  }
+};
+
+function openFix(key) {
+  const fixer = FIXERS[key];
+  if (!fixer) return;
+  let host = 'siteniz.com';
+  try { host = new URL(window.lastAnalyzedUrl).hostname.replace(/^www\./,''); } catch(e){}
+  const content = fixer.gen(host).replace(/\\n/g, '\n');
+  document.getElementById('fix-modal-title').textContent = fixer.title[lang];
+  document.getElementById('fix-modal-desc').textContent = fixer.desc[lang];
+  document.getElementById('fix-modal-code').textContent = content;
+  const actionBtn = document.getElementById('fix-modal-action');
+  const T2 = T[lang];
+  if (fixer.type === 'download') {
+    actionBtn.textContent = T2.fixDownload || '⬇ İndir';
+    actionBtn.onclick = () => {
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = fixer.filename;
+      a.click();
+      URL.revokeObjectURL(a.href);
+    };
+  } else {
+    actionBtn.textContent = T2.fixCopy || '📋 Kopyala';
+    actionBtn.onclick = () => {
+      navigator.clipboard.writeText(content).then(() => {
+        actionBtn.textContent = T2.fixCopied || '✅ Kopyalandı!';
+        setTimeout(() => { actionBtn.textContent = T2.fixCopy || '📋 Kopyala'; }, 2000);
+      }).catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = content; document.body.appendChild(ta); ta.select();
+        document.execCommand('copy'); document.body.removeChild(ta);
+        actionBtn.textContent = T2.fixCopied || '✅ Kopyalandı!';
+        setTimeout(() => { actionBtn.textContent = T2.fixCopy || '📋 Kopyala'; }, 2000);
+      });
+    };
+  }
+  document.getElementById('fix-modal').classList.add('active');
+}
+
+function closeFix() {
+  document.getElementById('fix-modal').classList.remove('active');
+}
+// ESC tuşu ve dışarı tıklama ile kapat
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeFix();
+});
+document.addEventListener('click', (e) => {
+  if (e.target.id === 'fix-modal') closeFix();
+});
 
 function copyPrompt() {
   const txt = document.getElementById('prompt-box').textContent;
