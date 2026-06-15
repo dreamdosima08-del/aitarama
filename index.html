@@ -1397,14 +1397,14 @@ const FIXERS = {
     title: { tr: 'Siteniz İçin Schema.org Kodu', en: 'Schema.org Code for Your Site' },
     type: 'copy', filename: null,
     desc: { tr: 'Bu kodu sayfanızın <head> bölümüne yapıştırın.', en: 'Paste this code into your page <head> section.' },
-    gen: (host) => `<script type="application/ld+json">\n{\n  "@context": "https://schema.org",\n  "@type": "Organization",\n  "name": "${host}",\n  "url": "https://${host}",\n  "description": "[sitenizin kisa aciklamasi]",\n  "sameAs": [\n    "https://twitter.com/[hesabiniz]",\n    "https://instagram.com/[hesabiniz]"\n  ]\n}\n</script>`
+    gen: (host) => `<scr`+`ipt type="application/ld+json">\n{\n  "@context": "https://schema.org",\n  "@type": "Organization",\n  "name": "${host}",\n  "url": "https://${host}",\n  "description": "[sitenizin kisa aciklamasi]",\n  "sameAs": [\n    "https://twitter.com/[hesabiniz]",\n    "https://instagram.com/[hesabiniz]"\n  ]\n}\n</scr`+`ipt>`
   },
   jsonld: {
     btn: { tr: '📋 JSON-LD Kodu Al', en: '📋 Get JSON-LD Code' },
     title: { tr: 'Siteniz İçin JSON-LD', en: 'JSON-LD for Your Site' },
     type: 'copy', filename: null,
     desc: { tr: 'Bu yapısal veri kodunu sayfanızın <head> bölümüne ekleyin.', en: 'Add this structured data to your page <head>.' },
-    gen: (host) => `<script type="application/ld+json">\n{\n  "@context": "https://schema.org",\n  "@type": "WebSite",\n  "name": "${host}",\n  "url": "https://${host}",\n  "potentialAction": {\n    "@type": "SearchAction",\n    "target": "https://${host}/?s={search_term_string}",\n    "query-input": "required name=search_term_string"\n  }\n}\n</script>`
+    gen: (host) => `<scr`+`ipt type="application/ld+json">\n{\n  "@context": "https://schema.org",\n  "@type": "WebSite",\n  "name": "${host}",\n  "url": "https://${host}",\n  "potentialAction": {\n    "@type": "SearchAction",\n    "target": "https://${host}/?s={search_term_string}",\n    "query-input": "required name=search_term_string"\n  }\n}\n</scr`+`ipt>`
   },
   desc: {
     btn: { tr: '📋 Meta Etiketi Al', en: '📋 Get Meta Tag' },
