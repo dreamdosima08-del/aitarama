@@ -462,6 +462,13 @@
     position: absolute; inset: 0;
     display: flex; align-items: center; justify-content: center;
     font-family: var(--font-display); font-size: 1.3rem; font-weight: 800;
+    transform: translateY(-6px);
+  }
+  .score-badge-label {
+    position: absolute; left: 0; right: 0; bottom: 16px;
+    text-align: center;
+    font-family: var(--font-mono); font-size: 0.42rem; font-weight: 700;
+    letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase;
   }
   .score-info h2 { font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; }
   .score-info p { color: var(--muted); font-size: 0.85rem; margin-top: 6px; line-height: 1.5; }
@@ -751,6 +758,7 @@
             stroke-dasharray="213.6" stroke-dashoffset="213.6"/>
         </svg>
         <div class="score-num" id="score-num">0</div>
+        <div class="score-badge-label" id="geo-score-label">GEO Score</div>
       </div>
       <div class="score-info">
         <h2 id="score-title"></h2>
@@ -1144,7 +1152,35 @@ async function runCheck() {
     faqPass:       { pass: workerResults.faqPass === true }
   };
 
-  const score = Math.round(Object.values(checks).filter(c => c.pass).length / Object.keys(checks).length * 100);
+  // ===== GEO SCORE — Ağırlıklı Puanlama =====
+  // AI görünürlüğü için kritik kontroller daha yüksek ağırlık alır.
+  const WEIGHTS = {
+    aibots:        10,  // En kritik: AI botları engelliyse her şey boşa
+    llms:           9,  // AI içerik rehberi — GEO'nun kalbi
+    schema:         9,  // Yapısal veri — AI anlamlandırması
+    jsonld:         8,  // Google önerilen format
+    faqPass:        8,  // AI alıntılama için kritik
+    sitemap:        7,  // Keşfedilebilirlik
+    title:          7,  // Temel kimlik
+    desc:           7,  // AI özetleme
+    h1:             6,  // İçerik hiyerarşisi
+    canonical:      6,  // Kopya içerik önleme
+    textRatioPass:  6,  // İçerik yoğunluğu
+    robots:         5,  // Tarama kontrolü
+    https:          5,  // Güvenlik (temel beklenti)
+    og:             4,  // Sosyal/AI önizleme
+    ogimage:        4,  // Önizleme görseli
+    lang:           4,  // Dil sinyali
+    viewport:       3,  // Mobil uyum (temel)
+    favicon:        2   // Marka sinyali (düşük etki)
+  };
+  let earned = 0, totalWeight = 0;
+  for (const key in checks) {
+    const w = WEIGHTS[key] || 1;
+    totalWeight += w;
+    if (checks[key].pass) earned += w;
+  }
+  const score = Math.round(earned / totalWeight * 100);
   showResults(score, checks, t);
   document.getElementById('btn-check').disabled = false;
 }
