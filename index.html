@@ -21,6 +21,20 @@
 <meta name="robots" content="index, follow">
 <meta name="author" content="Scanliq">
 <link rel="canonical" href="https://scanliq.com/">
+<link rel="alternate" hreflang="tr" href="https://scanliq.com/">
+<link rel="alternate" hreflang="en" href="https://scanliq.com/?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://scanliq.com/">
+
+<!-- Geo Meta -->
+<meta name="geo.region" content="TR">
+<meta name="geo.placename" content="Turkey">
+<meta name="geo.position" content="39.9255;32.8662">
+<meta name="ICBM" content="39.9255, 32.8662">
+
+<!-- DNS Prefetch — Performans -->
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="dns-prefetch" href="//www.googletagmanager.com">
+<link rel="dns-prefetch" href="//scanliq-api.dreamdosima08.workers.dev">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -48,6 +62,8 @@
   "description": "Web sitelerinin yapay zeka uyumluluğunu analiz eden dijital değerlendirme platformu.",
   "applicationCategory": "SEO Tool",
   "operatingSystem": "Web",
+  "inLanguage": ["tr", "en"],
+  "availableLanguage": ["Turkish", "English"],
   "offers": {
     "@type": "Offer",
     "price": "0",
@@ -56,7 +72,9 @@
   "publisher": {
     "@type": "Organization",
     "name": "Scanliq",
-    "url": "https://scanliq.com"
+    "url": "https://scanliq.com",
+    "areaServed": "Worldwide",
+    "availableLanguage": ["Turkish", "English"]
   }
 }
 </script>
@@ -646,7 +664,7 @@
   <!-- STATS -->
   <div class="stats-bar" id="stats-bar">
     <div class="stat-item">
-      <span class="stat-num">16</span>
+      <span class="stat-num">18</span>
       <span class="stat-label" id="stat1-label">Kontrol Noktası</span>
     </div>
     <div class="stat-item">
@@ -670,7 +688,7 @@
       </div>
       <div class="about-card">
         <span class="about-card-icon">📊</span>
-        <h3 id="about2-title">16 Kritik Kontrol</h3>
+        <h3 id="about2-title">18 Kritik Kontrol</h3>
         <p id="about2-text">robots.txt, llms.txt, Schema.org, Open Graph, canonical URL, meta açıklama, JSON-LD, viewport, dil etiketi ve HTTPS — hepsini tek tıkla analiz eder.</p>
       </div>
       <div class="about-card">
@@ -698,7 +716,7 @@
       <div class="step">
         <div class="step-num">2</div>
         <h4 id="step2-title">Tara</h4>
-        <p id="step2-text">Scanliq 16 kritik noktayı otomatik olarak tarar.</p>
+        <p id="step2-text">Scanliq 18 kritik noktayı otomatik olarak tarar.</p>
       </div>
       <div class="step">
         <div class="step-num">3</div>
@@ -781,6 +799,18 @@
 <script>
 /* ===== LANG ===== */
 let lang = 'tr';
+
+// Otomatik dil tespiti
+(function() {
+  // URL parametresi öncelikli
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlLang = urlParams.get('lang');
+  if (urlLang === 'en') { lang = 'en'; return; }
+  if (urlLang === 'tr') { lang = 'tr'; return; }
+  // Tarayıcı dili
+  const bl = (navigator.language || navigator.userLanguage || 'tr').toLowerCase();
+  if (!bl.startsWith('tr')) lang = 'en';
+})();
 const T = {
   tr: {
     badge: 'Yapay Zeka Uyumluluk Analizi',
@@ -792,7 +822,7 @@ const T = {
     aboutLabel: 'Scanliq Nedir?',
     about1t: 'Yapay Zeka Okuyabilir mi?',
     about1p: 'ChatGPT, Perplexity ve Google AI Overview siteleri geleneksel arama motorlarından farklı değerlendirir. Scanliq, sitenizin bu sistemlere ne kadar görünür olduğunu ölçer.',
-    about2t: '16 Kritik Kontrol',
+    about2t: '18 Kritik Kontrol',
     about2p: 'robots.txt, llms.txt, Schema.org, Open Graph, canonical URL, meta açıklama, JSON-LD, viewport, dil etiketi ve HTTPS — hepsini tek tıkla analiz eder.',
     about3t: 'Anında Sonuç',
     about3p: 'Saniyeler içinde 0-100 arası AI hazırlık skoru alırsınız. Eksik noktalar için kişiselleştirilmiş öneriler sunulur.',
@@ -800,7 +830,7 @@ const T = {
     about4p: 'Türkiye\'nin ilk AI hazırlık analiz aracı. Hem Türkçe hem İngilizce tam destek ile çalışır.',
     howLabel: 'Nasıl Çalışır?',
     step1t: 'URL Gir', step1p: 'Analiz etmek istediğiniz sitenin adresini girin.',
-    step2t: 'Tara', step2p: 'Scanliq 16 kritik noktayı otomatik olarak tarar.',
+    step2t: 'Tara', step2p: 'Scanliq 18 kritik noktayı otomatik olarak tarar.',
     step3t: 'Skor Al', step3p: '0-100 arası AI hazırlık skoru ve öneriler alın.',
     step4t: 'İyileştir', step4p: 'Eksik noktaları giderin, AI görünürlüğünüzü artırın.',
     loadingLabel: 'TARAMA BAŞLADI',
@@ -852,6 +882,8 @@ const T = {
       h1: { title: 'H1 Başlığı', ok: 'H1 mevcut', warn: 'H1 bulunamadı', detail_ok: 'AI içerik hiyerarşisini anlayabilir.', detail_warn: 'Sayfanın ana konusu AI için belirsiz kalır.' },
       ogimage: { title: 'OG Görseli', ok: 'og:image tanımlı', warn: 'og:image eksik', detail_ok: 'AI önizlemelerinde görsel çıkar.', detail_warn: 'Paylaşımlarda görselsiz görünürsünüz.' },
       favicon: { title: 'Favicon', ok: 'Favicon mevcut', warn: 'Favicon eksik', detail_ok: 'Marka güvenilirlik sinyali tamam.', detail_warn: 'Tarayıcı ve AI listelerinde ikonsuz görünürsünüz.' },
+      textRatioPass: { title: 'Metin/HTML Oranı', ok: 'Metin oranı yeterli (%25+)', warn: 'Metin oranı düşük (<%25)', detail_ok: 'Sayfanın metin yoğunluğu AI için ideal düzeyde.', detail_warn: 'Çok fazla kod, az içerik — AI sayfayı anlamakta güçlük çeker.' },
+      faqPass: { title: 'Soru Blokları (FAQ)', ok: 'Soru blokları mevcut', warn: 'Soru bloğu bulunamadı', detail_ok: 'H2/H3 başlıklarında soru formatı var — AI alıntılamayı sever.', detail_warn: 'Soru-cevap formatı ekleyin, AI alıntı oranı artar.' },
       llms: { title: 'llms.txt', ok: 'llms.txt mevcut', warn: 'llms.txt bulunamadı', detail_ok: 'LLM\'ler için özel içerik kılavuzu var.', detail_warn: 'AI botları için yeni standarttır, eklenmesi önerilir.' },
       desc: { title: 'Meta Description', ok: 'Açıklama mevcut', warn: 'Meta açıklama eksik', detail_ok: 'Sayfa özeti AI\'ya aktarılabilir.', detail_warn: 'AI içerik özetleyemez, atlayabilir.' },
       og: { title: 'Open Graph', ok: 'OG etiketleri var', warn: 'OG etiketleri eksik', detail_ok: 'Paylaşım ve AI önizleme için hazır.', detail_warn: 'Sosyal ve AI paylaşımında düşük görünürlük.' },
@@ -865,6 +897,8 @@ const T = {
     tips: {
       llms: { title: 'llms.txt oluşturun', text: 'Sitenizin kök dizinine llms.txt ekleyin. AI botları için içerik kılavuzu sağlar.' },
       aibots: { title: 'AI bot engelini kaldırın', text: 'robots.txt dosyanızdan GPTBot, ClaudeBot ve PerplexityBot Disallow satırlarını silin.' },
+      textRatioPass: { title: 'İçerik yoğunluğunu artırın', text: 'Sayfanızdaki metin miktarını artırın. Script ve stil kodları azaltın, anlamlı paragraf içeriği ekleyin.' },
+      faqPass: { title: 'Soru-cevap bölümü ekleyin', text: 'H2 veya H3 başlıklarınızı soru formatında yazın ("X nedir?", "X nasıl yapılır?") — AI bu yapıyı öncelikli alıntılar.' },
       sitemap: { title: 'sitemap.xml ekleyin', text: 'Tüm sayfalarınızı listeleyen bir site haritası oluşturup kök dizine koyun.' },
       title: { title: 'Title etiketini düzeltin', text: 'Her sayfaya 10-70 karakter arası, anahtar kelime içeren benzersiz başlık ekleyin.' },
       h1: { title: 'H1 başlığı ekleyin', text: 'Her sayfada bir adet H1 başlığı bulunmalı — sayfanın ana konusunu özetler.' },
@@ -885,7 +919,7 @@ const T = {
     aboutLabel: 'What is Scanliq?',
     about1t: 'Can AI Read Your Site?',
     about1p: 'ChatGPT, Perplexity and Google AI Overview evaluate websites differently from traditional search engines. Scanliq measures how visible your site is to these systems.',
-    about2t: '16 Critical Checks',
+    about2t: '18 Critical Checks',
     about2p: 'robots.txt, llms.txt, Schema.org, Open Graph, canonical URL, meta description, JSON-LD, viewport, language tag and HTTPS — all analyzed in one click.',
     about3t: 'Instant Results',
     about3p: 'Get a 0-100 AI readiness score in seconds. Personalized recommendations for missing points.',
@@ -893,7 +927,7 @@ const T = {
     about4p: 'Turkey\'s first AI readiness analyzer. Full support in both Turkish and English.',
     howLabel: 'How It Works',
     step1t: 'Enter URL', step1p: 'Enter the address of the site you want to analyze.',
-    step2t: 'Scan', step2p: 'Scanliq automatically scans 16 critical points.',
+    step2t: 'Scan', step2p: 'Scanliq automatically scans 18 critical points.',
     step3t: 'Get Score', step3p: 'Receive a 0-100 AI readiness score and recommendations.',
     step4t: 'Improve', step4p: 'Fix missing points and boost your AI visibility.',
     loadingLabel: 'SCAN STARTED',
@@ -945,6 +979,8 @@ const T = {
       h1: { title: 'H1 Heading', ok: 'H1 present', warn: 'No H1 found', detail_ok: 'AI can understand content hierarchy.', detail_warn: 'Main topic stays unclear to AI.' },
       ogimage: { title: 'OG Image', ok: 'og:image defined', warn: 'og:image missing', detail_ok: 'Image appears in AI previews.', detail_warn: 'You appear without visuals in shares.' },
       favicon: { title: 'Favicon', ok: 'Favicon present', warn: 'Favicon missing', detail_ok: 'Brand trust signal complete.', detail_warn: 'You appear icon-less in browsers and AI lists.' },
+      textRatioPass: { title: 'Text/HTML Ratio', ok: 'Text ratio sufficient (25%+)', warn: 'Text ratio low (<25%)', detail_ok: 'Page text density is at ideal level for AI.', detail_warn: 'Too much code, too little content — AI struggles to understand the page.' },
+      faqPass: { title: 'FAQ / Question Blocks', ok: 'Question blocks found', warn: 'No question blocks found', detail_ok: 'H2/H3 headings include questions — AI loves to cite these.', detail_warn: 'Add Q&A format content to increase AI citation rate.' },
       llms: { title: 'llms.txt', ok: 'llms.txt present', warn: 'llms.txt not found', detail_ok: 'Custom content guide for LLMs exists.', detail_warn: 'Emerging standard for AI bots, recommended.' },
       desc: { title: 'Meta Description', ok: 'Description present', warn: 'Meta description missing', detail_ok: 'Page summary can be passed to AI.', detail_warn: 'AI cannot summarize content, may skip.' },
       og: { title: 'Open Graph', ok: 'OG tags present', warn: 'OG tags missing', detail_ok: 'Ready for sharing and AI preview.', detail_warn: 'Low visibility in social and AI sharing.' },
@@ -958,6 +994,8 @@ const T = {
     tips: {
       llms: { title: 'Create llms.txt', text: 'Add llms.txt to your root directory. Provides a content guide for AI bots.' },
       aibots: { title: 'Unblock AI bots', text: 'Remove GPTBot, ClaudeBot and PerplexityBot Disallow lines from your robots.txt.' },
+      textRatioPass: { title: 'Increase content density', text: 'Add more text content to your page. Reduce script/style code and add meaningful paragraph content.' },
+      faqPass: { title: 'Add FAQ / question blocks', text: 'Write H2 or H3 headings in question format ("What is X?", "How to do X?") — AI prioritizes citing this structure.' },
       sitemap: { title: 'Add sitemap.xml', text: 'Create a sitemap listing all your pages and place it in the root directory.' },
       title: { title: 'Fix your title tag', text: 'Add a unique 10-70 character keyword-rich title to every page.' },
       h1: { title: 'Add an H1 heading', text: 'Every page should have one H1 heading summarizing the main topic.' },
@@ -1008,6 +1046,11 @@ function setLang(l) {
   document.getElementById('footer-contact').textContent = t.footerContact;
   document.getElementById('footer-copy').textContent = t.footerCopy;
   document.documentElement.lang = l;
+  // URL'yi güncelle (sayfa yenilenmeden)
+  const url = new URL(window.location.href);
+  if (l === 'en') { url.searchParams.set('lang','en'); }
+  else { url.searchParams.delete('lang'); }
+  window.history.replaceState({}, '', url.toString());
 }
 
 /* ===== WORKER API ===== */
@@ -1081,22 +1124,24 @@ async function runCheck() {
   }
 
   const checks = {
-    https:    { pass: workerResults.https === true },
-    robots:   { pass: workerResults.robots === true },
-    aibots:   { pass: workerResults.aibots === true },
-    llms:     { pass: workerResults.llms === true },
-    sitemap:  { pass: workerResults.sitemap === true },
-    title:    { pass: workerResults.title === true },
-    desc:     { pass: workerResults.desc === true },
-    h1:       { pass: workerResults.h1 === true },
-    og:       { pass: workerResults.og === true },
-    ogimage:  { pass: workerResults.ogimage === true },
-    canonical:{ pass: workerResults.canonical === true },
-    schema:   { pass: workerResults.schema === true },
-    jsonld:   { pass: workerResults.jsonld === true },
-    viewport: { pass: workerResults.viewport === true },
-    lang:     { pass: workerResults.lang === true },
-    favicon:  { pass: workerResults.favicon === true }
+    https:         { pass: workerResults.https === true },
+    robots:        { pass: workerResults.robots === true },
+    aibots:        { pass: workerResults.aibots === true },
+    llms:          { pass: workerResults.llms === true },
+    sitemap:       { pass: workerResults.sitemap === true },
+    title:         { pass: workerResults.title === true },
+    desc:          { pass: workerResults.desc === true },
+    h1:            { pass: workerResults.h1 === true },
+    og:            { pass: workerResults.og === true },
+    ogimage:       { pass: workerResults.ogimage === true },
+    canonical:     { pass: workerResults.canonical === true },
+    schema:        { pass: workerResults.schema === true },
+    jsonld:        { pass: workerResults.jsonld === true },
+    viewport:      { pass: workerResults.viewport === true },
+    lang:          { pass: workerResults.lang === true },
+    favicon:       { pass: workerResults.favicon === true },
+    textRatioPass: { pass: workerResults.textRatioPass === true },
+    faqPass:       { pass: workerResults.faqPass === true }
   };
 
   const score = Math.round(Object.values(checks).filter(c => c.pass).length / Object.keys(checks).length * 100);
@@ -1150,7 +1195,7 @@ function showResults(score, checks, t) {
   });
 
   const failed = Object.entries(checks).filter(([,d]) => !d.pass).map(([k]) => k);
-  const tipKeys = ['aibots','llms','robots','sitemap','title','h1','desc','schema','og','canonical'];
+  const tipKeys = ['aibots','llms','robots','sitemap','faqPass','textRatioPass','title','h1','desc','schema','og','canonical'];
   const relevantTips = tipKeys.filter(k => failed.includes(k));
   const tipsSection = document.getElementById('tips-section');
   if (relevantTips.length > 0) {
@@ -1208,6 +1253,11 @@ function copyPrompt() {
     setTimeout(() => { btn.textContent = t.promptCopy; }, 2000);
   });
 }
+
+// Sayfa açılışı — otomatik dil
+document.addEventListener('DOMContentLoaded', function() {
+  setLang(lang);
+});
 
 function resetAll() {
   document.getElementById('prompt-section').style.display = 'none';
