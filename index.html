@@ -562,6 +562,150 @@
     transition: all 0.2s;
   }
   .fix-modal-action:hover { opacity: 0.88; transform: scale(1.02); }
+  /* AUTH SİSTEMİ */
+  .auth-header-btn {
+    background: var(--accent); color: #060d0a;
+    border: none; border-radius: 8px;
+    padding: 7px 16px;
+    font-family: var(--font-display); font-weight: 800;
+    font-size: 0.78rem; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .auth-header-btn:hover { transform: scale(1.05); opacity: 0.9; }
+  .auth-header-btn.logged-in {
+    background: var(--surface); color: var(--accent);
+    border: 1px solid var(--accent);
+  }
+  .auth-modal {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.85); backdrop-filter: blur(6px);
+    display: none; align-items: center; justify-content: center;
+    z-index: 1100; padding: 20px;
+  }
+  .auth-modal.active { display: flex; }
+  .auth-box {
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    border-radius: 16px;
+    padding: 32px 28px;
+    max-width: 420px; width: 100%;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,232,122,0.15);
+  }
+  .auth-close {
+    position: absolute; top: 14px; right: 14px;
+    background: var(--border); color: var(--text);
+    border: none; border-radius: 50%;
+    width: 32px; height: 32px; cursor: pointer;
+  }
+  .auth-close:hover { background: var(--accent); color: #060d0a; }
+  .auth-title {
+    font-family: var(--font-display); font-size: 1.4rem; font-weight: 800;
+    color: var(--accent); margin-bottom: 6px;
+  }
+  .auth-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 22px; line-height: 1.5; }
+  .auth-input {
+    width: 100%; background: #020a06;
+    border: 1px solid var(--border); border-radius: 10px;
+    padding: 12px 14px; color: var(--text);
+    font-family: var(--font-mono); font-size: 0.9rem;
+    margin-bottom: 12px; box-sizing: border-box;
+  }
+  .auth-input:focus { outline: none; border-color: var(--accent); }
+  .auth-submit {
+    width: 100%; background: var(--accent); color: #060d0a;
+    border: none; border-radius: 10px; padding: 13px;
+    font-family: var(--font-display); font-weight: 800; font-size: 0.92rem;
+    cursor: pointer; transition: all 0.2s; margin-bottom: 12px;
+  }
+  .auth-submit:hover { opacity: 0.9; transform: scale(1.02); }
+  .auth-submit:disabled { opacity: 0.5; cursor: wait; }
+  .auth-google {
+    width: 100%; background: #fff; color: #1a1a1a;
+    border: none; border-radius: 10px; padding: 12px;
+    font-family: var(--font-display); font-weight: 700; font-size: 0.88rem;
+    cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .auth-google:hover { opacity: 0.92; }
+  .auth-divider {
+    text-align: center; color: var(--muted);
+    font-size: 0.72rem; margin: 14px 0;
+    letter-spacing: 0.1em;
+  }
+  .auth-toggle {
+    text-align: center; font-size: 0.82rem;
+    color: var(--muted); margin-top: 16px;
+  }
+  .auth-toggle a { color: var(--accent); text-decoration: none; cursor: pointer; font-weight: 700; }
+  .auth-error {
+    background: rgba(255,80,80,0.12); border: 1px solid rgba(255,80,80,0.4);
+    color: #ff8080; border-radius: 8px;
+    padding: 9px 12px; font-size: 0.78rem;
+    margin-bottom: 12px; display: none;
+  }
+  .auth-error.show { display: block; }
+
+  /* KAYDET butonu — sonuçların yanına */
+  .save-btn {
+    background: linear-gradient(135deg, var(--accent), #00b8d9);
+    color: #060d0a; border: none; border-radius: 10px;
+    padding: 10px 18px;
+    font-family: var(--font-display); font-weight: 800;
+    font-size: 0.82rem; cursor: pointer;
+    transition: all 0.2s; margin-left: 10px;
+  }
+  .save-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,232,122,0.3); }
+  .save-btn:disabled { opacity: 0.6; cursor: default; }
+
+  /* GEÇMİŞ MODAL */
+  .history-modal {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.85); backdrop-filter: blur(6px);
+    display: none; align-items: center; justify-content: center;
+    z-index: 1100; padding: 20px;
+  }
+  .history-modal.active { display: flex; }
+  .history-box {
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    border-radius: 16px;
+    padding: 28px;
+    max-width: 700px; width: 100%;
+    max-height: 85vh; overflow-y: auto;
+    position: relative;
+  }
+  .history-title {
+    font-family: var(--font-display); font-size: 1.3rem; font-weight: 800;
+    color: var(--accent); margin-bottom: 6px;
+  }
+  .history-sub { font-size: 0.82rem; color: var(--muted); margin-bottom: 20px; }
+  .history-list { display: flex; flex-direction: column; gap: 10px; }
+  .history-item {
+    background: #020a06; border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; flex-wrap: wrap;
+  }
+  .history-item-url { font-family: var(--font-mono); font-size: 0.82rem; color: var(--text); word-break: break-all; flex: 1; min-width: 200px; }
+  .history-item-meta { font-size: 0.7rem; color: var(--muted); margin-top: 4px; }
+  .history-item-score {
+    font-family: var(--font-display); font-weight: 800;
+    font-size: 1.1rem; padding: 6px 14px;
+    border-radius: 8px; color: #060d0a;
+  }
+  .history-item-actions { display: flex; gap: 8px; }
+  .history-item-btn {
+    background: var(--border); color: var(--text);
+    border: none; border-radius: 6px; padding: 6px 10px;
+    font-size: 0.72rem; cursor: pointer;
+  }
+  .history-item-btn:hover { background: var(--accent); color: #060d0a; }
+  .history-empty {
+    text-align: center; padding: 40px 20px;
+    color: var(--muted); font-size: 0.88rem;
+  }
+
   .check-head {
     display: flex; align-items: center;
     justify-content: space-between; margin-bottom: 8px;
@@ -691,6 +835,41 @@
   .footer-links a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
   .footer-links a:hover { color: var(--accent); }
 </style>
+<!-- FIREBASE SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+  import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+  import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, serverTimestamp, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyA7SXenxT3Q_bCjFI-M4MlVw-NwOMQUwcY",
+    authDomain: "scanliq.firebaseapp.com",
+    projectId: "scanliq",
+    storageBucket: "scanliq.firebasestorage.app",
+    messagingSenderId: "483771844332",
+    appId: "1:483771844332:web:a0f49d2d25e684edc987c9"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  const provider = new GoogleAuthProvider();
+
+  // Pencere objesine bağla — diğer script bloğundan erişilebilsin
+  window.scanliqAuth = {
+    auth, db, provider,
+    signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword,
+    signOut, onAuthStateChanged,
+    collection, addDoc, getDocs, query, where, orderBy, serverTimestamp, deleteDoc, doc
+  };
+
+  // Auth durumu dinleyici
+  onAuthStateChanged(auth, (user) => {
+    window.currentUser = user;
+    if (typeof updateAuthUI === 'function') updateAuthUI(user);
+  });
+</script>
+
 </head>
 <body>
 <div class="wrap">
@@ -716,6 +895,10 @@
 </a>
     <div style="display:flex;align-items:center;gap:20px;">
       <a href="/blog.html" id="nav-blog" style="color:var(--muted);text-decoration:none;font-size:0.78rem;letter-spacing:0.05em;transition:color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">Blog</a>
+      <a href="javascript:void(0)" id="nav-history" onclick="openHistory()" style="display:none;color:var(--muted);text-decoration:none;font-size:0.78rem;letter-spacing:0.05em;transition:color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">📊 <span id="nav-history-text">Geçmiş</span></a>
+      <button id="auth-btn" onclick="openAuth()" class="auth-header-btn">
+        <span id="auth-btn-text">Giriş</span>
+      </button>
       <div class="lang-toggle">
         <button class="lang-btn active" onclick="setLang('tr')" id="btn-tr">TR</button>
         <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
@@ -836,7 +1019,10 @@
       <div class="score-info">
         <h2 id="score-title"></h2>
         <p id="score-desc"></p>
-        <span class="score-label" id="score-label"></span>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:8px;">
+          <span class="score-label" id="score-label"></span>
+          <button class="save-btn" id="save-analysis-btn" onclick="handleSaveClick()">💾 <span id="save-btn-text">Kaydet</span></button>
+        </div>
       </div>
     </div>
 
@@ -1144,6 +1330,8 @@ function setLang(l) {
   document.getElementById('footer-contact').textContent = t.footerContact;
   document.getElementById('footer-copy').textContent = t.footerCopy;
   document.documentElement.lang = l;
+  // Auth butonu metnini de güncelle
+  if (typeof updateAuthUI === 'function') updateAuthUI(window.currentUser);
   // URL'yi güncelle (sayfa yenilenmeden)
   const url = new URL(window.location.href);
   if (l === 'en') { url.searchParams.set('lang','en'); }
@@ -1342,6 +1530,17 @@ function showResults(score, checks, t) {
     tipsSection.style.display = 'none';
   }
 
+  // Son analiz verisini kaydet (Kaydet butonu için)
+  window.lastChecks = checks;
+  window.lastScore = score;
+  // Kaydet butonunu sıfırla
+  const sBtn = document.getElementById('save-analysis-btn');
+  const sBtnText = document.getElementById('save-btn-text');
+  if (sBtn) {
+    sBtn.disabled = false;
+    sBtn.innerHTML = '💾 <span id="save-btn-text">'+(lang==='tr'?'Kaydet':'Save')+'</span>';
+  }
+
   // AI Prompt kutusu
   const promptSection = document.getElementById('prompt-section');
   if (failed.length > 0) {
@@ -1536,10 +1735,16 @@ function closeFix() {
 }
 // ESC tuşu ve dışarı tıklama ile kapat
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeFix();
+  if (e.key === 'Escape') {
+    closeFix();
+    if (document.getElementById('auth-modal').classList.contains('active')) closeAuth();
+    if (document.getElementById('history-modal').classList.contains('active')) closeHistory();
+  }
 });
 document.addEventListener('click', (e) => {
   if (e.target.id === 'fix-modal') closeFix();
+  if (e.target.id === 'auth-modal') closeAuth();
+  if (e.target.id === 'history-modal') closeHistory();
 });
 
 function copyPrompt() {
@@ -1567,6 +1772,236 @@ document.addEventListener('DOMContentLoaded', function() {
   setLang(lang);
 });
 
+// ============================================================
+// AUTH SİSTEMİ (Firebase)
+// ============================================================
+let authMode = 'login'; // 'login' veya 'signup'
+window.currentUser = null;
+
+function updateAuthUI(user) {
+  const btn = document.getElementById('auth-btn');
+  const btnText = document.getElementById('auth-btn-text');
+  const navHistory = document.getElementById('nav-history');
+  const navHistoryText = document.getElementById('nav-history-text');
+  if (user) {
+    const name = user.displayName || user.email.split('@')[0];
+    btnText.textContent = name.length > 12 ? name.substring(0,12)+'…' : name;
+    btn.classList.add('logged-in');
+    btn.onclick = signOutUser;
+    navHistory.style.display = 'inline-block';
+    if (navHistoryText) navHistoryText.textContent = lang === 'tr' ? 'Geçmiş' : 'History';
+  } else {
+    btnText.textContent = lang === 'tr' ? 'Giriş' : 'Sign In';
+    btn.classList.remove('logged-in');
+    btn.onclick = openAuth;
+    navHistory.style.display = 'none';
+  }
+}
+
+function openAuth() {
+  document.getElementById('auth-modal').classList.add('active');
+  authMode = 'login';
+  applyAuthTexts();
+  document.getElementById('auth-error').classList.remove('show');
+}
+
+function closeAuth() {
+  document.getElementById('auth-modal').classList.remove('active');
+  document.getElementById('auth-email').value = '';
+  document.getElementById('auth-password').value = '';
+}
+
+function toggleAuthMode() {
+  authMode = authMode === 'login' ? 'signup' : 'login';
+  applyAuthTexts();
+  document.getElementById('auth-error').classList.remove('show');
+}
+
+function applyAuthTexts() {
+  const T_tr = {
+    loginTitle: 'Giriş Yap', signupTitle: 'Hesap Oluştur',
+    loginSub: 'Analizlerinizi kaydedin, sitelerinizi düzenli takip edin.',
+    signupSub: 'Ücretsiz hesap oluşturun, analizleriniz kaydedilsin.',
+    loginBtn: 'Giriş Yap', signupBtn: 'Hesap Oluştur',
+    loginToggle: 'Hesabınız yok mu?', loginLink: 'Kayıt olun',
+    signupToggle: 'Hesabınız var mı?', signupLink: 'Giriş yapın',
+    google: 'Google ile devam et'
+  };
+  const T_en = {
+    loginTitle: 'Sign In', signupTitle: 'Create Account',
+    loginSub: 'Save your analyses, track your sites regularly.',
+    signupSub: 'Create a free account, your analyses will be saved.',
+    loginBtn: 'Sign In', signupBtn: 'Create Account',
+    loginToggle: "Don't have an account?", loginLink: 'Sign up',
+    signupToggle: 'Already have an account?', signupLink: 'Sign in',
+    google: 'Continue with Google'
+  };
+  const tt = lang === 'tr' ? T_tr : T_en;
+  document.getElementById('auth-title').textContent = authMode === 'login' ? tt.loginTitle : tt.signupTitle;
+  document.getElementById('auth-sub').textContent = authMode === 'login' ? tt.loginSub : tt.signupSub;
+  document.getElementById('auth-submit').textContent = authMode === 'login' ? tt.loginBtn : tt.signupBtn;
+  document.getElementById('auth-toggle-text').textContent = authMode === 'login' ? tt.loginToggle : tt.signupToggle;
+  document.getElementById('auth-toggle-link').textContent = authMode === 'login' ? tt.loginLink : tt.signupLink;
+  document.getElementById('auth-google-text').textContent = tt.google;
+}
+
+async function submitAuth() {
+  const email = document.getElementById('auth-email').value.trim();
+  const password = document.getElementById('auth-password').value;
+  const errEl = document.getElementById('auth-error');
+  const btn = document.getElementById('auth-submit');
+  if (!email || !password) {
+    errEl.textContent = lang === 'tr' ? 'E-posta ve şifre gerekli.' : 'Email and password required.';
+    errEl.classList.add('show'); return;
+  }
+  if (password.length < 6) {
+    errEl.textContent = lang === 'tr' ? 'Şifre en az 6 karakter olmalı.' : 'Password must be at least 6 characters.';
+    errEl.classList.add('show'); return;
+  }
+  btn.disabled = true; errEl.classList.remove('show');
+  try {
+    const A = window.scanliqAuth;
+    if (authMode === 'login') {
+      await A.signInWithEmailAndPassword(A.auth, email, password);
+    } else {
+      await A.createUserWithEmailAndPassword(A.auth, email, password);
+    }
+    closeAuth();
+  } catch (e) {
+    let msg = e.message || 'Hata';
+    if (e.code === 'auth/invalid-credential' || e.code === 'auth/wrong-password' || e.code === 'auth/user-not-found') {
+      msg = lang === 'tr' ? 'E-posta veya şifre hatalı.' : 'Invalid email or password.';
+    } else if (e.code === 'auth/email-already-in-use') {
+      msg = lang === 'tr' ? 'Bu e-posta zaten kayıtlı.' : 'This email is already registered.';
+    } else if (e.code === 'auth/invalid-email') {
+      msg = lang === 'tr' ? 'Geçersiz e-posta.' : 'Invalid email.';
+    } else if (e.code === 'auth/weak-password') {
+      msg = lang === 'tr' ? 'Şifre çok zayıf.' : 'Password too weak.';
+    }
+    errEl.textContent = msg;
+    errEl.classList.add('show');
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+async function signInGoogle() {
+  const errEl = document.getElementById('auth-error');
+  try {
+    const A = window.scanliqAuth;
+    await A.signInWithPopup(A.auth, A.provider);
+    closeAuth();
+  } catch (e) {
+    if (e.code !== 'auth/popup-closed-by-user' && e.code !== 'auth/cancelled-popup-request') {
+      errEl.textContent = e.message || 'Hata';
+      errEl.classList.add('show');
+    }
+  }
+}
+
+async function signOutUser() {
+  const A = window.scanliqAuth;
+  await A.signOut(A.auth);
+}
+
+// ============================================================
+// ANALİZ KAYDETME
+// ============================================================
+function handleSaveClick() {
+  if (!window.lastAnalyzedUrl || !window.lastChecks) return;
+  saveAnalysis(window.lastAnalyzedUrl, window.lastScore, window.lastChecks);
+}
+
+async function saveAnalysis(url, score, checks) {
+  if (!window.currentUser) { openAuth(); return; }
+  const A = window.scanliqAuth;
+  const btn = document.getElementById('save-analysis-btn');
+  if (btn) { btn.disabled = true; btn.textContent = lang==='tr'?'Kaydediliyor…':'Saving…'; }
+  try {
+    const checkData = {};
+    Object.keys(checks).forEach(k => checkData[k] = checks[k].pass);
+    await A.addDoc(A.collection(A.db, 'analyses'), {
+      userId: window.currentUser.uid,
+      url, score, checks: checkData,
+      createdAt: A.serverTimestamp()
+    });
+    if (btn) { btn.textContent = lang==='tr'?'✅ Kaydedildi':'✅ Saved'; }
+  } catch (e) {
+    if (btn) { btn.disabled = false; btn.textContent = lang==='tr'?'💾 Kaydet':'💾 Save'; }
+    alert((lang==='tr'?'Kayıt hatası: ':'Save error: ')+e.message);
+  }
+}
+
+// ============================================================
+// GEÇMİŞ MODAL
+// ============================================================
+async function openHistory() {
+  if (!window.currentUser) { openAuth(); return; }
+  document.getElementById('history-modal').classList.add('active');
+  document.getElementById('history-title').textContent = lang==='tr'?'📊 Analiz Geçmişiniz':'📊 Your Analysis History';
+  document.getElementById('history-sub').textContent = lang==='tr'?'Kayıtlı analizlerinizi görüntüleyin.':'View your saved analyses.';
+  const listEl = document.getElementById('history-list');
+  listEl.innerHTML = '<div class="history-empty">'+(lang==='tr'?'Yükleniyor…':'Loading…')+'</div>';
+  try {
+    const A = window.scanliqAuth;
+    const q = A.query(
+      A.collection(A.db,'analyses'),
+      A.where('userId','==',window.currentUser.uid),
+      A.orderBy('createdAt','desc')
+    );
+    const snap = await A.getDocs(q);
+    if (snap.empty) {
+      listEl.innerHTML = '<div class="history-empty">'+(lang==='tr'?'Henüz kayıtlı analiz yok. Bir site analiz edip "Kaydet" butonuna basın.':'No saved analyses yet. Analyze a site and click "Save".')+'</div>';
+      return;
+    }
+    listEl.innerHTML = '';
+    snap.forEach(d => {
+      const data = d.data();
+      const date = data.createdAt?.toDate ? data.createdAt.toDate().toLocaleDateString(lang==='tr'?'tr-TR':'en-US') : '';
+      const scoreColor = data.score >= 80 ? '#00e87a' : data.score >= 50 ? '#ffb84d' : '#ff6b6b';
+      const item = document.createElement('div');
+      item.className = 'history-item';
+      item.innerHTML = `
+        <div style="flex:1;min-width:200px;">
+          <div class="history-item-url">${data.url}</div>
+          <div class="history-item-meta">${date}</div>
+        </div>
+        <div class="history-item-score" style="background:${scoreColor}">${data.score}</div>
+        <div class="history-item-actions">
+          <button class="history-item-btn" onclick="reanalyze('${data.url.replace(/'/g,"\\'")}')">${lang==='tr'?'🔄 Yenile':'🔄 Re-scan'}</button>
+          <button class="history-item-btn" onclick="deleteHistoryItem('${d.id}')">${lang==='tr'?'🗑':'🗑'}</button>
+        </div>
+      `;
+      listEl.appendChild(item);
+    });
+  } catch (e) {
+    listEl.innerHTML = '<div class="history-empty">'+(lang==='tr'?'Hata: ':'Error: ')+e.message+'</div>';
+  }
+}
+
+function closeHistory() {
+  document.getElementById('history-modal').classList.remove('active');
+}
+
+function reanalyze(url) {
+  closeHistory();
+  document.getElementById('url-input').value = url;
+  resetAll();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+  setTimeout(() => document.getElementById('btn-check').click(), 300);
+}
+
+async function deleteHistoryItem(id) {
+  if (!confirm(lang==='tr'?'Bu analiz silinsin mi?':'Delete this analysis?')) return;
+  try {
+    const A = window.scanliqAuth;
+    await A.deleteDoc(A.doc(A.db,'analyses',id));
+    openHistory(); // listeyi yenile
+  } catch (e) {
+    alert((lang==='tr'?'Silme hatası: ':'Delete error: ')+e.message);
+  }
+}
+
 function resetAll() {
   document.getElementById('prompt-section').style.display = 'none';
   document.getElementById('results').classList.remove('active');
@@ -1579,5 +2014,38 @@ function resetAll() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 </script>
+
+  <!-- GİRİŞ / KAYIT MODAL -->
+  <div class="auth-modal" id="auth-modal">
+    <div class="auth-box">
+      <button class="auth-close" onclick="closeAuth()">✕</button>
+      <h3 class="auth-title" id="auth-title">Giriş Yap</h3>
+      <p class="auth-sub" id="auth-sub">Analizlerinizi kaydedin, sitelerinizi düzenli takip edin.</p>
+      <div class="auth-error" id="auth-error"></div>
+      <input type="email" class="auth-input" id="auth-email" placeholder="E-posta adresi" autocomplete="email">
+      <input type="password" class="auth-input" id="auth-password" placeholder="Şifre (en az 6 karakter)" autocomplete="current-password">
+      <button class="auth-submit" id="auth-submit" onclick="submitAuth()">Giriş Yap</button>
+      <div class="auth-divider">VEYA</div>
+      <button class="auth-google" onclick="signInGoogle()">
+        <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"/><path fill="#FBBC05" d="M3.964 10.71c-.18-.54-.282-1.117-.282-1.71s.102-1.17.282-1.71V4.958H.957C.347 6.173 0 7.548 0 9s.348 2.827.957 4.042l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"/></svg>
+        <span id="auth-google-text">Google ile devam et</span>
+      </button>
+      <div class="auth-toggle" id="auth-toggle">
+        <span id="auth-toggle-text">Hesabınız yok mu?</span>
+        <a onclick="toggleAuthMode()" id="auth-toggle-link">Kayıt olun</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- GEÇMİŞ MODAL -->
+  <div class="history-modal" id="history-modal">
+    <div class="history-box">
+      <button class="auth-close" onclick="closeHistory()">✕</button>
+      <h3 class="history-title" id="history-title">📊 Analiz Geçmişiniz</h3>
+      <p class="history-sub" id="history-sub">Kayıtlı analizlerinizi görüntüleyin ve yeniden analiz edin.</p>
+      <div class="history-list" id="history-list"></div>
+    </div>
+  </div>
+
 </body>
 </html>
