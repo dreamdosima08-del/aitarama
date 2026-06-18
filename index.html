@@ -84,17 +84,20 @@
 
 <style>
   :root {
-    --bg: #060d0a;
-    --surface: #0d1a14;
-    --border: #1a3028;
-    --accent: #00e87a;
+    --bg: #020807;
+    --surface: #0a1612;
+    --border: rgba(0,255,170,0.10);
+    --border-solid: #122018;
+    --accent: #00F28A;
     --accent2: #00b8d9;
     --warn: #f5a623;
     --danger: #ff4d4d;
-    --text: #f0f8f4;
-    --muted: #8ab5a0;
+    --text: #FFFFFF;
+    --muted: #A0AAA5;
     --font-display: 'Syne', sans-serif;
     --font-mono: 'Space Mono', monospace;
+    --glow: rgba(0,242,138,0.12);
+    --glow-soft: rgba(0,242,138,0.06);
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -117,9 +120,24 @@
     position: fixed;
     inset: 0;
     background-image:
-      linear-gradient(rgba(0,232,122,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,232,122,0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
+      linear-gradient(rgba(0,242,138,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,242,138,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.65;
+  }
+
+  /* Radial glow — üst hafif */
+  body::after {
+    content: '';
+    position: fixed;
+    top: -25%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 600px;
+    background: radial-gradient(ellipse at center, rgba(0,242,138,0.055) 0%, transparent 68%);
     pointer-events: none;
     z-index: 0;
   }
@@ -156,6 +174,15 @@
     margin-bottom: 10px;
     animation: pulse-dot 2s ease-in-out infinite;
   }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-badge { animation: fadeInUp 0.5s ease both; }
+  .hero h1 { animation: fadeInUp 0.55s ease 0.08s both; }
+  .hero p { animation: fadeInUp 0.55s ease 0.16s both; }
+  .input-section { animation: fadeInUp 0.55s ease 0.24s both; }
+
   @keyframes pulse-dot {
     0%, 100% { opacity: 1; transform: scale(1); }
     50% { opacity: 0.4; transform: scale(0.6); }
@@ -164,9 +191,9 @@
   .lang-toggle {
     display: flex;
     gap: 4px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 6px;
+    background: rgba(10,22,18,0.8);
+    border: 1px solid rgba(0,255,170,0.12);
+    border-radius: 8px;
     padding: 4px;
   }
   .lang-btn {
@@ -185,7 +212,7 @@
 
   /* ===== HERO ===== */
   .hero {
-    padding: 60px 0 40px;
+    padding: 80px 0 52px;
     text-align: center;
   }
   .hero-badge {
@@ -195,7 +222,7 @@
     font-size: 0.78rem;
     letter-spacing: 0.2em;
     color: var(--accent);
-    border: 1px solid var(--accent);
+    border: 1px solid rgba(0,242,138,0.4);
     padding: 4px 14px;
     border-radius: 20px;
     margin-bottom: 24px;
@@ -211,9 +238,10 @@
   .hero h1 {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    line-height: 1.1;
-    margin-bottom: 16px;
+    font-size: clamp(2.2rem, 6vw, 3.6rem);
+    line-height: 1.08;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
   }
   .hero h1 em {
     font-style: normal;
@@ -221,9 +249,10 @@
   }
   .hero p {
     color: var(--muted);
-    font-size: 0.85rem;
-    line-height: 1.7;
-    max-width: 520px;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    max-width: 500px;
+    opacity: 0.85;
     margin: 0 auto;
   }
 
@@ -232,13 +261,18 @@
   .input-box {
     display: flex;
     gap: 10px;
-    background: var(--surface);
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    padding: 8px 8px 8px 16px;
-    transition: border-color 0.3s;
+    background: rgba(5,20,15,0.7);
+    border: 1px solid rgba(0,255,170,0.15);
+    border-radius: 14px;
+    padding: 10px 10px 10px 20px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: border-color 0.25s, box-shadow 0.25s;
   }
-  .input-box:focus-within { border-color: var(--accent); }
+  .input-box:focus-within {
+    border-color: rgba(0,242,138,0.5);
+    box-shadow: 0 0 0 3px rgba(0,242,138,0.07), 0 8px 28px rgba(0,242,138,0.05);
+  }
   .input-box input {
     flex: 1;
     background: none;
@@ -246,15 +280,16 @@
     outline: none;
     color: var(--text);
     font-family: var(--font-mono);
-    font-size: 0.85rem;
+    font-size: 0.9rem;
+    padding: 6px 0;
   }
-  .input-box input::placeholder { color: var(--muted); }
+  .input-box input::placeholder { color: rgba(160,170,165,0.5); }
   .btn-check {
     background: var(--accent);
-    color: #060d0a;
+    color: #020807;
     border: none;
-    border-radius: 7px;
-    padding: 11px 22px;
+    border-radius: 10px;
+    padding: 13px 26px;
     font-family: var(--font-display);
     font-weight: 800;
     font-size: 0.85rem;
@@ -263,17 +298,17 @@
     transition: all 0.2s;
     white-space: nowrap;
   }
-  .btn-check:hover { background: #00ffaa; transform: scale(1.03); }
+  .btn-check:hover { background: #10ffaa; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,242,138,0.3); }
   .btn-check:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
   /* ===== STATS BAR ===== */
   .stats-bar {
     display: flex;
     justify-content: center;
-    gap: 40px;
-    padding: 20px 0 40px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 60px;
+    gap: 48px;
+    padding: 24px 0 52px;
+    border-bottom: 1px solid rgba(0,255,170,0.07);
+    margin-bottom: 72px;
   }
   .stat-item { text-align: center; }
   .stat-num {
@@ -292,7 +327,7 @@
 
   /* ===== ABOUT ===== */
   .about-section {
-    margin-bottom: 60px;
+    margin-bottom: 72px;
   }
   .section-label {
     font-size: 0.75rem;
@@ -319,12 +354,14 @@
 
   .about-card {
     background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 20px;
+    border: 1px solid rgba(0,255,170,0.08);
+    border-radius: 14px;
+    padding: 24px;
     position: relative;
     overflow: hidden;
+    transition: border-color 0.25s, transform 0.25s;
   }
+  .about-card:hover { border-color: rgba(0,242,138,0.18); transform: translateY(-2px); }
   .about-card::before {
     content: '';
     position: absolute;
@@ -351,7 +388,7 @@
   }
 
   /* ===== HOW IT WORKS ===== */
-  .how-section { margin-bottom: 60px; }
+  .how-section { margin-bottom: 72px; }
   .steps {
     display: flex;
     gap: 0;
@@ -434,9 +471,9 @@
   #results.active { display: block; }
 
   .score-banner {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
+    background: linear-gradient(135deg, var(--surface) 0%, rgba(0,242,138,0.04) 100%);
+    border: 1px solid rgba(0,242,138,0.15);
+    border-radius: 14px;
     padding: 28px;
     margin-bottom: 24px;
     display: flex;
@@ -530,8 +567,8 @@
   .fix-modal.active { display: flex; }
   .fix-modal-box {
     background: var(--surface);
-    border: 1px solid var(--accent);
-    border-radius: 16px;
+    border: 1px solid rgba(0,242,138,0.25);
+    border-radius: 18px;
     padding: 28px;
     max-width: 600px; width: 100%;
     max-height: 85vh; overflow-y: auto;
@@ -577,6 +614,25 @@
   }
   .fix-modal-action:hover { opacity: 0.88; transform: scale(1.02); }
   /* AUTH SİSTEMİ */
+  .nav-history-link {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+    padding: 5px 10px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+  }
+  .nav-history-link:hover {
+    color: var(--accent);
+    border-color: rgba(0,242,138,0.15);
+    background: rgba(0,242,138,0.05);
+  }
+
   .auth-header-btn {
     background: var(--accent); color: #060d0a;
     border: none; border-radius: 8px;
@@ -599,8 +655,8 @@
   .auth-modal.active { display: flex; }
   .auth-box {
     background: var(--surface);
-    border: 1px solid var(--accent);
-    border-radius: 16px;
+    border: 1px solid rgba(0,242,138,0.3);
+    border-radius: 18px;
     padding: 32px 28px;
     max-width: 420px; width: 100%;
     position: relative;
@@ -682,8 +738,8 @@
   .history-modal.active { display: flex; }
   .history-box {
     background: var(--surface);
-    border: 1px solid var(--accent);
-    border-radius: 16px;
+    border: 1px solid rgba(0,242,138,0.25);
+    border-radius: 18px;
     padding: 28px;
     max-width: 700px; width: 100%;
     max-height: 85vh; overflow-y: auto;
@@ -766,7 +822,7 @@
 
   .prompt-section {
     background: var(--surface);
-    border: 1px solid var(--accent2);
+    border: 1px solid rgba(0,184,217,0.25);
     border-radius: 12px;
     padding: 24px;
     margin-bottom: 24px;
@@ -913,7 +969,13 @@
 </a>
     <div style="display:flex;align-items:center;gap:20px;">
       <a href="/blog.html" id="nav-blog" style="color:var(--muted);text-decoration:none;font-size:0.78rem;letter-spacing:0.05em;transition:color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">Blog</a>
-      <a href="javascript:void(0)" id="nav-history" onclick="openHistory()" style="display:none;color:var(--muted);text-decoration:none;font-size:0.78rem;letter-spacing:0.05em;transition:color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">📊 <span id="nav-history-text">Geçmiş</span></a>
+      <a href="javascript:void(0)" id="nav-history" onclick="openHistory()" class="nav-history-link" style="display:none;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+        <span id="nav-history-text">Geçmiş</span>
+      </a>
       <button id="auth-btn" onclick="openAuth()" class="auth-header-btn">
         <span id="auth-btn-text">Giriş</span>
       </button>
@@ -949,12 +1011,12 @@
       <span class="stat-label" id="stat1-label">Kontrol Noktası</span>
     </div>
     <div class="stat-item">
-      <span class="stat-num">2</span>
-      <span class="stat-label" id="stat2-label">Dil Desteği</span>
+      <span class="stat-num" style="font-size:1.7rem;">🎯</span>
+      <span class="stat-label" id="stat2-label">GEO Uyum Skoru</span>
     </div>
     <div class="stat-item">
-      <span class="stat-num">0₺</span>
-      <span class="stat-label" id="stat3-label">Ücretsiz</span>
+      <span class="stat-num">⚡</span>
+      <span class="stat-label" id="stat3-label">Anında Sonuç</span>
     </div>
   </div>
 
@@ -1114,7 +1176,7 @@ const T = {
     p: 'ChatGPT, Perplexity ve Google AI Overview siteleri farklı okur. URL\'nizi girin, saniyeler içinde öğrenin.',
     btnText: 'ANALİZ ET',
     placeholder: 'https://siteniz.com',
-    stat1: 'Kontrol Noktası', stat2: 'Dil Desteği', stat3: 'Ücretsiz',
+    stat1: 'Kontrol Noktası', stat2: 'GEO Uyum Skoru', stat3: 'Anında Sonuç',
     aboutLabel: 'Scanliq Nedir?',
     about1t: 'Yapay Zeka Okuyabilir mi?',
     about1p: 'ChatGPT, Perplexity ve Google AI Overview siteleri geleneksel arama motorlarından farklı değerlendirir. Scanliq, sitenizin bu sistemlere ne kadar görünür olduğunu ölçer.',
@@ -1214,7 +1276,7 @@ const T = {
     p: 'ChatGPT, Perplexity and Google AI Overview read sites differently. Enter your URL and find out in seconds.',
     btnText: 'ANALYZE',
     placeholder: 'https://yoursite.com',
-    stat1: 'Check Points', stat2: 'Languages', stat3: 'Free',
+    stat1: 'Check Points', stat2: 'GEO Score', stat3: 'Instant Result',
     aboutLabel: 'What is Scanliq?',
     about1t: 'Can AI Read Your Site?',
     about1p: 'ChatGPT, Perplexity and Google AI Overview evaluate websites differently from traditional search engines. Scanliq measures how visible your site is to these systems.',
@@ -1806,7 +1868,7 @@ function updateAuthUI(user) {
     btnText.textContent = name.length > 12 ? name.substring(0,12)+'…' : name;
     btn.classList.add('logged-in');
     btn.onclick = signOutUser;
-    navHistory.style.display = 'inline-block';
+    navHistory.style.display = 'flex';
     if (navHistoryText) navHistoryText.textContent = lang === 'tr' ? 'Geçmiş' : 'History';
   } else {
     btnText.textContent = lang === 'tr' ? 'Giriş' : 'Sign In';
@@ -1956,7 +2018,7 @@ async function saveAnalysis(url, score, checks) {
 async function openHistory() {
   if (!window.currentUser) { openAuth(); return; }
   document.getElementById('history-modal').classList.add('active');
-  document.getElementById('history-title').textContent = lang==='tr'?'📊 Analiz Geçmişiniz':'📊 Your Analysis History';
+  document.getElementById('history-title').textContent = lang==='tr'?'Analiz Geçmişiniz':'Analysis History';
   document.getElementById('history-sub').textContent = lang==='tr'?'Kayıtlı analizlerinizi görüntüleyin.':'View your saved analyses.';
   const listEl = document.getElementById('history-list');
   listEl.innerHTML = '<div class="history-empty">'+(lang==='tr'?'Yükleniyor…':'Loading…')+'</div>';
