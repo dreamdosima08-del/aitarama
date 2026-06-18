@@ -290,16 +290,18 @@
     background: var(--accent);
     color: #020807;
     border: none;
-    border-radius: 8px;
-    padding: 9px 16px;
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 0.75rem;
-    letter-spacing: 0.06em;
+    border-radius: 10px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 900;
     cursor: pointer;
     transition: all 0.22s;
-    white-space: nowrap;
     flex-shrink: 0;
+    line-height: 1;
   }
   .btn-check:hover { background: #10ffaa; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,242,138,0.3); }
   .btn-check:active { transform: translateY(0); box-shadow: none; }
@@ -1002,7 +1004,7 @@
     <div class="input-box">
       <input type="url" id="url-input" value="https://" placeholder="https://siteniz.com" autocomplete="off" spellcheck="false" />
       <button class="btn-check" id="btn-check" onclick="runCheck()">
-        <span id="btn-text">ANALİZ ET</span>
+        <span id="btn-text">→</span>
       </button>
     </div>
     <div class="error-msg" id="error-msg"></div>
@@ -1178,7 +1180,7 @@ const T = {
     badge: 'Yapay Zeka Uyumluluk Analizi',
     h1: 'Siteniz <em>yapay zekaya</em><br>hazır mı?',
     p: 'ChatGPT, Perplexity ve Google AI Overview siteleri farklı okur. URL\'nizi girin, saniyeler içinde öğrenin.',
-    btnText: 'ANALİZ ET',
+    btnText: '→',
     placeholder: 'https://siteniz.com',
     stat1: 'Kontrol Noktası', stat2: 'GEO Uyum Skoru', stat3: 'Anında Sonuç',
     aboutLabel: 'Scanliq Nedir?',
@@ -1278,7 +1280,7 @@ const T = {
     badge: 'AI Readiness Scanner',
     h1: 'Is your site ready<br>for <em>AI search</em>?',
     p: 'ChatGPT, Perplexity and Google AI Overview read sites differently. Enter your URL and find out in seconds.',
-    btnText: 'ANALYZE',
+    btnText: '→',
     placeholder: 'https://yoursite.com',
     stat1: 'Check Points', stat2: 'GEO Score', stat3: 'Instant Result',
     aboutLabel: 'What is Scanliq?',
