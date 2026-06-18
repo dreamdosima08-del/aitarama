@@ -1962,19 +1962,26 @@ async function openHistory() {
   listEl.innerHTML = '<div class="history-empty">'+(lang==='tr'?'Yükleniyor…':'Loading…')+'</div>';
   try {
     const A = window.scanliqAuth;
+    // Index gerektirmemesi için sıralama yapmıyoruz — veriyi çekip tarayıcıda sıralıyoruz
     const q = A.query(
       A.collection(A.db,'analyses'),
-      A.where('userId','==',window.currentUser.uid),
-      A.orderBy('createdAt','desc')
+      A.where('userId','==',window.currentUser.uid)
     );
     const snap = await A.getDocs(q);
     if (snap.empty) {
       listEl.innerHTML = '<div class="history-empty">'+(lang==='tr'?'Henüz kayıtlı analiz yok. Bir site analiz edip "Kaydet" butonuna basın.':'No saved analyses yet. Analyze a site and click "Save".')+'</div>';
       return;
     }
+    // Belgeleri diziye al ve tarihe göre (en yeni üstte) sırala
+    const docs = [];
+    snap.forEach(d => docs.push({ id: d.id, data: d.data() }));
+    docs.sort((a, b) => {
+      const ta = a.data.createdAt?.toDate ? a.data.createdAt.toDate().getTime() : 0;
+      const tb = b.data.createdAt?.toDate ? b.data.createdAt.toDate().getTime() : 0;
+      return tb - ta;
+    });
     listEl.innerHTML = '';
-    snap.forEach(d => {
-      const data = d.data();
+    docs.forEach(({ id, data }) => {
       const date = data.createdAt?.toDate ? data.createdAt.toDate().toLocaleDateString(lang==='tr'?'tr-TR':'en-US') : '';
       const scoreColor = data.score >= 80 ? '#00e87a' : data.score >= 50 ? '#ffb84d' : '#ff6b6b';
       const item = document.createElement('div');
@@ -1987,7 +1994,7 @@ async function openHistory() {
         <div class="history-item-score" style="background:${scoreColor}">${data.score}</div>
         <div class="history-item-actions">
           <button class="history-item-btn" onclick="reanalyze('${data.url.replace(/'/g,"\\'")}')">${lang==='tr'?'🔄 Yenile':'🔄 Re-scan'}</button>
-          <button class="history-item-btn" onclick="deleteHistoryItem('${d.id}')">${lang==='tr'?'🗑':'🗑'}</button>
+          <button class="history-item-btn" onclick="deleteHistoryItem('${id}')">${lang==='tr'?'🗑':'🗑'}</button>
         </div>
       `;
       listEl.appendChild(item);
