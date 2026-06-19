@@ -519,7 +519,42 @@
     letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase;
   }
   .score-info h2 { font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; }
-  .score-info p { color: var(--muted); font-size: 0.85rem; margin-top: 6px; line-height: 1.5; }
+  .score-info p { color: var(--muted); font-size: 0.85rem; margin-top: 8px; line-height: 1.6; }
+  .hl {
+    font-weight: 800;
+    padding: 1px 7px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .hl-bad   { color: #ff6b6b; background: rgba(255,90,90,0.12); }
+  .hl-warn  { color: #f5a623; background: rgba(245,166,35,0.12); }
+  .hl-mid   { color: #f5d023; background: rgba(245,208,35,0.12); }
+  .hl-good  { color: #00b8d9; background: rgba(0,184,217,0.12); }
+  .hl-great { color: #00F28A; background: rgba(0,242,138,0.14); }
+
+  /* AI Görünürlük Dökümü */
+  .vis-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .vis-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid;
+    letter-spacing: 0.02em;
+  }
+  .vis-pill .vis-icon { font-size: 0.8rem; line-height: 1; }
+  .vis-ok   { color: #00F28A; border-color: rgba(0,242,138,0.3); background: rgba(0,242,138,0.07); }
+  .vis-warn { color: #f5a623; border-color: rgba(245,166,35,0.3); background: rgba(245,166,35,0.07); }
+  .vis-fail { color: #ff6b6b; border-color: rgba(255,90,90,0.3); background: rgba(255,90,90,0.07); }
   .score-label {
     margin-top: 8px; font-size: 0.78rem; letter-spacing: 0.15em;
     padding: 3px 10px; border-radius: 20px;
@@ -1105,7 +1140,8 @@
       <div class="score-info">
         <h2 id="score-title"></h2>
         <p id="score-desc"></p>
-        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:8px;">
+        <div class="vis-row" id="vis-row"></div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px;">
           <span class="score-label" id="score-label"></span>
           <button class="save-btn" id="save-analysis-btn" onclick="handleSaveClick()">💾 <span id="save-btn-text">Kaydet</span></button>
         </div>
@@ -1224,7 +1260,9 @@ const T = {
       jsonld: 'JSON-LD yok — Google\'ın önerdiği JSON-LD formatında yapısal veri ekle.',
       viewport: 'Viewport meta etiketi yok — mobil uyum için viewport etiketi ekle.',
       lang: 'HTML lang etiketi yok — html etiketine dil tanımı ekle.',
-      favicon: 'Favicon yok — siteme favicon ekle ve link etiketini oluştur.'
+      favicon: 'Favicon yok — siteme favicon ekle ve link etiketini oluştur.',
+      textRatioPass: 'Metin/HTML oranı düşük — sayfamdaki gereksiz kod miktarını azaltıp anlamlı metin içeriğini artıracak öneriler ver.',
+      faqPass: 'Soru-cevap (FAQ) bloğu yok — sayfama uygun, H2/H3 başlıklarında soru formatında 3-4 soru-cevap bloğu oluştur.'
     },
     disclaimerText: 'ℹ️ Bu analiz, sitenizin kamuya açık HTML içeriğini ve teknik dosyalarını okuyarak gerçekleştirilir. Tespit edilen eksikler (llms.txt, meta etiketler, yapısal veri vb.) kesin bulgulardır ve giderilmeleri sitenize zarar vermez. Ancak yüksek skor, yapay zeka sistemlerinde görünürlük garantisi vermez — AI algoritmaları sürekli gelişmektedir. Scanliq, sektörce kabul görmüş en iyi uygulamalara uygunluğunuzu ölçer.',
     btnReset: '↩ Yeni Test',
@@ -1235,12 +1273,15 @@ const T = {
     scoreLabels: ['Kritik Eksikler', 'Geliştirme Gerekli', 'Orta Düzey', 'Oldukça İyi', 'Mükemmel'],
     scoreTitles: ['Hazır Değil', 'Zayıf', 'Gelişiyor', 'İyi', 'AI Hazır! 🚀'],
     scoreDescs: [
-      'Siteniz yapay zeka tarayıcılarına büyük ölçüde görünmez. Acil iyileştirme gerekli.',
-      'Temel eksikler mevcut. Birkaç kritik düzenlemeyle sıralama yükselir.',
-      'Ortalama düzeyde. Doğru adımlarla öne çıkabilir.',
-      'Siteniz AI araçlarına büyük ölçüde görünür. Küçük dokunuşlar yeterli.',
-      'Siteniz yapay zeka aramalarına mükemmel şekilde optimize edilmiş!'
+      'Siteniz yapay zeka tarayıcılarına <span class="hl hl-bad">büyük ölçüde görünmez</span>. Acil iyileştirme gerekli.',
+      '<span class="hl hl-warn">Temel eksikler</span> mevcut. Birkaç kritik düzenlemeyle sıralama yükselir.',
+      'Ortalama düzeyde. <span class="hl hl-mid">Doğru adımlarla öne çıkabilir</span>.',
+      'Siteniz AI araçlarına <span class="hl hl-good">büyük ölçüde görünür</span>. Küçük dokunuşlar yeterli.',
+      'Siteniz yapay zeka aramalarına <span class="hl hl-great">mükemmel şekilde optimize edilmiş</span>!'
     ],
+    visTitle: 'AI Motoru Görünürlüğü',
+    visLabels: { chatgpt: 'ChatGPT', google: 'Google AI', perplexity: 'Perplexity' },
+    visStatus: { ok: 'Görünür', warn: 'Kısmen', fail: 'Görünmez' },
     checks: {
       robots: { title: 'robots.txt', ok: 'Mevcut ve okunaklı', warn: 'robots.txt bulunamadı', detail_ok: 'Yapay zeka botlarına yönlendirme yapılabilir.', detail_warn: 'AI tarayıcıları hangi sayfaları okuyacağını bilemez.' },
       aibots: { title: 'AI Bot İzinleri', ok: 'AI botları engellenmemiş', warn: 'AI botları engellenmiş!', detail_ok: 'GPTBot, ClaudeBot ve PerplexityBot sitenizi okuyabilir.', detail_warn: 'robots.txt dosyanız AI botlarını engelliyor — ChatGPT sitenizi kaynak gösteremez.' },
@@ -1324,7 +1365,9 @@ const T = {
       jsonld: 'No JSON-LD — add structured data in Google-recommended JSON-LD format.',
       viewport: 'No viewport meta tag — add it for mobile compatibility.',
       lang: 'No HTML lang attribute — add language definition to the html tag.',
-      favicon: 'No favicon — add a favicon and create its link tag.'
+      favicon: 'No favicon — add a favicon and create its link tag.',
+      textRatioPass: 'Low text/HTML ratio — give suggestions to reduce unnecessary code and increase meaningful text content on my page.',
+      faqPass: 'No FAQ block — create 3-4 question-answer blocks in H2/H3 question format suited to my page.'
     },
     disclaimerText: 'ℹ️ This analysis reads your site\'s publicly available HTML content and technical files. Detected gaps (llms.txt, meta tags, structured data, etc.) are factual findings and fixing them will not harm your site. However, a high score does not guarantee visibility in AI systems — AI algorithms evolve constantly. Scanliq measures your compliance with industry-accepted best practices.',
     btnReset: '↩ New Test',
@@ -1335,12 +1378,15 @@ const T = {
     scoreLabels: ['Critical Issues', 'Needs Work', 'Average', 'Good', 'Excellent'],
     scoreTitles: ['Not Ready', 'Weak', 'Improving', 'Good', 'AI Ready! 🚀'],
     scoreDescs: [
-      'Your site is largely invisible to AI crawlers. Urgent improvements needed.',
-      'Key issues found. A few critical fixes will boost your ranking.',
-      'Average level. Right steps can make you stand out.',
-      'Your site is largely visible to AI tools. Small touches are enough.',
-      'Your site is perfectly optimized for AI search!'
+      'Your site is <span class="hl hl-bad">largely invisible</span> to AI crawlers. Urgent improvements needed.',
+      '<span class="hl hl-warn">Key issues found</span>. A few critical fixes will boost your ranking.',
+      'Average level. <span class="hl hl-mid">Right steps can make you stand out</span>.',
+      'Your site is <span class="hl hl-good">largely visible</span> to AI tools. Small touches are enough.',
+      'Your site is <span class="hl hl-great">perfectly optimized</span> for AI search!'
     ],
+    visTitle: 'AI Engine Visibility',
+    visLabels: { chatgpt: 'ChatGPT', google: 'Google AI', perplexity: 'Perplexity' },
+    visStatus: { ok: 'Visible', warn: 'Partial', fail: 'Not Visible' },
     checks: {
       robots: { title: 'robots.txt', ok: 'Present and readable', warn: 'robots.txt not found', detail_ok: 'AI bots can be directed properly.', detail_warn: 'AI crawlers cannot know which pages to read.' },
       aibots: { title: 'AI Bot Access', ok: 'AI bots not blocked', warn: 'AI bots are blocked!', detail_ok: 'GPTBot, ClaudeBot and PerplexityBot can read your site.', detail_warn: 'Your robots.txt blocks AI bots — ChatGPT cannot cite your site.' },
@@ -1557,11 +1603,27 @@ function showResults(score, checks, t) {
 
   document.getElementById('score-num').textContent = score;
   document.getElementById('score-title').textContent = t.scoreTitles[tier];
-  document.getElementById('score-desc').textContent = t.scoreDescs[tier];
+  document.getElementById('score-desc').innerHTML = t.scoreDescs[tier];
   const lbl = document.getElementById('score-label');
   lbl.textContent = t.scoreLabels[tier];
   lbl.style.background = color + '22';
   lbl.style.color = color;
+
+  // AI Motoru Görünürlük Dökümü — mevcut kontrol sonuçlarına dayalı
+  const pass = (k) => checks[k] && checks[k].pass === true;
+  const vis = {
+    chatgpt: pass('aibots') && pass('https') ? 'ok' : pass('aibots') ? 'warn' : 'fail',
+    google:  (pass('schema') && pass('jsonld')) ? 'ok' : (pass('schema') || pass('jsonld')) ? 'warn' : 'fail',
+    perplexity: (pass('aibots') && pass('llms')) ? 'ok' : pass('aibots') ? 'warn' : 'fail'
+  };
+  const visIcons = { ok: '✅', warn: '⚠️', fail: '❌' };
+  const visRow = document.getElementById('vis-row');
+  visRow.innerHTML = Object.entries(vis).map(([engine, status]) => `
+    <span class="vis-pill vis-${status}">
+      <span class="vis-icon">${visIcons[status]}</span>
+      ${t.visLabels[engine]} · ${t.visStatus[status]}
+    </span>
+  `).join('');
 
   const circ = 213.6;
   setTimeout(() => {
