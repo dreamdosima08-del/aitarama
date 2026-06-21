@@ -769,6 +769,28 @@
   .save-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,232,122,0.3); }
   .save-btn:disabled { opacity: 0.6; cursor: default; }
 
+  .pdf-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid rgba(0,242,138,0.3);
+    border-radius: 10px;
+    padding: 9px 16px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .pdf-btn:hover {
+    background: rgba(0,242,138,0.08);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .pdf-btn:disabled { opacity: 0.6; cursor: wait; }
+
   /* GEÇMİŞ MODAL */
   .history-modal {
     position: fixed; inset: 0;
@@ -985,6 +1007,7 @@
   });
 </script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -1144,6 +1167,10 @@
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px;">
           <span class="score-label" id="score-label"></span>
           <button class="save-btn" id="save-analysis-btn" onclick="handleSaveClick()">💾 <span id="save-btn-text">Kaydet</span></button>
+          <button class="pdf-btn" id="pdf-btn" onclick="generatePDF()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg>
+            <span id="pdf-btn-text">PDF Rapor</span>
+          </button>
         </div>
       </div>
     </div>
@@ -2055,6 +2082,241 @@ async function signOutUser() {
 // ============================================================
 // ANALİZ KAYDETME
 // ============================================================
+// ============================================================
+// PDF RAPOR ÜRETİMİ — Premium markalı rapor
+// ============================================================
+function generatePDF() {
+  if (!window.lastChecks || window.lastScore === undefined) return;
+  const btn = document.getElementById('pdf-btn');
+  const btnText = document.getElementById('pdf-btn-text');
+  const origText = btnText.textContent;
+  btn.disabled = true;
+  btnText.textContent = lang === 'tr' ? 'Hazırlanıyor…' : 'Generating…';
+
+  try {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+    const W = 210, H = 297;
+    const t = T[lang];
+    const score = window.lastScore;
+    const checks = window.lastChecks;
+    const url = window.lastAnalyzedUrl || '';
+    let host = url;
+    try { host = new URL(url).hostname.replace(/^www\./,''); } catch(e){}
+
+    // Renkler
+    const cAccent = [0, 242, 138];
+    const cDark = [2, 8, 7];
+    const cGray = [120, 130, 125];
+    const cLight = [240, 248, 244];
+    const tierColors = [[255,77,77],[245,166,35],[245,208,35],[0,184,217],[0,242,138]];
+    const tier = score < 30 ? 0 : score < 50 ? 1 : score < 70 ? 2 : score < 85 ? 3 : 4;
+    const sc = tierColors[tier];
+
+    // ===== HEADER BAR =====
+    doc.setFillColor(cDark[0], cDark[1], cDark[2]);
+    doc.rect(0, 0, W, 42, 'F');
+    // Logo metni
+    doc.setTextColor(cAccent[0], cAccent[1], cAccent[2]);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(26);
+    doc.text('Scanliq', 16, 22);
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'normal');
+    doc.text(lang === 'tr' ? 'GEO & AI Readiness Raporu' : 'GEO & AI Readiness Report', 16, 30);
+    // Tarih (sağ üst)
+    const dateStr = new Date().toLocaleDateString(lang === 'tr' ? 'tr-TR' : 'en-US', { year:'numeric', month:'long', day:'numeric' });
+    doc.setFontSize(8);
+    doc.setTextColor(160, 170, 165);
+    doc.text(dateStr, W - 16, 22, { align: 'right' });
+    doc.text('scanliq.com', W - 16, 28, { align: 'right' });
+
+    // ===== ANALİZ EDİLEN SİTE =====
+    let y = 56;
+    doc.setTextColor(cGray[0], cGray[1], cGray[2]);
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'normal');
+    doc.text(lang === 'tr' ? 'ANALİZ EDİLEN SİTE' : 'ANALYZED SITE', 16, y);
+    doc.setTextColor(cDark[0], cDark[1], cDark[2]);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(15);
+    doc.text(host, 16, y + 8);
+
+    // ===== GEO SCORE DAİRESİ =====
+    y = 82;
+    const cx = 45, cy = y + 18, r = 22;
+    // Dış halka (arka)
+    doc.setDrawColor(230, 235, 232);
+    doc.setLineWidth(4);
+    doc.circle(cx, cy, r, 'S');
+    // Skor yayı (renkli) — yaklaşık daire dilimleri ile
+    doc.setDrawColor(sc[0], sc[1], sc[2]);
+    doc.setLineWidth(4);
+    const segments = Math.round((score/100) * 60);
+    for (let i = 0; i < segments; i++) {
+      const a1 = (-90 + (i/60)*360) * Math.PI/180;
+      const a2 = (-90 + ((i+1)/60)*360) * Math.PI/180;
+      doc.line(cx + r*Math.cos(a1), cy + r*Math.sin(a1), cx + r*Math.cos(a2), cy + r*Math.sin(a2));
+    }
+    // Skor sayısı
+    doc.setTextColor(cDark[0], cDark[1], cDark[2]);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(22);
+    doc.text(String(score), cx, cy + 2, { align: 'center' });
+    doc.setFontSize(7);
+    doc.setTextColor(cGray[0], cGray[1], cGray[2]);
+    doc.text('GEO SCORE', cx, cy + 9, { align: 'center' });
+
+    // Skor başlığı + açıklama (dairenin sağında)
+    const titles = t.scoreTitles;
+    doc.setTextColor(sc[0], sc[1], sc[2]);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(16);
+    const cleanTitle = titles[tier].replace(/[^\x00-\x7F\u00C0-\u017F]/g, '').trim();
+    doc.text(cleanTitle, 78, cy - 6);
+    // Açıklama (HTML tag temizle)
+    doc.setTextColor(cGray[0], cGray[1], cGray[2]);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    const descClean = t.scoreDescs[tier].replace(/<[^>]*>/g, '');
+    const descLines = doc.splitTextToSize(descClean, 116);
+    doc.text(descLines, 78, cy + 1);
+
+    // ===== AI MOTORU GÖRÜNÜRLÜK =====
+    y = 128;
+    doc.setFillColor(cLight[0], cLight[1], cLight[2]);
+    doc.roundedRect(16, y, W - 32, 26, 3, 3, 'F');
+    doc.setTextColor(cDark[0], cDark[1], cDark[2]);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(10);
+    doc.text(lang === 'tr' ? 'AI Motoru Görünürlüğü' : 'AI Engine Visibility', 22, y + 9);
+
+    const pass = (k) => checks[k] && checks[k].pass === true;
+    const vis = {
+      ChatGPT: pass('aibots') && pass('https') ? 2 : pass('aibots') ? 1 : 0,
+      'Google AI': (pass('schema') && pass('jsonld')) ? 2 : (pass('schema') || pass('jsonld')) ? 1 : 0,
+      Perplexity: (pass('aibots') && pass('llms')) ? 2 : pass('aibots') ? 1 : 0
+    };
+    const visStatusTxt = lang === 'tr' ? ['Görünmez','Kısmen','Görünür'] : ['Not Visible','Partial','Visible'];
+    const visColors = [[255,77,77],[245,166,35],[0,200,118]];
+    let vx = 22;
+    Object.entries(vis).forEach(([engine, st]) => {
+      const vc = visColors[st];
+      doc.setFillColor(vc[0], vc[1], vc[2]);
+      doc.circle(vx + 2, y + 17, 1.6, 'F');
+      doc.setTextColor(cDark[0], cDark[1], cDark[2]);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(8.5);
+      doc.text(engine, vx + 6, y + 18);
+      doc.setTextColor(cGray[0], cGray[1], cGray[2]);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(7.5);
+      doc.text(visStatusTxt[st], vx + 6, y + 22.5);
+      vx += 60;
+    });
+
+    // ===== KONTROL LİSTESİ =====
+    y = 166;
+    doc.setTextColor(cDark[0], cDark[1], cDark[2]);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(12);
+    doc.text(lang === 'tr' ? 'Kontrol Sonuçları' : 'Check Results', 16, y);
+    const passCount = Object.values(checks).filter(c => c.pass).length;
+    const totalCount = Object.keys(checks).length;
+    doc.setTextColor(cGray[0], cGray[1], cGray[2]);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.text((lang==='tr'?passCount+' / '+totalCount+' başarılı':passCount+' / '+totalCount+' passed'), W - 16, y, { align: 'right' });
+
+    y += 8;
+    const entries = Object.entries(checks);
+    const colW = (W - 32) / 2;
+    const rowH = 8.5;
+    let col = 0, startY = y;
+    entries.forEach(([key, data], i) => {
+      const info = t.checks[key];
+      const label = info ? info.title : key;
+      const colX = 16 + col * colW;
+      const rowY = startY + Math.floor(i/2) * rowH - (col===1 ? 0 : 0);
+      const actualRow = Math.floor(i / 2);
+      const ry = startY + actualRow * rowH;
+      const rx = 16 + (i % 2) * colW;
+      // Durum ikonu
+      if (data.pass) {
+        doc.setFillColor(0, 200, 118);
+        doc.circle(rx + 2, ry - 1, 1.6, 'F');
+        doc.setTextColor(255,255,255);
+        doc.setFont('helvetica','bold');
+        doc.setFontSize(6);
+        doc.text('OK', rx + 2, ry - 0.3, { align:'center' });
+      } else {
+        doc.setFillColor(255, 77, 77);
+        doc.circle(rx + 2, ry - 1, 1.6, 'F');
+        doc.setTextColor(255,255,255);
+        doc.setFont('helvetica','bold');
+        doc.setFontSize(7);
+        doc.text('X', rx + 2, ry - 0.2, { align:'center' });
+      }
+      // Etiket (ASCII temizlik)
+      const cleanLabel = label.replace(/[^\x00-\x7F\u00C0-\u017F]/g, '').trim();
+      doc.setTextColor(data.pass ? 60 : 120, data.pass ? 60 : 60, data.pass ? 60 : 60);
+      doc.setFont('helvetica', data.pass ? 'normal' : 'bold');
+      doc.setFontSize(8.5);
+      doc.text(cleanLabel, rx + 6, ry);
+    });
+
+    // ===== EKSİKLER / ÖNERİLER KUTUSU =====
+    const failed = entries.filter(([,d]) => !d.pass).map(([k]) => k);
+    let boxY = startY + Math.ceil(entries.length/2) * rowH + 6;
+    if (failed.length > 0 && boxY < 250) {
+      doc.setFillColor(255, 248, 240);
+      const fh = Math.min(failed.length * 5 + 14, 250 - boxY);
+      doc.roundedRect(16, boxY, W - 32, fh, 3, 3, 'F');
+      doc.setTextColor(200, 100, 30);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9.5);
+      doc.text(lang === 'tr' ? 'Öncelikli İyileştirmeler' : 'Priority Improvements', 22, boxY + 8);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8);
+      doc.setTextColor(90, 70, 50);
+      let fy = boxY + 14;
+      failed.slice(0, 8).forEach((k) => {
+        const info = t.checks[k];
+        const lbl = info ? info.title.replace(/[^\x00-\x7F\u00C0-\u017F]/g, '').trim() : k;
+        doc.text('•  ' + lbl, 22, fy);
+        fy += 5;
+      });
+    }
+
+    // ===== FOOTER =====
+    doc.setFillColor(cDark[0], cDark[1], cDark[2]);
+    doc.rect(0, H - 18, W, 18, 'F');
+    doc.setTextColor(160, 170, 165);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(7.5);
+    doc.text(lang === 'tr'
+      ? 'Bu rapor Scanliq tarafından otomatik oluşturulmuştur · scanliq.com'
+      : 'This report was automatically generated by Scanliq · scanliq.com', W/2, H - 10, { align: 'center' });
+    doc.setTextColor(cAccent[0], cAccent[1], cAccent[2]);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(7.5);
+    doc.text('GEO Score: ' + score + '/100', W/2, H - 5, { align: 'center' });
+
+    // İndir
+    const fileName = 'scanliq-' + host.replace(/[^a-z0-9]/gi,'-') + '-' + new Date().toISOString().slice(0,10) + '.pdf';
+    doc.save(fileName);
+
+    btnText.textContent = lang === 'tr' ? '✓ İndirildi' : '✓ Downloaded';
+    setTimeout(() => { btnText.textContent = origText; btn.disabled = false; }, 2000);
+  } catch (e) {
+    console.error('PDF hata:', e);
+    alert((lang === 'tr' ? 'PDF oluşturulamadı: ' : 'PDF generation failed: ') + e.message);
+    btnText.textContent = origText;
+    btn.disabled = false;
+  }
+}
+
 function handleSaveClick() {
   if (!window.lastAnalyzedUrl || !window.lastChecks) return;
   saveAnalysis(window.lastAnalyzedUrl, window.lastScore, window.lastChecks);
