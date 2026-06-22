@@ -13,6 +13,13 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Favicon & App Icons -->
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<meta name="theme-color" content="#020807">
 
 <!-- SEO -->
 <title>Scanliq — AI Hazırlık Analizi | AI Readiness Scanner</title>
@@ -1758,15 +1765,31 @@ function showResults(score, checks, t) {
   // AI Motoru Görünürlük Dökümü — worker'dan gelen 4 motorlu sonuç
   const pass = (k) => checks[k] && checks[k].pass === true;
   let vis = window.lastEngineVis;
-  // Worker vermemişse (eski kayıt vb.) yerel hesapla
+  // Worker _engineVisibility vermemişse yerel hesapla.
+  // Worker eski olabilir (yeni bot alanları gelmeyebilir); bu yüzden
+  // yeni bot sinyali yoksa genel "aibots" sinyaline güvenli şekilde düşeriz.
   if (!vis) {
-    vis = {
-      chatgpt: pass('oaiSearchBot') && pass('https') ? 'ok' : pass('oaiSearchBot') ? 'warn' : 'fail',
-      google: (pass('googlebot') && pass('https') && (pass('schema')||pass('jsonld')) && pass('sitemap')) ? 'ok'
-              : (pass('googlebot') && [pass('https'),(pass('schema')||pass('jsonld')),pass('sitemap')].filter(Boolean).length>=2) ? 'warn' : 'fail',
-      perplexity: ((pass('perplexityBot')||pass('perplexityUser')) && pass('llms')) ? 'ok' : (pass('perplexityBot')||pass('perplexityUser')) ? 'warn' : 'fail',
-      copilot: pass('copilotReady') ? 'ok' : (pass('bingbot') && pass('https')) ? 'warn' : 'fail'
-    };
+    const hasNewBots = ('oaiSearchBot' in workerResults) || ('googlebot' in workerResults) || ('bingbot' in workerResults);
+    if (hasNewBots) {
+      // Yeni worker — spesifik bot sinyalleriyle hesapla
+      vis = {
+        chatgpt: pass('oaiSearchBot') && pass('https') ? 'ok' : pass('oaiSearchBot') ? 'warn' : 'fail',
+        google: (pass('googlebot') && pass('https') && (pass('schema')||pass('jsonld')) && pass('sitemap')) ? 'ok'
+                : (pass('googlebot') && [pass('https'),(pass('schema')||pass('jsonld')),pass('sitemap')].filter(Boolean).length>=2) ? 'warn' : 'fail',
+        perplexity: ((pass('perplexityBot')||pass('perplexityUser')) && pass('llms')) ? 'ok' : (pass('perplexityBot')||pass('perplexityUser')) ? 'warn' : 'fail',
+        copilot: pass('copilotReady') ? 'ok' : (pass('bingbot') && pass('https')) ? 'warn' : 'fail'
+      };
+    } else {
+      // Eski worker — genel sinyallerden mantıklı tahmin (asla topluca 'fail' verme)
+      const ai = pass('aibots'), https = pass('https'), structured = pass('schema') || pass('jsonld');
+      const llms = pass('llms'), sitemap = pass('sitemap');
+      vis = {
+        chatgpt: (ai && https) ? 'ok' : (ai || https) ? 'warn' : 'fail',
+        google: (ai && https && structured && sitemap) ? 'ok' : (https && (structured || sitemap)) ? 'warn' : 'fail',
+        perplexity: (ai && llms) ? 'ok' : (ai || llms) ? 'warn' : 'fail',
+        copilot: (https && (sitemap || structured)) ? 'ok' : (https) ? 'warn' : 'fail'
+      };
+    }
   }
   window.lastEngineVis = vis;
   const visIcons = { ok: '✅', warn: '⚠️', fail: '❌' };
