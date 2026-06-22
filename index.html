@@ -238,10 +238,13 @@
   .hero h1 {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: clamp(2.2rem, 6vw, 3.6rem);
-    line-height: 1.08;
-    margin-bottom: 24px;
-    letter-spacing: -0.02em;
+    font-size: clamp(1.5rem, 4.2vw, 2.6rem);
+    line-height: 1.2;
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
   }
   .hero h1 em {
     font-style: normal;
@@ -249,11 +252,17 @@
   }
   .hero p {
     color: var(--muted);
-    font-size: 0.9rem;
-    line-height: 1.8;
-    max-width: 500px;
-    opacity: 0.85;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    max-width: 480px;
+    opacity: 0.82;
     margin: 0 auto;
+  }
+  @media(max-width: 600px) {
+    .hero { padding: 40px 0 28px; }
+    .hero h1 { font-size: 1.45rem; line-height: 1.25; margin-bottom: 16px; }
+    .hero p { font-size: 0.82rem; }
+    .hero-badge { font-size: 0.66rem; margin-bottom: 18px; }
   }
 
   /* ===== INPUT ===== */
@@ -1015,20 +1024,31 @@
   <!-- HEADER -->
   <header>
     <a href="/" style="text-decoration:none;display:flex;align-items:center;">
-<svg width="140" height="44" viewBox="0 0 140 44" role="img" style="display:block;">
+<svg width="150" height="48" viewBox="0 0 150 48" role="img" style="display:block;">
   <title>Scanliq Logo</title>
-  <!-- Sinyal dalgaları -->
-  <path d="M14 22 Q17 14 20 22 Q23 30 26 22" fill="none" stroke="#1a3028" stroke-width="1.5" stroke-linecap="round"/>
-  <path d="M10 22 Q14 11 18 22 Q22 33 26 22" fill="none" stroke="#00b8d9" stroke-width="1.5" stroke-linecap="round"/>
-  <path d="M6 22 Q11 8 16 22 Q21 36 26 22" fill="none" stroke="#00e87a" stroke-width="2" stroke-linecap="round"/>
-  <circle cx="16" cy="22" r="3" fill="#00e87a"/>
-  <!-- Scan -->
-  <text x="32" y="20" font-family="Arial,sans-serif" font-size="16" font-weight="900" fill="#f0f8f4" letter-spacing="-0.5">Scan</text>
-  <!-- liq -->
-  <text x="32" y="37" font-family="Arial,sans-serif" font-size="16" font-weight="900" fill="#00e87a" letter-spacing="-0.5">liq</text>
-  <!-- AI rozeti -->
-  <rect x="82" y="4" width="22" height="13" fill="#00e87a" rx="3"/>
-  <text x="93" y="14" font-family="monospace" font-size="8" font-weight="700" fill="#060d0a" text-anchor="middle">AI</text>
+  <defs>
+    <linearGradient id="sq-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00F28A"/>
+      <stop offset="100%" stop-color="#00b8d9"/>
+    </linearGradient>
+    <filter id="sq-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- İkon: tarama halkası + sinyal -->
+  <g transform="translate(18,18)">
+    <circle cx="0" cy="0" r="14" fill="none" stroke="url(#sq-grad)" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="66 22" transform="rotate(-45)"/>
+    <path d="M-6.5 1 Q-4 -5 -1 1 Q2 7 4.5 1" fill="none" stroke="#00b8d9" stroke-width="1.4" stroke-linecap="round" opacity="0.55"/>
+    <path d="M-7.5 0 Q-4 -8 0 0 Q4 8 7.5 0" fill="none" stroke="url(#sq-grad)" stroke-width="2" stroke-linecap="round" filter="url(#sq-glow)"/>
+    <circle cx="0" cy="0" r="2.4" fill="#00F28A" filter="url(#sq-glow)"/>
+  </g>
+  <!-- Kelime markası -->
+  <text x="39" y="23" font-family="Syne, Arial, sans-serif" font-size="18" font-weight="800" letter-spacing="-0.4">
+    <tspan fill="#FFFFFF">Scan</tspan><tspan fill="url(#sq-grad)">liq</tspan>
+  </text>
+  <!-- Alt etiket: AI SEARCH VISIBILITY -->
+  <text x="40" y="38" font-family="Space Mono, monospace" font-size="7" font-weight="700" fill="#A0AAA5" letter-spacing="2.2">AI SEARCH</text>
 </svg>
 </a>
     <div style="display:flex;align-items:center;gap:20px;">
@@ -1052,9 +1072,9 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-badge" id="hero-badge">Yapay Zeka Uyumluluk Analizi</div>
-    <h1 id="hero-h1">Siteniz <em>yapay zekaya</em><br>hazır mı?</h1>
-    <p id="hero-p">ChatGPT, Perplexity ve Google AI Overview siteleri farklı okur. URL'nizi girin, saniyeler içinde öğrenin.</p>
+    <div class="hero-badge" id="hero-badge">AI Search Visibility Checker</div>
+    <h1 id="hero-h1">ChatGPT, Google AI, Perplexity ve <em>Copilot</em> sitenizi görebiliyor mu?</h1>
+    <p id="hero-p">URL'nizi girin; AI bot erişimi, yapılandırılmış veri, llms.txt, sitemap ve citation readiness sinyallerini saniyeler içinde analiz edin.</p>
   </section>
 
   <!-- INPUT -->
@@ -1071,7 +1091,7 @@
   <!-- STATS -->
   <div class="stats-bar" id="stats-bar">
     <div class="stat-item">
-      <span class="stat-num">18</span>
+      <span class="stat-num" id="stat1-num">30+</span>
       <span class="stat-label" id="stat1-label">Kontrol Noktası</span>
     </div>
     <div class="stat-item">
@@ -1240,17 +1260,17 @@ let lang = 'tr';
 })();
 const T = {
   tr: {
-    badge: 'Yapay Zeka Uyumluluk Analizi',
-    h1: 'Siteniz <em>yapay zekaya</em><br>hazır mı?',
-    p: 'ChatGPT, Perplexity ve Google AI Overview siteleri farklı okur. URL\'nizi girin, saniyeler içinde öğrenin.',
+    badge: 'AI Search Visibility Checker',
+    h1: 'ChatGPT, Google AI, Perplexity ve <em>Copilot</em> sitenizi görebiliyor mu?',
+    p: 'URL\'nizi girin; AI bot erişimi, yapılandırılmış veri, llms.txt, sitemap ve citation readiness sinyallerini saniyeler içinde analiz edin.',
     btnText: '→',
     placeholder: 'https://siteniz.com',
     stat1: 'Kontrol Noktası', stat2: 'GEO Uyum Skoru', stat3: 'Anında Sonuç',
     aboutLabel: 'Scanliq Nedir?',
     about1t: 'Yapay Zeka Okuyabilir mi?',
     about1p: 'ChatGPT, Perplexity ve Google AI Overview siteleri geleneksel arama motorlarından farklı değerlendirir. Scanliq, sitenizin bu sistemlere ne kadar görünür olduğunu ölçer.',
-    about2t: '18 Kritik Kontrol',
-    about2p: 'robots.txt, llms.txt, Schema.org, Open Graph, canonical URL, meta açıklama, JSON-LD, viewport, dil etiketi ve HTTPS — hepsini tek tıkla analiz eder.',
+    about2t: '30+ Kritik Kontrol',
+    about2p: 'ChatGPT Search, Google AI, Perplexity ve Bing Copilot bot erişimleri; llms.txt, Schema.org, JSON-LD, sitemap, canonical, citation readiness ve daha fazlası — hepsi tek tıkla.',
     about3t: 'Anında Sonuç',
     about3p: 'Saniyeler içinde 0-100 arası AI hazırlık skoru alırsınız. Eksik noktalar için kişiselleştirilmiş öneriler sunulur.',
     about4t: 'Türkçe ve İngilizce',
@@ -1274,8 +1294,22 @@ const T = {
     promptFixes: {
       https: 'HTTPS aktif değil — sitemi HTTPS\'ye taşımam için yol göster.',
       robots: 'robots.txt dosyası yok — AI botlarına (GPTBot, ClaudeBot, PerplexityBot) izin veren bir robots.txt oluştur.',
-      aibots: 'robots.txt dosyam AI botlarını engelliyor — GPTBot, ClaudeBot ve PerplexityBot engellerini kaldıracak şekilde düzenle.',
-      llms: 'llms.txt dosyası yok — sitemi tanıtan bir llms.txt dosyası oluştur.',
+      aibots: 'robots.txt dosyam AI botlarını engelliyor — OAI-SearchBot, GPTBot, ChatGPT-User, ClaudeBot, PerplexityBot, bingbot ve Googlebot engellerini kaldıracak şekilde düzenle.',
+      oaiSearchBot: 'robots.txt içinde OAI-SearchBot erişimini aç — ChatGPT Search görünürlüğü için en kritik bot budur.',
+      gptBot: 'OpenAI GPTBot erişimini açmak istiyorsanız robots.txt içinde GPTBot engelini kaldır.',
+      chatgptUser: 'ChatGPT kullanıcı tetiklemeli erişimleri için robots.txt içinde ChatGPT-User engelini kaldır.',
+      bingbot: 'robots.txt içinde bingbot erişimini aç — Bing ve Copilot görünürlüğü için gerekli.',
+      copilotReady: 'Bing/Copilot görünürlüğü için sitemap.xml, canonical, meta description ve JSON-LD yapılandırmasını güçlendir.',
+      googlebot: 'Googlebot erişimini aç; aksi halde Google AI ve Google Search görünürlüğü düşer.',
+      perplexityBot: 'robots.txt içinde PerplexityBot erişimini aç.',
+      perplexityUser: 'robots.txt içinde Perplexity-User erişimini aç.',
+      claudeBot: 'robots.txt içinde ClaudeBot erişimini aç.',
+      indexable: 'Sayfada noindex var — meta robots veya X-Robots-Tag içindeki noindex direktifini kaldır.',
+      structuredDataValidBasic: 'Geçerli JSON-LD yok — ayrıştırılabilir, hatasız bir JSON-LD bloğu ekle.',
+      hreflang: 'Çok dilli site iseniz hreflang etiketleri ekle (her dil sürümü için).',
+      responseStatusOk: 'Ana sayfam 200 OK dönmüyor — sunucu/yönlendirme yapılandırmasını kontrol et.',
+      contentLengthOk: 'Sayfada yeterli metin yok — AI bağlam çıkarabilmesi için anlamlı metin içeriği ekle.',
+      llms: 'llms.txt dosyası yok — kök dizine markayı, önemli sayfaları ve AI kullanım izinlerini açıklayan bir llms.txt dosyası ekle.',
       sitemap: 'sitemap.xml yok — sayfalarımı listeleyen bir sitemap.xml oluştur.',
       title: 'Title etiketi eksik veya uygunsuz — 10-70 karakter arası, anahtar kelime içeren title etiketi yaz.',
       desc: 'Meta description eksik — 120-160 karakter arası açıklama etiketi yaz.',
@@ -1307,11 +1341,25 @@ const T = {
       'Siteniz yapay zeka aramalarına <span class="hl hl-great">mükemmel şekilde optimize edilmiş</span>!'
     ],
     visTitle: 'AI Motoru Görünürlüğü',
-    visLabels: { chatgpt: 'ChatGPT', google: 'Google AI', perplexity: 'Perplexity' },
+    visLabels: { chatgpt: 'ChatGPT Search', google: 'Google AI', perplexity: 'Perplexity', copilot: 'Bing Copilot' },
     visStatus: { ok: 'Görünür', warn: 'Kısmen', fail: 'Görünmez' },
     checks: {
       robots: { title: 'robots.txt', ok: 'Mevcut ve okunaklı', warn: 'robots.txt bulunamadı', detail_ok: 'Yapay zeka botlarına yönlendirme yapılabilir.', detail_warn: 'AI tarayıcıları hangi sayfaları okuyacağını bilemez.' },
-      aibots: { title: 'AI Bot İzinleri', ok: 'AI botları engellenmemiş', warn: 'AI botları engellenmiş!', detail_ok: 'GPTBot, ClaudeBot ve PerplexityBot sitenizi okuyabilir.', detail_warn: 'robots.txt dosyanız AI botlarını engelliyor — ChatGPT sitenizi kaynak gösteremez.' },
+      aibots: { title: 'AI Bot İzinleri', ok: 'AI botları engellenmemiş', warn: 'AI botları engellenmiş!', detail_ok: 'OpenAI, Claude, Perplexity, Google ve Bing botları sitenizi okuyabilir.', detail_warn: 'robots.txt dosyanız bir veya daha fazla AI botunu engelliyor — AI motorları sitenizi kaynak gösteremez.' },
+      oaiSearchBot: { title: 'ChatGPT Search Bot', ok: 'OAI-SearchBot erişebiliyor', warn: 'OAI-SearchBot engelli', detail_ok: 'ChatGPT Search sitenizi tarayıp kaynak gösterebilir.', detail_warn: 'OAI-SearchBot engelli — ChatGPT Search görünürlüğü için en kritik bot budur.' },
+      gptBot: { title: 'OpenAI GPTBot', ok: 'GPTBot erişebiliyor', warn: 'GPTBot engelli', detail_ok: 'OpenAI içerik tarayıcısı (training) sitenize erişebiliyor.', detail_warn: 'GPTBot engelli — OpenAI veri tarayıcısı sitenizi okuyamaz (ChatGPT Search için OAI-SearchBot ayrıdır).' },
+      chatgptUser: { title: 'ChatGPT Kullanıcı Erişimi', ok: 'ChatGPT-User erişebiliyor', warn: 'ChatGPT-User engelli', detail_ok: 'Kullanıcı tetiklemeli ChatGPT erişimleri açık.', detail_warn: 'ChatGPT-User engelli — kullanıcı bir linki paylaştığında ChatGPT sitenizi açamaz.' },
+      bingbot: { title: 'Bing / Copilot Bot', ok: 'bingbot erişebiliyor', warn: 'bingbot engelli', detail_ok: 'Microsoft Bing ve Copilot sitenizi tarayabilir.', detail_warn: 'bingbot engelli — Bing ve Copilot görünürlüğünüz olmaz.' },
+      copilotReady: { title: 'Microsoft Copilot Hazırlığı', ok: 'Copilot için hazır', warn: 'Copilot hazırlığı eksik', detail_ok: 'HTTPS, bingbot erişimi ve yapısal sinyaller mevcut.', detail_warn: 'Copilot görünürlüğü için sitemap, canonical, meta description ve yapısal veri güçlendirilmeli.' },
+      googlebot: { title: 'Googlebot Erişimi', ok: 'Googlebot erişebiliyor', warn: 'Googlebot engelli', detail_ok: 'Google Search ve Google AI sitenizi tarayabilir.', detail_warn: 'Googlebot engelli — Google AI ve arama görünürlüğünüz ciddi düşer.' },
+      perplexityBot: { title: 'Perplexity Bot', ok: 'PerplexityBot erişebiliyor', warn: 'PerplexityBot engelli', detail_ok: 'Perplexity sitenizi tarayıp kaynak gösterebilir.', detail_warn: 'PerplexityBot engelli — Perplexity sitenizi kaynak gösteremez.' },
+      perplexityUser: { title: 'Perplexity Kullanıcı Erişimi', ok: 'Perplexity-User erişebiliyor', warn: 'Perplexity-User engelli', detail_ok: 'Kullanıcı tetiklemeli Perplexity erişimleri açık.', detail_warn: 'Perplexity-User engelli — kullanıcı sorgularında siteniz çekilemeyebilir.' },
+      claudeBot: { title: 'Claude Bot Erişimi', ok: 'ClaudeBot erişebiliyor', warn: 'ClaudeBot engelli', detail_ok: 'Anthropic Claude sitenizi okuyabilir.', detail_warn: 'ClaudeBot engelli — Claude sitenizi kaynak olarak kullanamaz.' },
+      indexable: { title: 'İndekslenebilirlik', ok: 'Sayfa indekslenebilir', warn: 'noindex tespit edildi', detail_ok: 'Sayfada noindex engeli yok — arama ve AI motorlarına açık.', detail_warn: 'Meta robots veya X-Robots-Tag noindex içeriyor — sayfa görünmez kalır.' },
+      structuredDataValidBasic: { title: 'Geçerli Yapısal Veri', ok: 'JSON-LD geçerli', warn: 'Geçerli JSON-LD yok', detail_ok: 'JSON-LD bloğu hatasız ayrıştırılabiliyor.', detail_warn: 'Ayrıştırılabilir geçerli bir JSON-LD bulunamadı.' },
+      hreflang: { title: 'Hreflang (Çok Dilli)', ok: 'hreflang tanımlı', warn: 'hreflang yok', detail_ok: 'Çok dilli hedefleme sinyali mevcut.', detail_warn: 'Çok dilli site iseniz hreflang ekleyin (tek dilli siteler için zorunlu değil).' },
+      responseStatusOk: { title: 'Sunucu Yanıtı (200)', ok: 'Sayfa 200 dönüyor', warn: 'Sayfa 200 dönmüyor', detail_ok: 'Ana URL başarıyla yükleniyor.', detail_warn: 'Ana URL 200 OK dönmüyor — botlar içeriğe ulaşamayabilir.' },
+      contentLengthOk: { title: 'İçerik Yeterliliği', ok: 'Yeterli metin var', warn: 'Metin içeriği az', detail_ok: 'Sayfada AI için yeterli metin içeriği var.', detail_warn: 'Sayfada çok az metin var — AI bağlam çıkaramayabilir.' },
       sitemap: { title: 'sitemap.xml', ok: 'Site haritası mevcut', warn: 'sitemap.xml bulunamadı', detail_ok: 'Botlar tüm sayfalarınızı keşfedebilir.', detail_warn: 'Sayfalarınızın keşfedilmesi zorlaşır.' },
       title: { title: 'Title Etiketi', ok: 'Başlık optimize', warn: 'Title eksik veya uygunsuz', detail_ok: 'Başlık mevcut ve ideal uzunlukta (10-70 karakter).', detail_warn: 'Başlık yok, çok kısa veya çok uzun.' },
       h1: { title: 'H1 Başlığı', ok: 'H1 mevcut', warn: 'H1 bulunamadı', detail_ok: 'AI içerik hiyerarşisini anlayabilir.', detail_warn: 'Sayfanın ana konusu AI için belirsiz kalır.' },
@@ -1345,17 +1393,17 @@ const T = {
     }
   },
   en: {
-    badge: 'AI Readiness Scanner',
-    h1: 'Is your site ready<br>for <em>AI search</em>?',
-    p: 'ChatGPT, Perplexity and Google AI Overview read sites differently. Enter your URL and find out in seconds.',
+    badge: 'AI Search Visibility Checker',
+    h1: 'Can ChatGPT, Google AI, Perplexity and <em>Copilot</em> see your website?',
+    p: 'Enter your URL and analyze AI bot access, structured data, llms.txt, sitemap and citation readiness signals in seconds.',
     btnText: '→',
     placeholder: 'https://yoursite.com',
     stat1: 'Check Points', stat2: 'GEO Score', stat3: 'Instant Result',
     aboutLabel: 'What is Scanliq?',
     about1t: 'Can AI Read Your Site?',
     about1p: 'ChatGPT, Perplexity and Google AI Overview evaluate websites differently from traditional search engines. Scanliq measures how visible your site is to these systems.',
-    about2t: '18 Critical Checks',
-    about2p: 'robots.txt, llms.txt, Schema.org, Open Graph, canonical URL, meta description, JSON-LD, viewport, language tag and HTTPS — all analyzed in one click.',
+    about2t: '30+ Critical Checks',
+    about2p: 'ChatGPT Search, Google AI, Perplexity and Bing Copilot bot access; llms.txt, Schema.org, JSON-LD, sitemap, canonical, citation readiness and more — all in one click.',
     about3t: 'Instant Results',
     about3p: 'Get a 0-100 AI readiness score in seconds. Personalized recommendations for missing points.',
     about4t: 'Turkish & English',
@@ -1379,8 +1427,22 @@ const T = {
     promptFixes: {
       https: 'HTTPS is not active — guide me to migrate my site to HTTPS.',
       robots: 'No robots.txt file — create one that allows AI bots (GPTBot, ClaudeBot, PerplexityBot).',
-      aibots: 'My robots.txt blocks AI bots — edit it to remove GPTBot, ClaudeBot and PerplexityBot blocks.',
-      llms: 'No llms.txt file — create an llms.txt describing my site.',
+      aibots: 'My robots.txt blocks AI bots — edit it to remove OAI-SearchBot, GPTBot, ChatGPT-User, ClaudeBot, PerplexityBot, bingbot and Googlebot blocks.',
+      oaiSearchBot: 'Allow OAI-SearchBot access in robots.txt — this is the most critical bot for ChatGPT Search visibility.',
+      gptBot: 'If you want OpenAI GPTBot access, remove the GPTBot block in robots.txt.',
+      chatgptUser: 'Remove the ChatGPT-User block in robots.txt for user-triggered ChatGPT access.',
+      bingbot: 'Allow bingbot access in robots.txt — required for Bing and Copilot visibility.',
+      copilotReady: 'For Bing/Copilot visibility, strengthen sitemap.xml, canonical, meta description and JSON-LD configuration.',
+      googlebot: 'Allow Googlebot access; otherwise Google AI and Google Search visibility will drop.',
+      perplexityBot: 'Allow PerplexityBot access in robots.txt.',
+      perplexityUser: 'Allow Perplexity-User access in robots.txt.',
+      claudeBot: 'Allow ClaudeBot access in robots.txt.',
+      indexable: 'The page has noindex — remove the noindex directive in meta robots or X-Robots-Tag.',
+      structuredDataValidBasic: 'No valid JSON-LD — add a parseable, error-free JSON-LD block.',
+      hreflang: 'If you run a multilingual site, add hreflang tags (for each language version).',
+      responseStatusOk: 'My homepage does not return 200 OK — check server/redirect configuration.',
+      contentLengthOk: 'Not enough text on the page — add meaningful text content so AI can extract context.',
+      llms: 'No llms.txt file — add an llms.txt to the root describing your brand, key pages and AI usage permissions.',
       sitemap: 'No sitemap.xml — create a sitemap listing my pages.',
       title: 'Title tag missing or improper — write a 10-70 character keyword-rich title tag.',
       desc: 'Meta description missing — write a 120-160 character description tag.',
@@ -1412,11 +1474,25 @@ const T = {
       'Your site is <span class="hl hl-great">perfectly optimized</span> for AI search!'
     ],
     visTitle: 'AI Engine Visibility',
-    visLabels: { chatgpt: 'ChatGPT', google: 'Google AI', perplexity: 'Perplexity' },
+    visLabels: { chatgpt: 'ChatGPT Search', google: 'Google AI', perplexity: 'Perplexity', copilot: 'Bing Copilot' },
     visStatus: { ok: 'Visible', warn: 'Partial', fail: 'Not Visible' },
     checks: {
       robots: { title: 'robots.txt', ok: 'Present and readable', warn: 'robots.txt not found', detail_ok: 'AI bots can be directed properly.', detail_warn: 'AI crawlers cannot know which pages to read.' },
-      aibots: { title: 'AI Bot Access', ok: 'AI bots not blocked', warn: 'AI bots are blocked!', detail_ok: 'GPTBot, ClaudeBot and PerplexityBot can read your site.', detail_warn: 'Your robots.txt blocks AI bots — ChatGPT cannot cite your site.' },
+      aibots: { title: 'AI Bot Access', ok: 'AI bots not blocked', warn: 'AI bots are blocked!', detail_ok: 'OpenAI, Claude, Perplexity, Google and Bing bots can read your site.', detail_warn: 'Your robots.txt blocks one or more AI bots — AI engines cannot cite your site.' },
+      oaiSearchBot: { title: 'ChatGPT Search Bot', ok: 'OAI-SearchBot allowed', warn: 'OAI-SearchBot blocked', detail_ok: 'ChatGPT Search can crawl and cite your site.', detail_warn: 'OAI-SearchBot is blocked — this is the most critical bot for ChatGPT Search visibility.' },
+      gptBot: { title: 'OpenAI GPTBot', ok: 'GPTBot allowed', warn: 'GPTBot blocked', detail_ok: 'OpenAI content crawler (training) can access your site.', detail_warn: 'GPTBot is blocked — OpenAI data crawler cannot read your site (OAI-SearchBot is separate for ChatGPT Search).' },
+      chatgptUser: { title: 'ChatGPT User Access', ok: 'ChatGPT-User allowed', warn: 'ChatGPT-User blocked', detail_ok: 'User-triggered ChatGPT access is open.', detail_warn: 'ChatGPT-User is blocked — ChatGPT cannot open your site when a user shares a link.' },
+      bingbot: { title: 'Bing / Copilot Bot', ok: 'bingbot allowed', warn: 'bingbot blocked', detail_ok: 'Microsoft Bing and Copilot can crawl your site.', detail_warn: 'bingbot is blocked — you will have no Bing or Copilot visibility.' },
+      copilotReady: { title: 'Microsoft Copilot Readiness', ok: 'Ready for Copilot', warn: 'Copilot readiness incomplete', detail_ok: 'HTTPS, bingbot access and structural signals are present.', detail_warn: 'For Copilot visibility, strengthen sitemap, canonical, meta description and structured data.' },
+      googlebot: { title: 'Googlebot Access', ok: 'Googlebot allowed', warn: 'Googlebot blocked', detail_ok: 'Google Search and Google AI can crawl your site.', detail_warn: 'Googlebot is blocked — your Google AI and search visibility drops sharply.' },
+      perplexityBot: { title: 'Perplexity Bot', ok: 'PerplexityBot allowed', warn: 'PerplexityBot blocked', detail_ok: 'Perplexity can crawl and cite your site.', detail_warn: 'PerplexityBot is blocked — Perplexity cannot cite your site.' },
+      perplexityUser: { title: 'Perplexity User Access', ok: 'Perplexity-User allowed', warn: 'Perplexity-User blocked', detail_ok: 'User-triggered Perplexity access is open.', detail_warn: 'Perplexity-User is blocked — your site may not be fetched on user queries.' },
+      claudeBot: { title: 'Claude Bot Access', ok: 'ClaudeBot allowed', warn: 'ClaudeBot blocked', detail_ok: 'Anthropic Claude can read your site.', detail_warn: 'ClaudeBot is blocked — Claude cannot use your site as a source.' },
+      indexable: { title: 'Indexability', ok: 'Page is indexable', warn: 'noindex detected', detail_ok: 'No noindex block on the page — open to search and AI engines.', detail_warn: 'Meta robots or X-Robots-Tag contains noindex — the page stays invisible.' },
+      structuredDataValidBasic: { title: 'Valid Structured Data', ok: 'JSON-LD is valid', warn: 'No valid JSON-LD', detail_ok: 'JSON-LD block parses without errors.', detail_warn: 'No parseable valid JSON-LD was found.' },
+      hreflang: { title: 'Hreflang (Multilingual)', ok: 'hreflang defined', warn: 'No hreflang', detail_ok: 'Multilingual targeting signal is present.', detail_warn: 'Add hreflang if you run a multilingual site (not required for single-language sites).' },
+      responseStatusOk: { title: 'Server Response (200)', ok: 'Page returns 200', warn: 'Page not returning 200', detail_ok: 'Main URL loads successfully.', detail_warn: 'Main URL does not return 200 OK — bots may not reach the content.' },
+      contentLengthOk: { title: 'Content Sufficiency', ok: 'Sufficient text', warn: 'Low text content', detail_ok: 'The page has enough text content for AI.', detail_warn: 'Very little text on the page — AI may not extract context.' },
       sitemap: { title: 'sitemap.xml', ok: 'Sitemap present', warn: 'sitemap.xml not found', detail_ok: 'Bots can discover all your pages.', detail_warn: 'Page discovery becomes harder.' },
       title: { title: 'Title Tag', ok: 'Title optimized', warn: 'Title missing or improper', detail_ok: 'Title exists and is ideal length (10-70 chars).', detail_warn: 'Title missing, too short or too long.' },
       h1: { title: 'H1 Heading', ok: 'H1 present', warn: 'No H1 found', detail_ok: 'AI can understand content hierarchy.', detail_warn: 'Main topic stays unclear to AI.' },
@@ -1572,6 +1648,15 @@ async function runCheck() {
     https:         { pass: workerResults.https === true },
     robots:        { pass: workerResults.robots === true },
     aibots:        { pass: workerResults.aibots === true },
+    oaiSearchBot:  { pass: workerResults.oaiSearchBot === true },
+    gptBot:        { pass: workerResults.gptBot === true },
+    chatgptUser:   { pass: workerResults.chatgptUser === true },
+    bingbot:       { pass: workerResults.bingbot === true },
+    copilotReady:  { pass: workerResults.copilotReady === true },
+    googlebot:     { pass: workerResults.googlebot === true },
+    perplexityBot: { pass: workerResults.perplexityBot === true },
+    perplexityUser:{ pass: workerResults.perplexityUser === true },
+    claudeBot:     { pass: workerResults.claudeBot === true },
     llms:          { pass: workerResults.llms === true },
     sitemap:       { pass: workerResults.sitemap === true },
     title:         { pass: workerResults.title === true },
@@ -1586,38 +1671,40 @@ async function runCheck() {
     lang:          { pass: workerResults.lang === true },
     favicon:       { pass: workerResults.favicon === true },
     textRatioPass: { pass: workerResults.textRatioPass === true },
-    faqPass:       { pass: workerResults.faqPass === true }
+    faqPass:       { pass: workerResults.faqPass === true },
+    indexable:     { pass: workerResults.indexable === true },
+    structuredDataValidBasic: { pass: workerResults.structuredDataValidBasic === true },
+    hreflang:      { pass: workerResults.hreflang === true },
+    responseStatusOk: { pass: workerResults.responseStatusOk === true },
+    contentLengthOk:  { pass: workerResults.contentLengthOk === true }
   };
 
-  // ===== GEO SCORE — Ağırlıklı Puanlama =====
-  // AI görünürlüğü için kritik kontroller daha yüksek ağırlık alır.
+  // ===== GEO SCORE — Ağırlıklı Puanlama (worker ile aynı) =====
   const WEIGHTS = {
-    aibots:        10,  // En kritik: AI botları engelliyse her şey boşa
-    llms:           9,  // AI içerik rehberi — GEO'nun kalbi
-    schema:         9,  // Yapısal veri — AI anlamlandırması
-    jsonld:         8,  // Google önerilen format
-    faqPass:        8,  // AI alıntılama için kritik
-    sitemap:        7,  // Keşfedilebilirlik
-    title:          7,  // Temel kimlik
-    desc:           7,  // AI özetleme
-    h1:             6,  // İçerik hiyerarşisi
-    canonical:      6,  // Kopya içerik önleme
-    textRatioPass:  6,  // İçerik yoğunluğu
-    robots:         5,  // Tarama kontrolü
-    https:          5,  // Güvenlik (temel beklenti)
-    og:             4,  // Sosyal/AI önizleme
-    ogimage:        4,  // Önizleme görseli
-    lang:           4,  // Dil sinyali
-    viewport:       3,  // Mobil uyum (temel)
-    favicon:        2   // Marka sinyali (düşük etki)
+    oaiSearchBot: 10, aibots: 10, llms: 9, schema: 9,
+    bingbot: 8, copilotReady: 8, jsonld: 8, faqPass: 8,
+    sitemap: 7, title: 7, desc: 7, googlebot: 7,
+    h1: 6, canonical: 6, textRatioPass: 6,
+    robots: 5, https: 5,
+    og: 4, ogimage: 4, lang: 4, chatgptUser: 4, perplexityUser: 4, claudeBot: 4,
+    gptBot: 3, viewport: 3, indexable: 3, structuredDataValidBasic: 3,
+    favicon: 2, hreflang: 2, responseStatusOk: 2, contentLengthOk: 2
   };
-  let earned = 0, totalWeight = 0;
-  for (const key in checks) {
-    const w = WEIGHTS[key] || 1;
-    totalWeight += w;
-    if (checks[key].pass) earned += w;
+  // Worker zaten skoru hesaplıyor; varsa onu kullan, yoksa burada hesapla
+  let score;
+  if (typeof workerResults._score === 'number') {
+    score = workerResults._score;
+  } else {
+    let earned = 0, totalWeight = 0;
+    for (const key in WEIGHTS) {
+      const w = WEIGHTS[key];
+      totalWeight += w;
+      if (checks[key] && checks[key].pass) earned += w;
+    }
+    score = Math.round(earned / totalWeight * 100);
   }
-  const score = Math.round(earned / totalWeight * 100);
+  // Worker'dan gelen motor görünürlüğünü sakla
+  window.lastEngineVis = workerResults._engineVisibility || null;
   showResults(score, checks, t);
   document.getElementById('btn-check').disabled = false;
 }
@@ -1636,21 +1723,31 @@ function showResults(score, checks, t) {
   lbl.style.background = color + '22';
   lbl.style.color = color;
 
-  // AI Motoru Görünürlük Dökümü — mevcut kontrol sonuçlarına dayalı
+  // AI Motoru Görünürlük Dökümü — worker'dan gelen 4 motorlu sonuç
   const pass = (k) => checks[k] && checks[k].pass === true;
-  const vis = {
-    chatgpt: pass('aibots') && pass('https') ? 'ok' : pass('aibots') ? 'warn' : 'fail',
-    google:  (pass('schema') && pass('jsonld')) ? 'ok' : (pass('schema') || pass('jsonld')) ? 'warn' : 'fail',
-    perplexity: (pass('aibots') && pass('llms')) ? 'ok' : pass('aibots') ? 'warn' : 'fail'
-  };
+  let vis = window.lastEngineVis;
+  // Worker vermemişse (eski kayıt vb.) yerel hesapla
+  if (!vis) {
+    vis = {
+      chatgpt: pass('oaiSearchBot') && pass('https') ? 'ok' : pass('oaiSearchBot') ? 'warn' : 'fail',
+      google: (pass('googlebot') && pass('https') && (pass('schema')||pass('jsonld')) && pass('sitemap')) ? 'ok'
+              : (pass('googlebot') && [pass('https'),(pass('schema')||pass('jsonld')),pass('sitemap')].filter(Boolean).length>=2) ? 'warn' : 'fail',
+      perplexity: ((pass('perplexityBot')||pass('perplexityUser')) && pass('llms')) ? 'ok' : (pass('perplexityBot')||pass('perplexityUser')) ? 'warn' : 'fail',
+      copilot: pass('copilotReady') ? 'ok' : (pass('bingbot') && pass('https')) ? 'warn' : 'fail'
+    };
+  }
+  window.lastEngineVis = vis;
   const visIcons = { ok: '✅', warn: '⚠️', fail: '❌' };
   const visRow = document.getElementById('vis-row');
-  visRow.innerHTML = Object.entries(vis).map(([engine, status]) => `
+  const engineOrder = ['chatgpt','google','perplexity','copilot'];
+  visRow.innerHTML = engineOrder.map((engine) => {
+    const status = vis[engine] || 'fail';
+    return `
     <span class="vis-pill vis-${status}">
       <span class="vis-icon">${visIcons[status]}</span>
       ${t.visLabels[engine]} · ${t.visStatus[status]}
-    </span>
-  `).join('');
+    </span>`;
+  }).join('');
 
   const circ = 213.6;
   setTimeout(() => {
@@ -1669,9 +1766,11 @@ function showResults(score, checks, t) {
     const card = document.createElement('div');
     card.className = 'check-card';
     // Başarısız ve çözümü olan kontroller için "Çöz" butonu
-    const hasFix = !data.pass && FIXERS[key];
+    const botFixKeys = ['oaiSearchBot','gptBot','chatgptUser','bingbot','googlebot','perplexityBot','perplexityUser','claudeBot','copilotReady'];
+    const effectiveFixer = botFixKeys.includes(key) ? FIXERS['aibots'] : FIXERS[key];
+    const hasFix = !data.pass && effectiveFixer;
     const fixBtn = hasFix
-      ? `<button class="fix-btn" data-fix="${key}" onclick="openFix('${key}')">${FIXERS[key].btn[lang]}</button>`
+      ? `<button class="fix-btn" data-fix="${key}" onclick="openFix('${key}')">${effectiveFixer.btn[lang]}</button>`
       : '';
     card.innerHTML = `
       <div class="check-head">
@@ -1750,21 +1849,21 @@ const FIXERS = {
     title: { tr: 'Hazır llms.txt Dosyanız', en: 'Your Ready llms.txt File' },
     type: 'download', filename: 'llms.txt',
     desc: { tr: 'Bu dosyayı indirin ve sitenizin kök dizinine (ana klasör) yükleyin.', en: 'Download this file and upload it to your site root directory.' },
-    gen: (host) => `# llms.txt\n# ${host}\n\n## Site Hakkinda\n${host} - [sitenizi bir cumleyle tanimlayin]\n\n## Onemli Sayfalar\n- Ana Sayfa: https://${host}/\n- Hakkimizda: https://${host}/hakkimizda\n- Iletisim: https://${host}/iletisim\n\n## Izinler\nAI sistemleri bu sitenin icerigini okuyabilir ve ozetleyebilir.\n\n## Iletisim\nE-posta: info@${host}\n`
+    gen: (host) => `# llms.txt\n# ${host}\n\n## Site Adi\n${host}\n\n## Kisa Aciklama\n[Sitenizi 1-2 cumleyle tanimlayin: ne yapar, kime hizmet eder]\n\n## Ana Hizmetler / Konular\n- [Ana hizmet veya konu 1]\n- [Ana hizmet veya konu 2]\n- [Ana hizmet veya konu 3]\n\n## Onemli Sayfalar\n- Ana Sayfa: https://${host}/\n- Hakkimizda: https://${host}/hakkimizda\n- Hizmetler: https://${host}/hizmetler\n- Iletisim: https://${host}/iletisim\n\n## AI Kullanim Izni\nBu sitenin icerigi yapay zeka sistemleri tarafindan okunabilir, ozetlenebilir ve kaynak gosterilebilir.\n\n## Tercih Edilen Kaynak Gosterim Biceci\nKaynak gosterirken lutfen site adini (${host}) ve ilgili sayfa baglantisini birlikte belirtin.\n\n## Iletisim\nE-posta: info@${host}\n\n## Son Guncelleme\n2026\n`
   },
   robots: {
     btn: { tr: '⬇ robots.txt Oluştur', en: '⬇ Generate robots.txt' },
     title: { tr: 'Hazır robots.txt Dosyanız', en: 'Your Ready robots.txt File' },
     type: 'download', filename: 'robots.txt',
     desc: { tr: 'Bu dosyayı indirin ve sitenizin kök dizinine yükleyin. AI botlarına tam erişim verir.', en: 'Download and upload to your site root. Grants full access to AI bots.' },
-    gen: (host) => `User-agent: *\nAllow: /\n\nUser-agent: GPTBot\nAllow: /\n\nUser-agent: ClaudeBot\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nUser-agent: Google-Extended\nAllow: /\n\nSitemap: https://${host}/sitemap.xml\n`
+    gen: (host) => `User-agent: *\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: GPTBot\nAllow: /\n\nUser-agent: ChatGPT-User\nAllow: /\n\nUser-agent: ClaudeBot\nAllow: /\n\nUser-agent: Claude-User\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nUser-agent: Perplexity-User\nAllow: /\n\nUser-agent: Googlebot\nAllow: /\n\nUser-agent: bingbot\nAllow: /\n\nUser-agent: Google-Extended\nAllow: /\n\nSitemap: https://${host}/sitemap.xml\n`
   },
   aibots: {
     btn: { tr: '⬇ robots.txt Düzelt', en: '⬇ Fix robots.txt' },
     title: { tr: 'Düzeltilmiş robots.txt', en: 'Fixed robots.txt' },
     type: 'download', filename: 'robots.txt',
     desc: { tr: 'Mevcut robots.txt dosyanızı bununla değiştirin — AI botları engeli kalkar.', en: 'Replace your current robots.txt with this — removes the AI bot block.' },
-    gen: (host) => `User-agent: *\nAllow: /\n\nUser-agent: GPTBot\nAllow: /\n\nUser-agent: ClaudeBot\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nUser-agent: Google-Extended\nAllow: /\n\nSitemap: https://${host}/sitemap.xml\n`
+    gen: (host) => `User-agent: *\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: GPTBot\nAllow: /\n\nUser-agent: ChatGPT-User\nAllow: /\n\nUser-agent: ClaudeBot\nAllow: /\n\nUser-agent: Claude-User\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nUser-agent: Perplexity-User\nAllow: /\n\nUser-agent: Googlebot\nAllow: /\n\nUser-agent: bingbot\nAllow: /\n\nUser-agent: Google-Extended\nAllow: /\n\nSitemap: https://${host}/sitemap.xml\n`
   },
   schema: {
     btn: { tr: '📋 Schema Kodu Al', en: '📋 Get Schema Code' },
@@ -1867,6 +1966,9 @@ const FIXERS = {
 };
 
 function openFix(key) {
+  // Bot erişim kartları aynı robots.txt çözümünü kullanır
+  const botKeys = ['oaiSearchBot','gptBot','chatgptUser','bingbot','googlebot','perplexityBot','perplexityUser','claudeBot','copilotReady'];
+  if (botKeys.includes(key)) key = 'aibots';
   const fixer = FIXERS[key];
   if (!fixer) return;
   let host = 'siteniz.com';
@@ -2183,44 +2285,72 @@ function generatePDF() {
     const descLines = doc.splitTextToSize(descClean, 116);
     doc.text(descLines, 78, cy + 1);
 
-    // ===== AI MOTORU GÖRÜNÜRLÜK =====
-    y = 128;
-    doc.setFillColor(cLight[0], cLight[1], cLight[2]);
-    doc.roundedRect(16, y, W - 32, 26, 3, 3, 'F');
+    // ===== AI MOTORU GÖRÜNÜRLÜK (4 motor) =====
+    y = 122;
+    const pass = (k) => checks[k] && checks[k].pass === true;
+    // Worker'dan gelen görünürlük varsa onu kullan
+    const ev = window.lastEngineVis || {};
+    const stMap = { ok: 2, warn: 1, fail: 0 };
+    const engineData = [
+      { name: 'ChatGPT Search', st: stMap[ev.chatgpt] ?? (pass('oaiSearchBot') && pass('https') ? 2 : pass('oaiSearchBot') ? 1 : 0),
+        reasonOk: lang==='tr'?'OAI-SearchBot erisebiliyor':'OAI-SearchBot allowed',
+        reasonBad: lang==='tr'?'OAI-SearchBot engelli veya HTTPS yok':'OAI-SearchBot blocked or no HTTPS',
+        action: lang==='tr'?'robots.txt icinde OAI-SearchBot erisimini ac':'Allow OAI-SearchBot in robots.txt' },
+      { name: 'Google AI / Gemini', st: stMap[ev.google] ?? 0,
+        reasonOk: lang==='tr'?'Googlebot + yapisal veri + sitemap mevcut':'Googlebot + structured data + sitemap present',
+        reasonBad: lang==='tr'?'Googlebot, yapisal veri veya sitemap eksik':'Googlebot, structured data or sitemap missing',
+        action: lang==='tr'?'Googlebot erisimi, Schema/JSON-LD ve sitemap ekle':'Add Googlebot access, Schema/JSON-LD and sitemap' },
+      { name: 'Perplexity', st: stMap[ev.perplexity] ?? 0,
+        reasonOk: lang==='tr'?'PerplexityBot erisebiliyor + llms.txt var':'PerplexityBot allowed + llms.txt present',
+        reasonBad: lang==='tr'?'PerplexityBot engelli veya llms.txt yok':'PerplexityBot blocked or no llms.txt',
+        action: lang==='tr'?'PerplexityBot erisimini ac ve llms.txt ekle':'Allow PerplexityBot and add llms.txt' },
+      { name: 'Bing Copilot', st: stMap[ev.copilot] ?? 0,
+        reasonOk: lang==='tr'?'HTTPS + bingbot + yapisal sinyaller mevcut':'HTTPS + bingbot + structural signals present',
+        reasonBad: lang==='tr'?'bingbot engelli veya yapisal sinyaller eksik':'bingbot blocked or structural signals missing',
+        action: lang==='tr'?'bingbot erisimi, sitemap, canonical ve JSON-LD ekle':'Add bingbot access, sitemap, canonical and JSON-LD' }
+    ];
+
     doc.setTextColor(cDark[0], cDark[1], cDark[2]);
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(10);
-    doc.text(lang === 'tr' ? 'AI Motoru Görünürlüğü' : 'AI Engine Visibility', 22, y + 9);
+    doc.setFontSize(11);
+    doc.text(lang === 'tr' ? 'AI Motoru Görünürlüğü' : 'AI Engine Visibility', 16, y);
+    y += 5;
 
-    const pass = (k) => checks[k] && checks[k].pass === true;
-    const vis = {
-      ChatGPT: pass('aibots') && pass('https') ? 2 : pass('aibots') ? 1 : 0,
-      'Google AI': (pass('schema') && pass('jsonld')) ? 2 : (pass('schema') || pass('jsonld')) ? 1 : 0,
-      Perplexity: (pass('aibots') && pass('llms')) ? 2 : pass('aibots') ? 1 : 0
-    };
-    const visStatusTxt = lang === 'tr' ? ['Görünmez','Kısmen','Görünür'] : ['Not Visible','Partial','Visible'];
+    const visStatusTxt = lang === 'tr' ? ['Gorunmez','Kismen','Gorunur'] : ['Not Visible','Partial','Visible'];
     const visColors = [[255,77,77],[245,166,35],[0,200,118]];
-    let vx = 22;
-    Object.entries(vis).forEach(([engine, st]) => {
-      const vc = visColors[st];
+    const rowHeight = 13;
+    engineData.forEach((eng) => {
+      const vc = visColors[eng.st];
+      // satır kutusu
+      doc.setFillColor(cLight[0], cLight[1], cLight[2]);
+      doc.roundedRect(16, y, W - 32, rowHeight - 2, 2, 2, 'F');
+      // durum noktası
       doc.setFillColor(vc[0], vc[1], vc[2]);
-      doc.circle(vx + 2, y + 17, 1.6, 'F');
+      doc.circle(22, y + 5.5, 2, 'F');
+      // motor adı
       doc.setTextColor(cDark[0], cDark[1], cDark[2]);
       doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9.5);
+      doc.text(eng.name, 27, y + 5);
+      // durum etiketi (sağ)
+      doc.setTextColor(vc[0], vc[1], vc[2]);
+      doc.setFont('helvetica', 'bold');
       doc.setFontSize(8.5);
-      doc.text(engine, vx + 6, y + 18);
+      doc.text(visStatusTxt[eng.st], W - 20, y + 5, { align: 'right' });
+      // sebep / aksiyon
       doc.setTextColor(cGray[0], cGray[1], cGray[2]);
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(7.5);
-      doc.text(visStatusTxt[st], vx + 6, y + 22.5);
-      vx += 60;
+      const line = eng.st === 2 ? eng.reasonOk : (eng.reasonBad + '  →  ' + eng.action);
+      doc.text(line.substring(0, 95), 27, y + 9.5);
+      y += rowHeight;
     });
 
     // ===== KONTROL LİSTESİ =====
-    y = 166;
+    y += 6;
     doc.setTextColor(cDark[0], cDark[1], cDark[2]);
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(12);
+    doc.setFontSize(11);
     doc.text(lang === 'tr' ? 'Kontrol Sonuçları' : 'Check Results', 16, y);
     const passCount = Object.values(checks).filter(c => c.pass).length;
     const totalCount = Object.keys(checks).length;
@@ -2229,10 +2359,10 @@ function generatePDF() {
     doc.setFontSize(9);
     doc.text((lang==='tr'?passCount+' / '+totalCount+' başarılı':passCount+' / '+totalCount+' passed'), W - 16, y, { align: 'right' });
 
-    y += 8;
+    y += 7;
     const entries = Object.entries(checks);
     const colW = (W - 32) / 2;
-    const rowH = 8.5;
+    const rowH = 6.6;
     let col = 0, startY = y;
     entries.forEach(([key, data], i) => {
       const info = t.checks[key];
@@ -2262,8 +2392,8 @@ function generatePDF() {
       const cleanLabel = label.replace(/[^\x00-\x7F\u00C0-\u017F]/g, '').trim();
       doc.setTextColor(data.pass ? 60 : 120, data.pass ? 60 : 60, data.pass ? 60 : 60);
       doc.setFont('helvetica', data.pass ? 'normal' : 'bold');
-      doc.setFontSize(8.5);
-      doc.text(cleanLabel, rx + 6, ry);
+      doc.setFontSize(7.8);
+      doc.text(cleanLabel.substring(0, 32), rx + 6, ry);
     });
 
     // ===== EKSİKLER / ÖNERİLER KUTUSU =====
