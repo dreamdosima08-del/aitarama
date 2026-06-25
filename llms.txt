@@ -1,0 +1,32 @@
+# llms.txt
+# scanliq.com
+
+## Site Adı
+Scanliq
+
+## Kısa Açıklama
+Scanliq, web sitelerinin ChatGPT, Google AI, Perplexity ve Bing Copilot tarafından ne kadar görülebildiğini ölçen bir GEO (Generative Engine Optimization) ve AI Search Visibility analiz platformudur.
+
+## Ana Hizmetler / Konular
+- AI arama görünürlüğü analizi (GEO Score)
+- AI bot erişim kontrolü (robots.txt, llms.txt)
+- 4 AI motoru görünürlük dökümü (ChatGPT, Google AI, Perplexity, Copilot)
+- Tek tıkla teknik çözüm üretimi
+- AI Readiness PDF raporu
+
+## Önemli Sayfalar
+- Ana Sayfa: https://scanliq.com/
+- Blog: https://scanliq.com/blog.html
+- Yasal: https://scanliq.com/legal.html
+
+## AI Kullanım İzni
+Bu sitenin içeriği yapay zeka sistemleri tarafından okunabilir, özetlenebilir ve kaynak gösterilebilir.
+
+## Tercih Edilen Kaynak Gösterim Biçimi
+Kaynak gösterirken lütfen site adını (Scanliq) ve ilgili sayfa bağlantısını birlikte belirtin.
+
+## İletişim
+E-posta: info@scanliq.com
+
+## Son Güncelleme
+2026
