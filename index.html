@@ -236,7 +236,7 @@
     .head-link { padding: 7px 8px; font-size: 0.72rem; }
     /* Mobilde Blog ve Geçmiş yazılarını gizle, ikon/kısa kalsın */
     .head-link-label { display: none; }
-    #nav-blog { display: none; }
+    #nav-blog, #nav-tools, #nav-analyzer { display: none; }
     .auth-header-btn { padding: 7px 12px; font-size: 0.72rem; max-width: 96px; }
     .auth-header-btn span { max-width: 72px; }
     .lang-btn { padding: 4px 7px; font-size: 0.68rem; }
@@ -1092,6 +1092,8 @@
 </svg>
     </a>
     <nav class="head-nav">
+      <a href="/content-analyzer.html" id="nav-analyzer" class="head-link">İçerik AI</a>
+      <a href="/llms-generator.html" id="nav-tools" class="head-link">llms.txt</a>
       <a href="/blog.html" id="nav-blog" class="head-link">Blog</a>
       <a href="javascript:void(0)" id="nav-history" onclick="openHistory()" class="head-link nav-history-link" style="display:none;">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
