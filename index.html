@@ -441,6 +441,83 @@
 
   /* ===== HOW IT WORKS ===== */
   .how-section { margin-bottom: 72px; }
+
+  /* ARAÇLAR (TOOLS) */
+  .tools-section { margin-bottom: 72px; }
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  @media(max-width: 780px) { .tools-grid { grid-template-columns: 1fr; } }
+  .tool-card {
+    display: block;
+    text-decoration: none;
+    background: var(--surface, rgba(10,22,18,0.5));
+    border: 1px solid rgba(0,255,170,0.1);
+    border-radius: 16px;
+    padding: 26px 24px;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .tool-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #00F28A, #00b8d9);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .tool-card:hover {
+    border-color: rgba(0,242,138,0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+  }
+  .tool-card:hover::before { opacity: 1; }
+  .tool-card-icon {
+    width: 48px; height: 48px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    background: rgba(0,242,138,0.08);
+    border-radius: 12px;
+    margin-bottom: 16px;
+  }
+  .tool-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .tool-card p {
+    font-size: 0.83rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+  .tool-card-cta {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    color: var(--accent);
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .tool-card-badge {
+    position: absolute;
+    top: 18px; right: 18px;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: rgba(0,242,138,0.12);
+    color: var(--accent);
+  }
   .steps {
     display: flex;
     gap: 0;
@@ -1199,6 +1276,34 @@
     </div>
   </section>
 
+  <!-- ARAÇLAR / TOOLS -->
+  <section class="tools-section" id="tools-section">
+    <div class="section-label" id="tools-label">Ücretsiz Araçlar</div>
+    <div class="tools-grid">
+      <a href="/" class="tool-card">
+        <span class="tool-card-badge" id="tool1-badge">ANA ARAÇ</span>
+        <div class="tool-card-icon">🔍</div>
+        <h3 id="tool1-title">AI Görünürlük Analizi</h3>
+        <p id="tool1-text">Sitenizin ChatGPT, Google AI, Perplexity ve Copilot'taki görünürlüğünü ölçün. GEO skorunuzu ve eksiklerinizi görün.</p>
+        <span class="tool-card-cta" id="tool1-cta">Analiz Et →</span>
+      </a>
+      <a href="/content-analyzer.html" class="tool-card">
+        <span class="tool-card-badge" id="tool2-badge">YAPAY ZEKA</span>
+        <div class="tool-card-icon">🤖</div>
+        <h3 id="tool2-title">AI İçerik Analizi</h3>
+        <p id="tool2-text">Makalenizin yapay zeka tarafından kaynak gösterilmeye ne kadar uygun olduğunu ölçün. Citation readiness skoru ve öneriler alın.</p>
+        <span class="tool-card-cta" id="tool2-cta">Makaleyi Analiz Et →</span>
+      </a>
+      <a href="/llms-generator.html" class="tool-card">
+        <span class="tool-card-badge" id="tool3-badge">ÜCRETSİZ</span>
+        <div class="tool-card-icon">📄</div>
+        <h3 id="tool3-title">llms.txt Oluşturucu</h3>
+        <p id="tool3-text">Web sitenizi yapay zekaya tanıtan llms.txt dosyasını saniyeler içinde oluşturun ve indirin.</p>
+        <span class="tool-card-cta" id="tool3-cta">Oluştur →</span>
+      </a>
+    </div>
+  </section>
+
   <!-- AD SLOT TOP -->
   <div class="ad-slot" id="ad-top"><!-- Google AdSense --></div>
 
@@ -1318,6 +1423,10 @@ const T = {
     about4t: 'Türkçe ve İngilizce',
     about4p: 'Türkiye\'nin ilk yapay zeka optimizasyonu (AI optimization) ve GEO analiz aracı. Hem Türkçe hem İngilizce tam destek ile çalışır.',
     howLabel: 'Nasıl Çalışır?',
+    toolsLabel: 'Ücretsiz Araçlar',
+    tool1t: 'AI Görünürlük Analizi', tool1p: 'Sitenizin ChatGPT, Google AI, Perplexity ve Copilot\'taki görünürlüğünü ölçün. GEO skorunuzu ve eksiklerinizi görün.', tool1cta: 'Analiz Et →', tool1b: 'ANA ARAÇ',
+    tool2t: 'AI İçerik Analizi', tool2p: 'Makalenizin yapay zeka tarafından kaynak gösterilmeye ne kadar uygun olduğunu ölçün. Citation readiness skoru ve öneriler alın.', tool2cta: 'Makaleyi Analiz Et →', tool2b: 'YAPAY ZEKA',
+    tool3t: 'llms.txt Oluşturucu', tool3p: 'Web sitenizi yapay zekaya tanıtan llms.txt dosyasını saniyeler içinde oluşturun ve indirin.', tool3cta: 'Oluştur →', tool3b: 'ÜCRETSİZ',
     step1t: 'URL Gir', step1p: 'Analiz etmek istediğiniz sitenin adresini girin.',
     step2t: 'Tara', step2p: 'Scanliq 18 kritik noktayı otomatik olarak tarar.',
     step3t: 'Skor Al', step3p: '0-100 arası AI hazırlık skoru ve öneriler alın.',
@@ -1451,6 +1560,10 @@ const T = {
     about4t: 'Turkish & English',
     about4p: 'A complete AI optimization (web AI optimization) and GEO analysis tool. Full support in both Turkish and English.',
     howLabel: 'How It Works',
+    toolsLabel: 'Free Tools',
+    tool1t: 'AI Visibility Analysis', tool1p: 'Measure your site\'s visibility in ChatGPT, Google AI, Perplexity and Copilot. See your GEO score and gaps.', tool1cta: 'Analyze →', tool1b: 'MAIN TOOL',
+    tool2t: 'AI Content Analysis', tool2p: 'Measure how citation-ready your article is for AI. Get a citation readiness score and suggestions.', tool2cta: 'Analyze Article →', tool2b: 'AI-POWERED',
+    tool3t: 'llms.txt Generator', tool3p: 'Create and download the llms.txt file that introduces your website to AI in seconds.', tool3cta: 'Generate →', tool3b: 'FREE',
     step1t: 'Enter URL', step1p: 'Enter the address of the site you want to analyze.',
     step2t: 'Scan', step2p: 'Scanliq automatically scans 18 critical points.',
     step3t: 'Get Score', step3p: 'Receive a 0-100 AI readiness score and recommendations.',
@@ -1592,6 +1705,12 @@ function setLang(l) {
   document.getElementById('about4-title').textContent = t.about4t;
   document.getElementById('about4-text').textContent = t.about4p;
   document.getElementById('how-label').childNodes[0].textContent = t.howLabel;
+  // Araçlar bölümü
+  const setTxt = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  setTxt('tools-label', t.toolsLabel);
+  setTxt('tool1-title', t.tool1t); setTxt('tool1-text', t.tool1p); setTxt('tool1-cta', t.tool1cta); setTxt('tool1-badge', t.tool1b);
+  setTxt('tool2-title', t.tool2t); setTxt('tool2-text', t.tool2p); setTxt('tool2-cta', t.tool2cta); setTxt('tool2-badge', t.tool2b);
+  setTxt('tool3-title', t.tool3t); setTxt('tool3-text', t.tool3p); setTxt('tool3-cta', t.tool3cta); setTxt('tool3-badge', t.tool3b);
   document.getElementById('step1-title').textContent = t.step1t;
   document.getElementById('step1-text').textContent = t.step1p;
   document.getElementById('step2-title').textContent = t.step2t;
