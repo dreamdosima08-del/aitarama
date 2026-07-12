@@ -690,6 +690,12 @@
 
   .checks-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
   @media(max-width:600px) { .checks-grid { grid-template-columns: 1fr; } }
+  .cat-group { margin-bottom: 28px; }
+  .cat-head { display: flex; align-items: center; gap: 12px; margin: 0 0 14px; }
+  .cat-head .cat-name { font-family: var(--font-display); font-size: 1rem; font-weight: 800; color: var(--text); display: flex; align-items: center; gap: 8px; }
+  .cat-head .cat-score { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-left: auto; }
+  .cat-head .cat-bar { flex: 1; height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; max-width: 160px; }
+  .cat-head .cat-bar-fill { height: 100%; border-radius: 3px; transition: width 0.8s ease; }
   @media(max-width:600px) {
     .auth-box, .fix-modal-box, .history-box { padding: 22px 18px; }
     .score-banner { flex-wrap: wrap; }
@@ -1194,7 +1200,7 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-badge" id="hero-badge">AI Search Visibility Checker</div>
+    <div class="hero-badge" id="hero-badge">SEO + GEO + AI Uyumluluk Analizi</div>
     <h1 id="hero-h1">ChatGPT, Google AI, Perplexity ve <em>Copilot</em> sitenizi görebiliyor mu?</h1>
     <p id="hero-p">URL'nizi girin; AI bot erişimi, yapılandırılmış veri, llms.txt, sitemap ve citation readiness sinyallerini saniyeler içinde analiz edin.</p>
   </section>
@@ -1341,11 +1347,30 @@
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg>
             <span id="pdf-btn-text">PDF Rapor</span>
           </button>
+          <button class="pdf-btn" id="cert-btn" onclick="openCertificate()" style="background:linear-gradient(135deg,#00F28A,#00b8d9);color:#020807;border:none;">
+            <span id="cert-btn-text">🏆 Sertifika Al</span>
+          </button>
         </div>
       </div>
     </div>
 
     <div class="checks-grid" id="checks-grid"></div>
+
+    <!-- AI UYUMLULUK SERTİFİKASI MODAL -->
+    <div class="fix-modal" id="cert-modal">
+      <div class="fix-modal-box" style="max-width:520px;">
+        <button class="fix-modal-close" onclick="closeCertificate()">✕</button>
+        <h3 class="fix-modal-title" id="cert-title">🏆 AI Uyumluluk Sertifikası</h3>
+        <p id="cert-sub" style="color:var(--muted);font-size:0.85rem;margin-bottom:18px;line-height:1.6;"></p>
+        <div id="cert-preview" style="display:flex;justify-content:center;margin-bottom:20px;"></div>
+        <div id="cert-embed-wrap">
+          <p style="font-size:0.82rem;color:var(--text);font-weight:600;margin-bottom:8px;" id="cert-embed-label">Bu rozeti sitenize ekleyin (HTML kodu):</p>
+          <textarea id="cert-embed" readonly style="width:100%;background:#020807;border:1px solid rgba(0,255,170,0.15);border-radius:10px;padding:12px;color:#c8f5e4;font-family:var(--font-mono,monospace);font-size:0.72rem;line-height:1.5;resize:vertical;min-height:90px;box-sizing:border-box;"></textarea>
+          <button class="pdf-btn" onclick="copyCertEmbed()" style="margin-top:10px;width:100%;justify-content:center;background:linear-gradient(135deg,#00F28A,#00b8d9);color:#020807;border:none;" id="cert-copy-btn">📋 Kodu Kopyala</button>
+          <p id="cert-note" style="font-size:0.75rem;color:var(--muted);margin-top:12px;line-height:1.6;"></p>
+        </div>
+      </div>
+    </div>
 
     <!-- TEK-TIK ÇÖZÜM MODAL -->
     <div class="fix-modal" id="fix-modal">
@@ -1411,7 +1436,7 @@ let lang = 'tr';
 })();
 const T = {
   tr: {
-    badge: 'AI Search Visibility Checker',
+    badge: 'SEO + GEO + AI Uyumluluk Analizi',
     h1: 'ChatGPT, Google AI, Perplexity ve <em>Copilot</em> sitenizi görebiliyor mu?',
     p: 'URL\'nizi girin; AI bot erişimi, yapılandırılmış veri, llms.txt, sitemap ve citation readiness sinyallerini saniyeler içinde analiz edin.',
     btnText: '→',
@@ -1548,7 +1573,7 @@ const T = {
     }
   },
   en: {
-    badge: 'AI Search Visibility Checker',
+    badge: 'SEO + GEO + AI Readiness Analysis',
     h1: 'Can ChatGPT, Google AI, Perplexity and <em>Copilot</em> see your website?',
     p: 'Enter your URL and analyze AI bot access, structured data, llms.txt, sitemap and citation readiness signals in seconds.',
     btnText: '→',
@@ -1688,9 +1713,14 @@ const T = {
 
 function setLang(l) {
   lang = l;
+  window.currentLang = l;
   document.getElementById('btn-tr').classList.toggle('active', l === 'tr');
   document.getElementById('btn-en').classList.toggle('active', l === 'en');
   const t = T[l];
+  const certBtn = document.getElementById('cert-btn-text');
+  if (certBtn) certBtn.textContent = l === 'tr' ? '🏆 Sertifika Al' : '🏆 Get Certificate';
+  const pdfBtn = document.getElementById('pdf-btn-text');
+  if (pdfBtn) pdfBtn.textContent = l === 'tr' ? 'PDF Rapor' : 'PDF Report';
   document.getElementById('hero-badge').textContent = t.badge;
   document.getElementById('hero-h1').innerHTML = t.h1;
   document.getElementById('hero-p').textContent = t.p;
@@ -1940,33 +1970,89 @@ function showResults(score, checks, t) {
   const icons = { pass: '✅', fail: '❌' };
   const barColors = { pass: '#00e87a', fail: '#ff4d4d' };
 
-  Object.entries(checks).forEach(([key, data], i) => {
-    const info = t.checks[key];
-    if (!info) return;
-    const status = data.pass ? 'pass' : 'fail';
-    const card = document.createElement('div');
-    card.className = 'check-card';
-    // Başarısız ve çözümü olan kontroller için "Çöz" butonu
-    const botFixKeys = ['oaiSearchBot','gptBot','chatgptUser','bingbot','googlebot','perplexityBot','perplexityUser','claudeBot','copilotReady'];
-    const effectiveFixer = botFixKeys.includes(key) ? FIXERS['aibots'] : FIXERS[key];
-    const hasFix = !data.pass && effectiveFixer;
-    const fixBtn = hasFix
-      ? `<button class="fix-btn" data-fix="${key}" onclick="openFix('${key}')">${effectiveFixer.btn[lang]}</button>`
-      : '';
-    card.innerHTML = `
-      <div class="check-head">
-        <span class="check-title">${info.title}</span>
-        <span class="check-status">${icons[status]}</span>
+  // Kontrol → Kategori eşlemesi (4 kategori)
+  const CATS = lang === 'tr' ? {
+    crawl: { name: 'AI Tarama Uyumluluğu', icon: '🤖' },
+    geo:   { name: 'GEO & İçerik', icon: '🎯' },
+    seo:   { name: 'Teknik SEO', icon: '⚙️' },
+    trust: { name: 'İçerik Kalitesi & Güven', icon: '🛡️' }
+  } : {
+    crawl: { name: 'AI Crawl Compatibility', icon: '🤖' },
+    geo:   { name: 'GEO & Content', icon: '🎯' },
+    seo:   { name: 'Technical SEO', icon: '⚙️' },
+    trust: { name: 'Content Quality & Trust', icon: '🛡️' }
+  };
+  const CAT_OF = {
+    robots:'crawl', aibots:'crawl', oaiSearchBot:'crawl', gptBot:'crawl', chatgptUser:'crawl',
+    bingbot:'crawl', copilotReady:'crawl', googlebot:'crawl', perplexityBot:'crawl',
+    perplexityUser:'crawl', claudeBot:'crawl', indexable:'crawl', responseStatusOk:'crawl',
+    llms:'geo', faqPass:'geo', textRatioPass:'geo', title:'geo', desc:'geo', h1:'geo',
+    sitemap:'seo', canonical:'seo', hreflang:'seo', viewport:'seo', lang:'seo',
+    https:'seo', contentLengthOk:'seo',
+    schema:'trust', jsonld:'trust', structuredDataValidBasic:'trust', og:'trust',
+    ogimage:'trust', favicon:'trust'
+  };
+  const catColor = (pct) => pct >= 70 ? '#00e87a' : pct >= 40 ? '#f5a623' : '#ff4d4d';
+
+  // Kontrolleri kategorilere ayır
+  const grouped = { crawl:[], geo:[], seo:[], trust:[] };
+  Object.entries(checks).forEach(([key, data]) => {
+    if (!t.checks[key]) return;
+    const cat = CAT_OF[key] || 'seo';
+    grouped[cat].push([key, data]);
+  });
+
+  const botFixKeys = ['oaiSearchBot','gptBot','chatgptUser','bingbot','googlebot','perplexityBot','perplexityUser','claudeBot','copilotReady'];
+  let animIndex = 0;
+
+  // Her kategoriyi grup olarak render et
+  ['crawl','geo','seo','trust'].forEach(catKey => {
+    const items = grouped[catKey];
+    if (!items.length) return;
+    const passed = items.filter(([,d]) => d.pass).length;
+    const pct = Math.round((passed / items.length) * 100);
+    const col = catColor(pct);
+
+    const group = document.createElement('div');
+    group.className = 'cat-group';
+    group.innerHTML = `
+      <div class="cat-head">
+        <span class="cat-name">${CATS[catKey].icon} ${CATS[catKey].name}</span>
+        <div class="cat-bar"><div class="cat-bar-fill" style="background:${col};width:0%"></div></div>
+        <span class="cat-score" style="background:${col}22;color:${col}">${passed}/${items.length}</span>
       </div>
-      <div class="check-detail">${data.pass ? info.detail_ok : info.detail_warn}</div>
-      <div class="check-bar"><div class="check-bar-fill" style="background:${barColors[status]};width:0%"></div></div>
-      ${fixBtn}
+      <div class="checks-grid"></div>
     `;
-    grid.appendChild(card);
-    setTimeout(() => {
-      card.classList.add('visible');
-      card.querySelector('.check-bar-fill').style.width = data.pass ? '100%' : '20%';
-    }, 80 * i + 200);
+    grid.appendChild(group);
+    setTimeout(() => { group.querySelector('.cat-bar-fill').style.width = pct + '%'; }, 300);
+
+    const subGrid = group.querySelector('.checks-grid');
+    items.forEach(([key, data]) => {
+      const info = t.checks[key];
+      const status = data.pass ? 'pass' : 'fail';
+      const effectiveFixer = botFixKeys.includes(key) ? FIXERS['aibots'] : FIXERS[key];
+      const hasFix = !data.pass && effectiveFixer;
+      const fixBtn = hasFix
+        ? `<button class="fix-btn" data-fix="${key}" onclick="openFix('${key}')">${effectiveFixer.btn[lang]}</button>`
+        : '';
+      const card = document.createElement('div');
+      card.className = 'check-card';
+      card.innerHTML = `
+        <div class="check-head">
+          <span class="check-title">${info.title}</span>
+          <span class="check-status">${icons[status]}</span>
+        </div>
+        <div class="check-detail">${data.pass ? info.detail_ok : info.detail_warn}</div>
+        <div class="check-bar"><div class="check-bar-fill" style="background:${barColors[status]};width:0%"></div></div>
+        ${fixBtn}
+      `;
+      subGrid.appendChild(card);
+      setTimeout(() => {
+        card.classList.add('visible');
+        card.querySelector('.check-bar-fill').style.width = data.pass ? '100%' : '20%';
+      }, 60 * animIndex + 300);
+      animIndex++;
+    });
   });
 
   const failed = Object.entries(checks).filter(([,d]) => !d.pass).map(([k]) => k);
@@ -2368,6 +2454,78 @@ async function signOutUser() {
 // ============================================================
 // PDF RAPOR ÜRETİMİ — Premium markalı rapor
 // ============================================================
+function openCertificate() {
+  if (window.lastScore === undefined) return;
+  const score = window.lastScore;
+  const lang = window.currentLang || 'tr';
+  let host = 'siteniz.com';
+  try { host = new URL(window.lastAnalyzedUrl).hostname.replace(/^www\./,''); } catch(e){}
+
+  // Sertifika seviyesi
+  let tier, tierColor;
+  if (score >= 85) { tier = lang==='tr'?'AI READY':'AI READY'; tierColor='#00F28A'; }
+  else if (score >= 60) { tier = lang==='tr'?'AI IMPROVING':'AI IMPROVING'; tierColor='#f5a623'; }
+  else { tier = lang==='tr'?'AI STARTER':'AI STARTER'; tierColor='#ff6b6b'; }
+
+  const T = lang==='tr' ? {
+    title: '🏆 AI Uyumluluk Sertifikası',
+    sub: `Tebrikler! <strong>${host}</strong> sitesi ${score}/100 GEO skoru aldı. Bu rozeti sitenize ekleyerek AI uyumluluğunuzu gösterin ve ziyaretçi güveni kazanın.`,
+    label: 'Bu rozeti sitenize ekleyin (HTML kodu):',
+    copy: '📋 Kodu Kopyala',
+    note: 'Rozet, Scanliq analiz sayfanıza bağlanır. Sitenizin footer\'ına veya "hakkında" sayfasına ekleyebilirsiniz.'
+  } : {
+    title: '🏆 AI Readiness Certificate',
+    sub: `Congratulations! <strong>${host}</strong> scored ${score}/100 GEO score. Add this badge to your site to show your AI readiness and earn visitor trust.`,
+    label: 'Add this badge to your site (HTML code):',
+    copy: '📋 Copy Code',
+    note: 'The badge links to your Scanliq analysis. You can add it to your site footer or "about" page.'
+  };
+
+  document.getElementById('cert-title').textContent = T.title;
+  document.getElementById('cert-sub').innerHTML = T.sub;
+  document.getElementById('cert-embed-label').textContent = T.label;
+  document.getElementById('cert-copy-btn').textContent = T.copy;
+  document.getElementById('cert-note').textContent = T.note;
+
+  // Rozet SVG (önizleme + embed aynı)
+  const badge = certBadgeSVG(score, tier, tierColor);
+  document.getElementById('cert-preview').innerHTML = badge;
+
+  // Embed kodu
+  const embed = `<a href="https://scanliq.com/" target="_blank" rel="noopener" title="Scanliq AI Readiness">
+${badge}
+</a>`;
+  document.getElementById('cert-embed').value = embed;
+
+  document.getElementById('cert-modal').classList.add('active');
+}
+
+function certBadgeSVG(score, tier, col) {
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="80" viewBox="0 0 200 80" role="img" aria-label="Scanliq AI Readiness ${score}/100">
+<rect width="200" height="80" rx="12" fill="#020807" stroke="#12332a" stroke-width="1.5"/>
+<circle cx="40" cy="40" r="24" fill="none" stroke="${col}" stroke-width="5" stroke-linecap="round" stroke-dasharray="${Math.round(score*1.508)} 151" transform="rotate(-90 40 40)"/>
+<text x="40" y="46" font-family="Arial,sans-serif" font-size="20" font-weight="800" fill="#fff" text-anchor="middle">${score}</text>
+<text x="72" y="32" font-family="Arial,sans-serif" font-size="15" font-weight="800" fill="#fff">Scanliq</text>
+<text x="72" y="48" font-family="monospace" font-size="9" font-weight="700" fill="${col}" letter-spacing="1">${tier}</text>
+<text x="72" y="64" font-family="monospace" font-size="7.5" fill="#5a7a6e" letter-spacing="0.5">AI READINESS 2026</text>
+</svg>`;
+}
+
+function closeCertificate() {
+  document.getElementById('cert-modal').classList.remove('active');
+}
+
+function copyCertEmbed() {
+  const el = document.getElementById('cert-embed');
+  el.select();
+  navigator.clipboard.writeText(el.value).then(() => {
+    const btn = document.getElementById('cert-copy-btn');
+    const orig = btn.textContent;
+    btn.textContent = '✓ ' + (window.currentLang==='en'?'Copied!':'Kopyalandı!');
+    setTimeout(() => btn.textContent = orig, 2000);
+  });
+}
+
 function generatePDF() {
   if (!window.lastChecks || window.lastScore === undefined) return;
   const btn = document.getElementById('pdf-btn');
