@@ -448,6 +448,71 @@
 
   /* ARAÇLAR (TOOLS) */
   .tools-section { margin-bottom: 72px; }
+
+  /* SON YAZILAR (LATEST POSTS) */
+  .latest-section { margin-bottom: 72px; }
+  .latest-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  @media(max-width: 780px) { .latest-grid { grid-template-columns: 1fr; } }
+  .latest-card {
+    display: block;
+    text-decoration: none;
+    background: var(--surface, rgba(10,22,18,0.5));
+    border: 1px solid rgba(0,255,170,0.1);
+    border-radius: 16px;
+    padding: 22px;
+    transition: all 0.25s;
+  }
+  .latest-card:hover {
+    border-color: rgba(0,242,138,0.3);
+    transform: translateY(-3px);
+  }
+  .latest-card-cat {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 3px 9px;
+    border-radius: 6px;
+    background: rgba(0,242,138,0.1);
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .latest-card h3 {
+    font-family: var(--font-display);
+    font-size: 0.98rem;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+  .latest-card-read {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .latest-footer {
+    text-align: center;
+    margin-top: 22px;
+  }
+  .latest-footer a {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 700;
+    border: 1px solid rgba(0,242,138,0.3);
+    border-radius: 20px;
+    padding: 10px 24px;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+  .latest-footer a:hover { background: rgba(0,242,138,0.08); }
   .tools-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1314,6 +1379,31 @@
     </div>
   </section>
 
+  <!-- SON YAZILAR / LATEST POSTS -->
+  <section class="latest-section" id="latest-section">
+    <div class="section-label" id="latest-label">Son Yazılar</div>
+    <div class="latest-grid">
+      <a href="/blog10.html" class="latest-card" id="latest-lang-wrap-1">
+        <span class="latest-card-cat">E-E-A-T</span>
+        <h3 id="latest1-title">Yapay Zeka Hangi Sitelere Güvenir? E-E-A-T Rehberi</h3>
+        <span class="latest-card-read" id="latest1-read">Okumaya Devam Et →</span>
+      </a>
+      <a href="/blog9.html" class="latest-card" id="latest-lang-wrap-2">
+        <span class="latest-card-cat">AI Citation</span>
+        <h3 id="latest2-title">ChatGPT Neden Bazı Siteleri Kaynak Gösterir?</h3>
+        <span class="latest-card-read" id="latest2-read">Okumaya Devam Et →</span>
+      </a>
+      <a href="/blog23.html" class="latest-card" id="latest-lang-wrap-3">
+        <span class="latest-card-cat">GEO SEO</span>
+        <h3 id="latest3-title">GEO SEO: Yapay Zeka Çağında Arama Optimizasyonu</h3>
+        <span class="latest-card-read" id="latest3-read">Okumaya Devam Et →</span>
+      </a>
+    </div>
+    <div class="latest-footer">
+      <a href="/blog.html" id="latest-all">Tüm Yazıları Gör →</a>
+    </div>
+  </section>
+
   <!-- AD SLOT TOP -->
   <div class="ad-slot" id="ad-top"><!-- Google AdSense --></div>
 
@@ -1456,6 +1546,11 @@ const T = {
     tool1t: 'AI Görünürlük Analizi', tool1p: 'Sitenizin ChatGPT, Google AI, Perplexity ve Copilot\'taki görünürlüğünü ölçün. GEO skorunuzu ve eksiklerinizi görün.', tool1cta: 'Analiz Et →', tool1b: 'ANA ARAÇ',
     tool2t: 'AI İçerik Analizi', tool2p: 'Makalenizin yapay zeka tarafından kaynak gösterilmeye ne kadar uygun olduğunu ölçün. Citation readiness skoru ve öneriler alın.', tool2cta: 'Makaleyi Analiz Et →', tool2b: 'YAPAY ZEKA',
     tool3t: 'llms.txt Oluşturucu', tool3p: 'Web sitenizi yapay zekaya tanıtan llms.txt dosyasını saniyeler içinde oluşturun ve indirin.', tool3cta: 'Oluştur →', tool3b: 'ÜCRETSİZ',
+    latestLabel: 'Son Yazılar',
+    latest1t: 'Yapay Zeka Hangi Sitelere Güvenir? E-E-A-T Rehberi', latest1url: '/blog10.html',
+    latest2t: 'ChatGPT Neden Bazı Siteleri Kaynak Gösterir?', latest2url: '/blog9.html',
+    latest3t: 'GEO SEO: Yapay Zeka Çağında Arama Optimizasyonu', latest3url: '/blog23.html',
+    latestRead: 'Okumaya Devam Et →', latestAll: 'Tüm Yazıları Gör →',
     step1t: 'URL Gir', step1p: 'Analiz etmek istediğiniz sitenin adresini girin.',
     step2t: 'Tara', step2p: 'Scanliq 18 kritik noktayı otomatik olarak tarar.',
     step3t: 'Skor Al', step3p: '0-100 arası AI hazırlık skoru ve öneriler alın.',
@@ -1593,6 +1688,11 @@ const T = {
     tool1t: 'AI Visibility Analysis', tool1p: 'Measure your site\'s visibility in ChatGPT, Google AI, Perplexity and Copilot. See your GEO score and gaps.', tool1cta: 'Analyze →', tool1b: 'MAIN TOOL',
     tool2t: 'AI Content Analysis', tool2p: 'Measure how citation-ready your article is for AI. Get a citation readiness score and suggestions.', tool2cta: 'Analyze Article →', tool2b: 'AI-POWERED',
     tool3t: 'llms.txt Generator', tool3p: 'Create and download the llms.txt file that introduces your website to AI in seconds.', tool3cta: 'Generate →', tool3b: 'FREE',
+    latestLabel: 'Latest Posts',
+    latest1t: 'Which Sites Does AI Trust? E-E-A-T Guide', latest1url: '/blog10-en.html',
+    latest2t: 'Why Does ChatGPT Cite Some Sites?', latest2url: '/blog9-en.html',
+    latest3t: 'GEO SEO: Search Optimization in the AI Era', latest3url: '/blog23-en.html',
+    latestRead: 'Read More →', latestAll: 'View All Posts →',
     step1t: 'Enter URL', step1p: 'Enter the address of the site you want to analyze.',
     step2t: 'Scan', step2p: 'Scanliq automatically scans 18 critical points.',
     step3t: 'Get Score', step3p: 'Receive a 0-100 AI readiness score and recommendations.',
@@ -1745,6 +1845,15 @@ function setLang(l) {
   setTxt('tool1-title', t.tool1t); setTxt('tool1-text', t.tool1p); setTxt('tool1-cta', t.tool1cta); setTxt('tool1-badge', t.tool1b);
   setTxt('tool2-title', t.tool2t); setTxt('tool2-text', t.tool2p); setTxt('tool2-cta', t.tool2cta); setTxt('tool2-badge', t.tool2b);
   setTxt('tool3-title', t.tool3t); setTxt('tool3-text', t.tool3p); setTxt('tool3-cta', t.tool3cta); setTxt('tool3-badge', t.tool3b);
+  // Son yazılar / Latest posts
+  setTxt('latest-label', t.latestLabel);
+  setTxt('latest1-title', t.latest1t); setTxt('latest1-read', t.latestRead);
+  setTxt('latest2-title', t.latest2t); setTxt('latest2-read', t.latestRead);
+  setTxt('latest3-title', t.latest3t); setTxt('latest3-read', t.latestRead);
+  setTxt('latest-all', t.latestAll);
+  const w1 = document.getElementById('latest-lang-wrap-1'); if (w1) w1.href = t.latest1url;
+  const w2 = document.getElementById('latest-lang-wrap-2'); if (w2) w2.href = t.latest2url;
+  const w3 = document.getElementById('latest-lang-wrap-3'); if (w3) w3.href = t.latest3url;
   document.getElementById('step1-title').textContent = t.step1t;
   document.getElementById('step1-text').textContent = t.step1p;
   document.getElementById('step2-title').textContent = t.step2t;
