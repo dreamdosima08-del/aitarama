@@ -2074,6 +2074,8 @@ function showResults(score, checks, t) {
   // Son analiz verisini kaydet (Kaydet butonu için)
   window.lastChecks = checks;
   window.lastScore = score;
+  // Anonim istatistik topla (kişisel veri yok — sadece toplu rapor için)
+  logAnonymousStat(score, checks);
   // Kaydet butonunu sıfırla
   const sBtn = document.getElementById('save-analysis-btn');
   const sBtnText = document.getElementById('save-btn-text');
@@ -2789,6 +2791,42 @@ function generatePDF() {
 function handleSaveClick() {
   if (!window.lastAnalyzedUrl || !window.lastChecks) return;
   saveAnalysis(window.lastAnalyzedUrl, window.lastScore, window.lastChecks);
+}
+
+// ============================================================
+// ANONİM İSTATİSTİK (toplu rapor için — kişisel veri saklanmaz)
+// ============================================================
+async function logAnonymousStat(score, checks) {
+  try {
+    const A = window.scanliqAuth;
+    if (!A || !A.db) return;
+
+    // Domain KAYDEDİLMEZ — sadece uzantı (TLD) ve ülke sinyali
+    let tld = 'other';
+    try {
+      const host = new URL(window.lastAnalyzedUrl).hostname.replace(/^www\./,'');
+      const parts = host.split('.');
+      tld = parts.length >= 2 ? '.' + parts.slice(-2).join('.') : 'other';
+      // Yaygın olmayan uzantıları sadeleştir
+      if (!/^\.(com|net|org|com\.tr|org\.tr|net\.tr|io|co|dev|app|tr|de|fr|es|it|nl|uk|info|biz|xyz|online|site|store|web\.tr|gen\.tr|edu\.tr|gov\.tr)$/.test(tld)) {
+        tld = 'other';
+      }
+    } catch(e) {}
+
+    // Sadece hangi kontrolün geçip geçmediği (true/false)
+    const checkData = {};
+    Object.keys(checks).forEach(k => { checkData[k] = !!checks[k].pass; });
+
+    await A.addDoc(A.collection(A.db, 'stats'), {
+      score: score,
+      tld: tld,
+      checks: checkData,
+      lang: (window.currentLang || 'tr'),
+      createdAt: A.serverTimestamp()
+    });
+  } catch (e) {
+    // Sessizce geç — istatistik kaydı kullanıcı deneyimini asla bozmamalı
+  }
 }
 
 async function saveAnalysis(url, score, checks) {
