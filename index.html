@@ -1175,6 +1175,15 @@
   .footer-links { display: flex; gap: 20px; }
   .footer-links a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
   .footer-links a:hover { color: var(--accent); }
+  /* İngilizce öneri çubuğu */
+  #lang-suggest { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 9999;
+    display: flex; align-items: center; gap: 10px; padding: 10px 12px 10px 16px; max-width: calc(100vw - 32px);
+    background: #0a1612; border: 1px solid rgba(0,242,138,0.35); border-radius: 14px; color: #e8fff4;
+    font-size: 0.85rem; font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; box-shadow: 0 10px 30px rgba(0,0,0,0.45); }
+  #lang-suggest span { white-space: nowrap; }
+  #lang-suggest button { border: 0; cursor: pointer; font: inherit; border-radius: 9px; }
+  #lang-suggest-go { background: #00F28A; color: #020807; font-weight: 700; padding: 7px 12px; white-space: nowrap; }
+  #lang-suggest-x { background: transparent; color: #8aa79b; padding: 6px 8px; }
 </style>
 <!-- FIREBASE SDK -->
 <script type="module">
@@ -1520,9 +1529,10 @@ let lang = 'tr';
   const urlLang = urlParams.get('lang');
   if (urlLang === 'en') { lang = 'en'; return; }
   if (urlLang === 'tr') { lang = 'tr'; return; }
-  // Tarayıcı dili
-  const bl = (navigator.language || navigator.userLanguage || 'tr').toLowerCase();
-  if (!bl.startsWith('tr')) lang = 'en';
+  // NOT: Tarayıcı diline göre otomatik çeviri YAPILMIYOR.
+  // Googlebot İngilizce ayarla geldiği için kök URL'nin (Türkçe sayfa) Google'a
+  // İngilizce görünmesine yol açıyordu. Kök URL her zaman Türkçe; İngilizce = ?lang=en.
+  // Türkçe olmayan ziyaretçilere sadece küçük bir öneri gösterilir (showLangSuggest).
 })();
 const T = {
   tr: {
@@ -1869,6 +1879,9 @@ function setLang(l) {
   document.getElementById('footer-contact').textContent = t.footerContact;
   document.getElementById('footer-copy').textContent = t.footerCopy;
   document.documentElement.lang = l;
+  // Canonical'ı aktif dile göre eşitle (?lang=en kendi adresini gösterir)
+  const canonEl = document.querySelector('link[rel="canonical"]');
+  if (canonEl) canonEl.href = l === 'en' ? 'https://scanliq.com/?lang=en' : 'https://scanliq.com/';
   // Auth butonu metnini de güncelle
   if (typeof updateAuthUI === 'function') updateAuthUI(window.currentUser);
   // URL'yi güncelle (sayfa yenilenmeden)
@@ -2425,7 +2438,29 @@ function copyPrompt() {
 // Sayfa açılışı — otomatik dil
 document.addEventListener('DOMContentLoaded', function() {
   setLang(lang);
+  showLangSuggest();
 });
+
+// İngilizce tarayıcı kullanan ziyaretçiye zorlamadan öneri
+function showLangSuggest() {
+  try {
+    if (lang === 'en') return;
+    const bl = (navigator.language || 'tr').toLowerCase();
+    if (bl.startsWith('tr')) return;
+    if (/bot|crawl|spider|lighthouse/i.test(navigator.userAgent)) return;
+    try { if (localStorage.getItem('scanliq_lang_hint') === '1') return; } catch (e) {}
+    const bar = document.createElement('div');
+    bar.id = 'lang-suggest';
+    bar.setAttribute('role', 'dialog');
+    bar.innerHTML = '<span>🌐 English?</span>' +
+      '<button type="button" id="lang-suggest-go">Switch to English</button>' +
+      '<button type="button" id="lang-suggest-x" aria-label="Close">✕</button>';
+    document.body.appendChild(bar);
+    const close = () => { bar.remove(); try { localStorage.setItem('scanliq_lang_hint', '1'); } catch (e) {} };
+    document.getElementById('lang-suggest-go').onclick = () => { setLang('en'); close(); };
+    document.getElementById('lang-suggest-x').onclick = close;
+  } catch (e) {}
+}
 
 // ============================================================
 // AUTH SİSTEMİ (Firebase)

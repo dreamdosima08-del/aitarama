@@ -11,7 +11,7 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Content Analysis — Article Citation Readiness Test 2026 | Scanliq</title>
+<title>AI Content Analysis: Citation Readiness Test | Scanliq</title>
 <meta name="description" content="Free AI content analysis. Measure how citation-ready your article is for ChatGPT and Perplexity. AI-powered citation readiness test with improvement suggestions.">
 <meta name="keywords" content="AI content analysis, article analysis, citation readiness, content optimization, AI content test, content checker, ChatGPT content, citation test, GEO content, article AI compatibility, content score, Scanliq">
 <meta name="robots" content="index, follow, max-image-preview:large">
@@ -328,52 +328,38 @@ async function analyzeContent() {
   resultEl.classList.remove('show');
   statusEl.innerHTML = '<div class="ca-loading"><div class="ca-spinner"></div>AI is analyzing your article...</div>';
 
-  const prompt = `You are a GEO (Generative Engine Optimization) and AI citation readiness expert. Analyze the text below for how suitable it is to be CITED by AI systems like ChatGPT and Perplexity.
-
-Evaluation criteria:
-1. Clear and direct answers (does it clearly answer questions?)
-2. Specific data and statistics (concrete numbers, verifiable info?)
-3. Structure and organization (headings, logical flow)
-4. Authority and trust signals (expertise, sourcing)
-5. Citability (can AI easily pull sentences?)
-
-Text:
-"""${text}"""
-
-Respond ONLY in this JSON format, write nothing else:
-{
-  "score": <citation readiness score 0-100>,
-  "verdict": "<one-sentence overall assessment>",
-  "strengths": [<strengths, 2-4 items, each a short string>],
-  "weaknesses": [<weaknesses, 2-4 items, each a short string>],
-  "suggestions": [<concrete improvement suggestions, 3-5 items. Each: what to do on which point, with example if possible. Short string>]
-}`;
+  const ERR = {
+    rate_limited: "You have reached the hourly analysis limit. Please try again later.",
+    too_long: "Text is too long. Please paste a section under 15,000 characters.",
+    too_short: "Please enter at least 30 words."
+  };
 
   try {
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
+    const response = await fetch("https://scanliq-api.dreamdosima08.workers.dev/analyze-content", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "claude-sonnet-4-6",
-        max_tokens: 1000,
-        messages: [{ role: "user", content: prompt }]
-      })
+      body: JSON.stringify({ text: text, lang: "en" })
     });
     const data = await response.json();
-    let raw = "";
-    if (data && data.content) {
-      raw = data.content.filter(b => b.type === "text").map(b => b.text).join("");
+    if (!response.ok || !data.success) {
+      const err = new Error(data && data.error);
+      err.code = data && data.error;
+      throw err;
     }
-    raw = raw.replace(/```json/g, "").replace(/```/g, "").trim();
-    const result = JSON.parse(raw);
+    const result = data.result;
     renderResult(result);
     statusEl.innerHTML = "";
   } catch (e) {
-    statusEl.innerHTML = '<div class="ca-error">An error occurred during analysis. Please try again. (Note: this tool only works on scanliq.com.)</div>';
+    const msg = (e && e.code && ERR[e.code]) || 'An error occurred during analysis. Please try again.';
+    statusEl.innerHTML = '<div class="ca-error">' + msg + '</div>';
   } finally {
     btn.disabled = false;
     btn.textContent = '✨ Analyze';
   }
+}
+
+function escHtml(s) {
+  return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 function renderResult(r) {
@@ -390,25 +376,25 @@ function renderResult(r) {
   html += '<div style="position:absolute;inset:8px;background:#020807;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;">';
   html += '<span class="ca-score-num" style="color:' + col + '">' + score + '</span>';
   html += '<span class="ca-score-label">CITATION</span></div></div>';
-  html += '<div class="ca-score-text"><h3 style="color:' + col + '">' + titles[tier] + '</h3><p>' + (r.verdict || '') + '</p></div>';
+  html += '<div class="ca-score-text"><h3 style="color:' + col + '">' + titles[tier] + '</h3><p>' + escHtml(r.verdict) + '</p></div>';
   html += '</div>';
 
   // Güçlü yönler
   if (r.strengths && r.strengths.length) {
     html += '<div class="ca-section"><h3>✅ Strengths</h3>';
-    r.strengths.forEach(s => { html += '<div class="ca-item"><div class="ca-item-body">• ' + s + '</div></div>'; });
+    r.strengths.forEach(s => { html += '<div class="ca-item"><div class="ca-item-body">• ' + escHtml(s) + '</div></div>'; });
     html += '</div>';
   }
   // Zayıf yönler
   if (r.weaknesses && r.weaknesses.length) {
     html += '<div class="ca-section"><h3>⚠️ Points to Improve</h3>';
-    r.weaknesses.forEach(s => { html += '<div class="ca-item"><div class="ca-item-body">• ' + s + '</div></div>'; });
+    r.weaknesses.forEach(s => { html += '<div class="ca-item"><div class="ca-item-body">• ' + escHtml(s) + '</div></div>'; });
     html += '</div>';
   }
   // Öneriler
   if (r.suggestions && r.suggestions.length) {
     html += '<div class="ca-section"><h3>💡 Improvement Suggestions</h3>';
-    r.suggestions.forEach(s => { html += '<div class="ca-suggestion">' + s + '</div>'; });
+    r.suggestions.forEach(s => { html += '<div class="ca-suggestion">' + escHtml(s) + '</div>'; });
     html += '</div>';
   }
 

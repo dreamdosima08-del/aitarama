@@ -11,7 +11,7 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI İçerik Analizi — Makale Citation Readiness Testi 2026 | Scanliq</title>
+<title>AI İçerik Analizi: Citation Readiness Testi | Scanliq</title>
 <meta name="description" content="Ücretsiz AI içerik analizi. Makalenizin ChatGPT ve Perplexity'de kaynak gösterilmeye ne kadar uygun olduğunu ölçün. Yapay zeka destekli citation readiness testi ve iyileştirme önerileri.">
 <meta name="keywords" content="AI içerik analizi, makale analizi, citation readiness, içerik optimizasyonu, yapay zeka içerik testi, AI content analysis, ChatGPT içerik, kaynak gösterilme testi, GEO içerik, makale AI uyumluluk, içerik skoru, Scanliq">
 <meta name="robots" content="index, follow, max-image-preview:large">
@@ -328,52 +328,38 @@ async function analyzeContent() {
   resultEl.classList.remove('show');
   statusEl.innerHTML = '<div class="ca-loading"><div class="ca-spinner"></div>Yapay zeka makalenizi analiz ediyor...</div>';
 
-  const prompt = `Sen bir GEO (Generative Engine Optimization) ve AI citation readiness uzmanısın. Aşağıdaki metni, ChatGPT ve Perplexity gibi yapay zeka sistemleri tarafından KAYNAK GÖSTERİLMEYE ne kadar uygun olduğu açısından analiz et.
-
-Değerlendirme kriterleri:
-1. Net ve doğrudan cevaplar (sorulara açık yanıt veriyor mu?)
-2. Spesifik veriler ve istatistikler (somut sayılar, doğrulanabilir bilgi var mı?)
-3. Yapı ve organizasyon (başlıklar, mantıklı akış)
-4. Otorite ve güven sinyalleri (uzmanlık, kaynak gösterme)
-5. Alıntılanabilirlik (AI kolayca cümle çekebilir mi?)
-
-Metin:
-"""${text}"""
-
-SADECE şu JSON formatında yanıt ver, başka hiçbir şey yazma:
-{
-  "score": <0-100 arası citation readiness skoru>,
-  "verdict": "<tek cümle genel değerlendirme>",
-  "strengths": [<güçlü yönler, 2-4 madde, her biri kısa string>],
-  "weaknesses": [<zayıf yönler, 2-4 madde, her biri kısa string>],
-  "suggestions": [<somut iyileştirme önerileri, 3-5 madde. Her öneri: hangi konuda ne yapılmalı, mümkünse örnekle. Kısa string>]
-}`;
+  const ERR = {
+    rate_limited: "Saatlik analiz sınırına ulaştınız. Lütfen biraz sonra tekrar deneyin.",
+    too_long: "Metin çok uzun. Lütfen 15.000 karakterden kısa bir bölüm yapıştırın.",
+    too_short: "Lütfen en az 30 kelimelik bir metin girin."
+  };
 
   try {
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
+    const response = await fetch("https://scanliq-api.dreamdosima08.workers.dev/analyze-content", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "claude-sonnet-4-6",
-        max_tokens: 1000,
-        messages: [{ role: "user", content: prompt }]
-      })
+      body: JSON.stringify({ text: text, lang: "tr" })
     });
     const data = await response.json();
-    let raw = "";
-    if (data && data.content) {
-      raw = data.content.filter(b => b.type === "text").map(b => b.text).join("");
+    if (!response.ok || !data.success) {
+      const err = new Error(data && data.error);
+      err.code = data && data.error;
+      throw err;
     }
-    raw = raw.replace(/```json/g, "").replace(/```/g, "").trim();
-    const result = JSON.parse(raw);
+    const result = data.result;
     renderResult(result);
     statusEl.innerHTML = "";
   } catch (e) {
-    statusEl.innerHTML = '<div class="ca-error">Analiz sırasında bir hata oluştu. Lütfen tekrar deneyin. (Not: Bu araç yalnızca scanliq.com üzerinde çalışır.)</div>';
+    const msg = (e && e.code && ERR[e.code]) || 'Analiz sırasında bir hata oluştu. Lütfen tekrar deneyin.';
+    statusEl.innerHTML = '<div class="ca-error">' + msg + '</div>';
   } finally {
     btn.disabled = false;
     btn.textContent = '✨ Analiz Et';
   }
+}
+
+function escHtml(s) {
+  return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 function renderResult(r) {
@@ -390,25 +376,25 @@ function renderResult(r) {
   html += '<div style="position:absolute;inset:8px;background:#020807;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;">';
   html += '<span class="ca-score-num" style="color:' + col + '">' + score + '</span>';
   html += '<span class="ca-score-label">CITATION</span></div></div>';
-  html += '<div class="ca-score-text"><h3 style="color:' + col + '">' + titles[tier] + '</h3><p>' + (r.verdict || '') + '</p></div>';
+  html += '<div class="ca-score-text"><h3 style="color:' + col + '">' + titles[tier] + '</h3><p>' + escHtml(r.verdict) + '</p></div>';
   html += '</div>';
 
   // Güçlü yönler
   if (r.strengths && r.strengths.length) {
     html += '<div class="ca-section"><h3>✅ Güçlü Yönler</h3>';
-    r.strengths.forEach(s => { html += '<div class="ca-item"><div class="ca-item-body">• ' + s + '</div></div>'; });
+    r.strengths.forEach(s => { html += '<div class="ca-item"><div class="ca-item-body">• ' + escHtml(s) + '</div></div>'; });
     html += '</div>';
   }
   // Zayıf yönler
   if (r.weaknesses && r.weaknesses.length) {
     html += '<div class="ca-section"><h3>⚠️ Geliştirilecek Noktalar</h3>';
-    r.weaknesses.forEach(s => { html += '<div class="ca-item"><div class="ca-item-body">• ' + s + '</div></div>'; });
+    r.weaknesses.forEach(s => { html += '<div class="ca-item"><div class="ca-item-body">• ' + escHtml(s) + '</div></div>'; });
     html += '</div>';
   }
   // Öneriler
   if (r.suggestions && r.suggestions.length) {
     html += '<div class="ca-section"><h3>💡 İyileştirme Önerileri</h3>';
-    r.suggestions.forEach(s => { html += '<div class="ca-suggestion">' + s + '</div>'; });
+    r.suggestions.forEach(s => { html += '<div class="ca-suggestion">' + escHtml(s) + '</div>'; });
     html += '</div>';
   }
 
