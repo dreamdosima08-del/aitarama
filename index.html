@@ -3,6 +3,7 @@
 <head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DB60YHH4JY"></script>
+<script src="/app-bridge.js"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -1184,6 +1185,8 @@
   #lang-suggest button { border: 0; cursor: pointer; font: inherit; border-radius: 9px; }
   #lang-suggest-go { background: #00F28A; color: #020807; font-weight: 700; padding: 7px 12px; white-space: nowrap; }
   #lang-suggest-x { background: transparent; color: #8aa79b; padding: 6px 8px; }
+  /* Android uygulamasında Google ile giriş çalışmaz (WebView); e-posta ile giriş kalır */
+  .in-app .auth-google, .in-app .auth-divider, .in-app #lang-suggest { display: none !important; }
 </style>
 <!-- FIREBASE SDK -->
 <script type="module">
@@ -2198,6 +2201,8 @@ function showResults(score, checks, t) {
   window.lastScore = score;
   // Anonim istatistik topla (kişisel veri yok — sadece toplu rapor için)
   logAnonymousStat(score, checks);
+  // Android uygulamasına analiz bitti sinyali (reklam sayacı); tarayıcıda etkisiz
+  if (window.scanliqAppEvent) window.scanliqAppEvent('scan_done');
   // Kaydet butonunu sıfırla
   const sBtn = document.getElementById('save-analysis-btn');
   const sBtnText = document.getElementById('save-btn-text');
@@ -2920,7 +2925,11 @@ function generatePDF() {
 
     // İndir
     const fileName = 'scanliq-' + host.replace(/[^a-z0-9]/gi,'-') + '-' + new Date().toISOString().slice(0,10) + '.pdf';
-    doc.save(fileName);
+    if (window.SCANLIQ_IN_APP && window.scanliqAppSaveFile) {
+      window.scanliqAppSaveFile(fileName, 'application/pdf', doc.output('datauristring').split(',')[1]);
+    } else {
+      doc.save(fileName);
+    }
 
     btnText.textContent = lang === 'tr' ? '✓ İndirildi' : '✓ Downloaded';
     setTimeout(() => { btnText.textContent = origText; btn.disabled = false; }, 2000);
