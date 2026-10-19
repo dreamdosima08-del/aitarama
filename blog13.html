@@ -74,9 +74,46 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {"@type":"Question","name":"Claude ile ChatGPT arasındaki fark nedir?","acceptedAnswer":{"@type":"Answer","text":"Claude, Anthropic tarafından geliştirilir ve uzun, karmaşık içerikleri anlamada güçlüdür. ChatGPT OpenAI'a aittir. Her ikisi de farklı botlarla web'i tarar."}},
-    {"@type":"Question","name":"ClaudeBot'u engellersem ne olur?","acceptedAnswer":{"@type":"Answer","text":"Claude sitenizi okuyamaz ve kullanıcılar Claude'a sorduğunda sitenizi kaynak gösteremez. Görünürlüğünüzü kaybedersiniz."}},
-    {"@type":"Question","name":"Claude için ayrı bir optimizasyon gerekir mi?","acceptedAnswer":{"@type":"Answer","text":"Temel GEO prensipleri ortaktır, ancak Claude derin ve iyi yapılandırılmış içeriği özellikle değerli bulur."}}
+    {
+      "@type": "Question",
+      "name": "Claude'un web botlarının adları nedir?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Anthropic üç bot kullanır: ClaudeBot (model eğitimi için içerik toplar), Claude-SearchBot (arama yanıtları için içeriği dizinler) ve Claude-User (bir kullanıcı soru sorduğunda veya link paylaştığında sayfayı açar)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "ClaudeBot'u engellersem Claude'da görünmez miyim?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ClaudeBot'u engellemek gelecekteki içeriğinizin eğitimde kullanılmasını engeller. Claude'un arama ve kullanıcı isteklerinde görünürlük için Claude-SearchBot ve Claude-User'a izin vermeniz yeterlidir."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Claude web aramasında hangi arama motorunu kullanıyor?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "2025'te yapılan incelemeler ve Anthropic'in alt işlemci listesi, Claude'un web aramasında Brave Search altyapısını kullandığını gösterdi. Bu yüzden sitenizin Brave aramasında görünüp görünmediğini kontrol etmek faydalıdır."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Claude ile ChatGPT arasındaki fark nedir?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Claude Anthropic'in, ChatGPT ise OpenAI'ın yapay zeka asistanıdır. Farklı botlar ve farklı arama altyapıları kullanırlar: ChatGPT büyük ölçüde Bing dizinine ve OAI-SearchBot'a, Claude ise kendi botlarına ve Brave Search altyapısına dayanır."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Claude için ayrı bir optimizasyon gerekir mi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Temel GEO prensipleri ortaktır. Claude'a özgü olarak doğru botlara izin vermek, Brave aramasındaki görünürlüğünüzü kontrol etmek ve uzun, iyi yapılandırılmış içerik sunmak fark yaratır."
+      }
+    }
   ]
 }
 </script>
@@ -180,6 +217,96 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: fle
 .footer-links { display: flex; gap: 8px 20px; flex-wrap: wrap; }
 .footer-links a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: var(--accent); }
+
+/* ==== DERİN YAZI KİTİ (deep-kit) ==== */
+.blog-content.deep p, .blog-content.deep li { font-size: 0.9rem; line-height: 1.85; }
+.blog-content.deep p { color: #b9d4c7; }
+.blog-content.deep ul.dl, .blog-content.deep ol.dl { margin: 0 0 18px 0; padding-left: 20px; color: #b9d4c7; }
+.blog-content.deep ul.dl li, .blog-content.deep ol.dl li { margin-bottom: 8px; }
+.blog-content.deep h2 { font-size: 1.35rem; margin-top: 52px; scroll-margin-top: 16px; }
+.blog-content.deep h3 { font-size: 1.02rem; }
+.blog-content.deep a { color: var(--accent); text-decoration: underline; text-decoration-color: rgba(0,232,122,.35); text-underline-offset: 3px; }
+.blog-content.deep a.cta-btn { color: #060d0a; text-decoration: none; }
+.dk-tldr { background: linear-gradient(135deg, rgba(0,232,122,.10), rgba(0,184,217,.08)); border: 1px solid rgba(0,232,122,.35); border-radius: 14px; padding: 18px 20px; margin: 8px 0 28px; }
+.dk-tldr b.k { display: block; font-family: var(--font-display); font-size: .78rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.dk-tldr ul { margin: 0; padding-left: 18px; }
+.dk-tldr li { font-size: .88rem; color: var(--text); margin-bottom: 6px; line-height: 1.6; }
+.dk-toc { border: 1px dashed var(--border); border-radius: 12px; padding: 14px 18px; margin: 0 0 30px; }
+.dk-toc summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; font-size: .85rem; color: var(--text); }
+.dk-toc ol { margin: 10px 0 0; padding-left: 20px; }
+.dk-toc li { font-size: .82rem; margin: 5px 0; }
+.dk-toc a { color: var(--muted) !important; text-decoration: none !important; }
+.dk-toc a:hover { color: var(--accent) !important; }
+.dk-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 22px 0; }
+@media(max-width:600px){ .dk-stats { grid-template-columns: 1fr; } }
+.dk-stat { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px; }
+.dk-stat .n { font-family: var(--font-display); font-weight: 800; font-size: 1.25rem; color: var(--accent); line-height: 1.2; }
+.dk-stat .t { font-size: .78rem; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+.dk-c { border-radius: 12px; padding: 14px 18px; margin: 22px 0; border: 1px solid; }
+.dk-c p { margin: 0 !important; font-size: .86rem !important; }
+.dk-c p + p { margin-top: 8px !important; }
+.dk-c.tip { background: rgba(0,184,217,.08); border-color: rgba(0,184,217,.4); }
+.dk-c.warn { background: rgba(245,166,35,.08); border-color: rgba(245,166,35,.45); }
+.dk-c.bad { background: rgba(255,77,109,.07); border-color: rgba(255,77,109,.4); }
+.dk-c.ok { background: rgba(0,232,122,.07); border-color: rgba(0,232,122,.4); }
+.dk-c.idea { background: rgba(167,139,250,.08); border-color: rgba(167,139,250,.45); }
+.dk-c b.h { display: block; font-family: var(--font-display); font-size: .8rem; letter-spacing: .06em; margin-bottom: 6px; color: var(--text); }
+.dk-tabs { margin: 22px 0; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: var(--surface); }
+.dk-tabbar { display: flex; overflow-x: auto; border-bottom: 1px solid var(--border); scrollbar-width: none; }
+.dk-tabbar button { flex: 0 0 auto; background: none; border: 0; color: var(--muted); font-family: var(--font-mono); font-size: .8rem; padding: 12px 16px; cursor: pointer; border-bottom: 2px solid transparent; }
+.dk-tabbar button[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+.dk-tabpanel { padding: 16px 18px; }
+.dk-tabpanel[hidden] { display: none; }
+.dk-tabpanel p:last-child { margin-bottom: 0; }
+.dk-acc { border: 1px solid var(--border); border-radius: 12px; margin: 10px 0; background: var(--surface); }
+.dk-acc summary { cursor: pointer; list-style: none; padding: 14px 44px 14px 16px; font-family: var(--font-display); font-weight: 700; font-size: .9rem; color: var(--text); position: relative; }
+.dk-acc summary::-webkit-details-marker { display: none; }
+.dk-acc summary::after { content: '+'; position: absolute; right: 16px; top: 10px; font-size: 1.3rem; color: var(--accent); transition: transform .2s; }
+.dk-acc[open] summary::after { transform: rotate(45deg); }
+.dk-acc .in { padding: 0 16px 14px; }
+.dk-acc .in p:last-child { margin-bottom: 0; }
+.dk-badge { display: inline-block; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; padding: 2px 8px; border-radius: 20px; margin-right: 6px; vertical-align: 2px; }
+.dk-badge.r { background: rgba(255,77,109,.15); color: #ff8aa0; }
+.dk-badge.y { background: rgba(245,166,35,.15); color: #f7c06a; }
+.dk-badge.g { background: rgba(0,232,122,.15); color: var(--accent); }
+.dk-check { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; margin: 24px 0; }
+.dk-check .hd { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 10px; flex-wrap: wrap; }
+.dk-check .hd b { font-family: var(--font-display); font-size: .95rem; }
+.dk-check .sc { font-family: var(--font-display); font-weight: 800; color: var(--accent); font-size: 1rem; }
+.dk-bar { height: 8px; background: #0a1611; border-radius: 6px; overflow: hidden; margin-bottom: 12px; }
+.dk-bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #ff4d6d, #f5a623, #00e87a); background-size: 300% 100%; transition: width .35s, background-position .35s; }
+.dk-check label { display: flex; gap: 10px; align-items: flex-start; padding: 9px 0; border-top: 1px solid rgba(26,48,40,.7); cursor: pointer; font-size: .85rem; color: #b9d4c7; line-height: 1.55; }
+.dk-check label:first-of-type { border-top: 0; }
+.dk-check input { margin-top: 4px; accent-color: #00e87a; width: 16px; height: 16px; flex: 0 0 auto; }
+.dk-check .msg { margin-top: 10px; font-size: .84rem; color: var(--text); min-height: 1.3em; }
+.dk-steps { counter-reset: s; margin: 22px 0; padding: 0; list-style: none; }
+.dk-steps > li { counter-increment: s; position: relative; padding: 0 0 18px 46px; border-left: 2px solid var(--border); margin-left: 15px; }
+.dk-steps > li:last-child { border-left-color: transparent; padding-bottom: 0; }
+.dk-steps > li::before { content: counter(s); position: absolute; left: -16px; top: -2px; width: 30px; height: 30px; border-radius: 50%; background: #0a2018; border: 2px solid var(--accent); color: var(--accent); font-family: var(--font-display); font-weight: 800; font-size: .85rem; display: flex; align-items: center; justify-content: center; }
+.dk-steps > li b.t { display: block; font-family: var(--font-display); font-size: .95rem; color: var(--text); margin-bottom: 4px; }
+.dk-steps > li p { margin-bottom: 8px; }
+.dk-quiz { background: linear-gradient(135deg, rgba(167,139,250,.10), rgba(0,184,217,.06)); border: 1px solid rgba(167,139,250,.4); border-radius: 14px; padding: 16px 18px; margin: 26px 0; }
+.dk-quiz .q { font-family: var(--font-display); font-weight: 700; font-size: .95rem; margin-bottom: 12px; color: var(--text); }
+.dk-quiz button.o { display: block; width: 100%; text-align: left; background: rgba(6,13,10,.6); border: 1px solid var(--border); color: #b9d4c7; font-family: var(--font-mono); font-size: .82rem; padding: 10px 12px; border-radius: 10px; margin: 6px 0; cursor: pointer; line-height: 1.5; }
+.dk-quiz button.o.right { border-color: var(--accent); color: var(--accent); }
+.dk-quiz button.o.wrong { border-color: #ff4d6d; color: #ff8aa0; }
+.dk-quiz .ex { display: none; margin-top: 10px; font-size: .84rem; color: var(--text); line-height: 1.6; }
+.dk-quiz.done .ex { display: block; }
+.dk-code { position: relative; }
+.dk-code button.cp { position: absolute; top: 10px; right: 10px; background: #0a2018; border: 1px solid var(--border); color: var(--muted); font-family: var(--font-mono); font-size: .72rem; padding: 4px 10px; border-radius: 6px; cursor: pointer; }
+.dk-code button.cp:hover { color: var(--accent); border-color: var(--accent); }
+.dk-vs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
+@media(max-width:600px){ .dk-vs { grid-template-columns: 1fr; } }
+.dk-vs > div { border-radius: 12px; padding: 14px 16px; border: 1px solid; }
+.dk-vs .no { background: rgba(255,77,109,.06); border-color: rgba(255,77,109,.35); }
+.dk-vs .yes { background: rgba(0,232,122,.06); border-color: rgba(0,232,122,.35); }
+.dk-vs b.h { display: block; font-family: var(--font-display); font-size: .8rem; margin-bottom: 6px; }
+.dk-vs .no b.h { color: #ff8aa0; } .dk-vs .yes b.h { color: var(--accent); }
+.dk-vs p { margin: 0 !important; font-size: .84rem !important; }
+.dk-src { font-size: .74rem !important; color: #6f9483 !important; border-top: 1px solid var(--border); padding-top: 14px; margin-top: 30px; }
+.dk-src a { color: #8ab5a0 !important; }
+.dk-upd { color: var(--accent); }
+/* ==== /DERİN YAZI KİTİ ==== */
 </style>
 </head>
 <body>
@@ -212,44 +339,172 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: fle
   <div class="blog-hero">
     <span class="blog-category">Claude AI</span>
     <h1>Claude'da <em>Nasıl Görünürsünüz?</em></h1>
-    <div class="blog-meta"><span>📅 25 Haziran 2026</span><span>✍️ Scanliq Ekibi</span><span>⏱️ 6 dk okuma</span></div>
+    <div class="blog-meta"><span class="dk-upd">🔄 Güncellendi: 19 Ekim 2026</span><span>📅 25 Haziran 2026</span><span>✍️ Scanliq Ekibi</span><span>⏱️ 10 dk okuma</span></div>
   </div>
-  <div class="blog-content">
-    <p>ChatGPT ve Gemini sürekli konuşulurken, güçlü bir yapay zeka asistanı çoğu zaman gözden kaçıyor: <strong>Claude</strong>. Anthropic'in geliştirdiği Claude, özellikle kurumsal dünyada ve geliştiriciler arasında hızla yaygınlaşıyor. Peki siteniz Claude tarafından görülebiliyor mu? Bu yazıda, Claude'un web'i nasıl okuduğunu ve sitenizi Claude'a nasıl açacağınızı anlatıyoruz.</p>
+  <div class="blog-content deep">
+    <p>ChatGPT ve Gemini sürekli konuşulurken güçlü bir yapay zeka asistanı çoğu zaman gözden kaçıyor: <strong>Claude</strong>. Anthropic'in geliştirdiği Claude, özellikle iş dünyasında, yazılım ekiplerinde ve uzun belgelerle çalışan profesyoneller arasında hızla yaygınlaşıyor. Claude artık web'de arama yapıp <a href="/blog9.html" data-il="1">kaynak gösterebiliyor</a>. Bu rehberde Claude'un web'i hangi botlarla okuduğunu, arama sonuçlarını nereden aldığını ve sitenizi Claude'a nasıl açacağınızı adım adım anlatıyoruz.</p>
 
-    <div class="info-box">
-      <p><strong>Neden önemli?</strong> Claude, uzun ve karmaşık içerikleri anlamada güçlüdür. Teknik, hukuki ve akademik içerikler için sık tercih edilir. Bu alanlarda siteniz varsa, Claude görünürlüğü kritiktir.</p>
+    <div class="dk-tldr">
+      <b class="k">Kısaca</b>
+      <ul>
+        <li>Anthropic'in <strong>üç ayrı botu</strong> var: ClaudeBot (eğitim), Claude-SearchBot (arama dizini) ve Claude-User (kullanıcı istediğinde sayfayı açar).</li>
+        <li>Claude'da görünmek için en azından <strong>Claude-SearchBot ve Claude-User'a</strong> izin vermelisiniz. ClaudeBot'u engellemek sadece eğitimden çıkmak demektir.</li>
+        <li>Claude'un web araması, <strong>Brave Search</strong> altyapısını kullanıyor. Brave'in dizininde olmak dolaylı ama önemli bir avantaj.</li>
+        <li>Claude uzun ve yapılı içeriği iyi anlar. Net başlıklar, tanımlar ve kanıtlı bilgi alıntılanma şansınızı artırır.</li>
+      </ul>
     </div>
 
-    <h2>Claude Web'i Nasıl Okur?</h2>
-    <p>Claude'un iki temel erişim yöntemi vardır: <strong>ClaudeBot</strong> (içerik tarama botu) ve <strong>Claude-User</strong> (kullanıcı tetiklemeli erişim). İlki Anthropic'in içerik toplamasını sağlar, ikincisi bir kullanıcı Claude'a bir link verdiğinde devreye girer.</p>
+    <details class="dk-toc" open>
+      <summary>📑 İçindekiler</summary>
+      <ol>
+        <li><a href="#c1">Claude neden önemli?</a></li>
+        <li><a href="#c2">Claude'un üç botu: hangisi ne yapar?</a></li>
+        <li><a href="#c3">Doğru robots.txt ayarı</a></li>
+        <li><a href="#c4">Claude arama sonuçlarını nereden alıyor?</a></li>
+        <li><a href="#c5">Claude için içerik nasıl hazırlanır?</a></li>
+        <li><a href="#c6">Claude'da görünürlüğünüzü test edin</a></li>
+        <li><a href="#c7">Kontrol listesi</a></li>
+      </ol>
+    </details>
 
-    <h2>ClaudeBot Erişimini Kontrol Edin</h2>
-    <p>robots.txt dosyanız ClaudeBot'u engelliyorsa, Claude sitenizi okuyamaz ve <a href="/blog9.html" data-il="1">kaynak gösteremez</a>. <a href="/blog4.html">robots.txt kontrol rehberimizde</a> engel olup olmadığını nasıl anlayacağınızı açıkladık.</p>
-    <h3>Doğru robots.txt Yapısı</h3>
-    <p>ClaudeBot ve Claude-User için <em>Disallow: /</em> kuralı olmamalı. İdeal olan, tüm AI botlarına açık net bir yapı kurmaktır.</p>
+    <h2 id="c1">Claude Neden Önemli?</h2>
+    <p>Claude'un kullanıcı kitlesi ChatGPT kadar geniş değil, ama <strong>niteliği farklı</strong>. Claude; şirketlerin iç araçlarında, yazılım geliştirme süreçlerinde, hukuk, finans ve araştırma gibi uzun metinle çalışılan alanlarda sık tercih ediliyor. Bu kullanıcılar genellikle satın alma kararı veren ya da kararı etkileyen profesyoneller.</p>
+    <div class="dk-stats">
+      <div class="dk-stat"><div class="n">B2B</div><div class="t">Kurumsal kullanım ağırlıklı: karar vericilere ulaşmanın yeni yolu.</div></div>
+      <div class="dk-stat"><div class="n">Uzun bağlam</div><div class="t">Uzun belge ve sayfaları bütün olarak okuyup özetleyebilir.</div></div>
+      <div class="dk-stat"><div class="n">Kaynaklı yanıt</div><div class="t">Web araması yaptığında yanıtın altında tıklanabilir kaynaklar gösterir.</div></div>
+    </div>
+    <p>Siteniz B2B hizmet, yazılım, danışmanlık, eğitim, hukuk ya da teknik içerik sunuyorsa, Claude görünürlüğü düşündüğünüzden daha değerli olabilir.</p>
 
-    <h2>Claude İçin İçerik Nasıl Optimize Edilir?</h2>
-    <h3>1. Net ve Yapılandırılmış İçerik</h3>
-    <p>Claude, iyi yapılandırılmış, başlıklara bölünmüş içeriği sever. Uzun metinleri bile mantıklı bölümlere ayırırsanız Claude daha iyi anlar.</p>
-    <h3>2. Bağlam ve Derinlik</h3>
-    <p>Claude yüzeysel içerikten çok, konuyu derinlemesine işleyen içeriği değerli bulur. <a href="/blog10.html">E-E-A-T sinyalleri</a> burada da geçerlidir.</p>
-    <h3>3. Yapısal Veri</h3>
-    <p>Schema.org ve JSON-LD, Claude'un içeriğinizin ne olduğunu kesin anlamasını sağlar. <a href="/blog3.html">Schema.org rehberimize</a> bakın.</p>
+    <h2 id="c2">Claude'un Üç Botu: Hangisi Ne Yapar?</h2>
+    <p>Anthropic, resmi yardım sayfasında üç ayrı bot tanımlıyor. Her birinin işi farklı, bu yüzden robots.txt kararınızı her biri için ayrı vermelisiniz:</p>
+    <div class="dk-tabs">
+      <div class="dk-tabbar" role="tablist">
+        <button role="tab" aria-selected="true">ClaudeBot</button>
+        <button role="tab" aria-selected="false">Claude-SearchBot</button>
+        <button role="tab" aria-selected="false">Claude-User</button>
+      </div>
+      <div class="dk-tabpanel" role="tabpanel">
+        <p><strong>Görevi:</strong> Herkese açık web içeriğini, Anthropic'in yapay zeka modellerinin eğitiminde kullanılabilmesi için toplar.</p>
+        <p><strong>Engellerseniz:</strong> Gelecekteki içeriğiniz eğitim verisinin dışında tutulur. Claude'un web aramasında görünmenizi doğrudan engellemez.</p>
+        <p><strong>Karar:</strong> İçeriğinizin model eğitiminde kullanılmasını istemiyorsanız engelleyebilirsiniz. Görünürlük açısından kritik bot bu değil.</p>
+      </div>
+      <div class="dk-tabpanel" role="tabpanel" hidden>
+        <p><strong>Görevi:</strong> Web'i gezerek içeriği analiz eder; Claude'un arama yanıtlarının alaka ve doğruluğunu artırmak için kullanılır.</p>
+        <p><strong>Engellerseniz:</strong> İçeriğiniz Claude'un arama için yaptığı dizinlemeye girmez; kullanıcıların arama sonuçlarında görünürlüğünüz azalabilir.</p>
+        <p><strong>Karar:</strong> Claude'da görünmek istiyorsanız <strong>izin verin</strong>.</p>
+      </div>
+      <div class="dk-tabpanel" role="tabpanel" hidden>
+        <p><strong>Görevi:</strong> Bir kullanıcı Claude'a soru sorduğunda ya da bir link paylaştığında, o sayfayı kullanıcı adına açıp okur.</p>
+        <p><strong>Engellerseniz:</strong> Kullanıcı sitenizi doğrudan sorsa bile Claude içeriğinizi getiremez. "Bu sayfaya erişemiyorum" der ve büyük ihtimalle başka bir kaynağa yönelir.</p>
+        <p><strong>Karar:</strong> Kesinlikle <strong>izin verin</strong>.</p>
+      </div>
+    </div>
+    <div class="dk-c warn"><b class="h">⚠️ Eski yazılarda yanlış bilgi</b><p>İnternetteki birçok rehber hâlâ sadece "ClaudeBot" ve "anthropic-ai" adlarından bahsediyor. Güncel resmi liste yukarıdaki üç bottan oluşuyor. robots.txt'nizi eski bir şablondan kopyaladıysanız kontrol edin.</p></div>
 
-    <h2>Claude, Diğer Motorlardan Farklı mı?</h2>
-    <p>Temel GEO prensipleri (bot erişimi, yapısal veri, net içerik) tüm motorlar için ortaktır. Ancak Claude'un güçlü yanı uzun bağlamı anlamasıdır — yani kapsamlı, iyi yazılmış içerik Claude'da ekstra avantaj sağlar. <a href="/blog8.html">GEO rehberimizle</a> temeli atın.</p>
+    <h2 id="c3">Doğru robots.txt Ayarı</h2>
+    <p>İki yaygın senaryo için kopyalayıp kullanabileceğiniz hazır ayarlar:</p>
+    <div class="code-block dk-code">
+      <div class="code-label">Senaryo A · Claude'a tamamen açık</div>
+<pre>User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /</pre>
+    </div>
+    <div class="code-block dk-code">
+      <div class="code-label">Senaryo B · Eğitime kapalı, aramaya açık</div>
+<pre>User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /</pre>
+    </div>
+    <p>robots.txt'nizde bu botlar hiç geçmiyorsa ve <code>User-agent: *</code> altında <code>Disallow: /</code> yoksa, varsayılan olarak zaten izin vermiş olursunuz. Asıl risk; eski bot listeleri, CDN'lerin "yapay zeka botlarını engelle" ayarları ve hosting güvenlik kurallarıdır. Kontrol adımları için <a href="/blog4.html">robots.txt rehberimize</a> bakın.</p>
+    <div class="dk-c tip"><b class="h">💡 Not</b><p>Anthropic, botlarını IP adresiyle engellemenin düzgün ve kalıcı çalışmayabileceğini belirtiyor. Erişimi yönetmenin önerilen yolu robots.txt'dir. Her alt alan adı (örneğin blog.siteniz.com) için ayrı robots.txt gerekir.</p></div>
+
+    <h2 id="c4">Claude Arama Sonuçlarını Nereden Alıyor?</h2>
+    <p>Claude web araması yaptığında arka planda bir arama altyapısına ihtiyaç duyar. 2025'te yapılan incelemeler ve Anthropic'in alt işlemci listesi, Claude'un web aramasında <strong>Brave Search</strong> altyapısını kullandığını gösterdi. Claude'un gösterdiği kaynakların büyük kısmı Brave'in sonuçlarıyla örtüşüyor.</p>
+    <p>Bunun pratik anlamı şu: Google'da iyi sıralanmanız Claude'da otomatik görüneceğiniz anlamına gelmez. Brave'in kendi bağımsız dizini vardır.</p>
+    <ol class="dk-steps">
+      <li><b class="t">Brave'de kendinizi arayın</b><p><code>search.brave.com</code> adresinde markanızı ve hedef sorgularınızı aratın. Sayfalarınız çıkıyor mu, hangi sırada?</p></li>
+      <li><b class="t">Taranabilir kalın</b><p>Brave dizinini kendi tarayıcısıyla ve gizlilik korumalı kullanım sinyalleriyle oluşturuyor. Sayfalarınızın hızlı açılması, HTML'de içerik barındırması ve iç linklerle birbirine bağlı olması keşfedilmeyi kolaylaştırır.</p></li>
+      <li><b class="t">Dış referans kazanın</b><p>Başka sitelerden aldığınız linkler ve bahsedilmeler, her arama motorunda olduğu gibi Brave'de de görünürlüğü artırır.</p></li>
+    </ol>
+    <div class="dk-c idea"><b class="h">Neden önemli bir ipucu?</b><p>Çoğu site sahibi Brave'i hiç kontrol etmiyor. Rakipleriniz Google'a odaklanırken Brave'de iyi durumda olmak, Claude yanıtlarında daha az rekabetle görünmeniz demek.</p></div>
+
+    <h2 id="c5">Claude İçin İçerik Nasıl Hazırlanır?</h2>
+    <p>Temel <a href="/blog8.html">GEO</a> prensipleri tüm motorlar için ortaktır. Claude'un güçlü yanlarını düşünerek birkaç noktaya ayrıca dikkat edin:</p>
+    <details class="dk-acc" open><summary>1. Net yapı: başlık, tanım, liste</summary><div class="in">
+      <p>Claude uzun sayfaları bütün olarak okuyabilir, ama yanıt verirken net ve kendi başına anlamlı paragrafları alıntılar. Her H2 başlığının altında ilk cümlede konunun özünü söyleyin. "X nedir?" sorusuna tek cümlelik bir tanım yazın, ardından detaya girin.</p>
+    </div></details>
+    <details class="dk-acc"><summary>2. Derinlik ve kanıt</summary><div class="in">
+      <p>Yüzeysel, her yerde bulunan bilgiyi tekrar eden sayfalar yerine; kendi verinizi, vaka çalışmanızı, karşılaştırma tablonuzu ve deneyiminizi içeren sayfalar kaynak olarak öne çıkar. Bu, <a href="/blog10.html">E-E-A-T</a> çerçevesinin "deneyim" ayağıdır.</p>
+    </div></details>
+    <details class="dk-acc"><summary>3. Erişilebilir sayfalar</summary><div class="in">
+      <p>Claude-User bir sayfayı açtığında giriş ekranına, çerez duvarına veya JavaScript ile yüklenen boş bir iskelete takılırsa içeriği okuyamaz. Önemli içeriğin HTML'de bulunduğundan emin olun. Ayrıntılar <a href="/blog17.html">JavaScript ve hayalet sayfalar rehberimizde</a>.</p>
+    </div></details>
+    <details class="dk-acc"><summary>4. Yapısal veri ve tarihler</summary><div class="in">
+      <p>Article, Organization ve FAQPage şemaları sayfanın ne olduğunu ve kimin yazdığını açıkça belirtir. Yayın ve güncelleme tarihlerini görünür yazın; güncel bilgi arayan sorularda tarih belirleyici olabilir. Bkz. <a href="/blog3.html">Schema.org rehberimiz</a>.</p>
+    </div></details>
+    <details class="dk-acc"><summary>5. Belgeleri ve rehberleri tek sayfada toplayın</summary><div class="in">
+      <p>Kullanıcılar Claude'a sık sık "bu linki özetle" ya da "bu dokümana göre şunu nasıl yaparım" diye soruyor. Ürün dokümantasyonunuz, fiyatlandırmanız veya rehberleriniz düzenli, bölümlere ayrılmış ve tek adreste erişilebilir olursa Claude bunları doğru özetler. Bu noktada <a href="/blog1.html">llms.txt</a> dosyası da önemli sayfalarınızın haritasını sunmanın kolay bir yoludur.</p>
+    </div></details>
+
+    <h2 id="c6">Claude'da Görünürlüğünüzü Test Edin</h2>
+    <p>Claude.ai'de web araması açıkken aşağıdaki soruları sorun ve hangi kaynakların gösterildiğini not edin. Aynı soruları birkaç hafta arayla tekrar sorarak değişimi izleyin.</p>
+    <div class="code-block dk-code">
+      <div class="code-label">Test soruları</div>
+<pre>[Markanız] nedir, ne iş yapar? Kaynak göster.
+[Sektörünüz] için en iyi [hizmet/ürün] seçenekleri neler?
+[Sitenizin bir sayfasının linki] — bu sayfayı özetler misin?
+[Uzman olduğunuz konu] hakkında güncel bir rehber önerir misin?</pre>
+    </div>
+    <p>Üçüncü soruda Claude "sayfaya erişemedim" diyorsa, Claude-User'ın engellendiğini ya da sayfanın JavaScript'e bağımlı olduğunu düşünün. Yapay zekadan gelen ziyaretleri Analytics'te görmek için <a href="/blog12.html">AI trafiğini ölçme rehberimize</a> bakın.</p>
+
+    <h2 id="c7">Claude Kontrol Listesi</h2>
+    <div class="dk-check" data-levels='[[0,"Önce robots.txt ile başlayın: Claude-SearchBot ve Claude-User açık mı?"],[50,"Erişim tamam. Şimdi içerik ve Brave görünürlüğüne odaklanın."],[88,"Neredeyse tamam! Test sorularını düzenli sorun."],[100,"Claude için hazırsınız."]]'>
+      <div class="hd"><b>Claude hazırlık durumu</b><span class="sc">0 / 8</span></div>
+      <div class="dk-bar"><i></i></div>
+      <label><input type="checkbox"> robots.txt'de Claude-SearchBot engellenmiyor</label>
+      <label><input type="checkbox"> robots.txt'de Claude-User engellenmiyor</label>
+      <label><input type="checkbox"> ClaudeBot kararımı bilinçli verdim (eğitime açık ya da kapalı)</label>
+      <label><input type="checkbox"> CDN / güvenlik duvarı Anthropic botlarını engellemiyor</label>
+      <label><input type="checkbox"> Sayfalarım search.brave.com'da çıkıyor</label>
+      <label><input type="checkbox"> Ana içerik HTML'de, giriş ekranı olmadan okunabiliyor</label>
+      <label><input type="checkbox"> Article / Organization / FAQPage yapısal verisi var</label>
+      <label><input type="checkbox"> Claude'a markamı sorup kaynakları kontrol ettim</label>
+      <div class="msg"></div>
+    </div>
+
+    <div class="dk-quiz">
+      <div class="q">🧠 Mini test: İçeriğinizin Claude'un eğitiminde kullanılmasını istemiyorsunuz ama Claude aramasında görünmek istiyorsunuz. Hangi botu engellersiniz?</div>
+      <button class="o" type="button">Claude-User</button>
+      <button class="o" type="button" data-right>ClaudeBot</button>
+      <button class="o" type="button">Claude-SearchBot</button>
+      <div class="ex">Doğru cevap: ClaudeBot. Bu bot eğitim için içerik toplar. Claude-SearchBot ve Claude-User'a izin vermeye devam ederseniz arama ve kullanıcı isteklerinde görünür kalırsınız.</div>
+    </div>
 
     <div class="cta-box">
-      <h3>Claude sitenizi görüyor mu?</h3>
-      <p>Scanliq ile ClaudeBot erişiminizi ve 4 AI motorundaki görünürlüğünüzü ücretsiz ölçün.</p>
+      <h3>Claude sitenizi görebiliyor mu?</h3>
+      <p>Scanliq, ClaudeBot erişiminizi ve ChatGPT, Google AI, Perplexity ve Copilot dahil 4 yapay zeka motorundaki hazırlığınızı ücretsiz ölçer.</p>
       <a class="cta-btn" href="https://scanliq.com/">Ücretsiz Analiz →</a>
     </div>
 
     <h2>Sık Sorulan Sorular</h2>
-    <div class="faq-item"><div class="faq-q">Claude ile ChatGPT arasındaki fark nedir?</div><div class="faq-a">Claude, Anthropic tarafından geliştirilir ve uzun, karmaşık içerikleri anlamada güçlüdür. ChatGPT OpenAI'a aittir. Her ikisi de farklı botlarla web'i tarar.</div></div>
-    <div class="faq-item"><div class="faq-q">ClaudeBot'u engellersem ne olur?</div><div class="faq-a">Claude sitenizi okuyamaz ve kullanıcılar Claude'a sorduğunda sitenizi kaynak gösteremez. Görünürlüğünüzü kaybedersiniz.</div></div>
-    <div class="faq-item"><div class="faq-q">Claude için ayrı bir optimizasyon gerekir mi?</div><div class="faq-a">Temel GEO prensipleri ortaktır, ancak Claude derin ve iyi yapılandırılmış içeriği özellikle değerli bulur.</div></div>
+    <div class="faq-item"><div class="faq-q">Claude'un web botlarının adları nedir?</div><div class="faq-a">Anthropic üç bot kullanır: ClaudeBot (model eğitimi için içerik toplar), Claude-SearchBot (arama yanıtları için içeriği dizinler) ve Claude-User (bir kullanıcı soru sorduğunda veya link paylaştığında sayfayı açar).</div></div>
+    <div class="faq-item"><div class="faq-q">ClaudeBot'u engellersem Claude'da görünmez miyim?</div><div class="faq-a">ClaudeBot'u engellemek gelecekteki içeriğinizin eğitimde kullanılmasını engeller. Claude'un arama ve kullanıcı isteklerinde görünürlük için Claude-SearchBot ve Claude-User'a izin vermeniz yeterlidir.</div></div>
+    <div class="faq-item"><div class="faq-q">Claude web aramasında hangi arama motorunu kullanıyor?</div><div class="faq-a">2025'te yapılan incelemeler ve Anthropic'in alt işlemci listesi, Claude'un web aramasında Brave Search altyapısını kullandığını gösterdi. Bu yüzden sitenizin Brave aramasında görünüp görünmediğini kontrol etmek faydalıdır.</div></div>
+    <div class="faq-item"><div class="faq-q">Claude ile ChatGPT arasındaki fark nedir?</div><div class="faq-a">Claude Anthropic'in, ChatGPT ise OpenAI'ın yapay zeka asistanıdır. Farklı botlar ve farklı arama altyapıları kullanırlar: ChatGPT büyük ölçüde Bing dizinine ve OAI-SearchBot'a, Claude ise kendi botlarına ve Brave Search altyapısına dayanır.</div></div>
+    <div class="faq-item"><div class="faq-q">Claude için ayrı bir optimizasyon gerekir mi?</div><div class="faq-a">Temel GEO prensipleri ortaktır. Claude'a özgü olarak doğru botlara izin vermek, Brave aramasındaki görünürlüğünüzü kontrol etmek ve uzun, iyi yapılandırılmış içerik sunmak fark yaratır.</div></div>
+
+    <p class="dk-src">Kaynaklar: Anthropic Gizlilik Merkezi, "Does Anthropic crawl data from the web, and how can site owners block the crawler?"; TechCrunch, "Anthropic appears to be using Brave to power web search for its Claude chatbot" (21 Mart 2025). Platformlar altyapılarını değiştirebilir. Son kontrol: Ekim 2026.</p>
 
     <div class="share-bar">
       <span class="share-label">Bu yazıyı paylaş:</span>
@@ -302,5 +557,52 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: fle
   <div>© 2026 Scanliq</div>
 </footer>
 </div>
+
+<script>
+/* deep-kit: sekmeler, kontrol listeleri, test, kopyala */
+(function(){
+  document.querySelectorAll('.dk-tabs').forEach(function(box){
+    var btns = box.querySelectorAll('.dk-tabbar button'), panes = box.querySelectorAll('.dk-tabpanel');
+    btns.forEach(function(b, i){ b.addEventListener('click', function(){
+      btns.forEach(function(x, j){ x.setAttribute('aria-selected', j === i ? 'true' : 'false'); });
+      panes.forEach(function(p, j){ p.hidden = j !== i; });
+    }); });
+  });
+  document.querySelectorAll('.dk-check').forEach(function(box){
+    var inputs = box.querySelectorAll('input[type=checkbox]'), bar = box.querySelector('.dk-bar i'),
+        sc = box.querySelector('.sc'), msg = box.querySelector('.msg'), levels = [];
+    try { levels = JSON.parse(box.getAttribute('data-levels') || '[]'); } catch(e) {}
+    function upd(){
+      var n = 0; inputs.forEach(function(i){ if (i.checked) n++; });
+      var pct = inputs.length ? Math.round(n * 100 / inputs.length) : 0;
+      bar.style.width = pct + '%'; bar.style.backgroundPosition = (100 - pct) + '% 0';
+      sc.textContent = n + ' / ' + inputs.length;
+      var m = ''; levels.forEach(function(l){ if (pct >= l[0]) m = l[1]; });
+      msg.textContent = m;
+    }
+    inputs.forEach(function(i){ i.addEventListener('change', upd); }); upd();
+  });
+  document.querySelectorAll('.dk-quiz').forEach(function(q){
+    q.querySelectorAll('button.o').forEach(function(b){ b.addEventListener('click', function(){
+      if (q.classList.contains('done')) return;
+      q.classList.add('done');
+      q.querySelectorAll('button.o').forEach(function(x){ if (x.hasAttribute('data-right')) x.classList.add('right'); });
+      if (!b.hasAttribute('data-right')) b.classList.add('wrong');
+    }); });
+  });
+  document.querySelectorAll('.dk-code').forEach(function(c){
+    var btn = document.createElement('button'); btn.className = 'cp'; btn.type = 'button';
+    var lbl = document.documentElement.lang === 'en' ? ['Copy', 'Copied ✓'] : ['Kopyala', 'Kopyalandı ✓'];
+    btn.textContent = lbl[0]; c.appendChild(btn);
+    btn.addEventListener('click', function(){
+      var t = c.querySelector('pre').innerText;
+      (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).catch(function(){
+        var ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+      });
+      btn.textContent = lbl[1]; setTimeout(function(){ btn.textContent = lbl[0]; }, 1800);
+    });
+  });
+})();
+</script>
 </body>
 </html>

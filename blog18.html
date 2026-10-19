@@ -74,9 +74,46 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {"@type":"Question","name":"AI görünürlüğündeki en kritik hata nedir?","acceptedAnswer":{"@type":"Answer","text":"AI botlarını robots.txt ile engellemek en ölümcül hatadır. Bu durumda diğer her şeyi mükemmel yapsanız bile AI sitenizi göremez."}},
-    {"@type":"Question","name":"Bu hataları nasıl tespit ederim?","acceptedAnswer":{"@type":"Answer","text":"Manuel kontrol mümkün ama zaman alır. Scanliq gibi araçlar tüm bu hataları otomatik tespit edip çözüm önerir."}},
-    {"@type":"Question","name":"Hataları düzeltmek ne kadar sürer?","acceptedAnswer":{"@type":"Answer","text":"Çoğu hata (robots.txt, llms.txt, schema) dakikalar içinde düzeltilebilir. JavaScript render gibi bazıları daha fazla teknik çalışma gerektirir."}}
+    {
+      "@type": "Question",
+      "name": "Yapay zeka görünürlüğündeki en kritik hata nedir?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yapay zeka botlarını robots.txt, CDN veya güvenlik duvarı ayarlarıyla farkında olmadan engellemek. Bot sitenize giremiyorsa, içeriğiniz ne kadar iyi olursa olsun yapay zeka sizi okuyamaz ve öneremez."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "GPTBot'u engellersem ChatGPT'de görünmez miyim?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Hayır, GPTBot OpenAI'ın eğitim botudur. ChatGPT aramasında görünürlük için OAI-SearchBot'a ve kullanıcı isteklerinde ChatGPT-User'a izin vermeniz yeterlidir. GPTBot'u engelleyip bu ikisine izin vererek eğitime kapalı, aramaya açık kalabilirsiniz."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Bu hataları nasıl tespit ederim?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "robots.txt dosyanızı ve sayfa kaynağınızı elle kontrol edebilir, Search Console ve Bing Webmaster Tools raporlarına bakabilirsiniz. Scanliq gibi araçlar bu kontrollerin çoğunu tek seferde otomatik yapar."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Hataları düzeltmek ne kadar sürer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "robots.txt, yapısal veri ve Bing Webmaster kaydı gibi hatalar dakikalar içinde düzeltilir. JavaScript ile yüklenen içerik ise sitenin altyapısına bağlı olarak daha fazla teknik çalışma gerektirebilir. Düzeltmelerin yapay zeka yanıtlarına yansıması ise birkaç gün ile birkaç hafta sürebilir."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "llms.txt dosyası olmaması bir hata mı?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Kritik bir hata değil. llms.txt önerilmiş bir standarttır; Google, Arama ve AI Overview için kullanmadığını açıkladı. Eklemesi kolay ve zararsız olduğu için önerilir, ancak bot erişimi, içerik kalitesi ve yapısal veri çok daha belirleyicidir."
+      }
+    }
   ]
 }
 </script>
@@ -180,6 +217,96 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: fle
 .footer-links { display: flex; gap: 8px 20px; flex-wrap: wrap; }
 .footer-links a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: var(--accent); }
+
+/* ==== DERİN YAZI KİTİ (deep-kit) ==== */
+.blog-content.deep p, .blog-content.deep li { font-size: 0.9rem; line-height: 1.85; }
+.blog-content.deep p { color: #b9d4c7; }
+.blog-content.deep ul.dl, .blog-content.deep ol.dl { margin: 0 0 18px 0; padding-left: 20px; color: #b9d4c7; }
+.blog-content.deep ul.dl li, .blog-content.deep ol.dl li { margin-bottom: 8px; }
+.blog-content.deep h2 { font-size: 1.35rem; margin-top: 52px; scroll-margin-top: 16px; }
+.blog-content.deep h3 { font-size: 1.02rem; }
+.blog-content.deep a { color: var(--accent); text-decoration: underline; text-decoration-color: rgba(0,232,122,.35); text-underline-offset: 3px; }
+.blog-content.deep a.cta-btn { color: #060d0a; text-decoration: none; }
+.dk-tldr { background: linear-gradient(135deg, rgba(0,232,122,.10), rgba(0,184,217,.08)); border: 1px solid rgba(0,232,122,.35); border-radius: 14px; padding: 18px 20px; margin: 8px 0 28px; }
+.dk-tldr b.k { display: block; font-family: var(--font-display); font-size: .78rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.dk-tldr ul { margin: 0; padding-left: 18px; }
+.dk-tldr li { font-size: .88rem; color: var(--text); margin-bottom: 6px; line-height: 1.6; }
+.dk-toc { border: 1px dashed var(--border); border-radius: 12px; padding: 14px 18px; margin: 0 0 30px; }
+.dk-toc summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; font-size: .85rem; color: var(--text); }
+.dk-toc ol { margin: 10px 0 0; padding-left: 20px; }
+.dk-toc li { font-size: .82rem; margin: 5px 0; }
+.dk-toc a { color: var(--muted) !important; text-decoration: none !important; }
+.dk-toc a:hover { color: var(--accent) !important; }
+.dk-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 22px 0; }
+@media(max-width:600px){ .dk-stats { grid-template-columns: 1fr; } }
+.dk-stat { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px; }
+.dk-stat .n { font-family: var(--font-display); font-weight: 800; font-size: 1.25rem; color: var(--accent); line-height: 1.2; }
+.dk-stat .t { font-size: .78rem; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+.dk-c { border-radius: 12px; padding: 14px 18px; margin: 22px 0; border: 1px solid; }
+.dk-c p { margin: 0 !important; font-size: .86rem !important; }
+.dk-c p + p { margin-top: 8px !important; }
+.dk-c.tip { background: rgba(0,184,217,.08); border-color: rgba(0,184,217,.4); }
+.dk-c.warn { background: rgba(245,166,35,.08); border-color: rgba(245,166,35,.45); }
+.dk-c.bad { background: rgba(255,77,109,.07); border-color: rgba(255,77,109,.4); }
+.dk-c.ok { background: rgba(0,232,122,.07); border-color: rgba(0,232,122,.4); }
+.dk-c.idea { background: rgba(167,139,250,.08); border-color: rgba(167,139,250,.45); }
+.dk-c b.h { display: block; font-family: var(--font-display); font-size: .8rem; letter-spacing: .06em; margin-bottom: 6px; color: var(--text); }
+.dk-tabs { margin: 22px 0; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: var(--surface); }
+.dk-tabbar { display: flex; overflow-x: auto; border-bottom: 1px solid var(--border); scrollbar-width: none; }
+.dk-tabbar button { flex: 0 0 auto; background: none; border: 0; color: var(--muted); font-family: var(--font-mono); font-size: .8rem; padding: 12px 16px; cursor: pointer; border-bottom: 2px solid transparent; }
+.dk-tabbar button[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+.dk-tabpanel { padding: 16px 18px; }
+.dk-tabpanel[hidden] { display: none; }
+.dk-tabpanel p:last-child { margin-bottom: 0; }
+.dk-acc { border: 1px solid var(--border); border-radius: 12px; margin: 10px 0; background: var(--surface); }
+.dk-acc summary { cursor: pointer; list-style: none; padding: 14px 44px 14px 16px; font-family: var(--font-display); font-weight: 700; font-size: .9rem; color: var(--text); position: relative; }
+.dk-acc summary::-webkit-details-marker { display: none; }
+.dk-acc summary::after { content: '+'; position: absolute; right: 16px; top: 10px; font-size: 1.3rem; color: var(--accent); transition: transform .2s; }
+.dk-acc[open] summary::after { transform: rotate(45deg); }
+.dk-acc .in { padding: 0 16px 14px; }
+.dk-acc .in p:last-child { margin-bottom: 0; }
+.dk-badge { display: inline-block; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; padding: 2px 8px; border-radius: 20px; margin-right: 6px; vertical-align: 2px; }
+.dk-badge.r { background: rgba(255,77,109,.15); color: #ff8aa0; }
+.dk-badge.y { background: rgba(245,166,35,.15); color: #f7c06a; }
+.dk-badge.g { background: rgba(0,232,122,.15); color: var(--accent); }
+.dk-check { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; margin: 24px 0; }
+.dk-check .hd { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 10px; flex-wrap: wrap; }
+.dk-check .hd b { font-family: var(--font-display); font-size: .95rem; }
+.dk-check .sc { font-family: var(--font-display); font-weight: 800; color: var(--accent); font-size: 1rem; }
+.dk-bar { height: 8px; background: #0a1611; border-radius: 6px; overflow: hidden; margin-bottom: 12px; }
+.dk-bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #ff4d6d, #f5a623, #00e87a); background-size: 300% 100%; transition: width .35s, background-position .35s; }
+.dk-check label { display: flex; gap: 10px; align-items: flex-start; padding: 9px 0; border-top: 1px solid rgba(26,48,40,.7); cursor: pointer; font-size: .85rem; color: #b9d4c7; line-height: 1.55; }
+.dk-check label:first-of-type { border-top: 0; }
+.dk-check input { margin-top: 4px; accent-color: #00e87a; width: 16px; height: 16px; flex: 0 0 auto; }
+.dk-check .msg { margin-top: 10px; font-size: .84rem; color: var(--text); min-height: 1.3em; }
+.dk-steps { counter-reset: s; margin: 22px 0; padding: 0; list-style: none; }
+.dk-steps > li { counter-increment: s; position: relative; padding: 0 0 18px 46px; border-left: 2px solid var(--border); margin-left: 15px; }
+.dk-steps > li:last-child { border-left-color: transparent; padding-bottom: 0; }
+.dk-steps > li::before { content: counter(s); position: absolute; left: -16px; top: -2px; width: 30px; height: 30px; border-radius: 50%; background: #0a2018; border: 2px solid var(--accent); color: var(--accent); font-family: var(--font-display); font-weight: 800; font-size: .85rem; display: flex; align-items: center; justify-content: center; }
+.dk-steps > li b.t { display: block; font-family: var(--font-display); font-size: .95rem; color: var(--text); margin-bottom: 4px; }
+.dk-steps > li p { margin-bottom: 8px; }
+.dk-quiz { background: linear-gradient(135deg, rgba(167,139,250,.10), rgba(0,184,217,.06)); border: 1px solid rgba(167,139,250,.4); border-radius: 14px; padding: 16px 18px; margin: 26px 0; }
+.dk-quiz .q { font-family: var(--font-display); font-weight: 700; font-size: .95rem; margin-bottom: 12px; color: var(--text); }
+.dk-quiz button.o { display: block; width: 100%; text-align: left; background: rgba(6,13,10,.6); border: 1px solid var(--border); color: #b9d4c7; font-family: var(--font-mono); font-size: .82rem; padding: 10px 12px; border-radius: 10px; margin: 6px 0; cursor: pointer; line-height: 1.5; }
+.dk-quiz button.o.right { border-color: var(--accent); color: var(--accent); }
+.dk-quiz button.o.wrong { border-color: #ff4d6d; color: #ff8aa0; }
+.dk-quiz .ex { display: none; margin-top: 10px; font-size: .84rem; color: var(--text); line-height: 1.6; }
+.dk-quiz.done .ex { display: block; }
+.dk-code { position: relative; }
+.dk-code button.cp { position: absolute; top: 10px; right: 10px; background: #0a2018; border: 1px solid var(--border); color: var(--muted); font-family: var(--font-mono); font-size: .72rem; padding: 4px 10px; border-radius: 6px; cursor: pointer; }
+.dk-code button.cp:hover { color: var(--accent); border-color: var(--accent); }
+.dk-vs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
+@media(max-width:600px){ .dk-vs { grid-template-columns: 1fr; } }
+.dk-vs > div { border-radius: 12px; padding: 14px 16px; border: 1px solid; }
+.dk-vs .no { background: rgba(255,77,109,.06); border-color: rgba(255,77,109,.35); }
+.dk-vs .yes { background: rgba(0,232,122,.06); border-color: rgba(0,232,122,.35); }
+.dk-vs b.h { display: block; font-family: var(--font-display); font-size: .8rem; margin-bottom: 6px; }
+.dk-vs .no b.h { color: #ff8aa0; } .dk-vs .yes b.h { color: var(--accent); }
+.dk-vs p { margin: 0 !important; font-size: .84rem !important; }
+.dk-src { font-size: .74rem !important; color: #6f9483 !important; border-top: 1px solid var(--border); padding-top: 14px; margin-top: 30px; }
+.dk-src a { color: #8ab5a0 !important; }
+.dk-upd { color: var(--accent); }
+/* ==== /DERİN YAZI KİTİ ==== */
 </style>
 </head>
 <body>
@@ -212,46 +339,155 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: fle
   <div class="blog-hero">
     <span class="blog-category">Hatalar</span>
     <h1>AI Görünürlüğünde <em>En Sık 7 Hata</em> ve Çözümleri</h1>
-    <div class="blog-meta"><span>📅 28 Haziran 2026</span><span>✍️ Scanliq Ekibi</span><span>⏱️ 8 dk okuma</span></div>
+    <div class="blog-meta"><span class="dk-upd">🔄 Güncellendi: 19 Ekim 2026</span><span>📅 28 Haziran 2026</span><span>✍️ Scanliq Ekibi</span><span>⏱️ 11 dk okuma</span></div>
   </div>
-  <div class="blog-content">
-    <p>Sitenizi yapay zekaya hazırlamak için çabalıyorsunuz ama sonuç alamıyor musunuz? Sorun, çoğu zaman fark edilmeyen küçük ama kritik hatalardır. İşte <strong>AI görünürlüğünü baltalayan en sık 7 hata</strong> — ve her birinin çözümü. Sitenizi bu hatalara karşı kontrol edin.</p>
+  <div class="blog-content deep">
+    <p>Sitenizi yapay zekaya hazırlamak için emek veriyorsunuz ama ChatGPT, Gemini ya da <a href="/blog7.html" data-il="1">Perplexity</a> sizi bir türlü <a href="/blog9.html" data-il="1">kaynak göstermiyor</a> mu? Sorun çoğu zaman büyük bir eksiklik değil, gözden kaçan küçük ama ölümcül hatalardır. Bu rehberde yapay zeka görünürlüğünü baltalayan en sık 7 hatayı; <strong>belirtisi, nasıl kontrol edileceği ve çözümüyle</strong> birlikte anlatıyoruz. Sonda da bizim kendi sitemizde yaşadığımız gerçek bir hatayı paylaşıyoruz.</p>
 
-    <div class="info-box">
-      <p><strong>Not:</strong> Bu hataların çoğu tek tek küçük görünür ama birikince sitenizi AI motorlarında tamamen görünmez yapabilir. İyi haber: hepsi düzeltilebilir.</p>
+    <div class="dk-tldr">
+      <b class="k">Kısaca</b>
+      <ul>
+        <li>En ölümcül hata, yapay zeka botlarını <strong>robots.txt veya CDN ayarlarıyla</strong> farkında olmadan engellemek.</li>
+        <li>Eğitim botu ile arama botu farklıdır: GPTBot'u engellemek ChatGPT aramasından çıkmak demek değildir; <strong>OAI-SearchBot</strong>'u engellemek ise öyledir.</li>
+        <li>Yapay zeka tarayıcılarının çoğu <strong>JavaScript çalıştırmaz</strong>; içerik HTML'de yoksa yok sayılır.</li>
+        <li>Genel, kanıtsız içerik alıntılanmaz. Somut veri, net tanım ve uzman kimliği alıntılanır.</li>
+        <li>Hepsini aşağıdaki interaktif listeyle 5 dakikada kontrol edebilirsiniz.</li>
+      </ul>
     </div>
 
-    <h2>Hata 1: AI Botlarını Engellemek</h2>
-    <p>En yaygın ve en ölümcül hata. robots.txt dosyanız GPTBot, ClaudeBot veya PerplexityBot'u engelliyorsa, diğer her şeyi mükemmel yapsanız bile AI sitenizi göremez. <a href="/blog4.html">robots.txt'nizi kontrol edin</a>.</p>
+    <details class="dk-toc" open>
+      <summary>📑 İçindekiler</summary>
+      <ol>
+        <li><a href="#h1">Yapay zeka botlarını engellemek</a></li>
+        <li><a href="#h2">JavaScript'e gömülü içerik</a></li>
+        <li><a href="#h3">Yapısal veri eksikliği</a></li>
+        <li><a href="#h4">Genel ve kanıtsız içerik</a></li>
+        <li><a href="#h5">Güven sinyallerini ihmal etmek</a></li>
+        <li><a href="#h6">Tek bir motora odaklanmak</a></li>
+        <li><a href="#h7">Bir kez yapıp unutmak</a></li>
+        <li><a href="#h8">Bonus: Bizim yaptığımız hata</a></li>
+        <li><a href="#h9">Hangi hatalar sizde var?</a></li>
+      </ol>
+    </details>
 
-    <h2>Hata 2: llms.txt Dosyasının Olmaması</h2>
-    <p><a href="/blog1.html" data-il="1">llms.txt</a>, yapay zekaya sitenizi tanıtan yeni standarttır. Olmaması, AI'a kendinizi tanıtma fırsatını kaçırmaktır. <a href="/blog5.html">Ücretsiz şablonumuzla</a> dakikalar içinde ekleyin.</p>
+    <div class="dk-c tip">
+      <b class="h">Nasıl okunur?</b>
+      <p><span class="dk-badge r">Kritik</span> sizi tamamen görünmez yapabilir. <span class="dk-badge y">Önemli</span> alıntılanma şansınızı ciddi düşürür. <span class="dk-badge g">İyileştirme</span> rekabette fark yaratır.</p>
+    </div>
 
-    <h2>Hata 3: Yapısal Veri Eksikliği</h2>
-    <p>Schema.org ve JSON-LD olmadan, AI içeriğinizin ne hakkında olduğunu tahmin etmek zorunda kalır. Yapısal veri, AI'a içeriğinizi net anlatır. <a href="/blog3.html">Schema rehberimize</a> bakın.</p>
+    <h2 id="h1">Hata 1: Yapay Zeka Botlarını Engellemek</h2>
+    <p><span class="dk-badge r">Kritik</span> En yaygın ve en ölümcül hata. Diğer her şeyi mükemmel yapsanız bile, bot sitenize giremiyorsa yapay zeka sizi okuyamaz, dolayısıyla öneremez.</p>
+    <p><strong>Belirti:</strong> Siteniz Google'da görünüyor ama ChatGPT veya Perplexity'ye adını sorduğunuzda "bu siteye erişemiyorum" ya da eski, yanlış bilgi veriyor.</p>
+    <p><strong>Neden olur?</strong> Üç yaygın sebep var:</p>
+    <ul class="dl">
+      <li>robots.txt dosyasında eski bir "tüm botları engelle" kuralı ya da hazır temadan gelen bot listesi.</li>
+      <li><strong>CDN/güvenlik duvarı ayarı:</strong> Cloudflare, Temmuz 2025'ten beri yeni eklenen alan adlarında yapay zeka tarayıcılarını varsayılan olarak engelliyor. Siteniz Cloudflare arkasındaysa panelde "AI botlarını engelle" ayarını kontrol edin.</li>
+      <li>Hosting firmasının, yoğun trafik yapan botları otomatik engelleyen güvenlik kuralları.</li>
+    </ul>
 
-    <h2>Hata 4: JavaScript'e Gömülü İçerik</h2>
-    <p>İçeriğiniz JavaScript ile yükleniyorsa, çoğu AI botu onu göremez. Tarayıcıda güzel görünen sayfa, AI için boş olabilir. <a href="/blog17.html">Hayalet sayfa sorununu</a> okuyun.</p>
+    <h3>Eğitim botu ≠ arama botu</h3>
+    <p>Birçok site sahibi "yapay zeka içeriğimi eğitimde kullanmasın" diye tüm botları kapatıyor ve farkında olmadan aramadan da çıkıyor. Oysa botlar iki ayrı iş yapar:</p>
+    <div class="table-wrap"><table>
+      <tr><th>Şirket</th><th>Eğitim botu</th><th>Arama / yanıt botu</th></tr>
+      <tr><td>OpenAI</td><td>GPTBot</td><td>OAI-SearchBot, ChatGPT-User</td></tr>
+      <tr><td>Anthropic</td><td>ClaudeBot</td><td>Claude-SearchBot, Claude-User</td></tr>
+      <tr><td>Perplexity</td><td>(eğitim için ayrı bot yok)</td><td>PerplexityBot, Perplexity-User</td></tr>
+      <tr><td>Google</td><td>Google-Extended (bir kontrol işareti)</td><td>Googlebot (AI Overview dahil)</td></tr>
+    </table></div>
+    <p>Yani eğitime kapalı ama aramada görünür olmak mümkün: GPTBot'u engelleyip OAI-SearchBot'a izin verebilirsiniz. Google tarafında Google-Extended'ı engellemek, sitenizin <a href="/blog6.html" data-il="1">AI Overview</a>'da görünmesini engellemez; AI Overview normal Googlebot taramasını kullanır.</p>
+    <p><strong>Nasıl kontrol edilir?</strong> Tarayıcıda <code>siteniz.com/robots.txt</code> adresini açın ve yukarıdaki bot adlarının altında <code>Disallow: /</code> olup olmadığına bakın. Adım adım anlatım için <a href="/blog4.html">robots.txt kontrol rehberimize</a> bakın.</p>
 
-    <h2>Hata 5: Zayıf, Genel İçerik</h2>
-    <p>"Kaliteli hizmet, uygun fiyat" gibi genel ifadeler AI için değersizdir. AI, spesifik, doğrulanabilir, net bilgiyi alıntılar. <a href="/blog9.html">AI alıntılama</a> mantığını öğrenin.</p>
+    <h2 id="h2">Hata 2: JavaScript'e Gömülü İçerik</h2>
+    <p><span class="dk-badge r">Kritik</span> Tarayıcınızda kusursuz görünen bir sayfa, yapay zeka botu için bomboş olabilir.</p>
+    <p><strong>Neden?</strong> Googlebot JavaScript'i çalıştırıp sayfayı "boyar", ama GPTBot ve ClaudeBot gibi yapay zeka tarayıcılarının büyük kısmı JavaScript çalıştırmaz; sadece sunucudan gelen ham HTML'i okur. Vercel'in yapay zeka tarayıcıları üzerine yaptığı analiz de bu tarayıcıların JavaScript'i işlemediğini gösterdi. İçeriğiniz sayfa açıldıktan sonra JavaScript ile yükleniyorsa (birçok React/Vue sitesinde, bazı site kurucularında ve "sonsuz kaydırma" listelerinde olduğu gibi), yapay zeka sadece boş bir iskelet görür.</p>
+    <p><strong>Nasıl kontrol edilir?</strong> Sayfanızda sağ tıklayıp "Sayfa kaynağını görüntüle" deyin (ya da <code>view-source:</code> ile açın) ve ana metninizden bir cümle arayın. Cümle kaynakta yoksa, yapay zeka da göremiyor demektir.</p>
+    <p><strong>Çözüm:</strong> Sunucu tarafında oluşturma (SSR) veya statik sayfa üretimi (SSG). Konuyu tüm ayrıntısıyla <a href="/blog17.html">JavaScript ve hayalet sayfalar rehberimizde</a> anlattık.</p>
 
-    <h2>Hata 6: Tek Bir Motora Odaklanmak</h2>
-    <p>Sadece ChatGPT'yi düşünüp Google AI, <a href="/blog7.html" data-il="1">Perplexity</a> ve Copilot'u ihmal etmek, kitlenizin büyük kısmını kaçırmaktır. <a href="/blog11.html">Dört motoru birden</a> hedefleyin.</p>
+    <h2 id="h3">Hata 3: Yapısal Veri Eksikliği</h2>
+    <p><span class="dk-badge y">Önemli</span> Yapısal veri (Schema.org, JSON-LD), sayfanızın ne olduğunu makinenin anlayacağı dille söyler: "Bu bir makale, yazarı şu, yayın tarihi şu", "Bu bir ürün, fiyatı şu, stokta var", "Bu bir SSS".</p>
+    <p><strong>Belirti:</strong> Yapay zeka sitenizden bahsederken işletme türünüzü, fiyatınızı veya tarihleri yanlış söylüyor.</p>
+    <p><strong>Çözüm:</strong> En az üç tür ekleyin: tüm sitede <code>Organization</code> (veya <a href="/blog16.html" data-il="1">yerel işletmeyseniz</a> <code>LocalBusiness</code>), içerik sayfalarında <code>Article</code>, soru-cevap bölümlerinde <code>FAQPage</code>. Kod örnekleri için <a href="/blog3.html">Schema.org rehberimize</a> bakın.</p>
+    <div class="dk-c warn"><b class="h">⚠️ Sık görülen alt hata</b><p>Yapısal verideki bilgi ile sayfada görünen bilgi farklı olmamalı. Örneğin şemada 4,9 puan yazıp sayfada hiç yorum göstermemek, güveni artırmaz, azaltır.</p></div>
 
-    <h2>Hata 7: Bir Kez Yapıp Unutmak</h2>
-    <p>AI görünürlüğü statik değildir. Algoritmalar değişir, içeriğiniz eskir, rakipleriniz gelişir. Düzenli kontrol etmezseniz, kazandığınız görünürlüğü kaybedersiniz. <a href="/blog15.html">Kontrol listemizi</a> düzenli uygulayın.</p>
+    <h2 id="h4">Hata 4: Genel ve Kanıtsız İçerik</h2>
+    <p><span class="dk-badge y">Önemli</span> Yapay zeka bir yanıt oluştururken alıntılayabileceği <strong>somut cümleler</strong> arar. "Kaliteli hizmet, uygun fiyat, müşteri memnuniyeti" gibi her sitede geçen ifadeler, alıntılanacak hiçbir şey sunmaz.</p>
+    <div class="dk-vs">
+      <div class="no"><b class="h">❌ Alıntılanmaz</b><p>"Kombi bakımında uzman ekibimizle hızlı ve kaliteli hizmet sunuyoruz."</p></div>
+      <div class="yes"><b class="h">✅ Alıntılanır</b><p>"Yıllık kombi bakımı ortalama 45 dakika sürer; filtre temizliği, baca gazı ölçümü ve basınç kontrolünü kapsar. Üretici garantisinin devamı için yılda bir bakım önerilir."</p></div>
+    </div>
+    <p><strong>Çözüm:</strong> Her önemli soruya ilk cümlede net bir cevap verin, ardından detaylandırın. Sayı, süre, fiyat aralığı, karşılaştırma gibi doğrulanabilir bilgiler ekleyin. Formülü <a href="/blog21.html">yapay zeka için içerik yazma rehberimizde</a> adım adım anlattık. Mevcut bir yazınızı <a href="/content-analyzer.html">ücretsiz içerik analizi aracımızla</a> test edebilirsiniz.</p>
+
+    <h2 id="h5">Hata 5: Güven Sinyallerini İhmal Etmek</h2>
+    <p><span class="dk-badge y">Önemli</span> Yapay zeka, özellikle sağlık, para ve hukuk gibi konularda "bunu kim söylüyor?" sorusuna bakar. Yazarı belli olmayan, iletişim bilgisi gizli, tarihi olmayan bir sayfa, içeriği iyi olsa bile geri planda kalır.</p>
+    <p><strong>Çözüm:</strong> Yazar adı ve kısa özgeçmişi, "Hakkımızda" ve iletişim sayfaları, yayın ve güncelleme tarihleri, gerçek fotoğraflar ve birinci elden deneyim. Bunların hepsi <a href="/blog10.html">E-E-A-T</a> çerçevesinin parçası; uygulama adımları için <a href="/blog22.html">güven sinyalleri rehberimize</a> bakın.</p>
+
+    <h2 id="h6">Hata 6: Tek Bir Motora Odaklanmak</h2>
+    <p><span class="dk-badge g">İyileştirme</span> "ChatGPT'de görünürsem yeter" yaklaşımı, kitlenin önemli bir kısmını kaçırır. Her motorun beslendiği kaynak farklıdır:</p>
+    <ul class="dl">
+      <li><strong>Google AI Overview ve AI Mode:</strong> Google'ın kendi dizini. Klasik SEO temeli burada belirleyici.</li>
+      <li><strong>ChatGPT ve <a href="/blog11.html" data-il="1">Copilot</a>:</strong> Büyük ölçüde Bing dizini. Bing Webmaster Tools'a sitenizi eklemediyseniz eksik kalırsınız.</li>
+      <li><strong>Perplexity:</strong> Kendi dizini ve canlı arama; net, güncel ve alıntılanabilir içeriği sever.</li>
+      <li><strong>Claude:</strong> Kendi tarayıcıları ve web araması; <a href="/blog13.html">Claude rehberimizde</a> ayrıntılar var.</li>
+    </ul>
+    <p><strong>Çözüm:</strong> Google Search Console'un yanında <strong>Bing Webmaster Tools</strong>'a da kaydolun ve sitemap'inizi gönderin. On dakikalık bu iş, ChatGPT ve Copilot görünürlüğünüzün altyapısını kurar.</p>
+
+    <h2 id="h7">Hata 7: Bir Kez Yapıp Unutmak</h2>
+    <p><span class="dk-badge g">İyileştirme</span> Yapay zeka görünürlüğü statik değildir. Botların adları ve kuralları değişir, platformlar yeni veri kaynakları ekler, rakipleriniz içeriklerini günceller, sizin içeriğiniz eskir. Bir CMS güncellemesi robots.txt'nizi sıfırlayabilir; yeni bir eklenti sayfalarınıza fark etmeden <code>noindex</code> ekleyebilir.</p>
+    <p><strong>Çözüm:</strong> Ayda bir 15 dakikalık bir rutin: robots.txt kontrolü, Search Console'da dizine eklenme raporu, birkaç test sorusunu yapay zekaya sormak ve en önemli 5 sayfanızın tarihini ve bilgilerini güncellemek. Tam liste için <a href="/blog15.html">AI SEO kontrol listemize</a> bakın. Yapay zekadan gelen ziyaretleri ölçmek için de <a href="/blog12.html">AI trafiği rehberimiz</a> var.</p>
+
+    <h2 id="h8">Bonus: Bizim Yaptığımız Hata (Gerçek Vaka)</h2>
+    <p>Bu hatayı kendi sitemiz scanliq.com'da yaşadık; paylaşmak istiyoruz çünkü çok sık görülüyor ve fark edilmesi zor.</p>
+    <p>Sitemizi kurarken bir süre hem <code>www.scanliq.com</code> hem <code>scanliq.com</code> adresleri yayındaydı ve yönlendirme ayarı değiştirildi. O dönemde Google sayfalarımızın bir kısmını taradığında <strong>"Yeniden yönlendirme hatası"</strong> aldı. Sorunu düzelttikten sonra bile Google o sayfalara aylarca geri dönmedi. Ekim 2026'da yaptığımız denetimde 55 sayfamızdan 10'u hâlâ bu eski hata yüzünden dizin dışındaydı. Search Console'da kayıtlı dört farklı sitemap adresinden biri de www'lu eski adresti ve 55 sayfanın 0'ını dizinde gösteriyordu.</p>
+    <div class="dk-c ok"><b class="h">✅ Ne yaptık?</b>
+      <p>1) Tüm adreslerin tek adımda doğru adrese (https, www'suz) 301 ile gittiğini doğruladık. 2) Eski ve hatalı sitemap kayıtlarını silip tek bir doğru sitemap gönderdik. 3) Etkilenen sayfalar için Search Console'dan yeniden tarama istedik. 4) Siteiçi linkleri güçlendirdik ki Google bu sayfalara daha çok yoldan ulaşsın.</p>
+    </div>
+    <p><strong>Ders:</strong> Alan adı, https veya www ayarını değiştirdiyseniz, aylar sonra bile Search Console'daki "Sayfa dizine ekleme" raporuna bakın. Teknik sorun çoktan çözülmüş olsa bile Google'ın hafızası güncellenmemiş olabilir.</p>
+
+    <h2 id="h9">Hangi Hatalar Sizde Var?</h2>
+    <p>Sitenizde <strong>doğru olanları</strong> işaretleyin. Hiçbir bilgi kaydedilmez.</p>
+    <div class="dk-check" data-levels='[[0,"Acil durum: önce bot erişimini ve JavaScript sorununu kontrol edin."],[40,"Yarı yoldasınız; önce kritik (kırmızı) maddeleri tamamlayın."],[70,"İyi gidiyorsunuz. Eksik kalanlar sizi rakiplerden ayıracak."],[100,"Harika! Aylık rutini sürdürün ve sonuçları ölçün."]]'>
+      <div class="hd"><b>7 hata kontrolü</b><span class="sc">0 / 10</span></div>
+      <div class="dk-bar"><i></i></div>
+      <label><input type="checkbox"> robots.txt'de OAI-SearchBot, PerplexityBot, Claude-SearchBot, Bingbot ve Googlebot engellenmiyor</label>
+      <label><input type="checkbox"> CDN / güvenlik duvarında "AI botlarını engelle" ayarı bilinçli olarak yapılandırıldı</label>
+      <label><input type="checkbox"> Ana içerik, sayfa kaynağında (HTML) görünüyor</label>
+      <label><input type="checkbox"> Organization / Article / FAQPage yapısal verisi var</label>
+      <label><input type="checkbox"> Önemli sorulara ilk cümlede net cevap veriliyor</label>
+      <label><input type="checkbox"> İçeriklerde somut veri, sayı ve örnek var</label>
+      <label><input type="checkbox"> Yazar, hakkımızda ve iletişim bilgileri açık</label>
+      <label><input type="checkbox"> Bing Webmaster Tools'a kayıtlıyım ve sitemap gönderdim</label>
+      <label><input type="checkbox"> Search Console'da dizine eklenme raporunu son 1 ayda kontrol ettim</label>
+      <label><input type="checkbox"> Yapay zekaya sitemi ayda bir soruyor ve sonuçları not ediyorum</label>
+      <div class="msg"></div>
+    </div>
+
+    <div class="dk-quiz">
+      <div class="q">🧠 Mini test: Sitenizin AI Overview'da görünmesini istiyor ama Gemini eğitimine içerik vermek istemiyorsunuz. Ne yaparsınız?</div>
+      <button class="o" type="button">Googlebot'u robots.txt ile engellerim</button>
+      <button class="o" type="button" data-right>Google-Extended'ı engeller, Googlebot'a izin veririm</button>
+      <button class="o" type="button">llms.txt dosyasını silerim</button>
+      <div class="ex">Doğru cevap: Google-Extended. Bu işaret Gemini eğitimi gibi kullanımları kontrol eder ama arama sonuçlarını ve AI Overview'u etkilemez. Googlebot'u engellemek ise sizi Google aramasından tamamen çıkarır.</div>
+    </div>
+
+    <div class="dk-c idea">
+      <b class="h">llms.txt hakkında dürüst bir not</b>
+      <p>Eski sürümümüzde llms.txt eksikliğini de bir "hata" olarak saymıştık. Güncel durum şu: llms.txt önerilmiş bir standart. Google, Arama ve AI Overview için kullanmadığını açıkça söyledi. Bazı yapay zeka araçları ve ajanlar ise okuyabiliyor. Eklemesi birkaç dakika sürdüğü için zararı yok, ama yukarıdaki 7 hatanın yerine geçmez. Ayrıntılar <a href="/blog1.html">llms.txt rehberimizde</a>.</p>
+    </div>
 
     <div class="cta-box">
-      <h3>Bu 7 hatadan kaçı sizde var?</h3>
-      <p>Scanliq, sitenizi tüm bu hatalara karşı saniyeler içinde kontrol eder ve çözüm üretir.</p>
+      <h3>Bu hatalardan kaçı sizde var?</h3>
+      <p>Scanliq, bot erişiminden yapısal veriye kadar 30'dan fazla sinyali saniyeler içinde ücretsiz kontrol eder ve neyi düzeltmeniz gerektiğini söyler.</p>
       <a class="cta-btn" href="https://scanliq.com/">Ücretsiz Analiz →</a>
     </div>
 
     <h2>Sık Sorulan Sorular</h2>
-    <div class="faq-item"><div class="faq-q">AI görünürlüğündeki en kritik hata nedir?</div><div class="faq-a">AI botlarını robots.txt ile engellemek en ölümcül hatadır. Bu durumda diğer her şeyi mükemmel yapsanız bile AI sitenizi göremez.</div></div>
-    <div class="faq-item"><div class="faq-q">Bu hataları nasıl tespit ederim?</div><div class="faq-a">Manuel kontrol mümkün ama zaman alır. Scanliq gibi araçlar tüm bu hataları otomatik tespit edip çözüm önerir.</div></div>
-    <div class="faq-item"><div class="faq-q">Hataları düzeltmek ne kadar sürer?</div><div class="faq-a">Çoğu hata (robots.txt, llms.txt, schema) dakikalar içinde düzeltilebilir. JavaScript render gibi bazıları daha fazla teknik çalışma gerektirir.</div></div>
+    <div class="faq-item"><div class="faq-q">Yapay zeka görünürlüğündeki en kritik hata nedir?</div><div class="faq-a">Yapay zeka botlarını robots.txt, CDN veya güvenlik duvarı ayarlarıyla farkında olmadan engellemek. Bot sitenize giremiyorsa, içeriğiniz ne kadar iyi olursa olsun yapay zeka sizi okuyamaz ve öneremez.</div></div>
+    <div class="faq-item"><div class="faq-q">GPTBot'u engellersem ChatGPT'de görünmez miyim?</div><div class="faq-a">Hayır, GPTBot OpenAI'ın eğitim botudur. ChatGPT aramasında görünürlük için OAI-SearchBot'a ve kullanıcı isteklerinde ChatGPT-User'a izin vermeniz yeterlidir. GPTBot'u engelleyip bu ikisine izin vererek eğitime kapalı, aramaya açık kalabilirsiniz.</div></div>
+    <div class="faq-item"><div class="faq-q">Bu hataları nasıl tespit ederim?</div><div class="faq-a">robots.txt dosyanızı ve sayfa kaynağınızı elle kontrol edebilir, Search Console ve Bing Webmaster Tools raporlarına bakabilirsiniz. Scanliq gibi araçlar bu kontrollerin çoğunu tek seferde otomatik yapar.</div></div>
+    <div class="faq-item"><div class="faq-q">Hataları düzeltmek ne kadar sürer?</div><div class="faq-a">robots.txt, yapısal veri ve Bing Webmaster kaydı gibi hatalar dakikalar içinde düzeltilir. JavaScript ile yüklenen içerik ise sitenin altyapısına bağlı olarak daha fazla teknik çalışma gerektirebilir. Düzeltmelerin yapay zeka yanıtlarına yansıması ise birkaç gün ile birkaç hafta sürebilir.</div></div>
+    <div class="faq-item"><div class="faq-q">llms.txt dosyası olmaması bir hata mı?</div><div class="faq-a">Kritik bir hata değil. llms.txt önerilmiş bir standarttır; Google, Arama ve AI Overview için kullanmadığını açıkladı. Eklemesi kolay ve zararsız olduğu için önerilir, ancak bot erişimi, içerik kalitesi ve yapısal veri çok daha belirleyicidir.</div></div>
+
+    <p class="dk-src">Kaynaklar ve notlar: Bot adları ve işlevleri OpenAI, Anthropic, Perplexity ve Google'ın yayımladığı tarayıcı belgelerine dayanır. Cloudflare'in varsayılan engelleme kararı Temmuz 2025'te duyuruldu. JavaScript bulgusu: Vercel, "The rise of the AI crawler". Google'ın llms.txt açıklaması 2025'te Search Engine Land'de haberleştirildi. Bonus bölümdeki veriler scanliq.com'un kendi Search Console denetimine aittir. Son kontrol: Ekim 2026.</p>
 
     <div class="share-bar">
       <span class="share-label">Bu yazıyı paylaş:</span>
@@ -304,5 +540,52 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: fle
   <div>© 2026 Scanliq</div>
 </footer>
 </div>
+
+<script>
+/* deep-kit: sekmeler, kontrol listeleri, test, kopyala */
+(function(){
+  document.querySelectorAll('.dk-tabs').forEach(function(box){
+    var btns = box.querySelectorAll('.dk-tabbar button'), panes = box.querySelectorAll('.dk-tabpanel');
+    btns.forEach(function(b, i){ b.addEventListener('click', function(){
+      btns.forEach(function(x, j){ x.setAttribute('aria-selected', j === i ? 'true' : 'false'); });
+      panes.forEach(function(p, j){ p.hidden = j !== i; });
+    }); });
+  });
+  document.querySelectorAll('.dk-check').forEach(function(box){
+    var inputs = box.querySelectorAll('input[type=checkbox]'), bar = box.querySelector('.dk-bar i'),
+        sc = box.querySelector('.sc'), msg = box.querySelector('.msg'), levels = [];
+    try { levels = JSON.parse(box.getAttribute('data-levels') || '[]'); } catch(e) {}
+    function upd(){
+      var n = 0; inputs.forEach(function(i){ if (i.checked) n++; });
+      var pct = inputs.length ? Math.round(n * 100 / inputs.length) : 0;
+      bar.style.width = pct + '%'; bar.style.backgroundPosition = (100 - pct) + '% 0';
+      sc.textContent = n + ' / ' + inputs.length;
+      var m = ''; levels.forEach(function(l){ if (pct >= l[0]) m = l[1]; });
+      msg.textContent = m;
+    }
+    inputs.forEach(function(i){ i.addEventListener('change', upd); }); upd();
+  });
+  document.querySelectorAll('.dk-quiz').forEach(function(q){
+    q.querySelectorAll('button.o').forEach(function(b){ b.addEventListener('click', function(){
+      if (q.classList.contains('done')) return;
+      q.classList.add('done');
+      q.querySelectorAll('button.o').forEach(function(x){ if (x.hasAttribute('data-right')) x.classList.add('right'); });
+      if (!b.hasAttribute('data-right')) b.classList.add('wrong');
+    }); });
+  });
+  document.querySelectorAll('.dk-code').forEach(function(c){
+    var btn = document.createElement('button'); btn.className = 'cp'; btn.type = 'button';
+    var lbl = document.documentElement.lang === 'en' ? ['Copy', 'Copied ✓'] : ['Kopyala', 'Kopyalandı ✓'];
+    btn.textContent = lbl[0]; c.appendChild(btn);
+    btn.addEventListener('click', function(){
+      var t = c.querySelector('pre').innerText;
+      (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).catch(function(){
+        var ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+      });
+      btn.textContent = lbl[1]; setTimeout(function(){ btn.textContent = lbl[0]; }, 1800);
+    });
+  });
+})();
+</script>
 </body>
 </html>

@@ -74,9 +74,46 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {"@type":"Question","name":"Yerel işletmem için en önemli AI adımı nedir?","acceptedAnswer":{"@type":"Answer","text":"LocalBusiness Schema eklemek en kritik adımdır. İşletme adı, adres, telefon ve çalışma saatlerini AI'ın net anlamasını sağlar."}},
-    {"@type":"Question","name":"Sosyal medyam varsa web sitesi gerekli mi?","acceptedAnswer":{"@type":"Answer","text":"Evet. AI motorları öncelikle web sitenizi okur. Sosyal medya tek başına yerel AI görünürlüğü için yeterli değildir."}},
-    {"@type":"Question","name":"Birden fazla şubem için ne yapmalıyım?","acceptedAnswer":{"@type":"Answer","text":"Her konum için ayrı, içerik dolu sayfalar oluşturun ve her birinde LocalBusiness Schema kullanın."}}
+    {
+      "@type": "Question",
+      "name": "Yerel işletmem için en önemli yapay zeka adımı nedir?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Google İşletme Profilinizi eksiksiz doldurmak ve isim, adres, telefon bilgilerinizi her platformda birebir aynı tutmak. Ardından Bing Places kaydı ve web sitenize LocalBusiness yapısal verisi eklemek gelir."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Sosyal medyam varsa web sitesi gerekli mi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Evet. Yapay zeka asistanları ağırlıklı olarak web sitelerini, harita kayıtlarını ve yorum platformlarını okur. Sadece sosyal medya hesabı olan bir işletme yapay zeka önerilerinde büyük ölçüde görünmez kalır."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "ChatGPT yerel işletme bilgisini nereden alıyor?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ChatGPT'nin web araması büyük ölçüde Bing dizinine ve OpenAI'ın tarayıcısı OAI-SearchBot'un topladığı sayfalara dayanır. Yerel sorgularda üçüncü taraf yer verisi sağlayıcılarından gelen bilgiler de kullanılıyor. Bu yüzden Bing Places kaydı ve botlara açık bir web sitesi önemlidir."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Birden fazla şubem için ne yapmalıyım?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Her şube için ayrı Google İşletme Profili ve sitenizde ayrı, içerik dolu bir şube sayfası oluşturun. Her şube sayfasında o şubenin kendi adresi ve telefonuyla LocalBusiness yapısal verisi kullanın."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Sonuçları görmek ne kadar sürer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Profil ve kayıt güncellemeleri genellikle birkaç gün ile birkaç hafta içinde yansır. Yorum ve içerik kaynaklı iyileşmeler ise aylar içinde birikerek etkisini gösterir. Bu yüzden her ay aynı test sorularıyla ölçüm yapmak önemlidir."
+      }
+    }
   ]
 }
 </script>
@@ -180,6 +217,96 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: fle
 .footer-links { display: flex; gap: 8px 20px; flex-wrap: wrap; }
 .footer-links a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: var(--accent); }
+
+/* ==== DERİN YAZI KİTİ (deep-kit) ==== */
+.blog-content.deep p, .blog-content.deep li { font-size: 0.9rem; line-height: 1.85; }
+.blog-content.deep p { color: #b9d4c7; }
+.blog-content.deep ul.dl, .blog-content.deep ol.dl { margin: 0 0 18px 0; padding-left: 20px; color: #b9d4c7; }
+.blog-content.deep ul.dl li, .blog-content.deep ol.dl li { margin-bottom: 8px; }
+.blog-content.deep h2 { font-size: 1.35rem; margin-top: 52px; scroll-margin-top: 16px; }
+.blog-content.deep h3 { font-size: 1.02rem; }
+.blog-content.deep a { color: var(--accent); text-decoration: underline; text-decoration-color: rgba(0,232,122,.35); text-underline-offset: 3px; }
+.blog-content.deep a.cta-btn { color: #060d0a; text-decoration: none; }
+.dk-tldr { background: linear-gradient(135deg, rgba(0,232,122,.10), rgba(0,184,217,.08)); border: 1px solid rgba(0,232,122,.35); border-radius: 14px; padding: 18px 20px; margin: 8px 0 28px; }
+.dk-tldr b.k { display: block; font-family: var(--font-display); font-size: .78rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.dk-tldr ul { margin: 0; padding-left: 18px; }
+.dk-tldr li { font-size: .88rem; color: var(--text); margin-bottom: 6px; line-height: 1.6; }
+.dk-toc { border: 1px dashed var(--border); border-radius: 12px; padding: 14px 18px; margin: 0 0 30px; }
+.dk-toc summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; font-size: .85rem; color: var(--text); }
+.dk-toc ol { margin: 10px 0 0; padding-left: 20px; }
+.dk-toc li { font-size: .82rem; margin: 5px 0; }
+.dk-toc a { color: var(--muted) !important; text-decoration: none !important; }
+.dk-toc a:hover { color: var(--accent) !important; }
+.dk-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 22px 0; }
+@media(max-width:600px){ .dk-stats { grid-template-columns: 1fr; } }
+.dk-stat { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px; }
+.dk-stat .n { font-family: var(--font-display); font-weight: 800; font-size: 1.25rem; color: var(--accent); line-height: 1.2; }
+.dk-stat .t { font-size: .78rem; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+.dk-c { border-radius: 12px; padding: 14px 18px; margin: 22px 0; border: 1px solid; }
+.dk-c p { margin: 0 !important; font-size: .86rem !important; }
+.dk-c p + p { margin-top: 8px !important; }
+.dk-c.tip { background: rgba(0,184,217,.08); border-color: rgba(0,184,217,.4); }
+.dk-c.warn { background: rgba(245,166,35,.08); border-color: rgba(245,166,35,.45); }
+.dk-c.bad { background: rgba(255,77,109,.07); border-color: rgba(255,77,109,.4); }
+.dk-c.ok { background: rgba(0,232,122,.07); border-color: rgba(0,232,122,.4); }
+.dk-c.idea { background: rgba(167,139,250,.08); border-color: rgba(167,139,250,.45); }
+.dk-c b.h { display: block; font-family: var(--font-display); font-size: .8rem; letter-spacing: .06em; margin-bottom: 6px; color: var(--text); }
+.dk-tabs { margin: 22px 0; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: var(--surface); }
+.dk-tabbar { display: flex; overflow-x: auto; border-bottom: 1px solid var(--border); scrollbar-width: none; }
+.dk-tabbar button { flex: 0 0 auto; background: none; border: 0; color: var(--muted); font-family: var(--font-mono); font-size: .8rem; padding: 12px 16px; cursor: pointer; border-bottom: 2px solid transparent; }
+.dk-tabbar button[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+.dk-tabpanel { padding: 16px 18px; }
+.dk-tabpanel[hidden] { display: none; }
+.dk-tabpanel p:last-child { margin-bottom: 0; }
+.dk-acc { border: 1px solid var(--border); border-radius: 12px; margin: 10px 0; background: var(--surface); }
+.dk-acc summary { cursor: pointer; list-style: none; padding: 14px 44px 14px 16px; font-family: var(--font-display); font-weight: 700; font-size: .9rem; color: var(--text); position: relative; }
+.dk-acc summary::-webkit-details-marker { display: none; }
+.dk-acc summary::after { content: '+'; position: absolute; right: 16px; top: 10px; font-size: 1.3rem; color: var(--accent); transition: transform .2s; }
+.dk-acc[open] summary::after { transform: rotate(45deg); }
+.dk-acc .in { padding: 0 16px 14px; }
+.dk-acc .in p:last-child { margin-bottom: 0; }
+.dk-badge { display: inline-block; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; padding: 2px 8px; border-radius: 20px; margin-right: 6px; vertical-align: 2px; }
+.dk-badge.r { background: rgba(255,77,109,.15); color: #ff8aa0; }
+.dk-badge.y { background: rgba(245,166,35,.15); color: #f7c06a; }
+.dk-badge.g { background: rgba(0,232,122,.15); color: var(--accent); }
+.dk-check { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; margin: 24px 0; }
+.dk-check .hd { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 10px; flex-wrap: wrap; }
+.dk-check .hd b { font-family: var(--font-display); font-size: .95rem; }
+.dk-check .sc { font-family: var(--font-display); font-weight: 800; color: var(--accent); font-size: 1rem; }
+.dk-bar { height: 8px; background: #0a1611; border-radius: 6px; overflow: hidden; margin-bottom: 12px; }
+.dk-bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #ff4d6d, #f5a623, #00e87a); background-size: 300% 100%; transition: width .35s, background-position .35s; }
+.dk-check label { display: flex; gap: 10px; align-items: flex-start; padding: 9px 0; border-top: 1px solid rgba(26,48,40,.7); cursor: pointer; font-size: .85rem; color: #b9d4c7; line-height: 1.55; }
+.dk-check label:first-of-type { border-top: 0; }
+.dk-check input { margin-top: 4px; accent-color: #00e87a; width: 16px; height: 16px; flex: 0 0 auto; }
+.dk-check .msg { margin-top: 10px; font-size: .84rem; color: var(--text); min-height: 1.3em; }
+.dk-steps { counter-reset: s; margin: 22px 0; padding: 0; list-style: none; }
+.dk-steps > li { counter-increment: s; position: relative; padding: 0 0 18px 46px; border-left: 2px solid var(--border); margin-left: 15px; }
+.dk-steps > li:last-child { border-left-color: transparent; padding-bottom: 0; }
+.dk-steps > li::before { content: counter(s); position: absolute; left: -16px; top: -2px; width: 30px; height: 30px; border-radius: 50%; background: #0a2018; border: 2px solid var(--accent); color: var(--accent); font-family: var(--font-display); font-weight: 800; font-size: .85rem; display: flex; align-items: center; justify-content: center; }
+.dk-steps > li b.t { display: block; font-family: var(--font-display); font-size: .95rem; color: var(--text); margin-bottom: 4px; }
+.dk-steps > li p { margin-bottom: 8px; }
+.dk-quiz { background: linear-gradient(135deg, rgba(167,139,250,.10), rgba(0,184,217,.06)); border: 1px solid rgba(167,139,250,.4); border-radius: 14px; padding: 16px 18px; margin: 26px 0; }
+.dk-quiz .q { font-family: var(--font-display); font-weight: 700; font-size: .95rem; margin-bottom: 12px; color: var(--text); }
+.dk-quiz button.o { display: block; width: 100%; text-align: left; background: rgba(6,13,10,.6); border: 1px solid var(--border); color: #b9d4c7; font-family: var(--font-mono); font-size: .82rem; padding: 10px 12px; border-radius: 10px; margin: 6px 0; cursor: pointer; line-height: 1.5; }
+.dk-quiz button.o.right { border-color: var(--accent); color: var(--accent); }
+.dk-quiz button.o.wrong { border-color: #ff4d6d; color: #ff8aa0; }
+.dk-quiz .ex { display: none; margin-top: 10px; font-size: .84rem; color: var(--text); line-height: 1.6; }
+.dk-quiz.done .ex { display: block; }
+.dk-code { position: relative; }
+.dk-code button.cp { position: absolute; top: 10px; right: 10px; background: #0a2018; border: 1px solid var(--border); color: var(--muted); font-family: var(--font-mono); font-size: .72rem; padding: 4px 10px; border-radius: 6px; cursor: pointer; }
+.dk-code button.cp:hover { color: var(--accent); border-color: var(--accent); }
+.dk-vs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
+@media(max-width:600px){ .dk-vs { grid-template-columns: 1fr; } }
+.dk-vs > div { border-radius: 12px; padding: 14px 16px; border: 1px solid; }
+.dk-vs .no { background: rgba(255,77,109,.06); border-color: rgba(255,77,109,.35); }
+.dk-vs .yes { background: rgba(0,232,122,.06); border-color: rgba(0,232,122,.35); }
+.dk-vs b.h { display: block; font-family: var(--font-display); font-size: .8rem; margin-bottom: 6px; }
+.dk-vs .no b.h { color: #ff8aa0; } .dk-vs .yes b.h { color: var(--accent); }
+.dk-vs p { margin: 0 !important; font-size: .84rem !important; }
+.dk-src { font-size: .74rem !important; color: #6f9483 !important; border-top: 1px solid var(--border); padding-top: 14px; margin-top: 30px; }
+.dk-src a { color: #8ab5a0 !important; }
+.dk-upd { color: var(--accent); }
+/* ==== /DERİN YAZI KİTİ ==== */
 </style>
 </head>
 <body>
@@ -212,43 +339,233 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: fle
   <div class="blog-hero">
     <span class="blog-category">Yerel İşletme</span>
     <h1>Yerel İşletmeler İçin <em>AI Görünürlüğü</em></h1>
-    <div class="blog-meta"><span>📅 28 Haziran 2026</span><span>✍️ Scanliq Ekibi</span><span>⏱️ 7 dk okuma</span></div>
+    <div class="blog-meta"><span class="dk-upd">🔄 Güncellendi: 19 Ekim 2026</span><span>📅 28 Haziran 2026</span><span>✍️ Scanliq Ekibi</span><span>⏱️ 10 dk okuma</span></div>
   </div>
-  <div class="blog-content">
-    <p>Bir kullanıcı ChatGPT'ye "yakınımdaki en iyi diş hekimi" veya "bu mahallede iyi bir kahveci" diye sorduğunda, yapay zeka birkaç işletme önerir. Peki sizin işletmeniz o önerilerin arasında mı? <strong>Yerel işletmeler için AI görünürlüğü, dijital tabelanın yeni hali.</strong> Bu yazıda, yerel işletmenizi ChatGPT, Google AI ve <a href="/blog7.html" data-il="1">Perplexity</a>'ye nasıl tanıtacağınızı anlatıyoruz.</p>
+  <div class="blog-content deep">
+    <p>Bir kullanıcı ChatGPT'ye "Kadıköy'de çocuklara iyi davranan bir diş hekimi önerir misin?" diye soruyor. Yapay zeka üç klinik sayıyor, her birinin neden önerildiğini bir cümleyle açıklıyor ve <a href="/blog9.html" data-il="1">kaynak gösteriyor</a>. Kullanıcı o üç kliniğin dışına neredeyse hiç bakmıyor. <strong>Yerel işletmeler için yapay zeka görünürlüğü, dijital tabelanın yeni hali.</strong> Bu rehberde yapay zekanın yerel önerileri hangi verilerden çıkardığını, işletmenizi bu listeye sokmak için neleri hangi sırayla yapmanız gerektiğini ve sonucu nasıl test edeceğinizi adım adım anlatıyoruz.</p>
 
-    <div class="info-box">
-      <p><strong>Neden kritik?</strong> Yerel aramaların büyük kısmı artık yapay zekaya yöneliyor. "En yakın", "önerir misin", "iyi bir yer" gibi sorularda görünmüyorsanız, potansiyel müşterileri rakiplerinize kaptırıyorsunuz.</p>
+    <div class="dk-tldr">
+      <b class="k">Kısaca</b>
+      <ul>
+        <li>Yapay zeka yerel öneriyi tek yerden değil; <strong>harita profilleri, yorum siteleri ve web sitenizden</strong> topladığı bilgilerin uyumundan çıkarır.</li>
+        <li>En kritik dört varlık: <strong>Google İşletme Profili, Bing Places, web siteniz ve yorumlarınız.</strong></li>
+        <li>İsim, adres, telefon (NAP) her yerde <strong>harfi harfine aynı</strong> olmalı; tutarsızlık güveni düşürür.</li>
+        <li>Web sitenizde <strong>LocalBusiness yapısal verisi</strong> ve gerçek müşteri sorularını yanıtlayan bir SSS bölümü olmalı.</li>
+        <li>Sonucu ölçmek kolay: aşağıdaki test sorularını her ay ChatGPT, Gemini ve Copilot'a sorun, not alın.</li>
+      </ul>
     </div>
 
-    <h2>Yerel AI Görünürlüğü Neden Farklı?</h2>
-    <p>Yerel işletmelerde AI, konuma dayalı öneriler yapar. Bu yüzden klasik GEO sinyallerine ek olarak <strong>konum bilgisi, işletme türü ve yerel güven sinyalleri</strong> kritik hale gelir. Yapay zeka, hangi işletmenin nerede olduğunu ve ne yaptığını net anlamalıdır.</p>
+    <details class="dk-toc" open>
+      <summary>📑 İçindekiler</summary>
+      <ol>
+        <li><a href="#y1">Yapay zeka yerel öneriyi nereden çıkarıyor?</a></li>
+        <li><a href="#y2">Temel kural: NAP ve varlık tutarlılığı</a></li>
+        <li><a href="#y3">7 adımlık yerel AI görünürlük planı</a></li>
+        <li><a href="#y4">Yorumlar neden yapay zeka için altın değerinde?</a></li>
+        <li><a href="#y5">Sektörünüze göre ipuçları</a></li>
+        <li><a href="#y6">Kendinizi test edin: 12 maddelik kontrol</a></li>
+        <li><a href="#y7">Görünürlüğünüzü nasıl ölçersiniz?</a></li>
+        <li><a href="#y8">En sık yapılan hatalar</a></li>
+      </ol>
+    </details>
 
-    <h2>Yerel İşletmeler İçin 5 Temel Adım</h2>
-    <h3>1. LocalBusiness Schema</h3>
-    <p>İşletmenizin adı, adresi, telefonu, çalışma saatleri ve konumu Schema.org LocalBusiness işaretlemesiyle belirtilmeli. Bu, AI'ın işletmenizi doğru anlamasının temelidir. <a href="/blog3.html">Schema.org rehberimize</a> bakın.</p>
-    <h3>2. Tutarlı NAP Bilgisi</h3>
-    <p>İsim, Adres, Telefon (NAP) bilgileri sitenizde ve tüm dizinlerde aynı olmalı. Tutarsızlık, AI'ın güvenini sarsar.</p>
-    <h3>3. Konum Sayfaları</h3>
-    <p>Birden fazla şubeniz varsa, her konum için ayrı, içerik dolu sayfalar oluşturun.</p>
-    <h3>4. Yerel Soru-Cevap</h3>
-    <p>"Park yeriniz var mı?", "Rezervasyon gerekir mi?" gibi yerel müşteri sorularını yanıtlayan FAQ blokları ekleyin. <a href="/blog9.html">AI alıntılama</a> için güçlüdür.</p>
-    <h3>5. AI Bot Erişimi</h3>
-    <p>robots.txt dosyanız AI botlarını engellememeli — yoksa işletmeniz hiçbir AI önerisinde çıkamaz. <a href="/blog4.html">robots.txt rehberimize</a> bakın.</p>
+    <h2 id="y1">Yapay Zeka Yerel Öneriyi Nereden Çıkarıyor?</h2>
+    <p>Klasik Google aramasında yerel sonuçlar büyük ölçüde harita paketinden gelir. Yapay zeka asistanlarında durum biraz farklı: model, birkaç farklı kaynaktan bilgi toplar, bunları karşılaştırır ve tutarlı görünen işletmeleri önerir. Platformlar veri kaynaklarının tamamını açıklamıyor; aşağıdaki tablo resmi açıklamalara ve sektördeki yaygın gözlemlere dayanıyor. Platformunuzu seçin:</p>
 
-    <h2>Yerel İşletmelerin En Büyük Hatası</h2>
-    <p>Çoğu yerel işletme, sadece sosyal medyaya güvenip kendi web sitesini ihmal eder. Ancak AI motorları öncelikle web sitenizi okur. Sağlam, yapısal veriyle donatılmış bir web sitesi, yerel AI görünürlüğünün temelidir. <a href="/blog8.html">GEO rehberimizle</a> başlayın.</p>
+    <div class="dk-tabs">
+      <div class="dk-tabbar" role="tablist">
+        <button role="tab" aria-selected="true">Google AI</button>
+        <button role="tab" aria-selected="false">ChatGPT</button>
+        <button role="tab" aria-selected="false">Copilot</button>
+        <button role="tab" aria-selected="false">Perplexity</button>
+        <button role="tab" aria-selected="false">Siri / Apple</button>
+      </div>
+      <div class="dk-tabpanel" role="tabpanel">
+        <p><strong>AI Overview ve AI Mode</strong>, Google'ın kendi verisini kullanır: Google İşletme Profili (eski adıyla Google My Business), Google Haritalar yorumları ve Google'ın dizine eklediği web sayfaları. Türkiye'de yerel aramaların büyük kısmı hâlâ Google'da başladığı için burası ilk durağınız. Profilinizdeki kategori, çalışma saatleri, hizmetler ve yorumlar doğrudan kullanılır.</p>
+        <p>Detaylar için <a href="/blog6.html">Google AI Overview rehberimize</a> bakın.</p>
+      </div>
+      <div class="dk-tabpanel" role="tabpanel" hidden>
+        <p>ChatGPT'nin web araması büyük ölçüde <strong>Bing dizinine</strong> ve OpenAI'ın kendi tarayıcısı <strong>OAI-SearchBot</strong>'un topladığı sayfalara dayanır. Yerel sorgularda ayrıca üçüncü taraf yer verisi sağlayıcılarından (sektörde Foursquare ve Yelp gibi kaynakların adı geçiyor) gelen işletme bilgileri ve harita kartları görülüyor.</p>
+        <p>Pratik sonuç: Bing'de görünmeyen ve web sitesi OAI-SearchBot'a kapalı olan bir işletmenin ChatGPT'de önerilmesi zorlaşır. Google profilinizdeki bilgiler ChatGPT'ye ancak başka kaynaklar üzerinden ulaşır.</p>
+      </div>
+      <div class="dk-tabpanel" role="tabpanel" hidden>
+        <p><strong>Microsoft Copilot</strong>, Bing'in yerel verisini kullanır: <strong>Bing Places for Business</strong> kayıtları ve Bing dizini. Bing Places, Google İşletme Profilinizi birkaç tıkla içe aktarmanıza izin verir. Bu yüzden en az emekle en çok kazanç sağlayan adımlardan biri.</p>
+        <p>Detaylar için <a href="/blog11.html">Bing Copilot rehberimize</a> bakın.</p>
+      </div>
+      <div class="dk-tabpanel" role="tabpanel" hidden>
+        <p><strong>Perplexity</strong>, kendi dizini ve canlı web aramasıyla çalışır; yerel sorularda sıklıkla yorum sitelerini, harita kayıtlarını ve işletmelerin kendi sitelerini kaynak gösterir. Burada en büyük fark yaratan şey, sitenizde açık, net ve alıntılanabilir bilgi olmasıdır: adres, hizmetler, fiyat aralığı, çalışma saatleri.</p>
+        <p>Detaylar için <a href="/blog7.html">Perplexity SEO rehberimize</a> bakın.</p>
+      </div>
+      <div class="dk-tabpanel" role="tabpanel" hidden>
+        <p>iPhone kullanıcıları "Siri, yakınımda açık eczane" dediğinde veri <strong>Apple Haritalar</strong>'dan gelir. İşletmenizi <strong>Apple Business Connect</strong> üzerinden ücretsiz sahiplenip saatlerinizi, fotoğraflarınızı ve iletişim bilgilerinizi güncelleyebilirsiniz. Türkiye'de iPhone kullanım oranı düşünüldüğünde bu adımı atlamamak gerekir.</p>
+      </div>
+    </div>
+
+    <div class="dk-c tip">
+      <b class="h">💡 Türkiye notu</b>
+      <p>Türkiye'de Yandex Haritalar da yaygın kullanılıyor. Yapay zeka asistanlarının doğrudan kaynağı olmasa bile, <strong>Yandex Business</strong> kaydı NAP tutarlılığınızı güçlendiren ek bir referans noktasıdır.</p>
+    </div>
+
+    <h2 id="y2">Temel Kural: NAP ve Varlık Tutarlılığı</h2>
+    <p>NAP; <strong>İsim (Name), Adres (Address), Telefon (Phone)</strong> demektir. Yapay zeka, aynı işletmeyle ilgili farklı kaynaklardaki bilgileri eşleştirmeye çalışır. Bilgiler birbirini tutuyorsa işletmenizi net bir "varlık" (entity) olarak tanır ve güvenle önerir. Tutmuyorsa, ya iki ayrı işletme sanar ya da hiç önermez.</p>
+
+    <div class="dk-vs">
+      <div class="no"><b class="h">❌ Tutarsız</b><p>Google: "Güneş Diş Kliniği"<br>Site: "Güneş Ağız ve Diş Sağlığı Polikliniği"<br>Instagram: "gunesdis_kadikoy"<br>Telefon: bir yerde sabit hat, bir yerde cep</p></div>
+      <div class="yes"><b class="h">✅ Tutarlı</b><p>Her yerde: "Güneş Diş Kliniği"<br>Aynı açık adres (mahalle, cadde, no, ilçe)<br>Aynı telefon, aynı biçimde: +90 216 …<br>Sosyal hesaplar siteye, site sosyal hesaplara link veriyor</p></div>
+    </div>
+
+    <p>Kısa bir egzersiz: işletmenizin adını Google'da, Bing'de, Apple Haritalar'da ve Instagram'da aratın. Dört sonucu yan yana koyun. İsim, adres ve telefon birebir aynı mı? Değilse, bu rehberdeki diğer her şeyden önce bunu düzeltin.</p>
+
+    <h2 id="y3">7 Adımlık Yerel AI Görünürlük Planı</h2>
+    <p>Adımlar etki ve kolaylık sırasına göre dizildi. İlk üçü birkaç saatinizi alır ama sonuçların büyük kısmını onlar belirler.</p>
+
+    <ol class="dk-steps">
+      <li><b class="t">Google İşletme Profilinizi eksiksiz doldurun</b>
+        <p>Doğru ana kategori (örneğin "Diş Kliniği", "Kafe"), ek kategoriler, çalışma saatleri (bayram saatleri dahil), hizmetler listesi, en az 10 güncel fotoğraf ve kısa bir işletme açıklaması. Açıklamada ne yaptığınızı ve nerede olduğunuzu düz bir cümleyle yazın.</p></li>
+      <li><b class="t">Bing Places'e kaydolun</b>
+        <p>Google profilinizi içe aktararak 10 dakikada bitirebilirsiniz. Copilot ve büyük ölçüde ChatGPT'nin yerel bilgisi buradan beslenir.</p></li>
+      <li><b class="t">Apple Business Connect ve Yandex Business</b>
+        <p>Siri ve Apple Haritalar için Apple Business Connect, Türkiye'deki ek doğrulama için Yandex Business. İkisinde de NAP bilgisini Google'dakiyle birebir aynı girin.</p></li>
+      <li><b class="t">Web sitenize LocalBusiness yapısal verisi ekleyin</b>
+        <p>Yapay zekaya işletmenizi makine diliyle anlatan koddur. Aşağıda kopyalayıp kendi bilgilerinizle değiştirebileceğiniz bir örnek var. Genel yapı için <a href="/blog3.html">Schema.org rehberimize</a> bakın.</p></li>
+      <li><b class="t">Her hizmet ve şube için ayrı sayfa açın</b>
+        <p>"İmplant", "Çocuk diş hekimliği", "Kadıköy şubesi" gibi her biri için en az birkaç paragraf özgün içerik içeren ayrı sayfalar. Yapay zeka "X semtinde Y hizmeti" sorusunu en iyi, tam olarak o konuyu anlatan bir sayfayla eşleştirir.</p></li>
+      <li><b class="t">Yorum toplamayı sisteme bağlayın</b>
+        <p>Hizmetten sonra müşteriye kısa bir mesajla yorum bağlantısı gönderin. Her yoruma, olumsuz olanlar dahil, kibar ve somut bir yanıt verin. Detaylar aşağıda.</p></li>
+      <li><b class="t">Sitenizi yapay zeka botlarına açık tutun</b>
+        <p>robots.txt dosyanız Googlebot, Bingbot, OAI-SearchBot, PerplexityBot ve Claude-SearchBot'u engellememeli. Hazır site paketlerinde bu engel bazen varsayılan olarak gelir. <a href="/blog4.html">robots.txt kontrol rehberimizle</a> 2 dakikada doğrulayın.</p></li>
+    </ol>
+
+    <h3>Kopyala-yapıştır LocalBusiness örneği</h3>
+    <p>Bu kodu sitenizin ana sayfasındaki <code>&lt;head&gt;</code> bölümüne ekleyin. <code>@type</code> alanında işletmenize en uygun alt türü kullanın: <code>Dentist</code>, <code>Restaurant</code>, <code>CafeOrCoffeeShop</code>, <code>HairSalon</code>, <code>Hotel</code>, <code>Plumber</code> gibi. Uygun alt tür yoksa <code>LocalBusiness</code> yazın.</p>
+    <div class="code-block dk-code">
+      <div class="code-label">JSON-LD · LocalBusiness</div>
+<pre>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "Dentist",
+  "name": "Güneş Diş Kliniği",
+  "url": "https://www.ornek-klinik.com/",
+  "image": "https://www.ornek-klinik.com/img/klinik.jpg",
+  "telephone": "+90-216-000-00-00",
+  "priceRange": "₺₺",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Örnek Cad. No: 10",
+    "addressLocality": "Kadıköy",
+    "addressRegion": "İstanbul",
+    "postalCode": "34710",
+    "addressCountry": "TR"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": 40.9903, "longitude": 29.0290 },
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+    "opens": "09:00", "closes": "19:00"
+  }],
+  "sameAs": [
+    "https://www.instagram.com/ornekklinik",
+    "https://maps.google.com/?cid=000000000"
+  ]
+}
+&lt;/script&gt;</pre>
+    </div>
+    <div class="dk-c warn">
+      <b class="h">⚠️ Dikkat</b>
+      <p>Koddaki bilgiler, Google İşletme Profilinizdekiyle birebir aynı olmalı. Yapısal verideki saatler ile profildeki saatler çelişirse, yapay zeka hangisine inanacağını bilemez. Yayınladıktan sonra Google'ın Zengin Sonuç Testi ile kodu doğrulayın.</p>
+    </div>
+
+    <h2 id="y4">Yorumlar Neden Yapay Zeka İçin Altın Değerinde?</h2>
+    <p>Yapay zeka bir işletmeyi önerirken "neden" sorusuna cevap vermek zorundadır: "Çocuklarla ilgilenmesiyle biliniyor", "fiyatları makul bulunuyor", "randevuya sadık". Bu gerekçeleri büyük ölçüde <strong>yorumların metninden</strong> çıkarır. Yani yıldız sayısı kadar, yorumlarda <em>ne yazdığı</em> da önemlidir.</p>
+    <div class="dk-stats">
+      <div class="dk-stat"><div class="n">Sayı</div><div class="t">Az sayıda yorum, yapay zekaya genelleme yapacak malzeme vermez.</div></div>
+      <div class="dk-stat"><div class="n">Tazelik</div><div class="t">Son aylarda gelen yorumlar, işletmenin hâlâ aktif ve iyi olduğunu gösterir.</div></div>
+      <div class="dk-stat"><div class="n">İçerik</div><div class="t">Hizmet adı, semt ve somut deneyim geçen yorumlar, sorulara doğrudan eşleşir.</div></div>
+    </div>
+    <p><strong>Pratik ipucu:</strong> Müşteriden yorum isterken "Hangi hizmeti aldığınızı ve memnun kaldığınız bir şeyi yazarsanız çok seviniriz" gibi yönlendirici ama baskısız bir cümle ekleyin. "İmplant tedavim çok rahat geçti" gibi bir yorum, "İmplant için Kadıköy'de iyi bir klinik" sorusuyla doğrudan eşleşir.</p>
+    <div class="dk-c bad">
+      <b class="h">🚫 Asla yapmayın</b>
+      <p>Sahte yorum satın almak, çalışanlara yorum yazdırmak veya yorum karşılığı indirim vermek Google'ın politikalarına aykırıdır. Profilinizin askıya alınmasına yol açabilir. Yapay zeka sistemleri de olağandışı yorum örüntülerini giderek daha iyi ayırt ediyor.</p>
+    </div>
+    <p>Olumsuz yorumlara verdiğiniz yanıtlar da sinyaldir. Savunmacı değil, çözüm odaklı ve somut yanıtlar, işletmenizin güvenilirliğini gösterir. Güven sinyallerinin genel mantığını <a href="/blog10.html">E-E-A-T rehberimizde</a> anlattık.</p>
+
+    <h2 id="y5">Sektörünüze Göre İpuçları</h2>
+    <details class="dk-acc"><summary>🍽️ Restoran ve kafe</summary><div class="in">
+      <p>Menünüzü PDF ya da fotoğraf olarak değil, <strong>sayfada metin olarak</strong> yayınlayın; yapay zeka görsel menüyü okuyamayabilir. "Vegan seçenek var mı?", "Çocuk sandalyesi var mı?", "Paket servis yapıyor musunuz?" sorularını SSS'de yanıtlayın. <code>Restaurant</code> şemasında <code>servesCuisine</code> ve <code>menu</code> alanlarını doldurun.</p>
+    </div></details>
+    <details class="dk-acc"><summary>🩺 Klinik ve sağlık</summary><div class="in">
+      <p>Her hekimin adı, uzmanlığı ve kısa özgeçmişi ayrı bir sayfada olsun. Tedavi sayfalarında süreç, süre ve iyileşme gibi bilgileri tıbbi doğruluğa dikkat ederek yazın. Sağlıkta yapay zeka daha temkinlidir; uzman kimliği ve şeffaflık burada belirleyicidir.</p>
+    </div></details>
+    <details class="dk-acc"><summary>🏨 Otel ve pansiyon</summary><div class="in">
+      <p>Oda tiplerini, olanakları (otopark, kahvaltı, evcil hayvan) ve konuma göre mesafeleri ("merkeze 5 dakika yürüme") açık metinle yazın. Yapay zeka "deniz manzaralı, evcil hayvan kabul eden otel" gibi çok kriterli sorularda bu ayrıntıları arar.</p>
+    </div></details>
+    <details class="dk-acc"><summary>🔧 Hizmet işletmeleri (tesisatçı, kuaför, oto servis)</summary><div class="in">
+      <p>Hizmet verdiğiniz semtleri tek tek listeleyin, acil hizmet saatlerinizi belirtin. Fiyat aralığı verebiliyorsanız verin: "Kombi bakımı 1.500–2.500 ₺" gibi somut bir bilgi, yapay zekanın yanıtına doğrudan girebilir.</p>
+    </div></details>
+    <details class="dk-acc"><summary>🛍️ Mağaza</summary><div class="in">
+      <p>Stokta tuttuğunuz markaları ve ürün gruplarını sayfada sayın. Online satış da yapıyorsanız <a href="/blog14.html">e-ticaret için GEO rehberimiz</a> size ayrıca yol gösterir.</p>
+    </div></details>
+
+    <h2 id="y6">Kendinizi Test Edin: 12 Maddelik Kontrol</h2>
+    <p>İşaretledikçe puanınız güncellenir. Hiçbir bilgi kaydedilmez; sayfayı yenileyince sıfırlanır.</p>
+    <div class="dk-check" data-levels='[[0,"Başlangıç: önce ilk üç maddeye odaklanın."],[34,"Temel atılmış. Yapısal veri ve yorum sistemi sırada."],[67,"Güçlü durumdasınız. Eksik kalanları tamamlayın ve ölçmeye başlayın."],[100,"Mükemmel! Şimdi her ay test sorularıyla sonucu takip edin."]]'>
+      <div class="hd"><b>Yerel AI hazırlık kontrolü</b><span class="sc">0 / 12</span></div>
+      <div class="dk-bar"><i></i></div>
+      <label><input type="checkbox"> Google İşletme Profilim doğrulandı ve tüm alanları dolu</label>
+      <label><input type="checkbox"> Bing Places kaydım var</label>
+      <label><input type="checkbox"> Apple Business Connect kaydım var</label>
+      <label><input type="checkbox"> İsim, adres ve telefon her platformda birebir aynı</label>
+      <label><input type="checkbox"> Web sitemde LocalBusiness yapısal verisi var</label>
+      <label><input type="checkbox"> Her ana hizmetin ayrı bir sayfası var</label>
+      <label><input type="checkbox"> Sitemde müşteri sorularını yanıtlayan bir SSS bölümü var</label>
+      <label><input type="checkbox"> Son 3 ayda yeni yorumlar aldım</label>
+      <label><input type="checkbox"> Yorumların çoğuna yanıt verdim</label>
+      <label><input type="checkbox"> robots.txt dosyam yapay zeka botlarını engellemiyor</label>
+      <label><input type="checkbox"> Menü, fiyat veya hizmet listem sayfada metin olarak duruyor</label>
+      <label><input type="checkbox"> Yapay zekaya işletmemi her ay soruyorum ve not alıyorum</label>
+      <div class="msg"></div>
+    </div>
+
+    <h2 id="y7">Görünürlüğünüzü Nasıl Ölçersiniz?</h2>
+    <p>Yerel AI görünürlüğünü ölçmenin en güvenilir yolu, müşterilerinizin soracağı soruları sizin de sormanızdır. Aşağıdaki kalıpları kendi sektörünüze ve semtinize göre doldurun. Her ay ChatGPT, Gemini ve Copilot'a, mümkünse oturum açmadan ya da gizli pencereden sorun. Sonuçları bir tabloya not edin: önerildiniz mi, kaçıncı sıradaydınız, gerekçe ne yazıyordu?</p>
+    <div class="code-block dk-code">
+      <div class="code-label">Test soruları (kendi bilgilerinizle doldurun)</div>
+<pre>[Semt]'te iyi bir [hizmet] önerir misin?
+[Şehir]'de [özellik] olan [işletme türü] hangileri?
+[İşletme adınız] hakkında ne biliyorsun? Adresi ve saatleri ne?
+[Semt] civarında hafta sonu açık [işletme türü] var mı?
+[Rakip adı] yerine alternatif önerir misin?</pre>
+    </div>
+    <p>Üçüncü soru özellikle önemli: yapay zeka işletmeniz hakkında yanlış bilgi veriyorsa (eski adres, yanlış saat), bu tutarsızlığın nereden geldiğini bulup düzeltmeniz gerekir. Web sitenize yapay zeka kaynaklı ziyaretçi gelip gelmediğini görmek için <a href="/blog12.html">AI trafiğini ölçme rehberimize</a> bakın.</p>
+
+    <h2 id="y8">En Sık Yapılan Hatalar</h2>
+    <div class="dk-c bad"><b class="h">1. Sadece sosyal medyaya güvenmek</b><p>Instagram sayfası iyi bir vitrin olsa da yapay zeka asistanları ağırlıklı olarak web sitelerini, harita kayıtlarını ve yorum platformlarını okur. Sadece Instagram'ı olan bir işletme, yapay zeka için büyük ölçüde görünmezdir.</p></div>
+    <div class="dk-c bad"><b class="h">2. Saatleri güncellememek</b><p>Bayram, tatil ve sezon saatlerini güncellememek, yapay zekanın "şu an açık" diye yanlış bilgi vermesine yol açar. Kullanıcı kapıda kalınca hem müşteri hem güven kaybedilir.</p></div>
+    <div class="dk-c bad"><b class="h">3. Her şeyi tek sayfaya sıkıştırmak</b><p>On hizmeti tek bir "Hizmetlerimiz" listesinde iki kelimeyle geçmek, hiçbirinin yapay zekada eşleşmemesi demektir.</p></div>
+    <div class="dk-c bad"><b class="h">4. Taşınıp eski kayıtları unutmak</b><p>Adres değiştiyse eski adres hâlâ bir dizinde, eski bir haberde ya da yorum sitesinde duruyor olabilir. Bulabildiğiniz her kaydı güncelleyin.</p></div>
+
+    <div class="dk-quiz">
+      <div class="q">🧠 Mini test: Copilot'ta görünmek için en hızlı adım hangisi?</div>
+      <button class="o" type="button">Instagram'da daha sık paylaşım yapmak</button>
+      <button class="o" type="button" data-right>Bing Places'e kaydolup Google profilini içe aktarmak</button>
+      <button class="o" type="button">Web sitesine daha çok anahtar kelime eklemek</button>
+      <div class="ex">Doğru cevap: Bing Places. Copilot yerel bilgiyi büyük ölçüde Bing'in verisinden alır. Google İşletme Profilinizi içe aktararak bu adımı dakikalar içinde tamamlayabilirsiniz.</div>
+    </div>
 
     <div class="cta-box">
-      <h3>İşletmeniz AI önerilerinde çıkıyor mu?</h3>
-      <p>Scanliq ile yerel işletmenizin AI görünürlüğünü ücretsiz analiz edin.</p>
+      <h3>İşletmenizin sitesi yapay zekaya hazır mı?</h3>
+      <p>Scanliq, sitenizin yapay zeka botlarına açık olup olmadığını, yapısal verinizi ve 30'dan fazla sinyali ücretsiz kontrol eder.</p>
       <a class="cta-btn" href="https://scanliq.com/">Ücretsiz Analiz →</a>
     </div>
 
     <h2>Sık Sorulan Sorular</h2>
-    <div class="faq-item"><div class="faq-q">Yerel işletmem için en önemli AI adımı nedir?</div><div class="faq-a">LocalBusiness Schema eklemek en kritik adımdır. İşletme adı, adres, telefon ve çalışma saatlerini AI'ın net anlamasını sağlar.</div></div>
-    <div class="faq-item"><div class="faq-q">Sosyal medyam varsa web sitesi gerekli mi?</div><div class="faq-a">Evet. AI motorları öncelikle web sitenizi okur. Sosyal medya tek başına yerel AI görünürlüğü için yeterli değildir.</div></div>
-    <div class="faq-item"><div class="faq-q">Birden fazla şubem için ne yapmalıyım?</div><div class="faq-a">Her konum için ayrı, içerik dolu sayfalar oluşturun ve her birinde LocalBusiness Schema kullanın.</div></div>
+    <div class="faq-item"><div class="faq-q">Yerel işletmem için en önemli yapay zeka adımı nedir?</div><div class="faq-a">Google İşletme Profilinizi eksiksiz doldurmak ve isim, adres, telefon bilgilerinizi her platformda birebir aynı tutmak. Ardından Bing Places kaydı ve web sitenize LocalBusiness yapısal verisi eklemek gelir.</div></div>
+    <div class="faq-item"><div class="faq-q">Sosyal medyam varsa web sitesi gerekli mi?</div><div class="faq-a">Evet. Yapay zeka asistanları ağırlıklı olarak web sitelerini, harita kayıtlarını ve yorum platformlarını okur. Sadece sosyal medya hesabı olan bir işletme yapay zeka önerilerinde büyük ölçüde görünmez kalır.</div></div>
+    <div class="faq-item"><div class="faq-q">ChatGPT yerel işletme bilgisini nereden alıyor?</div><div class="faq-a">ChatGPT'nin web araması büyük ölçüde Bing dizinine ve OpenAI'ın tarayıcısı OAI-SearchBot'un topladığı sayfalara dayanır. Yerel sorgularda üçüncü taraf yer verisi sağlayıcılarından gelen bilgiler de kullanılıyor. Bu yüzden Bing Places kaydı ve botlara açık bir web sitesi önemlidir.</div></div>
+    <div class="faq-item"><div class="faq-q">Birden fazla şubem için ne yapmalıyım?</div><div class="faq-a">Her şube için ayrı Google İşletme Profili ve sitenizde ayrı, içerik dolu bir şube sayfası oluşturun. Her şube sayfasında o şubenin kendi adresi ve telefonuyla LocalBusiness yapısal verisi kullanın.</div></div>
+    <div class="faq-item"><div class="faq-q">Sonuçları görmek ne kadar sürer?</div><div class="faq-a">Profil ve kayıt güncellemeleri genellikle birkaç gün ile birkaç hafta içinde yansır. Yorum ve içerik kaynaklı iyileşmeler ise aylar içinde birikerek etkisini gösterir. Bu yüzden her ay aynı test sorularıyla ölçüm yapmak önemlidir.</div></div>
+
+    <p class="dk-src">Kaynaklar ve notlar: Platformların yerel veri kaynakları resmi açıklamalara ve sektör gözlemlerine dayanır; platformlar bu kaynakları değiştirebilir. Bing Places'in Google İşletme Profili içe aktarma özelliği ve Apple Business Connect ücretsiz hizmetlerdir. Yapısal veri türleri için: <a href="https://schema.org/LocalBusiness" rel="noopener" target="_blank">schema.org/LocalBusiness</a>. Son kontrol: Ekim 2026.</p>
 
     <div class="share-bar">
       <span class="share-label">Bu yazıyı paylaş:</span>
@@ -301,5 +618,52 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: fle
   <div>© 2026 Scanliq</div>
 </footer>
 </div>
+
+<script>
+/* deep-kit: sekmeler, kontrol listeleri, test, kopyala */
+(function(){
+  document.querySelectorAll('.dk-tabs').forEach(function(box){
+    var btns = box.querySelectorAll('.dk-tabbar button'), panes = box.querySelectorAll('.dk-tabpanel');
+    btns.forEach(function(b, i){ b.addEventListener('click', function(){
+      btns.forEach(function(x, j){ x.setAttribute('aria-selected', j === i ? 'true' : 'false'); });
+      panes.forEach(function(p, j){ p.hidden = j !== i; });
+    }); });
+  });
+  document.querySelectorAll('.dk-check').forEach(function(box){
+    var inputs = box.querySelectorAll('input[type=checkbox]'), bar = box.querySelector('.dk-bar i'),
+        sc = box.querySelector('.sc'), msg = box.querySelector('.msg'), levels = [];
+    try { levels = JSON.parse(box.getAttribute('data-levels') || '[]'); } catch(e) {}
+    function upd(){
+      var n = 0; inputs.forEach(function(i){ if (i.checked) n++; });
+      var pct = inputs.length ? Math.round(n * 100 / inputs.length) : 0;
+      bar.style.width = pct + '%'; bar.style.backgroundPosition = (100 - pct) + '% 0';
+      sc.textContent = n + ' / ' + inputs.length;
+      var m = ''; levels.forEach(function(l){ if (pct >= l[0]) m = l[1]; });
+      msg.textContent = m;
+    }
+    inputs.forEach(function(i){ i.addEventListener('change', upd); }); upd();
+  });
+  document.querySelectorAll('.dk-quiz').forEach(function(q){
+    q.querySelectorAll('button.o').forEach(function(b){ b.addEventListener('click', function(){
+      if (q.classList.contains('done')) return;
+      q.classList.add('done');
+      q.querySelectorAll('button.o').forEach(function(x){ if (x.hasAttribute('data-right')) x.classList.add('right'); });
+      if (!b.hasAttribute('data-right')) b.classList.add('wrong');
+    }); });
+  });
+  document.querySelectorAll('.dk-code').forEach(function(c){
+    var btn = document.createElement('button'); btn.className = 'cp'; btn.type = 'button';
+    var lbl = document.documentElement.lang === 'en' ? ['Copy', 'Copied ✓'] : ['Kopyala', 'Kopyalandı ✓'];
+    btn.textContent = lbl[0]; c.appendChild(btn);
+    btn.addEventListener('click', function(){
+      var t = c.querySelector('pre').innerText;
+      (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).catch(function(){
+        var ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+      });
+      btn.textContent = lbl[1]; setTimeout(function(){ btn.textContent = lbl[0]; }, 1800);
+    });
+  });
+})();
+</script>
 </body>
 </html>

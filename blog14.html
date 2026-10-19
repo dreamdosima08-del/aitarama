@@ -74,9 +74,46 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {"@type":"Question","name":"E-ticaret için en önemli GEO adımı nedir?","acceptedAnswer":{"@type":"Answer","text":"Product Schema (ürün yapısal verisi) eklemek en kritik adımdır. Fiyat, stok, marka ve değerlendirme bilgisini AI'ın net anlamasını sağlar."}},
-    {"@type":"Question","name":"AI ürünümü neden önermiyor?","acceptedAnswer":{"@type":"Answer","text":"Muhtemel sebepler: ürün schema eksik, robots.txt AI botlarını engelliyor, ürün bilgisi JavaScript ile yükleniyor veya açıklamalar çok genel."}},
-    {"@type":"Question","name":"Küçük e-ticaret siteleri de AI'da görünebilir mi?","acceptedAnswer":{"@type":"Answer","text":"Evet. İyi yapılandırılmış ürün sayfaları ve net açıklamalarla küçük siteler büyük rakiplerini AI önerilerinde geçebilir."}}
+    {
+      "@type": "Question",
+      "name": "E-ticaret için en önemli GEO adımı nedir?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ürün verinizi doğru ve tutarlı hale getirmek: her ürün sayfasında Product yapısal verisi, Google Merchant Center'da güncel bir feed ve sayfa, şema ve feed'de birebir aynı fiyat ve stok bilgisi."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "ChatGPT'de ürünlerim nasıl görünür?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ChatGPT ürün önerilerini ürün verisi sağlayıcılarından ve web aramasından besler. Shopify kullanıyorsanız ürünleriniz Shopify Catalog üzerinden ulaşabilir; diğer platformlarda OpenAI'a doğrudan ürün feed'i göndermek için başvurabilirsiniz. Ayrıca sitenizin OAI-SearchBot'a açık ve Bing'de dizinli olması gerekir."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Yapay zeka ürünümü neden önermiyor?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sık görülen sebepler: Product şemasının eksik olması, fiyat ve stok bilgisinin JavaScript ile yüklenmesi, robots.txt'nin yapay zeka botlarını engellemesi, ürün açıklamalarının ölçülebilir özellik içermemesi veya feed ile sayfa arasındaki fiyat tutarsızlığı."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Küçük e-ticaret siteleri de yapay zekada görünebilir mi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Evet. Yapay zeka, kullanıcının kriterlerine en iyi uyan ürünü arar. Niş bir ürünü en net anlatan, doğru verisi olan küçük bir site, genel açıklamalı büyük bir siteyi bu eşleşmede geçebilir."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Pazaryerinde satıyorsam kendi siteme gerek var mı?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pazaryerleri yapay zeka yanıtlarında sık kaynak gösterilir, ancak kendi siteniz ürünün ana kaynağı olmanızı ve marka güveni oluşturmanızı sağlar. Pazaryerinde olmayan detaylı rehber, karşılaştırma ve uyumluluk bilgilerini kendi sitenizde vermek fark yaratır."
+      }
+    }
   ]
 }
 </script>
@@ -180,6 +217,96 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: fle
 .footer-links { display: flex; gap: 8px 20px; flex-wrap: wrap; }
 .footer-links a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: var(--accent); }
+
+/* ==== DERİN YAZI KİTİ (deep-kit) ==== */
+.blog-content.deep p, .blog-content.deep li { font-size: 0.9rem; line-height: 1.85; }
+.blog-content.deep p { color: #b9d4c7; }
+.blog-content.deep ul.dl, .blog-content.deep ol.dl { margin: 0 0 18px 0; padding-left: 20px; color: #b9d4c7; }
+.blog-content.deep ul.dl li, .blog-content.deep ol.dl li { margin-bottom: 8px; }
+.blog-content.deep h2 { font-size: 1.35rem; margin-top: 52px; scroll-margin-top: 16px; }
+.blog-content.deep h3 { font-size: 1.02rem; }
+.blog-content.deep a { color: var(--accent); text-decoration: underline; text-decoration-color: rgba(0,232,122,.35); text-underline-offset: 3px; }
+.blog-content.deep a.cta-btn { color: #060d0a; text-decoration: none; }
+.dk-tldr { background: linear-gradient(135deg, rgba(0,232,122,.10), rgba(0,184,217,.08)); border: 1px solid rgba(0,232,122,.35); border-radius: 14px; padding: 18px 20px; margin: 8px 0 28px; }
+.dk-tldr b.k { display: block; font-family: var(--font-display); font-size: .78rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.dk-tldr ul { margin: 0; padding-left: 18px; }
+.dk-tldr li { font-size: .88rem; color: var(--text); margin-bottom: 6px; line-height: 1.6; }
+.dk-toc { border: 1px dashed var(--border); border-radius: 12px; padding: 14px 18px; margin: 0 0 30px; }
+.dk-toc summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; font-size: .85rem; color: var(--text); }
+.dk-toc ol { margin: 10px 0 0; padding-left: 20px; }
+.dk-toc li { font-size: .82rem; margin: 5px 0; }
+.dk-toc a { color: var(--muted) !important; text-decoration: none !important; }
+.dk-toc a:hover { color: var(--accent) !important; }
+.dk-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 22px 0; }
+@media(max-width:600px){ .dk-stats { grid-template-columns: 1fr; } }
+.dk-stat { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px; }
+.dk-stat .n { font-family: var(--font-display); font-weight: 800; font-size: 1.25rem; color: var(--accent); line-height: 1.2; }
+.dk-stat .t { font-size: .78rem; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+.dk-c { border-radius: 12px; padding: 14px 18px; margin: 22px 0; border: 1px solid; }
+.dk-c p { margin: 0 !important; font-size: .86rem !important; }
+.dk-c p + p { margin-top: 8px !important; }
+.dk-c.tip { background: rgba(0,184,217,.08); border-color: rgba(0,184,217,.4); }
+.dk-c.warn { background: rgba(245,166,35,.08); border-color: rgba(245,166,35,.45); }
+.dk-c.bad { background: rgba(255,77,109,.07); border-color: rgba(255,77,109,.4); }
+.dk-c.ok { background: rgba(0,232,122,.07); border-color: rgba(0,232,122,.4); }
+.dk-c.idea { background: rgba(167,139,250,.08); border-color: rgba(167,139,250,.45); }
+.dk-c b.h { display: block; font-family: var(--font-display); font-size: .8rem; letter-spacing: .06em; margin-bottom: 6px; color: var(--text); }
+.dk-tabs { margin: 22px 0; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: var(--surface); }
+.dk-tabbar { display: flex; overflow-x: auto; border-bottom: 1px solid var(--border); scrollbar-width: none; }
+.dk-tabbar button { flex: 0 0 auto; background: none; border: 0; color: var(--muted); font-family: var(--font-mono); font-size: .8rem; padding: 12px 16px; cursor: pointer; border-bottom: 2px solid transparent; }
+.dk-tabbar button[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+.dk-tabpanel { padding: 16px 18px; }
+.dk-tabpanel[hidden] { display: none; }
+.dk-tabpanel p:last-child { margin-bottom: 0; }
+.dk-acc { border: 1px solid var(--border); border-radius: 12px; margin: 10px 0; background: var(--surface); }
+.dk-acc summary { cursor: pointer; list-style: none; padding: 14px 44px 14px 16px; font-family: var(--font-display); font-weight: 700; font-size: .9rem; color: var(--text); position: relative; }
+.dk-acc summary::-webkit-details-marker { display: none; }
+.dk-acc summary::after { content: '+'; position: absolute; right: 16px; top: 10px; font-size: 1.3rem; color: var(--accent); transition: transform .2s; }
+.dk-acc[open] summary::after { transform: rotate(45deg); }
+.dk-acc .in { padding: 0 16px 14px; }
+.dk-acc .in p:last-child { margin-bottom: 0; }
+.dk-badge { display: inline-block; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; padding: 2px 8px; border-radius: 20px; margin-right: 6px; vertical-align: 2px; }
+.dk-badge.r { background: rgba(255,77,109,.15); color: #ff8aa0; }
+.dk-badge.y { background: rgba(245,166,35,.15); color: #f7c06a; }
+.dk-badge.g { background: rgba(0,232,122,.15); color: var(--accent); }
+.dk-check { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; margin: 24px 0; }
+.dk-check .hd { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 10px; flex-wrap: wrap; }
+.dk-check .hd b { font-family: var(--font-display); font-size: .95rem; }
+.dk-check .sc { font-family: var(--font-display); font-weight: 800; color: var(--accent); font-size: 1rem; }
+.dk-bar { height: 8px; background: #0a1611; border-radius: 6px; overflow: hidden; margin-bottom: 12px; }
+.dk-bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #ff4d6d, #f5a623, #00e87a); background-size: 300% 100%; transition: width .35s, background-position .35s; }
+.dk-check label { display: flex; gap: 10px; align-items: flex-start; padding: 9px 0; border-top: 1px solid rgba(26,48,40,.7); cursor: pointer; font-size: .85rem; color: #b9d4c7; line-height: 1.55; }
+.dk-check label:first-of-type { border-top: 0; }
+.dk-check input { margin-top: 4px; accent-color: #00e87a; width: 16px; height: 16px; flex: 0 0 auto; }
+.dk-check .msg { margin-top: 10px; font-size: .84rem; color: var(--text); min-height: 1.3em; }
+.dk-steps { counter-reset: s; margin: 22px 0; padding: 0; list-style: none; }
+.dk-steps > li { counter-increment: s; position: relative; padding: 0 0 18px 46px; border-left: 2px solid var(--border); margin-left: 15px; }
+.dk-steps > li:last-child { border-left-color: transparent; padding-bottom: 0; }
+.dk-steps > li::before { content: counter(s); position: absolute; left: -16px; top: -2px; width: 30px; height: 30px; border-radius: 50%; background: #0a2018; border: 2px solid var(--accent); color: var(--accent); font-family: var(--font-display); font-weight: 800; font-size: .85rem; display: flex; align-items: center; justify-content: center; }
+.dk-steps > li b.t { display: block; font-family: var(--font-display); font-size: .95rem; color: var(--text); margin-bottom: 4px; }
+.dk-steps > li p { margin-bottom: 8px; }
+.dk-quiz { background: linear-gradient(135deg, rgba(167,139,250,.10), rgba(0,184,217,.06)); border: 1px solid rgba(167,139,250,.4); border-radius: 14px; padding: 16px 18px; margin: 26px 0; }
+.dk-quiz .q { font-family: var(--font-display); font-weight: 700; font-size: .95rem; margin-bottom: 12px; color: var(--text); }
+.dk-quiz button.o { display: block; width: 100%; text-align: left; background: rgba(6,13,10,.6); border: 1px solid var(--border); color: #b9d4c7; font-family: var(--font-mono); font-size: .82rem; padding: 10px 12px; border-radius: 10px; margin: 6px 0; cursor: pointer; line-height: 1.5; }
+.dk-quiz button.o.right { border-color: var(--accent); color: var(--accent); }
+.dk-quiz button.o.wrong { border-color: #ff4d6d; color: #ff8aa0; }
+.dk-quiz .ex { display: none; margin-top: 10px; font-size: .84rem; color: var(--text); line-height: 1.6; }
+.dk-quiz.done .ex { display: block; }
+.dk-code { position: relative; }
+.dk-code button.cp { position: absolute; top: 10px; right: 10px; background: #0a2018; border: 1px solid var(--border); color: var(--muted); font-family: var(--font-mono); font-size: .72rem; padding: 4px 10px; border-radius: 6px; cursor: pointer; }
+.dk-code button.cp:hover { color: var(--accent); border-color: var(--accent); }
+.dk-vs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
+@media(max-width:600px){ .dk-vs { grid-template-columns: 1fr; } }
+.dk-vs > div { border-radius: 12px; padding: 14px 16px; border: 1px solid; }
+.dk-vs .no { background: rgba(255,77,109,.06); border-color: rgba(255,77,109,.35); }
+.dk-vs .yes { background: rgba(0,232,122,.06); border-color: rgba(0,232,122,.35); }
+.dk-vs b.h { display: block; font-family: var(--font-display); font-size: .8rem; margin-bottom: 6px; }
+.dk-vs .no b.h { color: #ff8aa0; } .dk-vs .yes b.h { color: var(--accent); }
+.dk-vs p { margin: 0 !important; font-size: .84rem !important; }
+.dk-src { font-size: .74rem !important; color: #6f9483 !important; border-top: 1px solid var(--border); padding-top: 14px; margin-top: 30px; }
+.dk-src a { color: #8ab5a0 !important; }
+.dk-upd { color: var(--accent); }
+/* ==== /DERİN YAZI KİTİ ==== */
 </style>
 </head>
 <body>
@@ -212,43 +339,177 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: fle
   <div class="blog-hero">
     <span class="blog-category">E-ticaret</span>
     <h1>E-ticaret İçin GEO: <em>Ürünleriniz AI'da Görünüyor mu?</em></h1>
-    <div class="blog-meta"><span>📅 25 Haziran 2026</span><span>✍️ Scanliq Ekibi</span><span>⏱️ 7 dk okuma</span></div>
+    <div class="blog-meta"><span class="dk-upd">🔄 Güncellendi: 19 Ekim 2026</span><span>📅 25 Haziran 2026</span><span>✍️ Scanliq Ekibi</span><span>⏱️ 11 dk okuma</span></div>
   </div>
-  <div class="blog-content">
-    <p>Bir kullanıcı ChatGPT'ye "en iyi kablosuz kulaklık hangisi" diye sorduğunda, yapay zeka birkaç ürün önerir ve kaynak gösterir. Peki sizin ürün sayfanız o önerilerin arasında mı? <strong>E-ticaret siteleri için AI görünürlüğü, yeni neslin raf görünürlüğüdür.</strong> Bu yazıda, ürün sayfalarınızı ChatGPT, Google AI ve <a href="/blog7.html" data-il="1">Perplexity</a>'ye nasıl açacağınızı anlatıyoruz.</p>
+  <div class="blog-content deep">
+    <p>Bir kullanıcı ChatGPT'ye "5.000 TL altında, gürültü engelleyen, uzun pil ömürlü kablosuz kulaklık önerir misin?" diye soruyor. Yapay zeka üç model öneriyor, her birinin neden uygun olduğunu açıklıyor ve satın alınabilecek mağazaları gösteriyor. Bu listede değilseniz, kullanıcı sizin ürün sayfanıza hiç gelmeyecek. <strong>E-ticarette yapay zeka görünürlüğü, yeni neslin raf görünürlüğüdür.</strong> Bu rehberde ChatGPT, Google AI Mode ve Perplexity'nin ürün önerilerini nereden çıkardığını ve ürün sayfalarınızı bu önerilere girecek şekilde nasıl hazırlayacağınızı adım adım anlatıyoruz.</p>
 
-    <div class="info-box">
-      <p><strong>Kritik gerçek:</strong> AI motorları artık ürün önerirken kaynak gösteriyor. Ürün sayfanız yapay zeka tarafından okunamıyorsa, rakipleriniz önerilirken siz görünmez kalırsınız.</p>
+    <div class="dk-tldr">
+      <b class="k">Kısaca</b>
+      <ul>
+        <li>Yapay zeka alışveriş önerileri iki kaynaktan beslenir: <strong>ürün veri akışları (feed)</strong> ve <strong>web sayfalarınızın içeriği</strong>. İkisi de doğru ve tutarlı olmalı.</li>
+        <li>Google tarafında anahtar <strong>Merchant Center</strong>; ChatGPT tarafında <strong>OpenAI ürün feed'i</strong> ve Shopify kullanıyorsanız Shopify Catalog.</li>
+        <li>Her ürün sayfasında <strong>Product yapısal verisi</strong> (fiyat, stok, marka, GTIN, yorum) olmalı.</li>
+        <li>"Harika ürün" yerine ölçülebilir özellikler yazın: yapay zeka, kullanıcının kriterlerini bu özelliklerle eşleştirir.</li>
+        <li>Fiyat, stok ve kargo bilgisi JavaScript'e gömülüyse yapay zeka göremeyebilir.</li>
+      </ul>
     </div>
 
-    <h2>AI Çağında E-ticaret Neden Değişti?</h2>
-    <p>Eskiden kullanıcı Google'da arar, on sonuç tarar, sitelere tek tek bakardı. Şimdi yapay zekaya soruyor ve sentezlenmiş bir öneri alıyor. Bu öneride yer almak, e-ticaret için hayati önem taşıyor.</p>
+    <details class="dk-toc" open>
+      <summary>📑 İçindekiler</summary>
+      <ol>
+        <li><a href="#e1">Yapay zeka ürün önerisini nasıl yapıyor?</a></li>
+        <li><a href="#e2">Platform platform: neyi nereye göndermelisiniz?</a></li>
+        <li><a href="#e3">Ürün sayfası için 6 adım</a></li>
+        <li><a href="#e4">Kopyala-yapıştır Product şeması</a></li>
+        <li><a href="#e5">Ürün açıklaması: önce ve sonra</a></li>
+        <li><a href="#e6">Pazaryerleri ve kendi siteniz</a></li>
+        <li><a href="#e7">Kontrol listesi</a></li>
+      </ol>
+    </details>
 
-    <h2>Ürün Sayfaları İçin GEO: 5 Temel Adım</h2>
-    <h3>1. Product Schema (Ürün Yapısal Verisi)</h3>
-    <p>Her ürün sayfası, Schema.org Product işaretlemesi içermelidir: fiyat, stok durumu, marka, değerlendirme puanı. Bu, AI'ın ürününüzü kesin anlamasını sağlar. <a href="/blog3.html">Schema.org rehberimize</a> bakın.</p>
-    <h3>2. Net Ürün Açıklamaları</h3>
-    <p>"Harika ürün" değil, "20 saat pil ömrü, aktif gürültü engelleme, Bluetooth 5.3" gibi spesifik, faktel açıklamalar yazın. AI spesifik veriyi alıntılamayı sever.</p>
-    <h3>3. Soru-Cevap Blokları</h3>
-    <p>"Bu kulaklık suya dayanıklı mı?" gibi gerçek müşteri sorularını yanıtlayan FAQ blokları ekleyin. <a href="/blog9.html">AI alıntılama</a> için en güçlü formattır.</p>
-    <h3>4. AI Bot Erişimi</h3>
-    <p><a href="/blog4.html" data-il="1">robots.txt</a> dosyanız ürün sayfalarını AI botlarına kapatmamalı. Birçok e-ticaret platformu varsayılan olarak bazı dizinleri engeller — kontrol edin.</p>
-    <h3>5. Değerlendirme ve Puanlar</h3>
-    <p>Yapısal veriyle işaretlenmiş gerçek müşteri değerlendirmeleri, AI'ın güven sinyali olarak değerlendirdiği önemli bir faktördür.</p>
+    <h2 id="e1">Yapay Zeka Ürün Önerisini Nasıl Yapıyor?</h2>
+    <p>Klasik aramada kullanıcı on sonuç görür, sitelere tek tek girer, karşılaştırır. Yapay zekada bu karşılaştırmayı model yapar. OpenAI'ın alışveriş açıklamalarına göre süreç kabaca iki aşamalı:</p>
+    <ol class="dk-steps">
+      <li><b class="t">Ürün seçimi</b><p>Model, kullanıcının isteğini ve sohbetteki bağlamı yorumlar ("5.000 TL altı", "gürültü engelleme", "uzun pil") ve bu kriterlere uyan ürünleri; üçüncü taraf sağlayıcılardan gelen yapılandırılmış ürün verisi ve web içerikleri üzerinden seçer. Kullanıcı fiyat sınırı veya belirli bir özellik verdiğinde, bu özellikler seçimde daha ağır basar.</p></li>
+      <li><b class="t">Satıcı seçimi</b><p>Ürün seçildikten sonra, onu satan mağazalar listelenir. Bu sıralamada stok durumu, fiyat, satıcının kalitesi ve satıcının ürünün üreticisi ya da ana satıcısı olup olmadığı gibi etkenler rol oynar.</p></li>
+    </ol>
+    <div class="dk-c idea"><b class="h">Bunun anlamı</b><p>Yapay zeka ürününüzü önermek için önce onun <strong>özelliklerini net olarak bilmeli</strong>, sonra sizin <strong>güncel fiyat ve stok bilginize</strong> güvenmeli. Eksik özellik verisi sizi ilk aşamada, eski veya tutarsız fiyat bilgisi ise ikinci aşamada eler.</p></div>
 
-    <h2>E-ticarette Sık Yapılan Hatalar</h2>
-    <p><a href="/blog17.html" data-il="1">JavaScript</a> ile yüklenen ürün bilgileri (AI okuyamayabilir), eksik ürün schema'sı, AI botlarını engelleyen robots.txt ve zayıf ürün açıklamaları — en yaygın görünmezlik sebepleridir. <a href="/blog8.html">GEO rehberimiz</a> temel prensipleri içerir.</p>
+    <h2 id="e2">Platform Platform: Neyi Nereye Göndermelisiniz?</h2>
+    <div class="dk-tabs">
+      <div class="dk-tabbar" role="tablist">
+        <button role="tab" aria-selected="true">Google AI Mode</button>
+        <button role="tab" aria-selected="false">ChatGPT</button>
+        <button role="tab" aria-selected="false">Perplexity</button>
+        <button role="tab" aria-selected="false">Copilot</button>
+      </div>
+      <div class="dk-tabpanel" role="tabpanel">
+        <p>Google'ın yapay zeka destekli alışveriş deneyimleri (AI Mode ve AI Overview'daki ürün önerileri), Google'ın <strong>Shopping Graph</strong>'ına dayanır. Bu veri büyük ölçüde <strong>Google Merchant Center</strong>'a gönderilen ürün feed'lerinden ve taranan ürün sayfalarından gelir.</p>
+        <p><strong>Yapılacak:</strong> Merchant Center hesabı açın, ürün feed'inizi bağlayın (ücretsiz listelemeler dahil), fiyat ve stok bilgisinin sitenizle birebir aynı olduğunu kontrol edin. Ayrıntılar için <a href="/blog6.html">AI Overview rehberimize</a> bakın.</p>
+      </div>
+      <div class="dk-tabpanel" role="tabpanel" hidden>
+        <p>ChatGPT'nin alışveriş önerileri, ürün verisi sağlayıcılarından ve web aramasından beslenir. OpenAI, satıcıların doğrudan ürün feed'i gönderebileceği bir yapı sunuyor. Feed'de kararlı ürün kimliği, başlık, açıklama, marka, ürün linki, görsel, fiyat ve stok zorunlu; varyantlar, kampanyalar, iade koşulları ve yorumlar gibi alanlar isteğe bağlı.</p>
+        <p><strong>Shopify kullanıyorsanız</strong> ürün verileriniz Shopify Catalog üzerinden ek kurulum gerekmeden ChatGPT'ye ulaşabiliyor. Diğer platformlarda doğrudan feed göndermek için başvuru yapmak gerekiyor. Uygun ürün ve satıcılarda kullanıcının ChatGPT içinden satın almasına izin veren <strong>Instant Checkout</strong> da devreye girebiliyor.</p>
+        <p>Feed olmasa bile, web siteniz <strong>OAI-SearchBot</strong>'a açık ve Bing'de dizinli olmalı; ChatGPT'nin web araması bu kaynakları kullanır.</p>
+      </div>
+      <div class="dk-tabpanel" role="tabpanel" hidden>
+        <p>Perplexity'nin alışveriş özellikleri, ürün sorularında karşılaştırmalı kartlar ve satın alma seçenekleri gösterir. Önerilerde web içeriği, inceleme siteleri ve satıcı verileri birlikte kullanılır.</p>
+        <p><strong>Yapılacak:</strong> PerplexityBot'a açık olun; ürün sayfalarınızda net teknik özellikler, karşılaştırma tabloları ve gerçek kullanıcı yorumları bulundurun. Bkz. <a href="/blog7.html">Perplexity SEO rehberi</a>.</p>
+      </div>
+      <div class="dk-tabpanel" role="tabpanel" hidden>
+        <p>Microsoft Copilot'un alışveriş önerileri Bing'in verisini kullanır. <strong>Microsoft Merchant Center</strong> üzerinden ürün feed'i gönderebilir, sitenizi Bing Webmaster Tools'a ekleyebilirsiniz. Google Merchant Center feed'inizi içe aktarma seçeneği işinizi hızlandırır.</p>
+        <p>Bkz. <a href="/blog11.html">Bing Copilot rehberimiz</a>.</p>
+      </div>
+    </div>
+    <div class="dk-c warn"><b class="h">⚠️ Dürüst bir uyarı</b><p>Feed göndermek veya platforma entegre olmak, ürününüzün önerileceğini <strong>garanti etmez</strong>. Seçimi platform yapar ve kriterleri zamanla değişebilir. Feed, kapıdan girmenizi sağlar; önerilmenizi ise ürün verinizin kalitesi, fiyatınız ve itibarınız belirler.</p></div>
+
+    <h2 id="e3">Ürün Sayfası İçin 6 Adım</h2>
+    <ol class="dk-steps">
+      <li><b class="t">Product yapısal verisi ekleyin</b><p>İsim, görsel, açıklama, marka, SKU, mümkünse GTIN (barkod), fiyat, para birimi, stok durumu, kargo ve iade bilgisi, ortalama puan. Aşağıda hazır bir örnek var. Genel kurallar için <a href="/blog3.html">Schema.org rehberimize</a> bakın.</p></li>
+      <li><b class="t">Ölçülebilir özellikler yazın</b><p>Kullanıcılar yapay zekaya kriterle soru soruyor: "su geçirmez mi", "kaç saat gidiyor", "ağırlığı ne". Bu bilgiler sayfada tablo veya liste olarak açıkça durmalı.</p></li>
+      <li><b class="t">Ürün SSS'si ekleyin</b><p>"Hangi telefonlarla uyumlu?", "Garanti süresi ne?", "Kutudan ne çıkıyor?" Gerçek müşteri sorularını müşteri hizmetleri kayıtlarınızdan toplayın ve cevaplayın.</p></li>
+      <li><b class="t">Fiyat ve stok HTML'de olsun</b><p>Birçok e-ticaret temasında fiyat ve stok sayfa açıldıktan sonra JavaScript ile yüklenir. Yapay zeka tarayıcılarının çoğu bunu göremez. Sayfa kaynağında fiyatın göründüğünü kontrol edin. Bkz. <a href="/blog17.html">JavaScript rehberi</a>.</p></li>
+      <li><b class="t">Gerçek yorumları görünür kılın</b><p>Yorumların metni, yapay zekanın "neden bu ürün" sorusuna cevap bulduğu yerdir. Yorumlar sayfada okunabilir olmalı ve yapısal veride doğru özetlenmeli.</p></li>
+      <li><b class="t">Kategori ve rehber sayfaları yazın</b><p>"Koşu için en iyi kulaklık nasıl seçilir?" gibi rehber içerikler, yapay zekanın karşılaştırma sorularında kaynak olarak gösterdiği sayfalardır. İçinden kendi ürünlerinize doğal linkler verin.</p></li>
+    </ol>
+
+    <h2 id="e4">Kopyala-Yapıştır Product Şeması</h2>
+    <p>Bu örneği her ürün sayfasına, kendi bilgilerinizle doldurarak ekleyin. Çoğu e-ticaret altyapısı (Shopify, WooCommerce, ikas, Ticimax vb.) bunun bir kısmını otomatik üretir; eksik alanları tamamlamak için tema ayarlarına veya bir eklentiye bakın.</p>
+    <div class="code-block dk-code">
+      <div class="code-label">JSON-LD · Product</div>
+<pre>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Örnek ANC Kablosuz Kulaklık X2",
+  "image": ["https://www.ornekmagaza.com/img/x2-siyah.jpg"],
+  "description": "Aktif gürültü engelleme, 30 saat pil ömrü, Bluetooth 5.3, 250 g.",
+  "sku": "X2-SYH",
+  "gtin13": "8690000000000",
+  "brand": { "@type": "Brand", "name": "Örnek" },
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.6", "reviewCount": "128" },
+  "offers": {
+    "@type": "Offer",
+    "url": "https://www.ornekmagaza.com/x2-kulaklik",
+    "priceCurrency": "TRY",
+    "price": "4499.90",
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition",
+    "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": { "@type": "MonetaryAmount", "value": "0", "currency": "TRY" },
+      "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "TR" }
+    },
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "TR",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 14
+    }
+  }
+}
+&lt;/script&gt;</pre>
+    </div>
+    <div class="dk-c bad"><b class="h">🚫 Sık yapılan hata</b><p>Şemadaki fiyat ile sayfada görünen fiyatın farklı olması (örneğin kampanya fiyatı sayfada güncellenip şemada eski kalması). Bu, hem Google'da ürün sonuçlarından düşmenize hem de yapay zekanın verinize güvenmemesine yol açar. Fiyat güncellemelerini feed, şema ve sayfada aynı anda yapın.</p></div>
+
+    <h2 id="e5">Ürün Açıklaması: Önce ve Sonra</h2>
+    <p>Yapay zeka, kullanıcının kriterlerini ürün sayfanızdaki somut ifadelerle eşleştirir. Pazarlama dili bunu imkansız kılar:</p>
+    <div class="dk-vs">
+      <div class="no"><b class="h">❌ Önce</b><p>"Muhteşem ses kalitesi ve şık tasarımıyla hayatınızı değiştirecek, uzun süre kullanabileceğiniz harika bir kulaklık!"</p></div>
+      <div class="yes"><b class="h">✅ Sonra</b><p>"Aktif gürültü engelleme (ANC) açıkken 30 saat, kapalıyken 40 saat pil. 10 dakika şarjla 5 saat kullanım. Bluetooth 5.3, iki cihaza aynı anda bağlanma. Ağırlık 250 g. IPX4 terlemeye dayanıklı (suya dayanıklı değildir)."</p></div>
+    </div>
+    <p>"Sonra" örneğindeki her ifade bir soruya cevaptır: "uzun pil ömrü", "spor için uygun mu", "hafif kulaklık". Son parantezdeki dürüst kısıtlama da önemli; yapay zeka "suya dayanıklı kulaklık" arayan birine yanlış ürün önermemek için bu bilgiyi kullanır ve dürüst sayfalar güven kazanır. Mevcut bir açıklamanızı <a href="/content-analyzer.html">ücretsiz içerik analizi aracımızla</a> test edebilirsiniz.</p>
+
+    <div class="dk-quiz">
+      <div class="q">🧠 Mini test: Kullanıcı "çocuk odası için sessiz çalışan nemlendirici" soruyor. Hangi ürün açıklaması öne çıkar?</div>
+      <button class="o" type="button">"Sessiz ve şık tasarım, evinizin vazgeçilmezi!"</button>
+      <button class="o" type="button" data-right>"Gece modunda 26 dB ses seviyesi, 4 L hazne, 30 m² oda, otomatik kapanma."</button>
+      <button class="o" type="button">"En çok satan nemlendirici, hemen sipariş verin!"</button>
+      <div class="ex">Doğru cevap: ikincisi. "26 dB" sessizliği kanıtlar, "30 m²" oda boyutunu, "otomatik kapanma" güvenliği. Yapay zeka bu somut değerleri kullanıcının kriterleriyle eşleştirip gerekçeli bir öneri yapabilir.</div>
+    </div>
+
+    <h2 id="e6">Pazaryerleri ve Kendi Siteniz</h2>
+    <p>Türkiye'de birçok marka hem kendi sitesinde hem de Trendyol, Hepsiburada ve Amazon gibi pazaryerlerinde satıyor. Yapay zeka yanıtlarında pazaryeri sayfaları sık <a href="/blog9.html" data-il="1">kaynak gösterilir</a>, çünkü bu sayfalar güçlü, çok yorumlu ve iyi yapılandırılmış.</p>
+    <ul class="dl">
+      <li><strong>Tutarlılık:</strong> Ürün adı, model kodu ve teknik özellikler kendi sitenizde ve pazaryerlerinde aynı olmalı. Yapay zeka aynı ürünü farklı kaynaklarda eşleştirebilmeli.</li>
+      <li><strong>Kendi sitenizin farkı:</strong> Pazaryerinde olmayan bilgileri kendi sitenizde verin: detaylı kullanım rehberi, karşılaştırma tablosu, uyumluluk listesi, video. Böylece ürünün "ana kaynağı" siz olursunuz. OpenAI'ın satıcı sıralamasında üretici veya ana satıcı olmanın da etkisi var.</li>
+      <li><strong>Markanızı koruyun:</strong> Yapay zekaya "[Markanız] güvenilir mi?" diye sorun. Yanıtta sadece pazaryeri yorumları geçiyorsa, kendi sitenizde hakkımızda, garanti ve iletişim sayfalarını güçlendirme zamanı. Bkz. <a href="/blog10.html">E-E-A-T rehberi</a>.</li>
+    </ul>
+    <p>Büyük markaların yapay zeka hazırlığını merak ediyorsanız <a href="/blog24.html">20 markalık GEO skor raporumuza</a> bakın; Trendyol ve Hepsiburada da listede.</p>
+
+    <h2 id="e7">E-ticaret Kontrol Listesi</h2>
+    <div class="dk-check" data-levels='[[0,"Önce Merchant Center ve Product şemasıyla başlayın."],[40,"Altyapı kuruluyor. İçerik ve tutarlılık sırada."],[75,"Güçlü! Feed ve fiyat tutarlılığını düzenli kontrol edin."],[100,"Mükemmel. Şimdi yapay zekaya ürünlerinizi sorup sonuçları takip edin."]]'>
+      <div class="hd"><b>Ürünlerim yapay zekaya hazır mı?</b><span class="sc">0 / 11</span></div>
+      <div class="dk-bar"><i></i></div>
+      <label><input type="checkbox"> Google Merchant Center'da ürün feed'im aktif</label>
+      <label><input type="checkbox"> Microsoft Merchant Center / Bing Webmaster kaydım var</label>
+      <label><input type="checkbox"> Shopify kullanıyorum ya da ChatGPT için doğrudan feed başvurusunu değerlendirdim</label>
+      <label><input type="checkbox"> Her ürün sayfasında Product yapısal verisi var</label>
+      <label><input type="checkbox"> GTIN / barkod bilgisi şemada ve feed'de var</label>
+      <label><input type="checkbox"> Fiyat ve stok sayfa kaynağında (HTML) görünüyor</label>
+      <label><input type="checkbox"> Şema, feed ve sayfadaki fiyat birebir aynı</label>
+      <label><input type="checkbox"> Ürün açıklamaları ölçülebilir özellikler içeriyor</label>
+      <label><input type="checkbox"> Ürün sayfalarında SSS bölümü var</label>
+      <label><input type="checkbox"> robots.txt OAI-SearchBot, PerplexityBot ve Bingbot'u engellemiyor</label>
+      <label><input type="checkbox"> Kategori rehberleri yazdım ve ürünlere link verdim</label>
+      <div class="msg"></div>
+    </div>
 
     <div class="cta-box">
-      <h3>Ürünleriniz AI'da görünüyor mu?</h3>
-      <p>Scanliq ile e-ticaret sitenizin AI görünürlüğünü ücretsiz analiz edin.</p>
+      <h3>Ürünleriniz yapay zekada görünüyor mu?</h3>
+      <p>Scanliq ile e-ticaret sitenizin bot erişimini, yapısal verisini ve 4 yapay zeka motorundaki hazırlığını ücretsiz analiz edin.</p>
       <a class="cta-btn" href="https://scanliq.com/">Ücretsiz Analiz →</a>
     </div>
 
     <h2>Sık Sorulan Sorular</h2>
-    <div class="faq-item"><div class="faq-q">E-ticaret için en önemli GEO adımı nedir?</div><div class="faq-a">Product Schema (ürün yapısal verisi) eklemek en kritik adımdır. Fiyat, stok, marka ve değerlendirme bilgisini AI'ın net anlamasını sağlar.</div></div>
-    <div class="faq-item"><div class="faq-q">AI ürünümü neden önermiyor?</div><div class="faq-a">Muhtemel sebepler: ürün schema eksik, robots.txt AI botlarını engelliyor, ürün bilgisi JavaScript ile yükleniyor veya açıklamalar çok genel.</div></div>
-    <div class="faq-item"><div class="faq-q">Küçük e-ticaret siteleri de AI'da görünebilir mi?</div><div class="faq-a">Evet. İyi yapılandırılmış ürün sayfaları ve net açıklamalarla küçük siteler büyük rakiplerini AI önerilerinde geçebilir.</div></div>
+    <div class="faq-item"><div class="faq-q">E-ticaret için en önemli GEO adımı nedir?</div><div class="faq-a">Ürün verinizi doğru ve tutarlı hale getirmek: her ürün sayfasında Product yapısal verisi, Google Merchant Center'da güncel bir feed ve sayfa, şema ve feed'de birebir aynı fiyat ve stok bilgisi.</div></div>
+    <div class="faq-item"><div class="faq-q">ChatGPT'de ürünlerim nasıl görünür?</div><div class="faq-a">ChatGPT ürün önerilerini ürün verisi sağlayıcılarından ve web aramasından besler. Shopify kullanıyorsanız ürünleriniz Shopify Catalog üzerinden ulaşabilir; diğer platformlarda OpenAI'a doğrudan ürün feed'i göndermek için başvurabilirsiniz. Ayrıca sitenizin OAI-SearchBot'a açık ve Bing'de dizinli olması gerekir.</div></div>
+    <div class="faq-item"><div class="faq-q">Yapay zeka ürünümü neden önermiyor?</div><div class="faq-a">Sık görülen sebepler: Product şemasının eksik olması, fiyat ve stok bilgisinin JavaScript ile yüklenmesi, robots.txt'nin yapay zeka botlarını engellemesi, ürün açıklamalarının ölçülebilir özellik içermemesi veya feed ile sayfa arasındaki fiyat tutarsızlığı.</div></div>
+    <div class="faq-item"><div class="faq-q">Küçük e-ticaret siteleri de yapay zekada görünebilir mi?</div><div class="faq-a">Evet. Yapay zeka, kullanıcının kriterlerine en iyi uyan ürünü arar. Niş bir ürünü en net anlatan, doğru verisi olan küçük bir site, genel açıklamalı büyük bir siteyi bu eşleşmede geçebilir.</div></div>
+    <div class="faq-item"><div class="faq-q">Pazaryerinde satıyorsam kendi siteme gerek var mı?</div><div class="faq-a">Pazaryerleri yapay zeka yanıtlarında sık kaynak gösterilir, ancak kendi siteniz ürünün ana kaynağı olmanızı ve marka güveni oluşturmanızı sağlar. Pazaryerinde olmayan detaylı rehber, karşılaştırma ve uyumluluk bilgilerini kendi sitenizde vermek fark yaratır.</div></div>
+
+    <p class="dk-src">Kaynaklar ve notlar: Ürün ve satıcı seçimi ile feed alanları OpenAI'ın alışveriş yardım belgelerine ve satıcı rehberlerine dayanır. Google'ın yapay zeka alışveriş deneyimleri Shopping Graph ve Merchant Center verisini kullanır. Product şeması alanları için: <a href="https://schema.org/Product" rel="noopener" target="_blank">schema.org/Product</a>. Platform kuralları sık değişir. Son kontrol: Ekim 2026.</p>
 
     <div class="share-bar">
       <span class="share-label">Bu yazıyı paylaş:</span>
@@ -301,5 +562,52 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: fle
   <div>© 2026 Scanliq</div>
 </footer>
 </div>
+
+<script>
+/* deep-kit: sekmeler, kontrol listeleri, test, kopyala */
+(function(){
+  document.querySelectorAll('.dk-tabs').forEach(function(box){
+    var btns = box.querySelectorAll('.dk-tabbar button'), panes = box.querySelectorAll('.dk-tabpanel');
+    btns.forEach(function(b, i){ b.addEventListener('click', function(){
+      btns.forEach(function(x, j){ x.setAttribute('aria-selected', j === i ? 'true' : 'false'); });
+      panes.forEach(function(p, j){ p.hidden = j !== i; });
+    }); });
+  });
+  document.querySelectorAll('.dk-check').forEach(function(box){
+    var inputs = box.querySelectorAll('input[type=checkbox]'), bar = box.querySelector('.dk-bar i'),
+        sc = box.querySelector('.sc'), msg = box.querySelector('.msg'), levels = [];
+    try { levels = JSON.parse(box.getAttribute('data-levels') || '[]'); } catch(e) {}
+    function upd(){
+      var n = 0; inputs.forEach(function(i){ if (i.checked) n++; });
+      var pct = inputs.length ? Math.round(n * 100 / inputs.length) : 0;
+      bar.style.width = pct + '%'; bar.style.backgroundPosition = (100 - pct) + '% 0';
+      sc.textContent = n + ' / ' + inputs.length;
+      var m = ''; levels.forEach(function(l){ if (pct >= l[0]) m = l[1]; });
+      msg.textContent = m;
+    }
+    inputs.forEach(function(i){ i.addEventListener('change', upd); }); upd();
+  });
+  document.querySelectorAll('.dk-quiz').forEach(function(q){
+    q.querySelectorAll('button.o').forEach(function(b){ b.addEventListener('click', function(){
+      if (q.classList.contains('done')) return;
+      q.classList.add('done');
+      q.querySelectorAll('button.o').forEach(function(x){ if (x.hasAttribute('data-right')) x.classList.add('right'); });
+      if (!b.hasAttribute('data-right')) b.classList.add('wrong');
+    }); });
+  });
+  document.querySelectorAll('.dk-code').forEach(function(c){
+    var btn = document.createElement('button'); btn.className = 'cp'; btn.type = 'button';
+    var lbl = document.documentElement.lang === 'en' ? ['Copy', 'Copied ✓'] : ['Kopyala', 'Kopyalandı ✓'];
+    btn.textContent = lbl[0]; c.appendChild(btn);
+    btn.addEventListener('click', function(){
+      var t = c.querySelector('pre').innerText;
+      (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).catch(function(){
+        var ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+      });
+      btn.textContent = lbl[1]; setTimeout(function(){ btn.textContent = lbl[0]; }, 1800);
+    });
+  });
+})();
+</script>
 </body>
 </html>
