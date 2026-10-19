@@ -450,6 +450,21 @@
   /* ARAÇLAR (TOOLS) */
   .tools-section { margin-bottom: 72px; }
 
+
+  /* REHBER MERKEZİ (hub) */
+  .hub-section { margin-bottom: 72px; }
+  .hub-intro { color: var(--muted); font-size: 0.85rem; line-height: 1.6; margin: -4px 0 20px; max-width: 640px; }
+  .hub-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media(max-width: 900px) { .hub-grid { grid-template-columns: 1fr 1fr; } }
+  @media(max-width: 600px) { .hub-grid { grid-template-columns: 1fr; } }
+  .hub-card { background: var(--surface, rgba(10,22,18,0.5)); border: 1px solid rgba(0,255,170,0.1); border-radius: 16px; padding: 18px 18px 14px; }
+  .hub-card h3 { font-family: var(--font-display, 'Syne', sans-serif); font-size: 0.95rem; font-weight: 800; margin: 0 0 10px; display: flex; gap: 8px; align-items: center; }
+  .hub-card ul { list-style: none; margin: 0; padding: 0; }
+  .hub-card li { border-top: 1px solid rgba(0,255,170,0.07); }
+  .hub-card li:first-child { border-top: 0; }
+  .hub-card a { display: block; padding: 8px 0; color: var(--muted); text-decoration: none; font-size: 0.82rem; line-height: 1.4; transition: color 0.2s, padding 0.2s; }
+  .hub-card a:hover { color: var(--accent, #00F28A); padding-left: 4px; }
+
   /* SON YAZILAR (LATEST POSTS) */
   .latest-section { margin-bottom: 72px; }
   .latest-grid {
@@ -1416,6 +1431,64 @@
     </div>
   </section>
 
+  <!-- HUB:BASLA -->
+  <section class="hub-section" id="hub-section">
+    <div class="section-label" data-en-t="Guide Hub">Rehber Merkezi</div>
+    <p class="hub-intro" data-en-t="Everything about AI visibility, grouped by topic. Start with the fundamentals, then fix the technical setup and optimize engine by engine.">Yapay zeka görünürlüğü hakkında her şey, konu konu. Temellerden başlayın, sonra teknik altyapıyı kurun ve motor motor optimize edin.</p>
+    <div class="hub-grid">
+      <div class="hub-card">
+        <h3><span aria-hidden="true">🧭</span><span data-en-t="GEO Fundamentals">GEO Temelleri</span></h3>
+        <ul>
+          <li><a href="/blog8.html" data-en-href="/blog8-en.html" data-en-t="What is GEO? Core guide">GEO nedir? Temel rehber</a></li>
+          <li><a href="/blog19.html" data-en-href="/blog19-en.html" data-en-t="GEO vs SEO: what's the difference?">GEO vs SEO: fark ne?</a></li>
+          <li><a href="/blog23.html" data-en-href="/blog23-en.html" data-en-t="GEO SEO strategy">GEO SEO stratejisi</a></li>
+          <li><a href="/blog20.html" data-en-href="/blog20-en.html" data-en-t="What is AEO?">AEO nedir?</a></li>
+          <li><a href="/blog15.html" data-en-href="/blog15-en.html" data-en-t="AI SEO checklist">AI SEO kontrol listesi</a></li>
+          <li><a href="/blog18.html" data-en-href="/blog18-en.html" data-en-t="7 most common mistakes">En sık 7 hata</a></li>
+        </ul>
+      </div>
+      <div class="hub-card">
+        <h3><span aria-hidden="true">⚙️</span><span data-en-t="Technical Setup">Teknik Altyapı</span></h3>
+        <ul>
+          <li><a href="/blog1.html" data-en-href="/blog1-en.html" data-en-t="What is llms.txt?">llms.txt nedir?</a></li>
+          <li><a href="/blog5.html" data-en-href="/blog5-en.html" data-en-t="How to write llms.txt">llms.txt nasıl hazırlanır?</a></li>
+          <li><a href="/blog4.html" data-en-href="/blog4-en.html" data-en-t="Is robots.txt blocking AI bots?">robots.txt AI botlarını engelliyor mu?</a></li>
+          <li><a href="/blog3.html" data-en-href="/blog3-en.html" data-en-t="Schema.org structured data">Schema.org yapısal veri</a></li>
+          <li><a href="/blog17.html" data-en-href="/blog17-en.html" data-en-t="JavaScript & ghost pages">JavaScript ve hayalet sayfalar</a></li>
+        </ul>
+      </div>
+      <div class="hub-card">
+        <h3><span aria-hidden="true">🤖</span><span data-en-t="AI Engines">AI Motorları</span></h3>
+        <ul>
+          <li><a href="/blog2.html" data-en-href="/blog2-en.html" data-en-t="Showing up in ChatGPT">ChatGPT’de görünmek</a></li>
+          <li><a href="/blog9.html" data-en-href="/blog9-en.html" data-en-t="Why ChatGPT cites some sites">ChatGPT neden kaynak gösterir?</a></li>
+          <li><a href="/blog6.html" data-en-href="/blog6-en.html" data-en-t="Google AI Overview">Google AI Overview</a></li>
+          <li><a href="/blog7.html" data-en-href="/blog7-en.html" data-en-t="Perplexity SEO">Perplexity SEO</a></li>
+          <li><a href="/blog11.html" data-en-href="/blog11-en.html" data-en-t="Bing Copilot">Bing Copilot</a></li>
+          <li><a href="/blog13.html" data-en-href="/blog13-en.html" data-en-t="Claude">Claude</a></li>
+        </ul>
+      </div>
+      <div class="hub-card">
+        <h3><span aria-hidden="true">✍️</span><span data-en-t="Content & Trust">İçerik ve Güven</span></h3>
+        <ul>
+          <li><a href="/blog21.html" data-en-href="/blog21-en.html" data-en-t="Writing content for AI">AI için içerik yazımı</a></li>
+          <li><a href="/blog10.html" data-en-href="/blog10-en.html" data-en-t="What is E-E-A-T?">E-E-A-T nedir?</a></li>
+          <li><a href="/blog22.html" data-en-href="/blog22-en.html" data-en-t="Building trust signals">Güven sinyalleri nasıl kurulur?</a></li>
+        </ul>
+      </div>
+      <div class="hub-card">
+        <h3><span aria-hidden="true">📊</span><span data-en-t="Industry & Data">Sektör ve Veri</span></h3>
+        <ul>
+          <li><a href="/blog24.html" data-en-href="/blog24-en.html" data-en-t="20-brand GEO score report">20 marka GEO skor raporu</a></li>
+          <li><a href="/blog14.html" data-en-href="/blog14-en.html" data-en-t="GEO for e-commerce">E-ticaret için GEO</a></li>
+          <li><a href="/blog16.html" data-en-href="/blog16-en.html" data-en-t="Local businesses">Yerel işletmeler</a></li>
+          <li><a href="/blog12.html" data-en-href="/blog12-en.html" data-en-t="Measuring AI traffic">AI trafiğini ölçmek</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <!-- HUB:BITIR -->
+
   <!-- AD SLOT TOP -->
   <div class="ad-slot" id="ad-top"><!-- Google AdSense --></div>
 
@@ -1864,6 +1937,16 @@ function setLang(l) {
   setTxt('latest2-title', t.latest2t); setTxt('latest2-read', t.latestRead);
   setTxt('latest3-title', t.latest3t); setTxt('latest3-read', t.latestRead);
   setTxt('latest-all', t.latestAll);
+
+  // Rehber Merkezi: dil değişince link ve metinleri çevir (TR metin/href ilk seferde saklanır)
+  document.querySelectorAll('#hub-section [data-en-t]').forEach(el => {
+    if (el.dataset.trT === undefined) el.dataset.trT = el.textContent;
+    el.textContent = l === 'en' ? el.dataset.enT : el.dataset.trT;
+  });
+  document.querySelectorAll('#hub-section [data-en-href]').forEach(el => {
+    if (el.dataset.trHref === undefined) el.dataset.trHref = el.getAttribute('href');
+    el.setAttribute('href', l === 'en' ? el.dataset.enHref : el.dataset.trHref);
+  });
   const w1 = document.getElementById('latest-lang-wrap-1'); if (w1) w1.href = t.latest1url;
   const w2 = document.getElementById('latest-lang-wrap-2'); if (w2) w2.href = t.latest2url;
   const w3 = document.getElementById('latest-lang-wrap-3'); if (w3) w3.href = t.latest3url;

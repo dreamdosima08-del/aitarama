@@ -153,9 +153,16 @@ tr:last-child td { border-bottom: none; }
 footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--muted); flex-wrap: wrap; gap: 12px; }
 .footer-logo { font-family: var(--font-display); font-weight: 800; font-size: 0.9rem; }
 .footer-logo span { color: var(--accent); }
-.footer-links { display: flex; gap: 20px; }
+.footer-links { display: flex; gap: 8px 20px; flex-wrap: wrap; }
 .footer-links a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: var(--accent); }
+
+.tool-guides { margin: 40px 0 8px; }
+.tool-guides h2 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; margin-bottom: 14px; }
+.tool-guides-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media(max-width:600px) { .tool-guides-grid { grid-template-columns: 1fr; } }
+.tool-guides a { display: block; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; color: var(--text); text-decoration: none; font-size: 0.82rem; line-height: 1.4; transition: border-color 0.2s; }
+.tool-guides a:hover { border-color: var(--accent); }
 </style>
 
 <style>
@@ -292,9 +299,25 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: fle
   </div>
 </div>
 
+<!-- TG:BASLA -->
+<section class="tool-guides">
+  <h2>Related Guides</h2>
+  <div class="tool-guides-grid">
+    <a href="/blog21-en.html">How to write content for AI</a>
+    <a href="/blog9-en.html">Why ChatGPT cites some sites</a>
+    <a href="/blog10-en.html">What is E-E-A-T? Which sites AI trusts</a>
+    <a href="/blog22-en.html">How to build trust signals</a>
+    <a href="/blog20-en.html">What is AEO?</a>
+    <a href="/blog7-en.html">Perplexity SEO</a>
+  </div>
+</section>
+<!-- TG:BITIR -->
 <footer>
   <div class="footer-logo">Scan<span>liq</span></div>
   <div class="footer-links">
+    <a href="/?lang=en" data-ft="1">GEO Analyzer</a>
+    <a href="/llms-generator-en.html" data-ft="1">llms.txt Generator</a>
+    <a href="/content-analyzer-en.html" data-ft="1">Content Analyzer</a>
     <a href="/blog.html">Blog</a>
     <a href="/legal.html">Legal</a>
     <a href="/">Home</a>

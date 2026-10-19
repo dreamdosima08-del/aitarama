@@ -33,7 +33,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Scanliq">
 <meta property="article:published_time" content="2026-06-16T09:00:00+03:00">
-<meta property="article:modified_time" content="2026-10-16T09:00:00+03:00">
+<meta property="article:modified_time" content="2026-10-19T09:00:00+03:00">
 <meta property="article:author" content="Scanliq">
 <meta property="article:section" content="GEO">
 <meta name="twitter:card" content="summary_large_image">
@@ -61,7 +61,7 @@
   "author": {"@type": "Organization", "name": "Scanliq", "url": "https://scanliq.com"},
   "publisher": {"@type": "Organization", "name": "Scanliq", "url": "https://scanliq.com", "logo": {"@type":"ImageObject","url":"https://scanliq.com/img/logo.png"}},
   "datePublished": "2026-06-16T09:00:00+03:00",
-  "dateModified": "2026-10-16T09:00:00+03:00",
+  "dateModified": "2026-10-19T09:00:00+03:00",
   "mainEntityOfPage": {"@type": "WebPage", "@id": "https://scanliq.com/blog8-en.html"},
   "url": "https://scanliq.com/blog8-en.html",
   "inLanguage": "en-US",
@@ -164,6 +164,7 @@ tr:last-child td { border-bottom: none; }
 
 /* RELATED */
 .related { margin: 40px 0; }
+.related-lead { font-size: 0.8rem; color: var(--muted); margin: -8px 0 14px; }
 .related h3 { font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
 .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 @media(max-width:600px) { .related-grid { grid-template-columns: 1fr; } }
@@ -176,7 +177,7 @@ tr:last-child td { border-bottom: none; }
 footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--muted); flex-wrap: wrap; gap: 12px; }
 .footer-logo { font-family: var(--font-display); font-weight: 800; font-size: 0.9rem; }
 .footer-logo span { color: var(--accent); }
-.footer-links { display: flex; gap: 20px; }
+.footer-links { display: flex; gap: 8px 20px; flex-wrap: wrap; }
 .footer-links a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: var(--accent); }
 </style>
@@ -214,14 +215,14 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: fle
     <div class="blog-meta"><span>📅 June 16, 2026</span><span>✍️ Scanliq Team</span><span>⏱️ 7 min read</span></div>
   </div>
   <div class="blog-content">
-    <p><strong>GEO (Generative Engine Optimization)</strong> is the discipline of optimizing your website for generative AI engines like ChatGPT, Gemini, Claude and Perplexity. As of 2026, a significant share of searches now flows through AI answers rather than the traditional Google results page. This guide explains what GEO is, how it differs from classic SEO, and how to make your site GEO-ready step by step.</p>
+    <p><strong>GEO (Generative Engine Optimization)</strong> is the discipline of optimizing your website for generative AI engines like ChatGPT, Gemini, <a href="/blog13-en.html" data-il="1">Claude</a> and <a href="/blog7-en.html" data-il="1">Perplexity</a>. As of 2026, a significant share of searches now flows through AI answers rather than the traditional Google results page. This guide explains what GEO is, how it differs from classic SEO, and how to make your site GEO-ready step by step.</p>
 
     <div class="info-box">
       <p><strong>Quick definition:</strong> SEO optimizes your site for <em>search engines</em>, while GEO optimizes it for <em>AI engines</em>. They complement each other but operate by different rules.</p>
     </div>
 
     <h2>What is GEO?</h2>
-    <p>GEO stands for "Generative Engine Optimization." In traditional SEO, the goal was ranking high on Google. In GEO, the goal is for <strong>your site to be cited as a source and your content used in the answer</strong> when a user asks an AI a question.</p>
+    <p>GEO stands for "Generative Engine Optimization." In traditional SEO, the goal was ranking high on Google. In GEO, the goal is for <strong>your site to be <a href="/blog9-en.html" data-il="1">cited</a> as a source and your content used in the answer</strong> when a user asks an AI a question.</p>
     <p>This difference is critical: even if you rank #1 on Google, if ChatGPT doesn't know you, you're invisible in the AI era. GEO fills exactly this gap.</p>
 
     <h2>Differences Between GEO and SEO</h2>
@@ -242,13 +243,13 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: fle
     <h3>Search Behavior Has Changed</h3>
     <p>Instead of typing "best coffee maker" and scanning ten blue links, users now ask AI directly and get a single synthesized answer. If you're not in that answer, you lose a major share of your traffic.</p>
     <h3>AI Shows Sources</h3>
-    <p>ChatGPT, Perplexity and Google AI Overview display source links beneath their answers. Being among these sources is the new-generation equivalent of ranking first on Google.</p>
+    <p>ChatGPT, Perplexity and Google <a href="/blog6-en.html" data-il="1">AI Overview</a> display source links beneath their answers. Being among these sources is the new-generation equivalent of ranking first on Google.</p>
 
     <h2>5 Core Steps to Make Your Site GEO-Ready</h2>
     <h3>1. Allow AI Bots</h3>
     <p>Make sure your robots.txt doesn't block GPTBot, ClaudeBot and PerplexityBot. We covered how in our <a href="/blog4-en.html">GPTBot check guide</a> (official <a href="https://platform.openai.com/docs/gptbot" target="_blank" rel="noopener">OpenAI GPTBot docs</a>).</p>
     <h3>2. Add llms.txt</h3>
-    <p>llms.txt is a new standard that gives AI a summary of your site. Use our <a href="/blog5-en.html">free llms.txt template</a>.</p>
+    <p><a href="/blog1-en.html" data-il="1">llms.txt</a> is a new standard that gives AI a summary of your site. Use our <a href="/blog5-en.html">free llms.txt template</a>.</p>
     <h3>3. Use Structured Data</h3>
     <p>Schema.org and JSON-LD help AI understand your content. Check our <a href="/blog3-en.html">Schema.org guide</a>.</p>
     <h3>4. Write in Q&A Format</h3>
@@ -274,10 +275,33 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: fle
       <a class="share-btn" href="https://wa.me/?text=https://scanliq.com/blog8-en.html" target="_blank" rel="noopener">WhatsApp</a>
     </div>
     <div class="related">
-      <h3>Related Posts</h3>
+      <h3>Related Guides</h3>
+      <p class="related-lead">Keep going: these guides cover the next steps of the same topic.</p>
       <div class="related-grid">
-        <a class="related-card" href="/blog2-en.html"><div class="rc-cat">AI SEO</div><div class="rc-title">Is Your Site Visible on ChatGPT? 2026 AI SEO Guide</div></a>
-        <a class="related-card" href="/blog6-en.html"><div class="rc-cat">Google AI</div><div class="rc-title">How to Appear in Google AI Overview</div></a>
+        <a class="related-card" href="/blog19-en.html">
+          <div class="rc-cat">GEO vs SEO</div>
+          <div class="rc-title">GEO vs SEO: What's the Difference? Which Matters in?</div>
+        </a>
+        <a class="related-card" href="/blog23-en.html">
+          <div class="rc-cat">GEO SEO</div>
+          <div class="rc-title">GEO SEO Strategy: How to Do GEO and SEO Together</div>
+        </a>
+        <a class="related-card" href="/blog20-en.html">
+          <div class="rc-cat">AEO</div>
+          <div class="rc-title">What is AEO? Answer Engine Optimization Guide</div>
+        </a>
+        <a class="related-card" href="/blog15-en.html">
+          <div class="rc-cat">Checklist</div>
+          <div class="rc-title">AI SEO Checklist 2026: The Complete GEO Guide</div>
+        </a>
+        <a class="related-card" href="/blog2-en.html">
+          <div class="rc-cat">AI SEO</div>
+          <div class="rc-title">Is Your Site Visible on ChatGPT? 2026 AI SEO Guide</div>
+        </a>
+        <a class="related-card" href="/blog24-en.html">
+          <div class="rc-cat">GEO Report</div>
+          <div class="rc-title">2026 Brand GEO Score Report: How AI-Ready Are 20 Global Giants?</div>
+        </a>
       </div>
     </div>
   </div>
@@ -285,6 +309,9 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: fle
 <footer>
   <div class="footer-logo">Scan<span>liq</span></div>
   <div class="footer-links">
+    <a href="/?lang=en" data-ft="1">GEO Analyzer</a>
+    <a href="/llms-generator-en.html" data-ft="1">llms.txt Generator</a>
+    <a href="/content-analyzer-en.html" data-ft="1">Content Analyzer</a>
     <a href="/blog.html">Blog</a>
     <a href="/legal.html">Legal</a>
     <a href="/">Home</a>

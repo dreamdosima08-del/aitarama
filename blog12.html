@@ -33,7 +33,7 @@
 <meta property="og:locale" content="tr_TR">
 <meta property="og:site_name" content="Scanliq">
 <meta property="article:published_time" content="2026-06-22T09:00:00+03:00">
-<meta property="article:modified_time" content="2026-10-16T09:00:00+03:00">
+<meta property="article:modified_time" content="2026-10-19T09:00:00+03:00">
 <meta property="article:author" content="Scanliq">
 <meta property="article:section" content="AI Analitik">
 <meta name="twitter:card" content="summary_large_image">
@@ -61,7 +61,7 @@
   "author": {"@type": "Organization", "name": "Scanliq", "url": "https://scanliq.com"},
   "publisher": {"@type": "Organization", "name": "Scanliq", "url": "https://scanliq.com", "logo": {"@type":"ImageObject","url":"https://scanliq.com/img/logo.png"}},
   "datePublished": "2026-06-22T09:00:00+03:00",
-  "dateModified": "2026-10-16T09:00:00+03:00",
+  "dateModified": "2026-10-19T09:00:00+03:00",
   "mainEntityOfPage": {"@type": "WebPage", "@id": "https://scanliq.com/blog12.html"},
   "url": "https://scanliq.com/blog12.html",
   "inLanguage": "tr-TR",
@@ -164,6 +164,7 @@ tr:last-child td { border-bottom: none; }
 
 /* RELATED */
 .related { margin: 40px 0; }
+.related-lead { font-size: 0.8rem; color: var(--muted); margin: -8px 0 14px; }
 .related h3 { font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
 .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 @media(max-width:600px) { .related-grid { grid-template-columns: 1fr; } }
@@ -176,7 +177,7 @@ tr:last-child td { border-bottom: none; }
 footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--muted); flex-wrap: wrap; gap: 12px; }
 .footer-logo { font-family: var(--font-display); font-weight: 800; font-size: 0.9rem; }
 .footer-logo span { color: var(--accent); }
-.footer-links { display: flex; gap: 20px; }
+.footer-links { display: flex; gap: 8px 20px; flex-wrap: wrap; }
 .footer-links a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: var(--accent); }
 </style>
@@ -214,14 +215,14 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: fle
     <div class="blog-meta"><span>📅 22 Haziran 2026</span><span>✍️ Scanliq Ekibi</span><span>⏱️ 7 dk okuma</span></div>
   </div>
   <div class="blog-content">
-    <p>Sitenizi yapay zekaya hazır hale getirdiniz. Peki ya sonra? <strong>ChatGPT, Perplexity veya Copilot sizi kaynak gösterdiğinde bunu nasıl anlarsınız?</strong> Çoğu site sahibi, AI'dan gelen ziyaretçileri normal trafikle karışık görür ve farkına bile varmaz. Bu yazıda, yapay zeka kaynaklı trafiği nasıl tespit edeceğinizi ve ölçeceğinizi anlatıyoruz — çünkü ölçemediğiniz şeyi geliştiremezsiniz.</p>
+    <p>Sitenizi yapay zekaya hazır hale getirdiniz. Peki ya sonra? <strong>ChatGPT, <a href="/blog7.html" data-il="1">Perplexity</a> veya <a href="/blog11.html" data-il="1">Copilot</a> sizi kaynak gösterdiğinde bunu nasıl anlarsınız?</strong> Çoğu site sahibi, AI'dan gelen ziyaretçileri normal trafikle karışık görür ve farkına bile varmaz. Bu yazıda, yapay zeka kaynaklı trafiği nasıl tespit edeceğinizi ve ölçeceğinizi anlatıyoruz — çünkü ölçemediğiniz şeyi geliştiremezsiniz.</p>
 
     <div class="info-box">
       <p><strong>Temel fikir:</strong> AI motorları kullanıcıları sitenize yönlendirdiğinde, bu ziyaretler analitik araçlarınızda iz bırakır. Doğru bakmayı bilirseniz, "ChatGPT'den kaç kişi geldi" sorusunu yanıtlayabilirsiniz.</p>
     </div>
 
     <h2>AI Trafiği Nedir?</h2>
-    <p>AI trafiği, bir kullanıcının ChatGPT, Perplexity, Copilot veya Google AI Overview gibi bir yapay zeka yanıtındaki kaynak linkine tıklayarak sitenize gelmesidir. Bu, klasik arama trafiğinden farklıdır — kullanıcı zaten bir AI yanıtı okumuş, sonra detay için sitenize gelmiştir. Yani <strong>daha bilinçli ve niyetli bir ziyaretçidir.</strong></p>
+    <p>AI trafiği, bir kullanıcının ChatGPT, Perplexity, Copilot veya Google <a href="/blog6.html" data-il="1">AI Overview</a> gibi bir yapay zeka yanıtındaki kaynak linkine tıklayarak sitenize gelmesidir. Bu, klasik arama trafiğinden farklıdır — kullanıcı zaten bir AI yanıtı okumuş, sonra detay için sitenize gelmiştir. Yani <strong>daha bilinçli ve niyetli bir ziyaretçidir.</strong></p>
 
     <h2>AI Trafiğini Nasıl Tespit Edersiniz?</h2>
     <h3>1. Yönlendiren (Referrer) Kaynaklarına Bakın</h3>
@@ -269,10 +270,33 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: fle
       <a class="share-btn" href="https://wa.me/?text=https://scanliq.com/blog12.html" target="_blank" rel="noopener">WhatsApp</a>
     </div>
     <div class="related">
-      <h3>İlgili Yazılar</h3>
+      <h3>İlgili Rehberler</h3>
+      <p class="related-lead">Devam edin: bu rehberler aynı konunun sonraki adımlarını anlatıyor.</p>
       <div class="related-grid">
-        <a class="related-card" href="/blog9.html"><div class="rc-cat">AI Citation</div><div class="rc-title">ChatGPT Neden Bazı Siteleri Kaynak Gösterir?</div></a>
-        <a class="related-card" href="/blog8.html"><div class="rc-cat">GEO</div><div class="rc-title">GEO Nedir? Generative Engine Optimization Rehberi</div></a>
+        <a class="related-card" href="/blog2.html">
+          <div class="rc-cat">AI SEO</div>
+          <div class="rc-title">Siteniz ChatGPT'de Görünüyor mu? 2026 AI SEO Rehberi</div>
+        </a>
+        <a class="related-card" href="/blog9.html">
+          <div class="rc-cat">AI Citation</div>
+          <div class="rc-title">ChatGPT Neden Bazı Siteleri Kaynak Gösterir? Rehber</div>
+        </a>
+        <a class="related-card" href="/blog24.html">
+          <div class="rc-cat">GEO Raporu</div>
+          <div class="rc-title">2026 Marka GEO Skor Raporu: 20 Dünya Devi AI'da Ne Kadar Hazır?</div>
+        </a>
+        <a class="related-card" href="/blog15.html">
+          <div class="rc-cat">Kontrol Listesi</div>
+          <div class="rc-title">AI SEO Kontrol Listesi 2026: Eksiksiz GEO Rehberi</div>
+        </a>
+        <a class="related-card" href="/blog8.html">
+          <div class="rc-cat">GEO</div>
+          <div class="rc-title">GEO Nedir? Generative Engine Optimization Rehberi</div>
+        </a>
+        <a class="related-card" href="/blog14.html">
+          <div class="rc-cat">E-ticaret</div>
+          <div class="rc-title">E-ticaret İçin GEO: Ürünleriniz AI'da Görünüyor mu?</div>
+        </a>
       </div>
     </div>
   </div>
@@ -280,6 +304,9 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: fle
 <footer>
   <div class="footer-logo">Scan<span>liq</span></div>
   <div class="footer-links">
+    <a href="/" data-ft="1">GEO Analizi</a>
+    <a href="/llms-generator.html" data-ft="1">llms.txt Oluşturucu</a>
+    <a href="/content-analyzer.html" data-ft="1">İçerik Analizi</a>
     <a href="/blog.html">Blog</a>
     <a href="/legal.html">Yasal</a>
     <a href="/">Ana Sayfa</a>

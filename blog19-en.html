@@ -33,7 +33,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Scanliq">
 <meta property="article:published_time" content="2026-07-01T09:00:00+03:00">
-<meta property="article:modified_time" content="2026-10-16T09:00:00+03:00">
+<meta property="article:modified_time" content="2026-10-19T09:00:00+03:00">
 <meta property="article:author" content="Scanliq">
 <meta property="article:section" content="GEO vs SEO">
 <meta name="twitter:card" content="summary_large_image">
@@ -47,7 +47,7 @@
 {"@context": "https://schema.org", "@type": "WebPage", "name": "GEO vs SEO: What's the Difference? Which Matters in 2026?", "description": "What is the difference between GEO and SEO? Is SEO dead? We explain how GEO and SEO work together in the AI era and when to focus on each.", "url": "https://scanliq.com/blog19-en.html", "inLanguage": "en-US", "isPartOf": {"@type": "WebSite", "name": "Scanliq", "url": "https://scanliq.com"}}
 </script>
 <script type="application/ld+json">
-{"@context": "https://schema.org", "@type": "Article", "headline": "GEO vs SEO: What's the Difference? Which Matters in 2026?", "description": "What is the difference between GEO and SEO? Is SEO dead? We explain how GEO and SEO work together in the AI era and when to focus on each.", "image": "https://scanliq.com/img/blog19-en-og.png", "author": {"@type": "Organization", "name": "Scanliq", "url": "https://scanliq.com"}, "publisher": {"@type": "Organization", "name": "Scanliq", "url": "https://scanliq.com", "logo": {"@type": "ImageObject", "url": "https://scanliq.com/favicon-192.png"}}, "datePublished": "2026-07-01T09:00:00+03:00", "dateModified": "2026-10-16T09:00:00+03:00", "mainEntityOfPage": {"@type": "WebPage", "@id": "https://scanliq.com/blog19-en.html"}, "url": "https://scanliq.com/blog19-en.html", "inLanguage": "en-US", "articleSection": "GEO vs SEO", "keywords": "GEO vs SEO, GEO SEO difference, is SEO dead, what is GEO, what is SEO, GEO and SEO"}
+{"@context": "https://schema.org", "@type": "Article", "headline": "GEO vs SEO: What's the Difference? Which Matters in 2026?", "description": "What is the difference between GEO and SEO? Is SEO dead? We explain how GEO and SEO work together in the AI era and when to focus on each.", "image": "https://scanliq.com/img/blog19-en-og.png", "author": {"@type": "Organization", "name": "Scanliq", "url": "https://scanliq.com"}, "publisher": {"@type": "Organization", "name": "Scanliq", "url": "https://scanliq.com", "logo": {"@type": "ImageObject", "url": "https://scanliq.com/favicon-192.png"}}, "datePublished": "2026-07-01T09:00:00+03:00", "dateModified": "2026-10-19T09:00:00+03:00", "mainEntityOfPage": {"@type": "WebPage", "@id": "https://scanliq.com/blog19-en.html"}, "url": "https://scanliq.com/blog19-en.html", "inLanguage": "en-US", "articleSection": "GEO vs SEO", "keywords": "GEO vs SEO, GEO SEO difference, is SEO dead, what is GEO, what is SEO, GEO and SEO"}
 </script>
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is SEO dead, should I only do GEO now?", "acceptedAnswer": {"@type": "Answer", "text": "No, SEO isn't dead. GEO doesn't replace it, it adds a new layer. Even AI answers are mostly fed by content that ranks well on Google, so a strong SEO foundation is also needed for GEO."}}, {"@type": "Question", "name": "What's the most fundamental difference between GEO and SEO?", "acceptedAnswer": {"@type": "Answer", "text": "SEO focuses on ranking your site in search engines (click goal). GEO focuses on getting AI to cite you (appearing in the AI answer)."}}, {"@type": "Question", "name": "Can a small business do both SEO and GEO?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The good news is they overlap heavily — producing quality, clear, structured content serves both. Build the SEO foundation first, then add the GEO layer."}}]}
@@ -136,6 +136,7 @@ tr:last-child td { border-bottom: none; }
 
 /* RELATED */
 .related { margin: 40px 0; }
+.related-lead { font-size: 0.8rem; color: var(--muted); margin: -8px 0 14px; }
 .related h3 { font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
 .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 @media(max-width:600px) { .related-grid { grid-template-columns: 1fr; } }
@@ -148,7 +149,7 @@ tr:last-child td { border-bottom: none; }
 footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--muted); flex-wrap: wrap; gap: 12px; }
 .footer-logo { font-family: var(--font-display); font-weight: 800; font-size: 0.9rem; }
 .footer-logo span { color: var(--accent); }
-.footer-links { display: flex; gap: 20px; }
+.footer-links { display: flex; gap: 8px 20px; flex-wrap: wrap; }
 .footer-links a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: var(--accent); }
 </style>
@@ -202,7 +203,7 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: fle
     <p><strong>SEO (Search Engine Optimization)</strong> is the practice of ranking your website higher in traditional search engines like Google and Bing. It's built on keywords, backlinks, technical structure and authority signals. The goal is clear: appear at the top of a list of blue links and get the user to click yours.</p>
 
     <h2>What is GEO? (The New Layer)</h2>
-    <p><strong>GEO (Generative Engine Optimization)</strong> is the practice of structuring your content so AI systems like ChatGPT, Perplexity, Claude and Google AI <strong>cite it</strong>. The difference from traditional search: AI doesn't offer a list of links — it gathers information from multiple sources and generates a single answer. Your job is to be in that answer. We detailed the fundamentals in our <a href="/blog8-en.html">GEO guide</a>.</p>
+    <p><strong>GEO (Generative Engine Optimization)</strong> is the practice of structuring your content so AI systems like ChatGPT, <a href="/blog7-en.html" data-il="1">Perplexity</a>, <a href="/blog13-en.html" data-il="1">Claude</a> and Google AI <strong><a href="/blog9-en.html" data-il="1">cite</a> it</strong>. The difference from traditional search: AI doesn't offer a list of links — it gathers information from multiple sources and generates a single answer. Your job is to be in that answer. We detailed the fundamentals in our <a href="/blog8-en.html">GEO guide</a>.</p>
 
     <h2>SEO vs GEO: Key Differences</h2>
     <div class="table-wrap">
@@ -229,7 +230,7 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: fle
     <h3>SEO Foundation First</h3>
     <p>Technical health, a fast site, quality content and backlinks — these are the foundation for both SEO and GEO. Our <a href="/blog15-en.html">AI SEO checklist</a> helps you build this foundation.</p>
     <h3>Then the GEO Layer</h3>
-    <p>Bot access (robots.txt, llms.txt), structured data, clear and citable content. These make you visible in AI answers.</p>
+    <p>Bot access (robots.txt, <a href="/blog1-en.html" data-il="1">llms.txt</a>), <a href="/blog3-en.html" data-il="1">structured data</a>, clear and citable content. These make you visible in AI answers.</p>
 
     <div class="cta-box">
       <h3>See both your SEO and GEO score</h3>
@@ -249,10 +250,33 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: fle
       <a class="share-btn" href="https://wa.me/?text=https://scanliq.com/blog19-en.html" target="_blank" rel="noopener">WhatsApp</a>
     </div>
     <div class="related">
-      <h3>Related Posts</h3>
+      <h3>Related Guides</h3>
+      <p class="related-lead">Keep going: these guides cover the next steps of the same topic.</p>
       <div class="related-grid">
-        <a class="related-card" href="/blog8-en.html"><div class="rc-cat">GEO</div><div class="rc-title">What is GEO? Generative Engine Optimization Guide</div></a>
-        <a class="related-card" href="/blog15-en.html"><div class="rc-cat">Checklist</div><div class="rc-title">AI SEO Checklist 2026: The Complete GEO Guide</div></a>
+        <a class="related-card" href="/blog8-en.html">
+          <div class="rc-cat">GEO</div>
+          <div class="rc-title">What is GEO? Generative Engine Optimization Guide</div>
+        </a>
+        <a class="related-card" href="/blog23-en.html">
+          <div class="rc-cat">GEO SEO</div>
+          <div class="rc-title">GEO SEO Strategy: How to Do GEO and SEO Together</div>
+        </a>
+        <a class="related-card" href="/blog20-en.html">
+          <div class="rc-cat">AEO</div>
+          <div class="rc-title">What is AEO? Answer Engine Optimization Guide</div>
+        </a>
+        <a class="related-card" href="/blog6-en.html">
+          <div class="rc-cat">Google AI</div>
+          <div class="rc-title">How to Appear in Google AI Overview — Complete 2026 Guide</div>
+        </a>
+        <a class="related-card" href="/blog24-en.html">
+          <div class="rc-cat">GEO Report</div>
+          <div class="rc-title">2026 Brand GEO Score Report: How AI-Ready Are 20 Global Giants?</div>
+        </a>
+        <a class="related-card" href="/blog15-en.html">
+          <div class="rc-cat">Checklist</div>
+          <div class="rc-title">AI SEO Checklist 2026: The Complete GEO Guide</div>
+        </a>
       </div>
     </div>
   </div>
@@ -260,6 +284,9 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: fle
 <footer>
   <div class="footer-logo">Scan<span>liq</span></div>
   <div class="footer-links">
+    <a href="/?lang=en" data-ft="1">GEO Analyzer</a>
+    <a href="/llms-generator-en.html" data-ft="1">llms.txt Generator</a>
+    <a href="/content-analyzer-en.html" data-ft="1">Content Analyzer</a>
     <a href="/blog.html">Blog</a>
     <a href="/legal.html">Yasal</a>
     <a href="/">Ana Sayfa</a>
