@@ -1586,7 +1586,8 @@
     <div class="footer-links">
       <a href="/blog.html" id="footer-blog">Blog</a>
       <a href="/legal.html" id="footer-legal">Yasal</a>
-      <a href="/legal.html#privacy" id="footer-privacy">Gizlilik</a>
+      <a href="/gizlilik.html" id="footer-privacy">Gizlilik</a>
+      <a href="/hesap-sil.html" id="footer-delete">Hesap silme</a>
       <a href="/legal.html#contact" id="footer-contact">İletişim</a>
     </div>
     <div id="footer-copy">© 2026 Scanliq</div>
@@ -1962,6 +1963,8 @@ function setLang(l) {
   document.getElementById('nav-blog').textContent = l === 'tr' ? 'Blog' : 'Blog';
   document.getElementById('footer-legal').textContent = t.footerLegal;
   document.getElementById('footer-privacy').textContent = t.footerPrivacy;
+  { const fd = document.getElementById('footer-delete'); if (fd) fd.textContent = l === 'en' ? 'Delete account' : 'Hesap silme';
+    const hd = document.getElementById('history-delete-link'); if (hd) hd.textContent = l === 'en' ? 'Delete my account and data' : 'Hesabımı ve verilerimi sil'; }
   document.getElementById('footer-contact').textContent = t.footerContact;
   document.getElementById('footer-copy').textContent = t.footerCopy;
   document.documentElement.lang = l;
@@ -3204,6 +3207,7 @@ function resetAll() {
       <h3 class="history-title" id="history-title">📊 Analiz Geçmişiniz</h3>
       <p class="history-sub" id="history-sub">Kayıtlı analizlerinizi görüntüleyin ve yeniden analiz edin.</p>
       <div class="history-list" id="history-list"></div>
+      <p style="margin-top:14px;font-size:.72rem;text-align:center;"><a href="/hesap-sil.html" id="history-delete-link" style="color:#8ab5a0;">Hesabımı ve verilerimi sil</a></p>
     </div>
   </div>
 

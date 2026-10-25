@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hesap ve Veri Silme | Scanliq</title>
+<meta name="description" content="Scanliq hesabınızı ve kayıtlı analizlerinizi kalıcı olarak silin. Web sitesi ve Android uygulaması için hesap silme talebi.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://scanliq.com/hesap-sil.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script src="/app-bridge.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#060d0a; --surface:#0d1a14; --border:#1a3028; --accent:#00e87a; --accent2:#00b8d9; --danger:#ff4d6d; --text:#e8f5f0; --muted:#8ab5a0; --font-display:'Syne',sans-serif; --font-mono:'Space Mono',monospace; }
+  *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--text); font-family:var(--font-mono); line-height:1.7; }
+  .wrap { max-width:560px; margin:0 auto; padding:0 18px 60px; }
+  header { padding:24px 0; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); margin-bottom:28px; }
+  .logo { font-family:var(--font-display); font-weight:800; font-size:1.3rem; color:var(--text); text-decoration:none; }
+  .logo span { color:var(--accent); }
+  header a.back { color:var(--muted); font-size:.8rem; text-decoration:none; }
+  h1 { font-family:var(--font-display); font-size:1.7rem; line-height:1.2; margin-bottom:8px; }
+  .lead { color:var(--muted); font-size:.85rem; margin-bottom:22px; }
+  .card { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:18px; margin-bottom:16px; }
+  .card h2 { font-family:var(--font-display); font-size:1rem; margin-bottom:10px; }
+  .card p, .card li { font-size:.82rem; color:#b9d4c7; }
+  .card ul { margin:6px 0 4px 18px; }
+  label { display:block; font-size:.75rem; color:var(--muted); margin:10px 0 4px; }
+  input[type=email], input[type=password] { width:100%; background:#08130e; border:1px solid var(--border); color:var(--text); font-family:var(--font-mono); font-size:.9rem; padding:11px 12px; border-radius:10px; }
+  input:focus { outline:none; border-color:var(--accent); }
+  button { width:100%; border:0; border-radius:10px; padding:12px; font-family:var(--font-display); font-weight:800; font-size:.9rem; cursor:pointer; margin-top:12px; }
+  .btn-main { background:var(--accent); color:#04100a; }
+  .btn-google { background:#fff; color:#222; }
+  .btn-danger { background:var(--danger); color:#fff; }
+  .btn-ghost { background:none; border:1px solid var(--border); color:var(--muted); }
+  button:disabled { opacity:.5; cursor:not-allowed; }
+  .confirm { display:flex; gap:10px; align-items:flex-start; margin-top:12px; font-size:.8rem; color:#ffb3c0; }
+  .confirm input { margin-top:4px; accent-color:var(--danger); width:16px; height:16px; flex:0 0 auto; }
+  .msg { margin-top:12px; font-size:.82rem; min-height:1.2em; }
+  .msg.err { color:#ff8aa0; } .msg.ok { color:var(--accent); }
+  .who { font-size:.85rem; margin-bottom:6px; }
+  .who b { color:var(--accent); word-break:break-all; }
+  .hide { display:none !important; }
+  .in-app .web-only { display:none !important; }
+  a { color:var(--accent); }
+  .small { font-size:.75rem; color:var(--muted); margin-top:18px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <a class="logo" href="/">Scan<span>liq</span></a>
+  <a class="back" href="/">← Ana sayfa</a>
+</header>
+
+<h1>Hesap ve veri silme</h1>
+<p class="lead">Scanliq hesabınızı ve kaydettiğiniz tüm analizleri buradan kalıcı olarak silebilirsiniz. Bu sayfa web sitesi ve Android uygulaması (com.scanliq) için geçerlidir. <span lang="en">Delete your Scanliq account and all saved analyses permanently.</span></p>
+
+<div class="card">
+  <h2>Neler silinir?</h2>
+  <ul>
+    <li>Hesabınız ve e-posta adresiniz</li>
+    <li>Kaydettiğiniz tüm analizler (site adresi, puan, kontrol sonuçları, tarih)</li>
+  </ul>
+  <p style="margin-top:8px">Hesabınızla ilişkili olmayan anonim istatistikler sizi tanımlamadığı için kişisel veri içermez. Silme işlemi geri alınamaz.</p>
+</div>
+
+<!-- 1) Giriş -->
+<div class="card" id="step-login">
+  <h2>1. Silmek istediğiniz hesaba giriş yapın</h2>
+  <label for="em">E-posta</label>
+  <input type="email" id="em" autocomplete="email" placeholder="ornek@mail.com">
+  <label for="pw">Şifre</label>
+  <input type="password" id="pw" autocomplete="current-password" placeholder="••••••••">
+  <button class="btn-main" id="b-login" type="button">Giriş yap</button>
+  <button class="btn-google web-only" id="b-google" type="button">Google ile giriş yap</button>
+  <div class="msg" id="m-login"></div>
+</div>
+
+<!-- 2) Silme -->
+<div class="card hide" id="step-delete">
+  <h2>2. Hesabı sil</h2>
+  <p class="who">Giriş yapılan hesap: <b id="who"></b></p>
+  <label class="confirm"><input type="checkbox" id="ok"> Hesabımın ve tüm kayıtlı analizlerimin kalıcı olarak silineceğini anlıyorum.</label>
+  <button class="btn-danger" id="b-del" type="button" disabled>Hesabımı ve verilerimi sil</button>
+  <button class="btn-ghost" id="b-out" type="button">Farklı bir hesapla giriş yap</button>
+  <div class="msg" id="m-del"></div>
+</div>
+
+<!-- 3) Bitti -->
+<div class="card hide" id="step-done">
+  <h2>✅ Hesabınız silindi</h2>
+  <p>Hesabınız ve kayıtlı analizleriniz kalıcı olarak silindi. Scanliq'i hesap açmadan kullanmaya devam edebilirsiniz.</p>
+  <button class="btn-main" type="button" onclick="location.href='/'">Ana sayfaya dön</button>
+</div>
+
+<div class="card">
+  <h2>Giriş yapamıyor musunuz?</h2>
+  <p>Şifrenizi unuttuysanız ya da Google ile açtığınız hesaba uygulama içinden giriş yapamıyorsanız, kayıtlı e-posta adresinizden <a href="mailto:dreamdosima08@gmail.com?subject=Scanliq%20hesap%20silme%20talebi">dreamdosima08@gmail.com</a> adresine "hesap silme talebi" konulu bir e-posta gönderin. Talebinizi en geç 30 gün içinde tamamlar, size bilgi veririz.</p>
+</div>
+
+<p class="small">Ayrıntılar için <a href="/gizlilik.html">Gizlilik Politikası</a>.</p>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, deleteUser } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+import { getFirestore, collection, query, where, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+const app = initializeApp({
+  apiKey: "AIzaSyA7SXenxT3Q_bCjFI-M4MlVw-NwOMQUwcY",
+  authDomain: "scanliq.firebaseapp.com",
+  projectId: "scanliq",
+  storageBucket: "scanliq.firebasestorage.app",
+  messagingSenderId: "483771844332",
+  appId: "1:483771844332:web:a0f49d2d25e684edc987c9"
+});
+const auth = getAuth(app), db = getFirestore(app);
+const $ = (id) => document.getElementById(id);
+let freshLogin = false;
+
+function show(step) {
+  ['step-login','step-delete','step-done'].forEach(s => $(s).classList.toggle('hide', s !== step));
+}
+function msg(id, text, cls) { const m = $(id); m.textContent = text || ''; m.className = 'msg' + (cls ? ' ' + cls : ''); }
+const errText = (e) => ({
+  'auth/invalid-credential': 'E-posta veya şifre hatalı.',
+  'auth/wrong-password': 'E-posta veya şifre hatalı.',
+  'auth/user-not-found': 'Bu e-postayla kayıtlı hesap yok.',
+  'auth/invalid-email': 'Geçerli bir e-posta adresi girin.',
+  'auth/too-many-requests': 'Çok fazla deneme yapıldı. Biraz sonra tekrar deneyin.',
+  'auth/popup-blocked': 'Açılır pencere engellendi. Tarayıcınızda açılır pencerelere izin verin.',
+  'auth/requires-recent-login': 'Güvenlik için tekrar giriş yapmanız gerekiyor.'
+}[e && e.code] || ('Bir hata oluştu: ' + (e && e.message || e)));
+
+onAuthStateChanged(auth, (u) => {
+  if ($('step-done').classList.contains('hide') === false) return;
+  if (u) { $('who').textContent = u.email || u.uid; show('step-delete'); }
+  else show('step-login');
+});
+
+$('b-login').addEventListener('click', async () => {
+  msg('m-login', 'Giriş yapılıyor…');
+  try { await signInWithEmailAndPassword(auth, $('em').value.trim(), $('pw').value); freshLogin = true; msg('m-login', ''); }
+  catch (e) { msg('m-login', errText(e), 'err'); }
+});
+$('pw').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('b-login').click(); });
+$('b-google').addEventListener('click', async () => {
+  try { await signInWithPopup(auth, new GoogleAuthProvider()); freshLogin = true; }
+  catch (e) { if (e.code !== 'auth/popup-closed-by-user') msg('m-login', errText(e), 'err'); }
+});
+$('ok').addEventListener('change', () => { $('b-del').disabled = !$('ok').checked; });
+$('b-out').addEventListener('click', async () => { await signOut(auth); $('ok').checked = false; $('b-del').disabled = true; });
+
+$('b-del').addEventListener('click', async () => {
+  const u = auth.currentUser; if (!u) return show('step-login');
+  $('b-del').disabled = true; msg('m-del', 'Kayıtlı analizler siliniyor…');
+  try {
+    const snap = await getDocs(query(collection(db, 'analyses'), where('userId', '==', u.uid)));
+    let n = 0;
+    for (const d of snap.docs) { await deleteDoc(d.ref); n++; }
+    msg('m-del', n + ' analiz silindi. Hesap siliniyor…');
+    await deleteUser(u);
+    show('step-done');
+  } catch (e) {
+    if (e.code === 'auth/requires-recent-login') {
+      await signOut(auth);
+      show('step-login');
+      msg('m-login', 'Güvenlik için lütfen tekrar giriş yapın, ardından silme işlemini tamamlayın.', 'err');
+    } else {
+      msg('m-del', errText(e), 'err'); $('b-del').disabled = !$('ok').checked;
+    }
+  }
+});
+</script>
+</body>
+</html>
