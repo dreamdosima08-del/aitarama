@@ -97,3 +97,14 @@
 .ck-reset:hover{color:#fff;border-color:#00e87a}
 .ck-pill{position:fixed;right:14px;bottom:14px;z-index:50;background:#0d1f18;border:1px solid #00e87a;color:#00e87a;font:700 .8rem var(--font-mono,monospace);padding:8px 12px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.45);cursor:pointer;opacity:0;transform:translateY(10px);transition:opacity .25s,transform .25s;pointer-events:none}
 .ck-pill.on{opacity:1;transform:none;pointer-events:auto}
+.aeo-test{background:linear-gradient(135deg,#0d1f18,#0f1d2a);border:1px solid #1f4a37;border-radius:12px;padding:16px;margin:18px 0}
+.aeo-test label{display:block;font-size:.8rem;color:#8fb5a4;margin:8px 0 6px}
+.aeo-test input,.aeo-test textarea{width:100%;box-sizing:border-box;background:#06100c;border:1px solid #1f4a37;border-radius:8px;color:#e6f5ee;font:inherit;font-size:.88rem;padding:10px}
+.aeo-test input:focus,.aeo-test textarea:focus{outline:none;border-color:#00e87a}
+.aeo-run{margin-top:10px;background:#00e87a;color:#04140c;border:0;border-radius:8px;padding:9px 18px;font-weight:700;cursor:pointer}
+.aeo-out:empty{display:none}
+.aeo-out{margin-top:14px;border-top:1px solid #1f4a37;padding-top:12px}
+.aeo-score{font-weight:700;font-size:1rem;margin-bottom:8px;color:#e6f5ee}
+.aeo-out ul{list-style:none;padding:0;margin:0}
+.aeo-out li{font-size:.84rem;line-height:1.55;padding:5px 0;color:#b9d4c7}
+.aeo-out li b{color:#e6f5ee}

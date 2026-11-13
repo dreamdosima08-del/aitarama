@@ -74,3 +74,41 @@
       upd();
     })();
     
+/* AEO paragraf testi (tamamen tarayıcıda) */
+(function(){
+  var box = document.getElementById('aeo-test'); if (!box) return;
+  var en = document.documentElement.lang === 'en';
+  var q = box.querySelector('#aeo-q'), a = box.querySelector('#aeo-a'), out = box.querySelector('.aeo-out');
+  var T = en ? {
+    empty: 'Paste a paragraph first.', score: 'Answer readiness: ', s: ['Needs work', 'Getting there', 'Strong'],
+    fl: /\b(hello|hi there|in this (article|post|guide)|we will (look|explore|cover|discuss)|let'?s (dive|start|begin)|have you ever wondered|welcome)\b/i,
+    def: /\b(is|are|means|refers to|stands for)\b/i, ok: '✅', no: '⚠️',
+    m: { first: ['First sentence is short and direct', 'First sentence is long; aim for under 25 words'], len: ['Length is in the commonly recommended 40-60 word range', 'Paragraph length: '], fluff: ['No filler intro phrases', 'Filler intro found: start with the answer instead'], defn: ['First sentence reads like a definition or direct answer', 'First sentence doesn\'t look like a direct answer (e.g. "X is ...")'], kw: ['First sentence repeats the key term from the question', 'First sentence doesn\'t mention the key term from the question'], num: ['Contains concrete details (numbers, dates)', 'No concrete details: a number, date or example can make it stronger'] }, words: ' words', short: 'a bit short, aim for 40-60', long: 'a bit long, aim for 40-60'
+  } : {
+    empty: 'Önce bir paragraf yapıştırın.', score: 'Cevap hazırlığı: ', s: ['Geliştirilmeli', 'Fena değil', 'Güçlü'],
+    fl: /(bu yazı(mız)?da|bu rehberde|ele alacağız|inceleyeceğiz|anlatacağız|hazırsanız|merak ediyor musunuz|merhaba)/i,
+    def: /(\S+(dır|dir|dur|dür|tır|tir|tur|tür)\b|\bdemektir\b|\banlamına gelir\b|\bkısaltmasıdır\b)/i, ok: '✅', no: '⚠️',
+    m: { first: ['İlk cümle kısa ve doğrudan', 'İlk cümle uzun; 25 kelimenin altını hedefleyin'], len: ['Uzunluk sık önerilen 40-60 kelime aralığında', 'Paragraf uzunluğu: '], fluff: ['Dolgu giriş ifadesi yok', 'Dolgu giriş ifadesi var: doğrudan cevapla başlayın'], defn: ['İlk cümle bir tanım veya doğrudan cevap gibi', 'İlk cümle doğrudan bir cevap gibi görünmüyor (örnek: "X, ... -dir.")'], kw: ['İlk cümle sorudaki ana terimi tekrar ediyor', 'İlk cümlede sorudaki ana terim geçmiyor'], num: ['Somut ayrıntı var (sayı, tarih)', 'Somut ayrıntı yok: bir sayı, tarih veya örnek cevabı güçlendirir'] }, words: ' kelime', short: 'biraz kısa, hedef 40-60', long: 'biraz uzun, hedef 40-60'
+  };
+  var STOP = en ? /^(what|how|why|is|are|the|a|an|do|does|can|which|who|when|where|to|of|for|in|and|or)$/i
+                : /^(nedir|nasıl|neden|niçin|ne|mi|mı|mu|mü|bir|ve|ile|için|hangi|kim|nerede|zaman|olan|nelerdir|yapılır)$/i;
+  function words(s){ return (s.match(/[^\s.,;:!?()"'“”]+/g) || []); }
+  function run(){
+    var t = a.value.trim(); if (!t) { out.innerHTML = '<p>' + T.empty + '</p>'; return; }
+    var first = (t.match(/^[\s\S]*?[.!?](\s|$)/) || [t])[0].trim();
+    var fw = words(first).length, tw = words(t).length, r = [], pts = 0;
+    function add(ok, pass, fail){ r.push([ok, ok ? pass : fail]); if (ok) pts++; }
+    add(fw <= 25, T.m.first[0], T.m.first[1] + ' (' + fw + T.words + ')');
+    add(tw >= 40 && tw <= 60, T.m.len[0] + ' (' + tw + T.words + ')', T.m.len[1] + tw + T.words + ' · ' + (tw < 40 ? T.short : T.long));
+    add(!T.fl.test(t.slice(0, 220)), T.m.fluff[0], T.m.fluff[1]);
+    add(T.def.test(first), T.m.defn[0], T.m.defn[1]);
+    var keys = words(q.value).filter(function(w){ return w.length > 2 && !STOP.test(w); });
+    if (keys.length) { var lf = first.toLocaleLowerCase(en ? 'en' : 'tr'); add(keys.some(function(k){ return lf.indexOf(k.toLocaleLowerCase(en ? 'en' : 'tr').slice(0, Math.max(3, k.length - 2))) > -1; }), T.m.kw[0], T.m.kw[1]); }
+    add(/\d/.test(t), T.m.num[0], T.m.num[1]);
+    var p = Math.round(pts * 100 / r.length), lvl = p >= 80 ? 2 : p >= 50 ? 1 : 0;
+    var esc = function(s){ return s.replace(/[&<>]/g, function(c){ return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]; }); };
+    out.innerHTML = '<div class="aeo-score">' + T.score + pts + '/' + r.length + ' · ' + T.s[lvl] + '</div><div class="dk-bar"><i style="width:' + p + '%;background-position:' + (100 - p) + '% 0"></i></div><ul>' +
+      r.map(function(x){ return '<li>' + (x[0] ? T.ok : T.no) + ' ' + esc(x[1]) + '</li>'; }).join('') + '</ul>';
+  }
+  box.querySelector('.aeo-run').addEventListener('click', run);
+})();

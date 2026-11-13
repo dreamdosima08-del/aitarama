@@ -120,7 +120,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/blog.css?v=20261113">
-<link rel="stylesheet" href="/assets/deep-kit.css?v=20261113">
+<link rel="stylesheet" href="/assets/deep-kit.css?v=20261113b">
 </head>
 <body>
 <div class="wrap">
@@ -212,13 +212,13 @@
     </div>
 
     <h2 id="k2">2. Structured Data: Describe Your Page to Machines</h2>
-    <p>Structured data (Schema.org, JSON-LD) states plainly whether your page is an article, a product or a business, and who wrote it. AI uses this to evaluate your page in the right context. For code examples, see our <a href="/blog3-en.html">Schema.org guide</a>.</p>
+    <p>Structured data (Schema.org, JSON-LD) states plainly whether your page is an article, a product or a business, and who wrote it. An honest note: Google says no special schema is needed for AI Overviews and AI Mode; structured data isn't required, but it remains standard SEO practice for rich results and for your page being understood correctly. For code examples, see our <a href="/blog3-en.html">Schema.org guide</a>.</p>
     <div class="dk-check" data-levels='[[0,"Structured data missing: start with at least Organization and Article."],[60,"Core schemas are in place; don&#39;t skip validation."],[100,"Structured data done."]]'>
       <div class="hd"><b>Structured data</b><span class="sc">0 / 5</span></div>
       <div class="dk-bar"><i></i></div>
       <label><input type="checkbox"> <span><span class="dk-badge y">Important</span> An Organization schema (LocalBusiness for local businesses) is present site-wide. <small>Name, logo, address and contact details must match what's on the site.</small></span></label>
       <label><input type="checkbox"> <span><span class="dk-badge y">Important</span> Article pages have Article schema with author, publish date (datePublished) and update date (dateModified).</span></label>
-      <label><input type="checkbox"> <span><span class="dk-badge y">Important</span> FAQ sections have FAQPage schema, and the questions in the schema match the visible questions exactly.</span></label>
+      <label><input type="checkbox"> <span><span class="dk-badge g">Improvement</span> FAQ sections have FAQPage schema, and the questions in the schema match the visible questions exactly. <small>Google stopped showing FAQ rich results in May 2026; the schema is valid and harmless but no longer produces a separate appearance in Google.</small></span></label>
       <label><input type="checkbox"> <span><span class="dk-badge g">Improvement</span> If you run an online store, product pages have Product schema with price, availability and brand. <small>See the <a href="/blog14-en.html">e-commerce guide</a>.</small></span></label>
       <label><input type="checkbox"> <span><span class="dk-badge g">Improvement</span> Your schemas pass Google's Rich Results Test without errors.</span></label>
       <div class="msg"></div>
@@ -270,7 +270,7 @@
     </div>
 
     <h2 id="k6">6. llms.txt: Easy, but Don't Overrate It</h2>
-    <p>llms.txt is a proposed standard that summarizes your site for AI. Some AI tools and agents read it; however, Google has said it does not use it for Search or AI Overviews. Adding one takes a few minutes and does no harm, but it doesn't replace the items above. Details are in our <a href="/blog1-en.html">llms.txt guide</a>, and our <a href="/llms-generator-en.html">llms.txt generator</a> builds the file for you.</p>
+    <p>llms.txt is a proposed standard that summarizes your site for AI. Some AI tools and agents read it; however, Google's 2026 guide to generative AI features states plainly that Search ignores such files, so they neither help nor harm. Adding one takes a few minutes and does no harm, but it doesn't replace the items above. Details are in our <a href="/blog1-en.html">llms.txt guide</a>, and our <a href="/llms-generator-en.html">llms.txt generator</a> builds the file for you.</p>
     <div class="dk-check" data-levels='[[0,"Optional: the other groups come first."],[100,"llms.txt ready."]]'>
       <div class="hd"><b>llms.txt</b><span class="sc">0 / 1</span></div>
       <div class="dk-bar"><i></i></div>
@@ -318,7 +318,7 @@
     <div class="faq-item"><div class="faq-q">If I tick every item, am I guaranteed to appear in ChatGPT?</div><div class="faq-a">No. The list makes sure your site is technically readable and ready to be cited. AI systems decide which sources to show; the quality and trustworthiness of your content and what your competitors are doing also play a part.</div></div>
     <div class="faq-item"><div class="faq-q">Can I check the list automatically?</div><div class="faq-a">Most of the technical items, yes. Scanliq runs 32 checks automatically, including bot access, structured data, sitemap, llms.txt and content signals. Trust items such as author information, first-hand experience and external references still need your own judgment.</div></div>
 
-    <p class="dk-src">Sources and notes: Bot names are based on the crawler documentation of OpenAI, Anthropic, Perplexity and Google. Cloudflare announced its decision to block AI crawlers by default in July 2025. Google's statement that it does not use llms.txt for Search or AI Overviews was reported by Search Engine Land in 2025. Your ticks are stored only in this browser and are never sent to us. Last checked: November 2026.</p>
+    <p class="dk-src">Sources and notes: Bot names are based on the crawler documentation of OpenAI, Anthropic, Perplexity and Google. Cloudflare announced its decision to block AI crawlers by default in July 2025. Statements about llms.txt and structured data are based on Google's "Optimizing your website for generative AI features" guide (2026); the removal of FAQ rich results is based on the notice in Google's FAQPage documentation (May 2026). Your ticks are stored only in this browser and are never sent to us. Last checked: November 2026.</p>
 
 
     <div class="share-bar">
@@ -372,6 +372,6 @@
   <div>© 2026 Scanliq</div>
 </footer>
 </div>
-<script src="/assets/deep-kit.js?v=20261113"></script>
+<script src="/assets/deep-kit.js?v=20261113b"></script>
 </body>
 </html>

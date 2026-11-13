@@ -120,7 +120,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/blog.css?v=20261113">
-<link rel="stylesheet" href="/assets/deep-kit.css?v=20261113">
+<link rel="stylesheet" href="/assets/deep-kit.css?v=20261113b">
 </head>
 <body>
 <div class="wrap">
@@ -212,13 +212,13 @@
     </div>
 
     <h2 id="k2">2. Yapısal Veri: Sayfanızı Makineye Anlatın</h2>
-    <p>Yapısal veri (Schema.org, JSON-LD), sayfanızın bir makale mi, ürün mü, işletme mi olduğunu ve kimin yazdığını açıkça söyler. Yapay zeka bu bilgiyi kullanarak sayfanızı doğru bağlamda değerlendirir. Kod örnekleri için <a href="/blog3.html">Schema.org rehberimize</a> bakın.</p>
+    <p>Yapısal veri (Schema.org, JSON-LD), sayfanızın bir makale mi, ürün mü, işletme mi olduğunu ve kimin yazdığını açıkça söyler. Dürüst not: Google, AI Overview ve AI Mode için özel bir şema gerekmediğini söylüyor; yapısal veri zorunlu değil ama zengin sonuçlar ve sayfanın doğru anlaşılması için standart SEO uygulaması olmaya devam ediyor. Kod örnekleri için <a href="/blog3.html">Schema.org rehberimize</a> bakın.</p>
     <div class="dk-check" data-levels='[[0,"Yapısal veri eksik: en az Organization ve Article ile başlayın."],[60,"Temel şemalar var, doğrulama adımını atlamayın."],[100,"Yapısal veri tamam."]]'>
       <div class="hd"><b>Yapısal veri</b><span class="sc">0 / 5</span></div>
       <div class="dk-bar"><i></i></div>
       <label><input type="checkbox"> <span><span class="dk-badge y">Önemli</span> Tüm sitede Organization (yerel işletmeyseniz LocalBusiness) şeması var. <small>Ad, logo, adres ve iletişim bilgileri sitedekiyle aynı olmalı.</small></span></label>
       <label><input type="checkbox"> <span><span class="dk-badge y">Önemli</span> Yazı sayfalarında Article şeması; yazar, yayın tarihi (datePublished) ve güncelleme tarihi (dateModified) ile birlikte var.</span></label>
-      <label><input type="checkbox"> <span><span class="dk-badge y">Önemli</span> SSS bölümlerinde FAQPage şeması var ve şemadaki sorular sayfada görünen sorularla birebir aynı.</span></label>
+      <label><input type="checkbox"> <span><span class="dk-badge g">İyileştirme</span> SSS bölümlerinde FAQPage şeması var ve şemadaki sorular sayfada görünen sorularla birebir aynı. <small>Google, Mayıs 2026'dan beri SSS zengin sonuçlarını göstermiyor; şema geçerli ve zararsız, ama Google'da ayrıca bir görünüm sağlamıyor.</small></span></label>
       <label><input type="checkbox"> <span><span class="dk-badge g">İyileştirme</span> E-ticaret sitesiyseniz ürün sayfalarında fiyat, stok ve marka bilgili Product şeması var. <small>Bkz. <a href="/blog14.html">e-ticaret rehberi</a>.</small></span></label>
       <label><input type="checkbox"> <span><span class="dk-badge g">İyileştirme</span> Şemalar Google'ın Zengin Sonuç Testi'nden hatasız geçiyor.</span></label>
       <div class="msg"></div>
@@ -270,7 +270,7 @@
     </div>
 
     <h2 id="k6">6. llms.txt: Kolay Ama Abartılmamalı</h2>
-    <p>llms.txt, sitenizi yapay zekaya özetleyen önerilmiş bir standarttır. Bazı yapay zeka araçları ve ajanlar bu dosyayı okur; ancak Google, Arama ve AI Overview için kullanmadığını açıkladı. Eklemesi birkaç dakika sürer ve zararı yoktur, ama yukarıdaki maddelerin yerine geçmez. Ayrıntılar <a href="/blog1.html">llms.txt rehberimizde</a>, hazır dosya için <a href="/llms-generator.html">llms.txt oluşturucumuz</a> var.</p>
+    <p>llms.txt, sitenizi yapay zekaya özetleyen önerilmiş bir standarttır. Bazı yapay zeka araçları ve ajanlar bu dosyayı okur; ancak Google, 2026'da yayımladığı yapay zeka rehberinde Arama'nın bu tür dosyaları yok saydığını, ne fayda ne zarar getirdiğini açıkça yazdı. Eklemesi birkaç dakika sürer ve zararı yoktur, ama yukarıdaki maddelerin yerine geçmez. Ayrıntılar <a href="/blog1.html">llms.txt rehberimizde</a>, hazır dosya için <a href="/llms-generator.html">llms.txt oluşturucumuz</a> var.</p>
     <div class="dk-check" data-levels='[[0,"İsteğe bağlı: diğer gruplar daha öncelikli."],[100,"llms.txt hazır."]]'>
       <div class="hd"><b>llms.txt</b><span class="sc">0 / 1</span></div>
       <div class="dk-bar"><i></i></div>
@@ -318,7 +318,7 @@
     <div class="faq-item"><div class="faq-q">Bütün maddeleri işaretlersem ChatGPT'de görüneceğimi garanti eder mi?</div><div class="faq-a">Hayır. Liste, sitenizin teknik olarak okunabilir ve alıntılanmaya hazır olmasını sağlar. Hangi kaynağın gösterileceğine yapay zeka sistemleri karar verir; içeriğinizin kalitesi, güvenilirliği ve rakiplerinizin durumu da belirleyicidir.</div></div>
     <div class="faq-item"><div class="faq-q">Listeyi otomatik kontrol edebilir miyim?</div><div class="faq-a">Teknik maddelerin çoğunu evet. Scanliq bot erişimi, yapısal veri, sitemap, llms.txt ve içerik sinyalleri dahil 32 kontrolü otomatik yapar. Yazar bilgisi, birinci elden deneyim ve dış referanslar gibi güven maddelerini ise sizin değerlendirmeniz gerekir.</div></div>
 
-    <p class="dk-src">Kaynaklar ve notlar: Bot adları OpenAI, Anthropic, Perplexity ve Google'ın tarayıcı belgelerine dayanır. Cloudflare'in yapay zeka tarayıcılarını varsayılan engelleme kararı Temmuz 2025'te duyuruldu. Google'ın llms.txt'yi Arama ve AI Overview'da kullanmadığı açıklaması 2025'te Search Engine Land'de haberleştirildi. İşaretleriniz yalnızca bu tarayıcıda saklanır, bize gönderilmez. Son kontrol: Kasım 2026.</p>
+    <p class="dk-src">Kaynaklar ve notlar: Bot adları OpenAI, Anthropic, Perplexity ve Google'ın tarayıcı belgelerine dayanır. Cloudflare'in yapay zeka tarayıcılarını varsayılan engelleme kararı Temmuz 2025'te duyuruldu. llms.txt ve yapısal veriyle ilgili ifadeler Google'ın "Optimizing your website for generative AI features" rehberine (2026), SSS zengin sonuçlarının kaldırılması Google'ın FAQPage belgesindeki duyuruya (Mayıs 2026) dayanır. İşaretleriniz yalnızca bu tarayıcıda saklanır, bize gönderilmez. Son kontrol: Kasım 2026.</p>
 
 
     <div class="share-bar">
@@ -372,6 +372,6 @@
   <div>© 2026 Scanliq</div>
 </footer>
 </div>
-<script src="/assets/deep-kit.js?v=20261113"></script>
+<script src="/assets/deep-kit.js?v=20261113b"></script>
 </body>
 </html>
