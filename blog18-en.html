@@ -82,105 +82,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg: #060d0a; --surface: #0d1a14; --border: #1a3028;
-  --accent: #00e87a; --accent2: #00b8d9; --warn: #f5a623;
-  --text: #f0f8f4; --muted: #8ab5a0;
-  --font-display: 'Syne', sans-serif; --font-mono: 'Space Mono', monospace;
-}
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: var(--bg); color: var(--text); font-family: var(--font-mono); min-height: 100vh; overflow-x: hidden; line-height: 1.8; }
-body::before {
-  content: ''; position: fixed; inset: 0;
-  background-image: linear-gradient(rgba(0,232,122,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,232,122,0.03) 1px, transparent 1px);
-  background-size: 40px 40px; pointer-events: none; z-index: 0;
-}
-.wrap { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding: 0 20px; }
-
-/* HEADER */
-header { padding: 28px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); margin-bottom: 0; }
-.logo { font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; letter-spacing: -0.02em; text-decoration: none; display: flex; align-items: center; gap: 2px; }
-.logo-scan { color: var(--text); } .logo-liq { color: var(--accent); }
-.logo-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; margin-left: 2px; margin-bottom: 10px; animation: pd 2s ease-in-out infinite; }
-@keyframes pd { 0%,100%{opacity:1} 50%{opacity:0.3} }
-nav { display: flex; gap: 20px; align-items: center; }
-nav a { color: var(--muted); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.05em; transition: color 0.2s; }
-nav a:hover { color: var(--accent); }
-nav a.active { color: var(--accent); }
-
-/* HERO */
-.blog-hero { padding: 48px 0 32px; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
-.blog-category { display: inline-block; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 3px 12px; border-radius: 20px; margin-bottom: 16px; }
-.blog-hero h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1.15; margin-bottom: 16px; }
-.blog-hero h1 em { font-style: normal; color: var(--accent); }
-.blog-meta { display: flex; gap: 20px; flex-wrap: wrap; font-size: 0.8rem; color: var(--muted); }
-.blog-meta span { display: flex; align-items: center; gap: 6px; }
-
-/* CONTENT */
-.blog-content { padding: 0 0 60px; }
-.blog-content h2 { font-family: var(--font-display); font-size: 1.2rem; font-weight: 800; margin: 40px 0 16px; color: var(--text); position: relative; padding-left: 16px; }
-.blog-content h2::before { content: ''; position: absolute; left: 0; top: 4px; bottom: 4px; width: 3px; background: var(--accent); border-radius: 2px; }
-.blog-content h3 { font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; margin: 28px 0 12px; color: var(--accent2); }
-.blog-content p { font-size: 0.82rem; color: var(--muted); margin-bottom: 16px; line-height: 1.8; }
-.blog-content strong { color: var(--text); }
-
-/* CODE BLOCK */
-.code-block { background: #020a06; border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin: 20px 0; overflow-x: auto; }
-.code-block pre { font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent); line-height: 1.6; }
-.code-label { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 10px; }
-
-/* INFO BOX */
-.info-box { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; padding: 16px 20px; margin: 24px 0; }
-.info-box.warn { border-left-color: var(--warn); }
-.info-box p { font-size: 0.85rem; color: var(--muted); margin: 0; }
-.info-box strong { color: var(--text); }
-
-/* TABLE */
-.table-wrap { overflow-x: auto; margin: 20px 0; }
-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
-th { background: var(--surface); color: var(--accent); font-family: var(--font-display); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
-td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--muted); }
-tr:last-child td { border-bottom: none; }
-.tag-yes { color: var(--accent); } .tag-no { color: #ff4d4d; } .tag-soon { color: var(--warn); }
-
-/* FAQ */
-.faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin-bottom: 10px; }
-.faq-q { font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-.faq-a { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
-
-/* SHARE */
-.share-bar { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin: 40px 0; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-.share-label { font-family: var(--font-display); font-size: 0.8rem; font-weight: 700; }
-.share-btn { background: none; border: 1px solid var(--border); color: var(--muted); font-family: var(--font-mono); font-size: 0.8rem; padding: 7px 16px; border-radius: 6px; cursor: pointer; text-decoration: none; transition: all 0.2s; }
-.share-btn:hover { border-color: var(--accent); color: var(--accent); }
-
-/* CTA */
-.cta-box { background: linear-gradient(135deg, #0d1a14, #0a2018); border: 1px solid var(--accent); border-radius: 12px; padding: 28px; text-align: center; margin: 40px 0; }
-.cta-box h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; margin-bottom: 10px; }
-.cta-box p { font-size: 0.85rem; color: var(--muted); margin-bottom: 20px; }
-.cta-btn { display: inline-block; background: var(--accent); color: #060d0a; font-family: var(--font-display); font-weight: 800; font-size: 0.85rem; padding: 12px 28px; border-radius: 8px; text-decoration: none; transition: all 0.2s; }
-.cta-btn:hover { background: #00ffaa; transform: scale(1.03); }
-
-/* RELATED */
-.related { margin: 40px 0; }
-.related-lead { font-size: 0.8rem; color: var(--muted); margin: -8px 0 14px; }
-.related h3 { font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
-.related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-@media(max-width:600px) { .related-grid { grid-template-columns: 1fr; } }
-.related-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-decoration: none; transition: border-color 0.2s; display: block; }
-.related-card:hover { border-color: var(--accent); }
-.related-card .rc-cat { font-size: 0.72rem; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px; }
-.related-card .rc-title { font-family: var(--font-display); font-size: 0.82rem; font-weight: 700; color: var(--text); line-height: 1.4; }
-
-/* FOOTER */
-footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--muted); flex-wrap: wrap; gap: 12px; }
-.footer-logo { font-family: var(--font-display); font-weight: 800; font-size: 0.9rem; }
-.footer-logo span { color: var(--accent); }
-.footer-links { display: flex; gap: 8px 20px; flex-wrap: wrap; }
-.footer-links a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
-.footer-links a:hover { color: var(--accent); }
-</style>
+<link rel="stylesheet" href="/assets/blog.css?v=20261113">
 </head>
 <body>
 <div class="wrap">
@@ -265,7 +167,7 @@ footer { border-top: 1px solid var(--border); padding: 24px 0 40px; display: fle
       <div class="related-grid">
         <a class="related-card" href="/blog15-en.html">
           <div class="rc-cat">Checklist</div>
-          <div class="rc-title">AI SEO Checklist 2026: The Complete GEO Guide</div>
+          <div class="rc-title">AI SEO and GEO Checklist 2026: A 30-Point Guide</div>
         </a>
         <a class="related-card" href="/blog17-en.html">
           <div class="rc-cat">Technical GEO</div>
